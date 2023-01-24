@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: <a href='#'>Affiliations</a>. Address. Contacts. Moto. Etc.
+subtitle: <a href=https://centropi.impa.br/>Centro Pi</a> -   <a href=https://impa.br/>IMPA</a>
 
 profile:
   align: right
