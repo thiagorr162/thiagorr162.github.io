@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Statistics in BlockChain
+title: Blockchain statistics
 description: Partnership with Cartesi
 img: assets/img/projects/cartesi/capa.png
 importance: 3

@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Recommendation System
+title: Keywords extraction
 description: Partnership with Rede Globo
 img: assets/img/projects/globo/capa.jpeg
 importance: 1
