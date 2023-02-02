@@ -5,7 +5,7 @@ github_users:
   - dccsillag 
 
 github_repos:
-  - alshedivat/al-folio
-  - Lionelsy/Conference-Accepted-Paper-List
-  - jv-rv/split-conformal-nonexchangeable
   - dccsillag/amnioml
+  - jv-rv/split-conformal-nonexchangeable
+  - Lionelsy/Conference-Accepted-Paper-List
+  - alshedivat/al-folio
