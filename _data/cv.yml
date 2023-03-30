@@ -31,13 +31,19 @@
     - title: Postdoc at Centro Pi
       institution: Instituto de matemática pura e aplicada, IMPA
       year: 2023
-      # description:
-      #   - Description 1.
-      #   - Description 2.
-      #   - title: Description 3.
-      #     contents:
-      #       - Sub-description 1.
-      #       - Sub-description 2.
+      description:
+        - Description 1.
+        - Description 2.
+
+- title: Awards
+  type: time_table
+  contents:
+    - title: Deployed Application Award
+      # institution: The Association for the Advancement of Artificial Intelligence (AAAI)
+      year: 2023
+      description:
+        - Presented at Conference on Innovative Applications of Artificial Intelligence (AAAI)
+        - AI Application entitled "AmnioML Amniotic fluid segmentation and volume prediction with uncertainty quantification"
 
 - title: Academic Interests
   type: nested_list
