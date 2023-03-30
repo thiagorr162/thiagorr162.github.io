@@ -31,9 +31,9 @@
     - title: Postdoc at Centro Pi
       institution: Instituto de matemática pura e aplicada, IMPA
       year: 2023
-      description:
-        - Description 1.
-        - Description 2.
+      # description:
+      #   - Description 1.
+      #   - Description 2.
 
 - title: Awards
   type: time_table
