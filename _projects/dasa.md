@@ -1,10 +1,10 @@
 ---
 layout: page
-title: Amniotic fluid segmentation
+title: DASA
 description: IMPA-Data Partnership - Amniotic Fluid Detection Algorithm in Medical Imaging
 img: assets/img/projects/dasa/capa.png
-importance: 2
-category: work
+importance: 0
+category: 2021
 ---
 
 The amniotic fluid detection algorithm was developed by the Institute of Pure and Applied Mathematics (IMPA) in collaboration with healthcare professionals from the Dasa group. Its purpose is to identify and quantify the presence of amniotic fluid in medical images, specifically in the context of fetal development during pregnancy.

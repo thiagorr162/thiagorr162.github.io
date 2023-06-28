@@ -1,10 +1,10 @@
 ---
 layout: page
-title: Blockchain statistics
+title: Cartesi
 description: IMPA-Cartesi Partnership - Enhancing Proof-of-Stake Lottery System
 img: assets/img/projects/cartesi/capa.png
-importance: 3
-category: work
+importance: 1
+category: 2022
 ---
 
 In collaboration with Cartesi, our team undertook a project to enhance Cartesi's Proof-of-Stake (PoS) lottery system. The primary objective was to optimize the system's functionality and performance by leveraging our expertise in data analysis, computational simulations, and statistical theory.

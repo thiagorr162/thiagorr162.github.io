@@ -1,10 +1,10 @@
 ---
 layout: page
-title: Keywords extraction
+title: Rede Globo
 description: IMPA-Rede Globo Partnership - Automated Metadata Extraction and Enrichment for Content Recommendation System
 img: assets/img/projects/globo/capa.jpeg
 importance: 1
-category: work
+category: 2022
 ---
 
 The Centro Pi (Projects and Innovation Center IMPA) collaborated with Globo, a prominent entertainment company, to develop an automated metadata extraction and enrichment project using artificial intelligence models. The project aimed to enhance Globo's content recommendation systems by leveraging advanced techniques in data processing and analysis.
