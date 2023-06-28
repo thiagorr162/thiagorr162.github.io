@@ -1,10 +1,10 @@
 ---
 layout: page
-title: ML applied to finance
+title: Stone Pagamentos
 description: IMPA-Stone Partnership - Machine Learning for Credit Assessment in the Financial Sector
 img: assets/img/projects/stone/capa.png
-importance: 4
-category: work
+importance: 0
+category: 2020
 ---
 
 The IMPA-Stone partnership undertook a project focused on leveraging machine learning techniques to address the challenge of credit assessment for corporate entities. This collaboration brought together the expertise of IMPA researchers and students with the support and resources provided by Stone, a prominent fintech company.
