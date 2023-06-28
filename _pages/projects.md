@@ -6,13 +6,20 @@ description:
 nav: true
 nav_order: 2
 horizontal: false
+year_range: "2020-2022"
+display_categories: true
 ---
+{% assign start_year = page.year_range | split: "-" | first | plus: 0 %}
+{% assign end_year = page.year_range | split: "-" | last | plus: 0 %}
+{% assign all_categories = (start_year..end_year) | reverse %}
+
+
 
 <!-- pages/projects.md -->
 <div class="projects">
 {%- if site.enable_project_categories and page.display_categories %}
   <!-- Display categorized projects -->
-  {%- for category in page.display_categories %}
+  {%- for category in all_categories %}
   <h2 class="category">{{ category }}</h2>
   {%- assign categorized_projects = site.projects | where: "category", category -%}
   {%- assign sorted_projects = categorized_projects | sort: "importance" %}
