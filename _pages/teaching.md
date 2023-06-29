@@ -6,7 +6,7 @@ description:
 nav: true
 nav_order: 2
 horizontal: false
-year_range: "2020-2022"
+year_range: "2023"
 display_categories: true
 ---
 {% assign start_year = page.year_range | split: "-" | first | plus: 0 %}
