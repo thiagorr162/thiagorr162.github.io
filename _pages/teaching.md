@@ -4,7 +4,7 @@ title: teaching
 permalink: /teaching/
 description:
 nav: true
-nav_order: 2
+nav_order: 5
 horizontal: false
 year_range: "2023"
 display_categories: true
