@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Stone Pagamentos
+title: Stone
 description: Machine Learning for Credit Assessment in the Financial Sector
 img: assets/img/projects/stone/capa.png
 importance: 0
