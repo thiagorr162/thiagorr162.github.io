@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Rede Globo
-description: IMPA-Rede Globo Partnership - Automated Metadata Extraction and Enrichment for Content Recommendation System
+description: Automated Metadata Extraction and Enrichment for Content Recommendation System
 img: assets/img/projects/globo/capa.jpeg
 importance: 1
 category: 2022

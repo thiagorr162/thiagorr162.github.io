@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Stone Pagamentos
-description: IMPA-Stone Partnership - Machine Learning for Credit Assessment in the Financial Sector
+description: Machine Learning for Credit Assessment in the Financial Sector
 img: assets/img/projects/stone/capa.png
 importance: 0
 category: 2020

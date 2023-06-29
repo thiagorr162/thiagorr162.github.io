@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Cartesi
-description: IMPA-Cartesi Partnership - Enhancing Proof-of-Stake Lottery System
+description: Enhancing Proof-of-Stake Lottery System
 img: assets/img/projects/cartesi/capa.png
 importance: 1
 category: 2022

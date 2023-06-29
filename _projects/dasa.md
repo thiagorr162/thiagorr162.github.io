@@ -1,7 +1,7 @@
 ---
 layout: page
 title: DASA
-description: IMPA-Data Partnership - Amniotic Fluid Detection Algorithm in Medical Imaging
+description: Amniotic Fluid Detection Algorithm in Medical Imaging
 img: assets/img/projects/dasa/capa.png
 importance: 0
 category: 2021
