@@ -2,7 +2,7 @@
 layout: page
 title: projects
 permalink: /projects/
-description:
+description: All projects were carried out in collaboration with IMPA through the Centro Pi.
 nav: true
 nav_order: 3
 horizontal: false
