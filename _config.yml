@@ -4,7 +4,7 @@
 
 title: blank # the website title (if blank, full name will be used instead)
 first_name: Thiago
-middle_name: R.
+middle_name:
 last_name: Ramos
 email: thiagorr(at)impa.br
 description: > # the ">" symbol means to ignore newlines until "footer_text:"
@@ -13,7 +13,7 @@ footer_text: >
   Powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio">al-folio</a> theme.
   Hosted by <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>.
   Photos from <a href="https://unsplash.com" target="_blank">Unsplash</a>.
-keywords: thiagorr, Thiago, thiago, ramos, Ramos, math, statistics, machine learning, impa, IMPA # add your own keywords or leave empty
+keywords: thiagorr, Thiago, thiago, ramos, thiago ramos, tiago ramos, tiago, Tiago, Ramos, math, statistics, machine learning, impa, IMPA # add your own keywords or leave empty
 
 lang: en # the language of your site (for example: en, fr, cn, ru, etc.)
 icon: icon.png  # the emoji used as the favicon (alternatively, provide image name in /assets/img/)
@@ -76,13 +76,13 @@ telegram_username: # your Telegram user name
 scholar_userid: 1OPgS00AAAAJ # your Google Scholar ID
 semanticscholar_id: 2055918287 # your Semantic Scholar ID
 whatsapp_number: # your WhatsApp number (full phone number in international format. Omit any zeroes, brackets, or dashes when adding the phone number in international format.)
-orcid_id: 0000-0001-6271-7099 # your ORCID ID
+orcid_id: #0000-0001-6271-7099 # your ORCID ID
 medium_username: # your Medium username
 quora_username: # your Quora username
 publons_id: # your ID on Publons
 research_gate_profile: # your profile on ResearchGate
 blogger_url: # your blogger URL
-work_url: https://centropi.impa.br # work page URL
+work_url: #https://centropi.impa.br # work page URL
 keybase_username: # your keybase user name
 wikidata_id: # your wikidata id
 dblp_url: https://dblp.org/pid/320/6908.html # your DBLP profile url
