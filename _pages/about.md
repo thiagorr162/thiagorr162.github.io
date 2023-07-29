@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: <a href=https://centropi.impa.br/>Centro Pi</a> -   <a href=https://impa.br/>IMPA</a>
+subtitle: 
 
 profile:
   align: right
@@ -12,6 +12,7 @@ profile:
     <p style="text-align: center;">Me</p>
 
 news: true  # includes a list of news items
+latest_posts: true  # includes a list of the newest posts
 selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true  # includes social icons at the bottom of the page
 ---
