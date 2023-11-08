@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Prefeitura do Rio de Janeiro
+title: Rio de Janeiro
 description: Machine Learning for Credit Assessment in the Financial Sector
 img: assets/img/projects/rio_rain/capa.png
 importance: 0
