@@ -9,7 +9,7 @@ nav_order: 6
 
 ##### 2023
 
-- FGV, Rio de Janeiro, Brazil. **Aplicações Industriais: Hashing e Resolução de Entidade. [[Slides]](../assets/pdf/presentations/fgv/fgv-2023-hashing.pdf)**
+- IBM, Rio de Janeiro, Brazil. **Aplicações Industriais: Hashing e Resolução de Entidade. [[Slides]](../assets/pdf/presentations/fgv/fgv-2023-hashing.pdf)**
 
 ##### 2022
 

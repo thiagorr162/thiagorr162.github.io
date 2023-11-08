@@ -17,4 +17,6 @@ selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true  # includes social icons at the bottom of the page
 ---
 
-I am currently a postdoctoral researcher at the Center for Projects and Innovation at IMPA. My educational background includes a bachelor's and master's degree in pure mathematics from the University of São Paulo, as well as a Ph.D. at IMPA, where I was supervised by Roberto I. Oliveira and Paulo Orenstein. My research interests lie in the field of theoretical and applied machine learning, particularly in the areas of boosting, conformal prediction, and learning to hash. I also have experience in applying machine learning to industrial settings, having worked with companies such as Cartesi, Stone Pagamentos, DASA, Rede Globo and Rio de Janeiro City Hall.
+Currently, I’m working at SRBR as an artificial intelligence specialist, playing a crucial role in generating
+innovative resources in the healthcare field for Samsung devices. My experience includes working with time-series
+data and sensor information from various mobile devices and wearables.
