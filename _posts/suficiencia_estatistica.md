@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Suficiência estatística w 
+title: Suficiência estatística
 date: 2023-11-10
-description: an example of a blog post with some code
+description: TODO
 tags: statistics
 categories: learning
 ---
