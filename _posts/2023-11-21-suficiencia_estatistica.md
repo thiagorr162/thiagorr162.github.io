@@ -17,8 +17,6 @@ tags: statistics, inference
 categories: statistics
 ---
 
-# Estatística suficiente
-
 Nosso objetivo ao realizar inferência estatística é aprender um parâmetro desconhecido $$\theta$$ a partir dos dados $$X$$, supondo que esses dados vieram de uma distribuição $$P_\theta.$$
 
 Para a maioria das aplicações, $$X$$ será um vetor aleatório. O parâmetro $$\theta$$ pode ser uma constante única ou assumir valores em algum **subconjunto** de $$\mathbb{R}^p$$. O parâmetro $$\theta$$ e os dados $$X$$ estão relacionados por meio de um modelo no qual a distribuição de $$X$$ é determinada por $$\theta$$. A distribuição quando o parâmetro é $$\theta$$ é denotada por $$P_\theta$$, e escrevemos $$X \sim P_\theta$$. Em geral, um modelo é escrito como o conjunto de distribuições  $$\mathcal{P} = \{P_\theta : \theta \in \Omega\}$$, onde o espaço de parâmetros $$\Omega$$ é o conjunto de todos os valores possíveis para $$\theta$$.
@@ -52,3 +50,7 @@ $$
 $$
 
 isto é, a proporção (%) de "caras" observadas após os 100 lançamentos. 
+
+## Suficiência estatística
+
+bla bla
