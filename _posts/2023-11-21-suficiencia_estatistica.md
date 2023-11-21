@@ -29,13 +29,16 @@ Nesse caso então, teríamos que:
 
 - $$\Omega = [0,1]$$ já que $$\theta$$ representa uma probabilidade e portanto seus valores devem estar entre 0 e 1;
 
-- Portanto:
+- Juntando tudo, temos que:
+  
   $$
   X\sim P_\theta,\ \textrm{com}\  P_\theta\in\mathcal{P} = \{\textrm{Bin}(100, \theta) : \theta \in [0,1]\}.
   $$
 
 Nesse exemplo, uma **estatística** $$\delta$$ dos dados $$X$$ que parece natural para nos dar informação sobre o parâmetro $$\theta$$ que queremos estimar seria, por exemplo:
+
 $$
 \delta(X) = \frac{X}{100},
 $$
-isto é, a proporção de "caras" observadas após os 100 lançamentos. 
+
+isto é, a proporção (%) de "caras" observadas após os 100 lançamentos. 
