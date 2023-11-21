@@ -1,10 +1,8 @@
 ---
 layout: post
 title: Suficiência estatística
-date: 2023-11-10
-description: TODO
+date: 2023-11-21
+description: 
 tags: statistics
-categories: learning
+categories: statistics
 ---
-asd
-YYYY/MM/DD
