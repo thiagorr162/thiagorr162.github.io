@@ -116,9 +116,8 @@ No próximo exemplo, tentarei dar mais intuição sobre esse processo de "isolar
 
 ## Exemplo 2: Distribuição uniforme
 
-Suponha que temos $$X=(X_1,\dots,X_n)$$ onde cada coordenada é i.i.d. e $$X_i\sim \textrm{Uniform}([0,\theta]).$$ **Nosso objetivo é encontrar uma estatística suficiente para $$\theta$$**.
+Suponha que temos $$X=(X_1,\dots,X_n)$$ onde cada coordenada é i.i.d. e $$X_i\sim \textrm{Uniform}([0,\theta]).$$ **Nosso objetivo é encontrar uma estatística suficiente para $$\theta$$**. Note que,
 
-Note que,
 $$
 \begin{align*}
 p_{\theta}(x)&= \frac{1}{\theta^n}\prod_{i=1}^n \mathbb{1}\{\theta\leq x_1\leq \theta\}\\
