@@ -60,6 +60,4 @@ isto é, a proporção (%) de "caras" observadas após os 100 lançamentos.
 
 # Suficiência estatística
 
-@keener
-
-# Referências
+<d-cite key="keener"></d-cite>
