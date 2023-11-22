@@ -126,7 +126,8 @@ Perceba que em todos os exemplos anteriores, a intuição para encontrarmos uma 
 
 De fato, essa intuição que criamos analisando os exemplos anteriores pode ser formalizada através do seguinte teorema:
 
-> **Teorema de Fatorização:** Seja $$\mathcal{P}$$ um modelo com densidades $$p_\theta$$ absolutamente contínuas com relação à uma medida $$\mu$$. Então, $$T(X)$$ é suficiente para $$\mathcal{P}$$ se, e somente se,  existirem funções não negativas $$g_\theta$$ e $h$ para as quais
+> **Teorema de Fatorização:** Seja $$\mathcal{P}$$ um modelo com densidades $$p_\theta$$ absolutamente contínuas com relação à uma medida $$\mu$$. Então, $$T(X)$$ é suficiente para $$\mathcal{P}$$ se, e somente se,  existirem funções não negativas $$g_\theta$$ e $$h$$ para as quais
+> 
 > $$
 > p_\theta(x) = g_\theta(T(x))h(x),
 > $$
@@ -145,6 +146,7 @@ $$
 Além de ser uma ferramenta ótima para encontrarmos estatística suficientes, o teorema de fatorização ainda nos fornece uma excelente explicação sobre o porquê da intuição que utilizamos anteriormente de fato funciona na prática. 
 
 **Prova do teorema (caso discreto):** $$(\Leftarrow)$$Primeiro, vamos supor que $$p_\theta(x) = g_\theta(T(x))h(x)$$ e provar que de fato $$T(X)$$ é suficiente para $$\theta$$, isto é, queremos provar que quando condicionado à $$T(X)=t$$, a distribuição de probabilidade de $$X$$ não depende de $$\theta$$. De fato, temos que
+
 $$
 \begin{align*}
 P_\theta(X=x\mid T(X)=t ) & \overset{\textrm{hip}}{=} \frac{p_\theta(x)\mathbb{1}\{T(x)=t\}}{P_\theta(T(X)=t)}\\
@@ -158,6 +160,7 @@ $$
 e essa última expressão **não depende** de $$\theta.$$ Perceba que isso explica muito bem nossa intuição de escrever $$p_\theta$$ e isolar os fatores que contém $$\theta$$, já que quando escrever a probabilidade condicional, os fatores isolados se cancelam no quociente acima.
 
 $$(\Rightarrow)$$ Agora vamos supor que $$T(X)$$ é suficiente para $$\theta$$ e mostrar que conseguimos fatorar $$p_\theta$$ como no enunciado. De fato, note que:
+
 $$
 \begin{align*}
 p_\theta(x) &= P_\theta(X=x)\\
@@ -166,13 +169,12 @@ p_\theta(x) &= P_\theta(X=x)\\
 & \overset{(ii)}{=}P(X=x\mid T(X)=T(x))P_\theta(T(X)=T(x))
 \end{align*}
 $$
+
 onde (i) vale já que $$T(x)=T(x)$$ é completamente determinado por $$X=x$$ (pense sobre isso!) e (ii) vale pela hipótese de suficiência. Portanto basta tomarmos $$h(x) =P(X=x\mid T(x)=t) $$ e $$g_\theta(t) = P_\theta(T(x)=t)$$.
 
 ```
-<!---
-TODO:
+NEXT:
 - fazer mais exemplos com e sem fatorização
 - colocar refs
 - colocar footnote para abs continua
--->
 ```
