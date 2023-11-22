@@ -191,4 +191,5 @@ NEXT:
 - fazer mais exemplos com e sem fatorização
 - colocar refs
 - colocar footnote para abs continua
+- famílias expos
 ```
