@@ -70,6 +70,7 @@ $$
 Note que estatístico **B**, a princípio, tem menos informação que o **A**. Por exemplo, suponha que $$\mathbf{X} = (0,1,1,1,0,1,0,0,0,1)$$, então **A** saberia exatamente o que aconteceu em cada lançamento de moeda, enquanto **B** teria apenas a informação de que  foram observadas 5 "caras" em $$n=10$$ lançamentos. Mas isso realmente é verdade? Ou seja, **o estatístico *A* tem mais informação que *B*?**
 
 Para respondermos isso, vamos calcular a densidade conjunta de $$\mathbf{X}$$. Isto é, para $$x =(x_1,\dots,x_n)\in[0,1]^n$$:
+
 $$
 \begin{align*}
 p_{\theta}(x)=p_{\theta}(x_1,\dots,x_n) &= \prod_{i=1}^n\theta^{x_i} (1-\theta)^{1-x_i}\\
