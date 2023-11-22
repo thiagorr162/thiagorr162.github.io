@@ -11,7 +11,7 @@ Nosso objetivo ao realizar inferência estatística é aprender um parâmetro de
 
 Para a maioria das aplicações, $$X$$ será um vetor aleatório. O parâmetro $$\theta$$ pode ser uma constante única ou assumir valores em algum **subconjunto** de $$\mathbb{R}^p$$. O parâmetro $$\theta$$ e os dados $$X$$ estão relacionados por meio de um modelo no qual a distribuição de $$X$$ é determinada por $$\theta$$. A distribuição quando o parâmetro é $$\theta$$ é denotada por $$P_\theta$$, e escrevemos $$X \sim P_\theta$$. Em geral, um modelo é escrito como o conjunto de distribuições  $$\mathcal{P} = \{P_\theta : \theta \in \Omega\}$$, onde o espaço de parâmetros $$\Omega$$ é o conjunto de todos os valores possíveis para $$\theta$$.
 
-Nossa estratégia para obter informações sobre o parâmetro $$\theta$$, por enquanto, envolve a exploração de funções $$\delta$$ aplicadas aos dados $$X$$, que serão referidas como **estatísticas** ou **estimadores**. Essas funções são concebidas de modo a proporcionar uma representação significativa do parâmetro não observável $$\theta$$. A busca por uma função $$\delta(X)$$ próxima de $$\theta$$ é o que chamamos de **estimação**.
+Nossa estratégia para obter informações sobre o parâmetro $$\theta$$, por enquanto, envolve a exploração de funções $$\delta$$ aplicadas aos dados $$X$$, que serão referidas como **estatísticas**. Quando essas funções são concebidas de modo a proporcionar uma representação significativa do parâmetro não observável $$\theta$$,  vamos chama-las de  de **estimadores** e esse processo de busca por uma função $$\delta(X)$$ próxima de $$\theta$$ é o que chamamos de **estimação**.
 
 ## Exemplo 1: Lançamento de moeda
 
