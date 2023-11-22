@@ -85,8 +85,10 @@ No fim das contas, o valor individual de cada $$x_i$$ não importa. A única inf
 Perceba que, existem $${n\choose t}$$ sequências de lançamentos de moedas cuja a quantidade de ocorrência de "caras" é igual à $$t$$, e para todas elas são atribuídas as mesmas probabilidades $$\theta^t(1-\theta)^{n-t}$$, o que nos faz suspeitar que condicionado ao evento $$T(X)=t$$, a probabilidade conjunta de $$X$$ deveria ser uniforme e independente do parâmetro $$\theta$$. De fato, podemos verificar isso na prática:
 
 $$
+\begin{align}
 P_{\theta}(X=x\mid T=t) &= \frac{\theta^t (1-\theta)^{n-t}}{\theta^{t} (1-\theta)^{n-t}}\mathbb{1}\{T(x)=t\}{n \choose t}^{-1}\\
-&= \mathbb{1}\{T(x)=t\}{n \choose t}^{-1}.
+&= \mathbb{1}\{T(x)=t\} {n \choose t}^{-1}.
+\end{align}
 $$
 
 Esse fenômeno pode ser resumido da seguinte forma:
