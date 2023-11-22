@@ -70,17 +70,15 @@ No fim das contas, o valor individual de cada $$x_i$$ não importa. A única inf
 Perceba que, existem $${n\choose t}$$ sequências de lançamentos de moedas cuja a quantidade de ocorrência de "caras" é igual à $$t$$, e para todas elas são atribuídas as mesmas probabilidades $$\theta^t(1-\theta)^{n-t}$$, o que nos faz suspeitar que condicionado ao evento $$T(X)=t$$, a probabilidade conjunta de $$X$$ deveria ser uniforme e independente do parâmetro $$\theta$$. De fato, podemos verificar isso na prática:
 
 $$
-\begin{align}
+\begin{align*}
 P_{\theta}(X=x\mid T=t) &= \frac{\theta^t (1-\theta)^{n-t}}{\theta^{t} (1-\theta)^{n-t}}\mathbb{1}\{T(x)=t\}{n \choose t}^{-1}\\
 &= \mathbb{1}\{T(x)=t\} {n \choose t}^{-1}.
-\end{align}
+\end{align*}
 $$
 
 Esse fenômeno pode ser resumido da seguinte forma:
 
-> **A distribuição de $$X$$ condicional ao evento $$T(X)=t$$ não depende do parâmetro $$\theta$$**
-
-Quando isso acontece, dizemos que a estatística $$T(X)$$ é suficiente para $$\theta$$.
+> **A distribuição de $$X$$ condicional ao evento $$T(X)=t$$ não depende do parâmetro $$\theta$$. Quando isso acontece, dizemos que a estatística $$T(X)$$ é suficiente para $$\theta$$.**
 
 Antes de continuarmos, vamos analisar um caso em que uma estatística $$\tilde{T}$$ não é suficiente para $$\theta$$ para criarmos um pouco mais de intuição sobre a definição acima. Para isso, considere por exemplo, a estatística 
 
@@ -109,15 +107,72 @@ Note que,
 $$
 \begin{align*}
 p_{\theta}(x)&= \frac{1}{\theta^n}\prod_{i=1}^n \mathbb{1}\{\theta\leq x_1\leq \theta\}\\
-&\frac{1}{\theta^n}\mathbb{1}\{\theta\leq x_1,\dots,x_n\leq \theta\}\\
-& \frac{1}{\theta^n} \mathbb{1}\{0\leq  \min\{x_1,\dots,x_n\}\}\mathbb{1}\{\max\{x_1,\dots,x_n\}\leq \theta\}
+&=\frac{1}{\theta^n}\mathbb{1}\{\theta\leq x_1,\dots,x_n\leq \theta\}\\
+& =\frac{1}{\theta^n} \mathbb{1}\{0\leq  \min\{x_1,\dots,x_n\}\}\mathbb{1}\{\max\{x_1,\dots,x_n\}\leq \theta\}
 \end{align*}
 $$
 
 
 Seguindo a mesma intuição do exemplo das moedas, a expressão acima nos parece dizer que tudo o que realmente precisamos saber sobre a expressão acima **quando a tarefa é estimar $$\theta$$** é saber o valor de $$T(X)=\max\{X_1,\dots,X_n\}$$ e que  condicionar a distribuição de $$X$$ no evento $$T(X)=t$$ é suficiente para isolarmos a aleatoriedade da expressão acima do parâmetro $$\theta$$.
 
-De fato, é fácil provar que $$T(X)$$ é suficiente utilizando a definição que demos anteriormente (FAZER).
+De fato, é fácil provar que $$T(X)$$ é suficiente utilizando a definição que demos anteriormente (**FAZER**).
 
+# Teorema de Fatorização
 
+Perceba que em todos os exemplos anteriores, a intuição para encontrarmos uma estatística suficiente foi:
 
+1. Escrever a expressão da distribuição de probabilidade $$p_\theta(x)$$;
+2. Tentar isolar expressões que envolvem $$\theta$$ de outros fatores que não envolvem o parâmetro que queremos estimar.
+
+De fato, essa intuição que criamos analisando os exemplos anteriores pode ser formalizada através do seguinte teorema:
+
+> **Teorema de Fatorização:** Seja $$\mathcal{P}$$ um modelo com densidades $$p_\theta$$ absolutamente contínuas com relação à uma medida $$\mu$$. Então, $$T(X)$$ é suficiente para $$\mathcal{P}$$ se, e somente se,  existirem funções não negativas $$g_\theta$$ e $h$ para as quais
+> $$
+> p_\theta(x) = g_\theta(T(x))h(x),
+> $$
+>
+> para $$\mu$$-q.t.p $$x$$.
+
+Note que isso facilita muito nosso trabalho em descobrir se uma estatística $$T(X)$$ é suficiente. Por exemplo, no exemplo das distribuições uniformes, tomando $$T(X)=\max\{X_1,\dots,X_n\}$$,  $$h(x) =\min\{X_1,\dots,X_n\} $$ e $$g_\theta(x) = \frac{1}{\theta^n} \mathbb{1}\{0\leq  x\}$$, temos que:
+
+$$
+\begin{align*}
+p_{\theta}(x)&= \frac{1}{\theta^n} \mathbb{1}\{0\leq  \min\{x_1,\dots,x_n\}\}\mathbb{1}\{\max\{x_1,\dots,x_n\}\leq \theta\}\\
+&= g_\theta(x)h(x).
+\end{align*}
+$$
+
+Além de ser uma ferramenta ótima para encontrarmos estatística suficientes, o teorema de fatorização ainda nos fornece uma excelente explicação sobre o porquê da intuição que utilizamos anteriormente de fato funciona na prática. 
+
+**Prova do teorema (caso discreto):** $$(\Leftarrow)$$Primeiro, vamos supor que $$p_\theta(x) = g_\theta(T(x))h(x)$$ e provar que de fato $$T(X)$$ é suficiente para $$\theta$$, isto é, queremos provar que quando condicionado à $$T(X)=t$$, a distribuição de probabilidade de $$X$$ não depende de $$\theta$$. De fato, temos que
+$$
+\begin{align*}
+P_\theta(X=x\mid T(X)=t ) & \overset{\textrm{hip}}{=} \frac{p_\theta(x)\mathbb{1}\{T(x)=t\}}{P_\theta(T(X)=t)}\\
+& = \frac{p_\theta(x)\mathbb{1}\{T(x)=t\}}{\sum_{T(x)=t} p_\theta(x)}\\
+& = \frac{g_\theta(T(x))h(x)\mathbb{1}\{T(x)=t\}}{\sum_{T(x)=t} g_\theta(T(x))h(x)}\\
+& = \frac{g_\theta(t)h(x)\mathbb{1}\{T(x)=t\}}{\sum_{T(x)=t} g_\theta(t)h(x)}\\
+& = \frac{h(x)\mathbb{1}\{T(x)=t\}}{\sum_{T(x)=t} h(x)},
+\end{align*}
+$$
+
+e essa última expressão **não depende** de $$\theta.$$ Perceba que isso explica muito bem nossa intuição de escrever $$p_\theta$$ e isolar os fatores que contém $$\theta$$, já que quando escrever a probabilidade condicional, os fatores isolados se cancelam no quociente acima.
+
+$$(\Rightarrow)$$ Agora vamos supor que $$T(X)$$ é suficiente para $$\theta$$ e mostrar que conseguimos fatorar $$p_\theta$$ como no enunciado. De fato, note que:
+$$
+\begin{align*}
+p_\theta(x) &= P_\theta(X=x)\\
+& \overset{(i)}{=} P_\theta(X=x, T(X)=T(x))\\
+& = P_\theta(X=x\mid T(X)=T(x))P_\theta(T(X)=T(x))\\
+& \overset{(ii)}{=}P(X=x\mid T(X)=T(x))P_\theta(T(X)=T(x))
+\end{align*}
+$$
+onde (i) vale já que $$T(x)=T(x)$$ é completamente determinado por $$X=x$$ (pense sobre isso!) e (ii) vale pela hipótese de suficiência. Portanto basta tomarmos $$h(x) =P(X=x\mid T(x)=t) $$ e $$g_\theta(t) = P_\theta(T(x)=t)$$.
+
+```
+<!---
+TODO:
+- fazer mais exemplos com e sem fatorização
+- colocar refs
+- colocar footnote para abs continua
+-->
+```
