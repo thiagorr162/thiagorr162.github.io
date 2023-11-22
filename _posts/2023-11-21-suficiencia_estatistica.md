@@ -15,7 +15,7 @@ Nossa estratégia para obter informações sobre o parâmetro $$\theta$$, por en
 
 ## Exemplo 1: Lançamento de moeda
 
-Como exemplo, suponha que estamos modelando o lançamento de $$n$$ moedas indenpendentes, tal que a probabilidade da face observada após o lançamento ser "cara" é $$\theta$$ e da face "coroa" ser observada é de $$1-\theta$$, com $$\theta\in[0,1]$$.  Nesse caso, podemos modelar a variável aleatória $$X = (X_1,\dots,X_n)$$ que nos diz se a $i$-ésima moeda  caiu "cara" ou "coroa", através de uma distribuição Bernoulli, isto é:
+Como exemplo, suponha que estamos modelando o lançamento de $$n$$ moedas indenpendentes, tal que a probabilidade da face observada após o lançamento ser "cara" é $$\theta$$ e da face "coroa" ser observada é de $$1-\theta$$, com $$\theta\in[0,1]$$.  Nesse caso, podemos modelar a variável aleatória $$X = (X_1,\dots,X_n)$$ que nos diz se a $$i$$-ésima moeda  caiu "cara" ou "coroa", através de uma distribuição Bernoulli, isto é:
 
 $$
 \mathbf{X} = (X_1,\dots,X_n) \sim \textrm{Bernoulli}(\theta)^{\otimes n},\ \theta\in[0,1].
@@ -52,7 +52,7 @@ $$
 T(X) = X_1+\dots+X_n
 $$
 
-Note que estatístico **B**, a princípio, tem menos informação que o **A**. Por exemplo, suponha que $$X = (0,1,1,1,0,1,0,0,0,1)$$, então **A** saberia exatamente o que aconteceu em cada lançamento de moeda, enquanto **B** teria apenas a informação de que  foram observadas 5 "caras" em $$n=10$$ lançamentos. Mas isso realmente é verdade? Ou seja, **o estatístico *A* tem mais informação que *B*?**
+Note que estatístico **B**, a princípio, tem menos informação que o **A**. Por exemplo, suponha que $$X = (0,1,1,1,0,1,0,0,0,1)$$, então **A** saberia exatamente o que aconteceu em cada lançamento de moeda, enquanto **B** teria apenas a informação de que  foram observadas 5 "caras" em $$n=10$$ lançamentos. Mas isso realmente é verdade? Ou seja, **no problema de estimação de $$\theta$$, o estatístico *A* tem mais informação que *B*?**
 
 Para respondermos isso, vamos calcular a distribuição conjunta de $$X$$. Isto é, para $$x =(x_1,\dots,x_n)\in[0,1]^n$$:
 
