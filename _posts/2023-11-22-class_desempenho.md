@@ -47,7 +47,6 @@ Esse estimador $$g_*$$ é conhecido como estimador de Bayes e conseguimos provar
 
 **Prova:** Defina $$\eta(x) = P(Y=1\mid X=x)$$, então para um classificador qualquer $$g$$, temos que
 
-
 $$
 \begin{align*}
 R(g) &= \mathbb{E}[Y\neq g(X)]\\
@@ -57,6 +56,30 @@ R(g) &= \mathbb{E}[Y\neq g(X)]\\
 \end{align*}
 $$
 
-
 Para minimizarmos a expressão acima, basta minimizarmos a função dentro do valor esperado. Note que apenas um dos lados **A** ou **B** será não-nulo na expressão acima, já que ou $$g(x)=0$$ ou $$g(x)=1$$. Se $$\eta(x)>1/2$$, então como queremos minimizar $$R(g)$$, gostaríamos que o lado direito (B) fosse o não-nulo, já que nesse caso $$1-\eta(x)<\eta(x)$$ . Logo, se $$\eta(x)>1/2$$ o classificador que minimiza a expressão deve ser igual à 1. Caso contrário, ele deve ser 0. Mas isso é exatamente o classificador de Bayes que descrevemos anteriormente. $$\blacksquare$$
 
+A função $$\eta(x)= P(Y=1\mid X=x)$$ é comummente chamada de **função regressora**. Em geral, em aprendizado de máquinas, as funções que minimizam algum risco tem sempre essa cara. Por exemplo, quando estamos trabalhando com problema de regressão ao invés de classificação (i.e. $$Y\in\mathbb{R}$$ ao invés de $$Y\in\{0,1\}$$) e utilizamos o risco quadrático como critério de otimização (i.e. $$R(f) = \mathbb{E}[(f(X)-Y)^2]$$), a função $$f_*$$ que otimiza esse critério é dada por$$f_*(x) = \mathbb{E}[Y\mid X=x]$$, semelhante ao classificador de Bayes. Não vou entrar em muitos mais detalhes sobre isso por enquanto, já que esse vai ser o assunto de um futuro post.
+
+Voltando ao problema de como escolher o melhor classificador, na prática dois problemas acontecem:
+
+1. Não temos acesso à distribuição real dos dados $$P$$, e portanto não conseguimos construir o classificador de Bayes como acima;
+2. Como não temos a distribuição real dos dados $$P$$, também não conseguimos minimizar o risco $$R(g)$$, já que ele depende do cálculo de um valor esperado sobre $$P$$.
+
+Para resolver o problema (1), o que fazemos é treinar algum modelo $$g(x)$$ para aproximar o comportamento do classificador de Bayes, isto é,
+
+$$
+\tilde{g}(x) \approx \eta(x),
+$$
+e daí construímos um classificador final $$g$$, tal que $$g(x)=1$$ se $$\tilde{g}(x)>12$$ e $$g(x)=0$$ caso contrário.
+
+Para resolvermos o problema (2), utilizamos o fato de que 
+
+$$
+P(Y\neq g(X)) \approx \frac{1}{N}\sum_{i=1}^N\mathbb{1}[Y_y\neq g(X_i)].
+$$
+
+Esse fato é intuitivo utilizando a lei dos grandes números, por exemplo. Entretanto, essas ferramentas estatísticas assimptóticas não funcionam muito bem na teoria "moderna" de aprendizado estatístico, já que o comum em problema reais é termos acesso à um número muito limitado de dados (i.e. $$N$$ não é tão grande), e portanto a hipótese assimptótica desses resultados deixa de ser razoável.  O que é utilizado hoje em dia são resultados probabilísticos de **amostra finita**, que nos dão estimativas do erro $$\textrm{erro}_N$$:
+$$
+\textrm{erro}_N = \left| P(Y\neq g(X)) - \frac{1}{N}\sum_{i=1}^N\mathbb{1}[Y_y\neq g(X_i)]\mid \right|
+$$
+em função do tamanho da amostra $$N$$. A teoria básica que encapsula esses resultados é a de concentração de medida. Não entrarei em detalhes sobre isso agora, já que esse será um tema futuro no nosso blog.
