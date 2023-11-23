@@ -28,11 +28,11 @@ $$
 
 seja o menor possível. 
 
-Intuitivamente, conseguimos imaginar qual seria o melhor classificador possível $$g_*(X)$$. Suponha por um instante que você tem acesso à distribuição real dos dados $$P$$. Se alguém te desse um valor $$X_0$$ e perguntasse qual o melhor chute possível para a respectiva saída $$Y_0$$ você poderia raciocinar da seguinte forma: 
+Intuitivamente, conseguimos imaginar qual seria o melhor classificador possível $$g_*(X)$$. Suponha por um instante que você tem acesso à distribuição real dos dados $$p(x,y)$$, e portanto, tem acesso à $$p(y\mid x)$$. Se alguém te desse um valor $$X_0$$ e perguntasse qual o melhor chute possível para a respectiva saída $$Y_0$$ você poderia raciocinar da seguinte forma: 
 
-> Dado que estou vendo esse valor para $$X_0$$, a probabilidade de $$Y_0$$ ser igual à 0 é maior que a probabilidade de ser igual à $$1$$? Se sim, meu melhor chute é dizer que $$Y_0$$ é 0. Caso contrário, meu melhor chute é dizer que é igual à 1.
+> Dado que  $$X_0=x$$, vou chutar que $$Y_0=1$$ se esse resultado for mais provável, isto é, $$P(Y=1|X)>1/2$$; ou chuatar $$Y_0=0$$ caso esse resultado for mais provável, isto é,  $$P(Y=1|X)\leq 1/2$$.
 
-Isto é.
+Note que isso pode ser reescrito de forma mais geral como:
 
 $$
 g_*(x) = \arg\max_{d\in\{0,1\}} P(Y=d\mid x)
