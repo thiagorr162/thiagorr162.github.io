@@ -7,7 +7,7 @@ tags: machine-learning, classification, performance-metrics
 categories: machine-learning
 ---
 
-Considere uma amostra i.i.d. de pares $$\{(X_1,Y_1),\dots,(X_n,Y_n)\}$$, em que  $$X_i\in\mathbb{R}^p$$ é um vetor que contém informações sobre um indivíduo$$i$$ e $$Y_i\in\{0,1\}$$ é a saída com respeito ao vetor $$X_i$$. Nosso objetivo é encontrar um classificador $$g:\mathbb{R}^p\to \{0,1\}$$ de modo que, para um novo par $$(X,Y)$$,  temos que $$g(X)$$  está "próximo" em algum sentido de $$Y$$.
+Considere uma amostra i.i.d. de pares $$\{(X_1,Y_1),\dots,(X_n,Y_n)\}$$, em que  $$X_i\in\mathbb{R}^p$$ é um vetor que contém informações sobre um indivíduo $$i$$ e $$Y_i\in\{0,1\}$$ é a saída com respeito ao vetor $$X_i$$. Nosso objetivo é encontrar um classificador $$g:\mathbb{R}^p\to \{0,1\}$$ de modo que, para um novo par $$(X,Y)$$,  temos que $$g(X)$$  está "próximo" em algum sentido de $$Y$$.
 
 
 Para exemplificar o cenário anterior, $$X_i$$ poderia representar uma série de fatores socioeconômicos de um estudante, $$Y_i$$ representar se esse estudante passou $$(Y_i=1)$$ ou não passou $$(Y_i=0)$$ no ENEM e $$g_0(X_i)=1$$ se a renda familiar desse estudante for maior que 5 salários mínimos e $$g_0(X_i)=0$$ caso contrário.
@@ -30,7 +30,7 @@ seja o menor possível.
 
 Intuitivamente, conseguimos imaginar qual seria o melhor classificador possível $$g_*(X)$$. Suponha por um instante que você tem acesso à distribuição real dos dados $$p(x,y)$$, e portanto, tem acesso à $$p(y\mid x)$$. Se alguém te desse um valor $$X_0$$ e perguntasse qual o melhor chute possível para a respectiva saída $$Y_0$$ você poderia raciocinar da seguinte forma: 
 
-> Dado que  $$X_0=x$$, vou chutar que $$Y_0=1$$ se esse resultado for mais provável, isto é, $$P(Y=1|X)>1/2$$; ou chuatar $$Y_0=0$$ caso esse resultado for mais provável, isto é,  $$P(Y=1|X)\leq 1/2$$.
+> Dado que  $$X_0=x$$, vou chutar que $$Y_0=1$$ se esse resultado for mais provável, isto é, $$P(Y=1|X)>1/2$$; ou chutar $$Y_0=0$$ caso esse resultado for mais provável, isto é,  $$P(Y=1|X)\leq 1/2$$.
 
 Note que isso pode ser reescrito de forma mais geral como:
 
@@ -94,13 +94,14 @@ Com base na análise realizada na seção anterior, conseguimos estabelecer uma 
 ## Acurácia
 
 Dado um classificador $$g$$, denotamos por **Acurácia** a seguinte métrica:
+
 $$
-\textrm{Acurácia}(g)=1 - \frac{1}{N}\sum_{i=1}^N\mathbb{1}[Y_y\neq g(X_i)]=\frac{1}{N}\sum_{i=1}^N\mathbb{1}[Y_y= g(X_i)]
+\textrm{Acurácia}(g)=1 - \frac{1}{N}\sum_{i=1}^N\mathbb{1}[Y_y\neq g(X_i)]=\frac{1}{N}\sum_{i=1}^N\mathbb{1}[Y_y= g(X_i)].
 $$
 
-Essencialmente, a Acurácia mede a proporção de observações para as quais o modelo $$g$$ prevê corretamente a classe em relação às observações totais.
+Essencialmente, a Acurácia mede a proporção de observações para as quais o modelo $$g$$ prevê corretamente a classe em relação às observações totais. 
 
-
+Note que na expressão da acurácia é um pouco diferente da expressão que vimos na seção anterior, já que subtraímos o risco anterior de 1. Fizemos isso apenas para manter a consistência com a definição de acurácia na literatura. Note que para qualquer função de risco $$R$$ que gostaríamos de **minimizar**,  podemos fazer $$1-R$$ e agora temos uma métrica de avaliação que gostaríamos de **maximizar**. Ou seja, as expressões são equivalentes e a única mudança é que em um caso temos um problema de maximização e no outro minimização.
 
 
 
@@ -109,4 +110,4 @@ Essencialmente, a Acurácia mede a proporção de observações para as quais o 
 1. Aprendizado de máquina: uma abordagem estatística. (2020). (n.p.): Rafael Izbicki.
 2. Mohri, M., Rostamizadeh, A., Talwalkar, A. (2018). Foundations of Machine Learning. United Kingdom: MIT Press.
 3. Hastie, T., Tibshirani, R., Friedman, J. (2013). The Elements of Statistical Learning: Data Mining, Inference, and Prediction. Germany: Springer New York.
-4. https://web.eecs.umich.edu/~cscott/past_courses/eecs598w14/notes/02_bayes_classifier.pdf
+4. [https://web.eecs.umich.edu/~cscott/past_courses/eecs598w14/notes/02_bayes_classifier.pdf](https://web.eecs.umich.edu/~cscott/past_courses/eecs598w14/notes/02_bayes_classifier.pdf)
