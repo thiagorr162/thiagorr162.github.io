@@ -30,7 +30,7 @@ seja o menor possível.
 
 Intuitivamente, conseguimos imaginar qual seria o melhor classificador possível $$g_*(X)$$. Suponha por um instante que você tem acesso à distribuição real dos dados $$p(x,y)$$, e portanto, tem acesso à $$p(y\mid x)$$. Se alguém te desse um valor $$X_0$$ e perguntasse qual o melhor chute possível para a respectiva saída $$Y_0$$ você poderia raciocinar da seguinte forma: 
 
-> Dado que  $$X_0=x$$, vou chutar que $$Y_0=1$$ se esse resultado for mais provável, isto é, $$P(Y=1|X)>1/2$$; ou chutar $$Y_0=0$$ caso esse resultado for mais provável, isto é,  $$P(Y=1|X)\leq 1/2$$.
+> Dado que  $$X_0=x$$, vou chutar que $$Y_0=1$$ se esse resultado for mais provável, isto é, $$P(Y=1\mid X)>1/2$$; ou chutar $$Y_0=0$$ caso esse resultado for mais provável, isto é,  $$P(Y=1\mid X)\leq 1/2$$.
 
 Note que isso pode ser reescrito de forma mais geral como:
 
