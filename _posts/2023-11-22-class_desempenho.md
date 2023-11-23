@@ -70,7 +70,8 @@ Para resolver o problema (1), o que fazemos é treinar algum modelo $$g(x)$$ par
 $$
 \tilde{g}(x) \approx \eta(x),
 $$
-e daí construímos um classificador final $$g$$, tal que $$g(x)=1$$ se $$\tilde{g}(x)>12$$ e $$g(x)=0$$ caso contrário.
+
+e daí construímos um classificador final $$g$$, tal que $$g(x)=1$$ se $$\tilde{g}(x)>1/2$$ e $$g(x)=0$$ caso contrário.
 
 Para resolvermos o problema (2), utilizamos o fato de que 
 
@@ -79,7 +80,13 @@ P(Y\neq g(X)) \approx \frac{1}{N}\sum_{i=1}^N\mathbb{1}[Y_y\neq g(X_i)].
 $$
 
 Esse fato é intuitivo utilizando a lei dos grandes números, por exemplo. Entretanto, essas ferramentas estatísticas assimptóticas não funcionam muito bem na teoria "moderna" de aprendizado estatístico, já que o comum em problema reais é termos acesso à um número muito limitado de dados (i.e. $$N$$ não é tão grande), e portanto a hipótese assimptótica desses resultados deixa de ser razoável.  O que é utilizado hoje em dia são resultados probabilísticos de **amostra finita**, que nos dão estimativas do erro $$\textrm{erro}_N$$:
+
 $$
 \textrm{erro}_N = \left| P(Y\neq g(X)) - \frac{1}{N}\sum_{i=1}^N\mathbb{1}[Y_y\neq g(X_i)]\mid \right|
 $$
-em função do tamanho da amostra $$N$$. A teoria básica que encapsula esses resultados é a de concentração de medida. Não entrarei em detalhes sobre isso agora, já que esse será um tema futuro no nosso blog.
+
+em função do tamanho da amostra $$N$$. A teoria básica que encapsula esses resultados é a de **concentração de medida**. Não entrarei em detalhes sobre isso agora, já que esse será um tema futuro no nosso blog.
+
+# Avaliando problemas de classificação
+
+Já vimos 
