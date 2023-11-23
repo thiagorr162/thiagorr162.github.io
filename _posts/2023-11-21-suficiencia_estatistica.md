@@ -186,10 +186,21 @@ $$
 
 onde (i) vale já que $$T(x)=T(x)$$ é completamente determinado por $$X=x$$ (pense sobre isso!) e (ii) vale pela hipótese de suficiência. Portanto basta tomarmos $$h(x) =P(X=x\mid T(x)=t) $$ e $$g_\theta(t) = P_\theta(T(x)=t)$$. $$\blacksquare$$
 
+# Referências
+
+1. Keener, R. W. (2010). Theoretical Statistics: Topics for a Core Course. Germany: Springer New York.
+2. https://bookdown.org/jkang37/stat205b-notes/lecture04.html
+3. https://www.stat.berkeley.edu/~wfithian/courses/stat210a/
+
+
+
+
+
+
+
 ```
 NEXT:
 - fazer mais exemplos com e sem fatorização
-- colocar refs
 - colocar footnote para abs continua
 - famílias expos
 ```

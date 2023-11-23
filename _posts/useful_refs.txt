@@ -1,0 +1,7 @@
+Aprendizado de máquina: uma abordagem estatística. (2020). (n.p.): Rafael Izbicki.
+
+Mohri, M., Rostamizadeh, A., Talwalkar, A. (2018). Foundations of Machine Learning. United Kingdom: MIT Press.
+
+Hastie, T., Tibshirani, R., Friedman, J. (2013). The Elements of Statistical Learning: Data Mining, Inference, and Prediction. Germany: Springer New York.
+
+Keener, R. W. (2010). Theoretical Statistics: Topics for a Core Course. Germany: Springer New York.
