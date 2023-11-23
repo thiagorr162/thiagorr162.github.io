@@ -42,7 +42,7 @@ Esse estimador $$g_*$$ é conhecido como estimador de Bayes e conseguimos provar
 
 > **Teorema:** O estimador $$g_*$$ que minimiza o risco $$R(g)$$ é dado por
 > $$
-> g_*(x) = \arg\max_{d\in\{0,1\}} P(Y=d\mid x)
+> g_*(x) = \arg\max_{d\in\{0,1\}} P(Y=d\mid x).
 > $$
 
 **Prova:** Defina $$\eta(x) = P(Y=1\mid X=x)$$, então para um classificador qualquer $$g$$, temos que
@@ -87,7 +87,7 @@ $$
 
 em função do tamanho da amostra $$N$$. A teoria básica que encapsula esses resultados é a de **concentração de medida**. Não entrarei em detalhes sobre isso agora, já que esse será um tema futuro no nosso blog.
 
-# Métricas de avaliação
+# Métricas de avaliação alternativas
 
 Com base na análise realizada na seção anterior, conseguimos estabelecer uma métrica de desempenho bastante intuitiva para classificadores.
 

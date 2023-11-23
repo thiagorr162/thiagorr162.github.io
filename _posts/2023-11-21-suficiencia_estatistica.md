@@ -189,8 +189,8 @@ onde (i) vale já que $$T(x)=T(x)$$ é completamente determinado por $$X=x$$ (pe
 # Referências
 
 1. Keener, R. W. (2010). Theoretical Statistics: Topics for a Core Course. Germany: Springer New York.
-2. https://bookdown.org/jkang37/stat205b-notes/lecture04.html
-3. https://www.stat.berkeley.edu/~wfithian/courses/stat210a/
+2. [https://bookdown.org/jkang37/stat205b-notes/lecture04.html](https://bookdown.org/jkang37/stat205b-notes/lecture04.html)
+3. [https://www.stat.berkeley.edu/~wfithian/courses/stat210a/](https://www.stat.berkeley.edu/~wfithian/courses/stat210a/)
 
 
 
