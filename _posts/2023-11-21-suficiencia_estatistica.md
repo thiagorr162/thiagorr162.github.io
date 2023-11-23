@@ -169,7 +169,7 @@ p_\theta(x) &= P_\theta(X=x)\\
 \end{align*}
 $$
 
-onde (i) vale já que $$T(x)=T(x)$$ é completamente determinado por $$X=x$$ (pense sobre isso!) e (ii) vale pela hipótese de suficiência. Portanto basta tomarmos $$h(x) =P(X=x\mid T(x)=t) $$ e $$g_\theta(t) = P_\theta(T(x)=t)$$.
+onde (i) vale já que $$T(x)=T(x)$$ é completamente determinado por $$X=x$$ (pense sobre isso!) e (ii) vale pela hipótese de suficiência. Portanto basta tomarmos $$h(x) =P(X=x\mid T(x)=t) $$ e $$g_\theta(t) = P_\theta(T(x)=t)$$. $$\blacksquare$$
 
 ```
 NEXT:
