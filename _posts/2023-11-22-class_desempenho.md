@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Métricas de desempenho: acurácia, precisão, recall, f1-score
+title: Métricas de desempenho em classificação
 date: 2023-11-22
 description: Vamos aprender o que é acurácia, precisão, recall e f1-score
 tags: machine-learning, classification, performance-metrics
