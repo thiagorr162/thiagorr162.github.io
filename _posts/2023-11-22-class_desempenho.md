@@ -88,9 +88,17 @@ $$
 
 em função do tamanho da amostra $$N$$. A teoria básica que encapsula esses resultados é a de **concentração de medida**. Não entrarei em detalhes sobre isso agora, já que esse será um tema futuro no nosso blog.
 
+Note que a análise anterior já nos fornece uma métrica de avaliação para problemas de classificação, isto é, encontrar um classificador $$g$$ que **minimiza**
+
+$$
+\frac{1}{N}\sum_{i=1}^N\mathbb{1}[Y_y\neq g(X_i)].
+$$
+
+Na próxima seção, veremos outras alternativas de métricas de avaliação.
+
 # Métricas de avaliação
 
-Antes de apresentarmos as métricas mais avançadas para avaliação de desempenho em problemas de classificação, é fundamental compreender o conceito de matrizes de confusão. 
+Antes de apresentarmos novas métricas para avaliação de desempenho em problemas de classificação, é fundamental compreender o conceito de matrizes de confusão. 
 
 ## Matriz de confusão
 
@@ -124,8 +132,10 @@ Há uma pequena diferença entre essa expressão e a função de risco que  defi
 Além disso, note que conseguimos escrever a expressão da acurácia em termos das classes da matriz de confusão, e dessa forma temos o seguinte:
 
 $$
-\textrm{Acurácia} = \frac{\textrm{TP}+\textrm{TN}}{\textrm{TN}+\textrm{TN}+\textrm{FP}+\textrm{FN}}.
+\textrm{Acurácia} = \frac{\textrm{TP}+\textrm{TN}}{\textrm{TP}+\textrm{TN}+\textrm{FP}+\textrm{FN}}.
 $$
+
+**Resumindo:** Quantas previsões corretas tivemos no total?
 
 ## Precisão
 
@@ -135,6 +145,10 @@ $$
 \textrm{Precisão} = \frac{\textrm{TP}}{\textrm{TP}+\textrm{FP}}.
 $$
 
+Note que um TP é um valor positivo que foi corretamente classificado como positivo. Já um FP era um valor negativo que foi erroneamente classificado como positivo. **Então o quociente está contando quantos valores foram classificados como positivos.**
+
+**Resumindo:** De todas as previsões positivas, quantas acertamos?
+
 ## Recall
 
 Recall é uma métrica de desempenho que mede a proporção de instâncias positivas corretamente identificadas por um modelo de classificação binária **em relação a todas as instâncias positivas reais**.  Em outras palavras, o recall mensura a capacidade do modelo de identificar corretamente instâncias positivas. Uma pontuação de recall alta indica que o modelo é capaz de identificar uma grande proporção de instâncias positivas, enquanto uma pontuação baixa de recall indica que o modelo está deixando de identificar muitas instâncias positivas.
@@ -142,6 +156,10 @@ Recall é uma métrica de desempenho que mede a proporção de instâncias posit
 $$
 \textrm{Recall} = \frac{\textrm{TP}}{\textrm{TP}+\textrm{FN}}.
 $$
+
+Note que um TP é um valor positivo que foi corretamente classificado como positivo. Já um FN era um valor positivo que foi erroneamente classificado como negativo. **Então o quociente está contando quantos valores são de fato positivos.**
+
+**Resumindo:** De todos os valores realmente positivos, quantos acertamos?
 
 ## F1-score
 
@@ -151,9 +169,9 @@ $$
 \textrm{F1-score} = \frac{2\cdot \textrm{Recall} \cdot \textrm{Precisão}}{\textrm{Recall}+\textrm{Precisão}}
 $$
 
-
-
 Essa métrica é altamente eficaz para equilibrar os efeitos de recall e precisão, uma vez que, se os valores de Recall ou Precisão forem muito baixos, o valor de F1 também será reduzido, dado que as métricas são multiplicadas.
+
+**Resumindo:** Tenta balancear Recall e Precisão sem dar prioridade para nenhum deles.
 
 # Qual métrica usar?
 
