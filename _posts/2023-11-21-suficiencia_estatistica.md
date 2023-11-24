@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Suficiência estatística w 
+title: Suficiência estatística
 date: 2023-11-10
 description: Vamos aprender o que é uma estatística suficiente
 tags: statistics, inference, sufficiency 
