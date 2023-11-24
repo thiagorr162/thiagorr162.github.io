@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Medidas de desempenho para classificação
+title: Métricas de desempenho: acurácia, precisão, recall, f1-score
 date: 2023-11-22
-description: Vamos aprender algumas medidas de desempenho para problemas de classificação
+description: Vamos aprender o que é acurácia, precisão, recall e f1-score
 tags: machine-learning, classification, performance-metrics
 categories: machine-learning
 ---
@@ -151,6 +151,9 @@ $$
 \textrm{F1-score} = \frac{2\cdot \textrm{Recall} \cdot \textrm{Precisão}}{\textrm{Recall}+\textrm{Precisão}}
 $$
 
+
+
+Essa métrica é altamente eficaz para equilibrar os efeitos de recall e precisão, uma vez que, se os valores de Recall ou Precisão forem muito baixos, o valor de F1 também será reduzido, dado que as métricas são multiplicadas.
 
 # Qual métrica usar?
 
