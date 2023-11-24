@@ -129,7 +129,7 @@ $$
 
 ## Precisão
 
-**Precisão** é uma métrica que mede a proporção de instâncias  verdadeiramente positivas (TP) entre as instâncias previstas como  positivas pelo modelo. Em outras palavras, a precisão mede a precisão  das previsões positivas feitas pelo modelo. Uma pontuação de alta  precisão indica que o modelo é capaz de identificar com precisão as  instâncias positivas, enquanto uma pontuação de baixa precisão indica  que o modelo está fazendo muitas previsões falsas positivas (FP).
+Precisão é uma métrica que mede a proporção de instâncias  verdadeiramente positivas (TP) entre as instâncias previstas como  positivas pelo modelo. Em outras palavras, a precisão mede a precisão  das previsões positivas feitas pelo modelo. Uma pontuação de alta  precisão indica que o modelo é capaz de identificar com precisão as  instâncias positivas, enquanto uma pontuação de baixa precisão indica  que o modelo está fazendo muitas previsões falsas positivas (FP).
 
 $$
 \textrm{Precisão} = \frac{\textrm{TP}}{\textrm{TP}+\textrm{FP}}.
@@ -137,15 +137,32 @@ $$
 
 ## Recall
 
-Recall é uma métrica de desempenho que mede a proporção de instâncias positivas corretamente identificadas por um modelo de classificação binária em relação a todas as instâncias positivas reais. É uma métrica importante na avaliação do desempenho de um modelo e frequentemente é utilizada em conjunto com outras métricas, como precisão, pontuação F1 e acurácia.
-
-Recall, também conhecido como sensibilidade ou taxa de verdadeiros positivos (TPR), mede a proporção de instâncias verdadeiramente positivas (TP) entre todas as instâncias positivas reais. Em outras palavras, o recall mensura a capacidade do modelo de identificar corretamente instâncias positivas. Uma pontuação de recall alta indica que o modelo é capaz de identificar uma grande proporção de instâncias positivas, enquanto uma pontuação baixa de recall indica que o modelo está deixando de identificar muitas instâncias positivas.
+Recall é uma métrica de desempenho que mede a proporção de instâncias positivas corretamente identificadas por um modelo de classificação binária **em relação a todas as instâncias positivas reais**.  Em outras palavras, o recall mensura a capacidade do modelo de identificar corretamente instâncias positivas. Uma pontuação de recall alta indica que o modelo é capaz de identificar uma grande proporção de instâncias positivas, enquanto uma pontuação baixa de recall indica que o modelo está deixando de identificar muitas instâncias positivas.
 
 $$
 \textrm{Recall} = \frac{\textrm{TP}}{\textrm{TP}+\textrm{FN}}.
 $$
 
-# Qual a melhor métrica?
+## F1-score
+
+E se tanto a Precisão quanto o Recall são importantes  e você precisa que o classificador se saia bem em ambos os aspectos? A resposta é usar a média harmônica entre as duas medidas, que chamamos de F1-score:
+
+$$
+\textrm{F1-score} = \frac{2\cdot \textrm{Recall} \cdot \textrm{Precisão}}{\textrm{Recall}+\textrm{Precisão}}
+$$
+
+
+# Qual métrica usar?
+
+Agora podemos nos perguntar, dentre todas essas métricas, qual devemos usar? Existe alguma métrica que é melhor para avaliar modelos? A resposta dessas perguntas depende muito do problema que estamos estudando.
+
+Por exemplo, suponha que estamos tentando prever se um indivíduo tem $$(Y=1)$$ ou não $$(Y=0)$$ uma doença muito rara que acontece apenas em 1% da população. Note que o estimador que sempre diz que a pessoa **não tem a doença**, teria uma **acurácia** de 99%! Mas isso, principalmente no âmbito médico, seria desastroso, já que não queremos correr o risco de deixar de diagnosticar doença, que pode muitas vezes ser fatal. Logo, acurácia não seria nada apropriada. Isso se deve ao fato do conjunto de dados ser muito desbalanceado, isto é, existe muito mais casos negativos que casos positivos. 
+
+Agora, imagine um cenário no qual um falso negativo acarreta custos significativos. Para ilustrar, consideremos o caso em que desejamos evitar o risco de diagnosticar erroneamente alguém como portador de câncer quando, na verdade, está saudável. Essa situação poderia resultar em considerável estresse emocional para a pessoa afetada. Nesse caso, é mais apropriado usarmos a **Precisão** com métrica, já que queremos estar bem certos do nosso diagnóstico.
+
+Outro cenário bastante plausível é o da prevenção de fraudes financeiras. Nesse contexto, o custo associado à não identificação de uma fraude é significativo. Portanto, nesse caso, seria apropriado empregar o **Recall** como métrica de avaliação. Isso se justifica pelo fato de que a classificação errônea de uma transação como fraudulenta pode ser facilmente verificada, e podemos tolerar alguns falsos positivos em vez de correr o risco de ter falsos negativos.
+
+Entretanto, há uma pegadinha nos exemplos dados acima. Um estimador que queira evitar qualquer estresse de um falso negativo, poderia, por exemplo, sempre dizer que ninguém tem câncer. Já um estimador que quisesse capturar toda fraude financeira, poderia simplesmente classificar todas as transações como fraudulentas. Dessa forma, é sempre bom fazermos uma análise geral dos casos possíveis usando a matriz de confusão e potencialmente fazer uso de métricas que combinam outras métricas, como é o caso do **F1-Score**.
 
 # Referências
 
@@ -155,3 +172,9 @@ $$
 4. [https://web.eecs.umich.edu/~cscott/past_courses/eecs598w14/notes/02_bayes_classifier.pdf](https://web.eecs.umich.edu/~cscott/past_courses/eecs598w14/notes/02_bayes_classifier.pdf)
 5. [https://medium.com/@impythonprogrammer/evaluation-metrics-for-classification-fc770511052d](https://medium.com/@impythonprogrammer/evaluation-metrics-for-classification-fc770511052d)
 6. [https://txt.cohere.com/classification-eval-metrics/](https://txt.cohere.com/classification-eval-metrics/)
+7. [https://www.kdnuggets.com/understanding-classification-metrics-your-guide-to-assessing-model-accuracy](https://www.kdnuggets.com/understanding-classification-metrics-your-guide-to-assessing-model-accuracy)
+
+```
+Next:
+falar de AUC e ROC
+```
