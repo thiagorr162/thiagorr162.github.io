@@ -105,10 +105,7 @@ Essas previsões podem ser separadas em quatro classes disjuntas:
 
 Podemos organizar essas classes de previsões em formato de matriz, resultando no que chamamos de **matriz de confusão**.
 
-|               | Predição Negativa | Predição Positiva |
-| :------------- | :-----------------: | ------------------ |
-| **REAL NEGATIVO** | TN                | FP               |
-| **REAL POSITIVO** | FN                | TP               |
+{% include figure.html path="assets/img/posts/class_metrics/matrix_confusao.png" class="img-fluid rounded z-depth-1" %}    
 
 Como veremos a seguir, sempre vamos conseguir representar as métricas de classificação usando as classes acima.
 
