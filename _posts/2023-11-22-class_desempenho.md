@@ -127,7 +127,7 @@ Há uma pequena diferença entre essa expressão e a função de risco que  defi
 Além disso, note que conseguimos escrever a expressão da acurácia em termos das classes da matriz de confusão, e dessa forma temos o seguinte:
 
 $$
-\textrm{Acurácia} = \frac{\textrm{TP}+\textrm{TN}}{\textrm{TN}+\textrm{TN}+\textrm{FP}+\textrm{FN}}.
+{\rm Acurácia} = \frac{{\rm TP}+\textrm{TN}}{\textrm{TN}+\textrm{TN}+\textrm{FP}+\textrm{FN}}.
 $$
 
 ## Precisão
@@ -135,7 +135,7 @@ $$
 Precisão é uma métrica que mede a proporção de instâncias  verdadeiramente positivas (TP) entre as instâncias previstas como  positivas pelo modelo. Em outras palavras, a precisão mede a precisão  das previsões positivas feitas pelo modelo. Uma pontuação de alta  precisão indica que o modelo é capaz de identificar com precisão as  instâncias positivas, enquanto uma pontuação de baixa precisão indica  que o modelo está fazendo muitas previsões falsas positivas (FP).
 
 $$
-\textrm{Precisão} = \frac{\textrm{TP}}{\textrm{TP}+\textrm{FP}}.
+{\rm Precisão} = \frac{\textrm{TP}}{\textrm{TP}+\textrm{FP}}.
 $$
 
 ## Recall
@@ -145,7 +145,7 @@ Recall é uma métrica de desempenho que mede a proporção de instâncias posit
 Recall, também conhecido como sensibilidade ou taxa de verdadeiros positivos (TPR), mede a proporção de instâncias verdadeiramente positivas (TP) entre todas as instâncias positivas reais. Em outras palavras, o recall mensura a capacidade do modelo de identificar corretamente instâncias positivas. Uma pontuação de recall alta indica que o modelo é capaz de identificar uma grande proporção de instâncias positivas, enquanto uma pontuação baixa de recall indica que o modelo está deixando de identificar muitas instâncias positivas.
 
 $$
-\textrm{Recall} = \frac{\textrm{TP}}{\textrm{TP}+\textrm{FN}}.
+{\rm Recall} = \frac{\textrm{TP}}{\textrm{TP}+\textrm{FN}}.
 $$
 
 # Qual a melhor métrica?
