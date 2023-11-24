@@ -1,7 +1,6 @@
 ---
 layout: post
 <<<<<<< HEAD
-<<<<<<< HEAD
 title: Suficiência estatística w 
 date: 2023-11-10
 description: an example of a blog post with some code
@@ -20,12 +19,6 @@ tags: statistics, inference
 description: Vamos aprender o que é uma estatística suficiente
 tags: statistics, inference, sufficiency 
 >>>>>>> Test adding bib references
-=======
-title: Suficiência estatística
-date: 2023-11-21
-description: Vamos aprender o que é uma estatística suficiente
-tags: statistics, inference, sufficiency 
->>>>>>> 7d318331c8c48d93800e18534c1274077a433e16
 categories: statistics
 ---
 

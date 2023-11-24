@@ -363,8 +363,6 @@ enable_progressbar:         true   # enables a horizontal progress bar linked to
 academicons:
   version: "1.9.1"
   integrity: "sha256-i1+4qU2G2860dGGIOJscdC30s9beBXjFfzjWLjBRsBg="
-bootstrap-table:
-  version: "1.22.1"
 bootstrap:
   version: "4.6.1"
   integrity:

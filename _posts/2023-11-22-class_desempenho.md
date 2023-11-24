@@ -5,7 +5,6 @@ date: 2023-11-22
 description: Vamos aprender algumas medidas de desempenho para problemas de classificação
 tags: machine-learning, classification, performance-metrics
 categories: machine-learning
-datatable: true
 ---
 
 Considere uma amostra i.i.d. de pares $$\{(X_1,Y_1),\dots,(X_n,Y_n)\}$$, em que  $$X_i\in\mathbb{R}^p$$ é um vetor que contém informações sobre um indivíduo $$i$$ e $$Y_i\in\{0,1\}$$ é a saída com respeito ao vetor $$X_i$$. Nosso objetivo é encontrar um classificador $$g:\mathbb{R}^p\to \{0,1\}$$ de modo que, para um novo par $$(X,Y)$$,  temos que $$g(X)$$  está "próximo" em algum sentido de $$Y$$.
@@ -107,15 +106,9 @@ Essas previsões podem ser separadas em quatro classes disjuntas:
 Podemos organizar essas classes de previsões em formato de matriz, resultando no que chamamos de **matriz de confusão**.
 
 |               | Predição Negativa | Predição Positiva |
-<<<<<<< HEAD
 | :------------- | :-----------------: | ------------------ |
 | **REAL NEGATIVO** | TN                | FP               |
 | **REAL POSITIVO** | FN                | TP               |
-=======
-| :------------ | :---------------: | :---------------: |
-| Real negativo |        TN         |        FP         |
-| Real positivo |        FN         |        TP         |
->>>>>>> parent of a8af2ca... Try adding markdown hint
 
 Como veremos a seguir, sempre vamos conseguir representar as métricas de classificação usando as classes acima.
 
@@ -134,16 +127,25 @@ Há uma pequena diferença entre essa expressão e a função de risco que  defi
 Além disso, note que conseguimos escrever a expressão da acurácia em termos das classes da matriz de confusão, e dessa forma temos o seguinte:
 
 $$
-{\rm Acurácia} = \frac{{\rm TP}+{\rm TP}}{{\rm TP}+{\rm TN}+{\rm FP}+{\rm FN}}.
+\textrm{Acurácia} = \frac{\textrm{TP}+\textrm{TN}}{\textrm{TN}+\textrm{TN}+\textrm{FP}+\textrm{FN}}.
 $$
 
 ## Precisão
 
 **Precisão** é uma métrica que mede a proporção de instâncias  verdadeiramente positivas (TP) entre as instâncias previstas como  positivas pelo modelo. Em outras palavras, a precisão mede a precisão  das previsões positivas feitas pelo modelo. Uma pontuação de alta  precisão indica que o modelo é capaz de identificar com precisão as  instâncias positivas, enquanto uma pontuação de baixa precisão indica  que o modelo está fazendo muitas previsões falsas positivas (FP).
 
+$$
+\textrm{Precisão} = \frac{\textrm{TP}}{\textrm{TP}+\textrm{FP}}.
+$$
+
+## Recall
+
+Recall é uma métrica de desempenho que mede a proporção de instâncias positivas corretamente identificadas por um modelo de classificação binária em relação a todas as instâncias positivas reais. É uma métrica importante na avaliação do desempenho de um modelo e frequentemente é utilizada em conjunto com outras métricas, como precisão, pontuação F1 e acurácia.
+
+Recall, também conhecido como sensibilidade ou taxa de verdadeiros positivos (TPR), mede a proporção de instâncias verdadeiramente positivas (TP) entre todas as instâncias positivas reais. Em outras palavras, o recall mensura a capacidade do modelo de identificar corretamente instâncias positivas. Uma pontuação de recall alta indica que o modelo é capaz de identificar uma grande proporção de instâncias positivas, enquanto uma pontuação baixa de recall indica que o modelo está deixando de identificar muitas instâncias positivas.
 
 $$
-{\rm Precisão} = \frac{{\rm TP}}{{\rm TP}+{\rm FP}}.
+\textrm{Recall} = \frac{\textrm{TP}}{\textrm{TP}+\textrm{FN}}.
 $$
 
 # Qual a melhor métrica?
