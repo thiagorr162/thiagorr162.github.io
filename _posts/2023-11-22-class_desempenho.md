@@ -18,7 +18,7 @@ No final, o que queremos entender é:
 
 > **Dentre as várias possibilidades de classificadores, como podemos escolher o melhor?**
 
-# Função de risco
+# Função de risco e classificador de Bayes
 
 Para respondermos a questão anterior, precisamos criar algum critério para podermos comparar os vários possíveis classificadores. Esse critério é dado pela função de risco que atribuímos ao problema. No nosso caso, o que gostaríamos é de ter **um classificador que comete a menor quantidade de erros na média**, isto é, dado um classificador $$g$$, queremos que o risco $$R(g)$$:
 
@@ -41,6 +41,7 @@ $$
 Esse estimador $$g_*$$ é conhecido como estimador de Bayes e conseguimos provar que ele de fato é o melhor possível através do seguinte teorema:
 
 > **Teorema:** O estimador $$g_*$$ que minimiza o risco $$R(g)$$ é dado por
+> 
 > $$
 > g_*(x) = \arg\max_{d\in\{0,1\}} P(Y=d\mid x).
 > $$
@@ -87,13 +88,33 @@ $$
 
 em função do tamanho da amostra $$N$$. A teoria básica que encapsula esses resultados é a de **concentração de medida**. Não entrarei em detalhes sobre isso agora, já que esse será um tema futuro no nosso blog.
 
-# Métricas de avaliação alternativas
+# Métricas de avaliação
 
-Com base na análise realizada na seção anterior, conseguimos estabelecer uma métrica de desempenho bastante intuitiva para classificadores.
+Antes de apresentarmos as métricas mais avançadas para avaliação de desempenho em problemas de classificação, é fundamental compreender o conceito de matrizes de confusão. 
+
+## Matriz de confusão
+
+Dado um classificador $$g$$ e uma amostra de dados $$\{(X_1,Y_1),\dots,(X_n,Y_n)\}$$  separada para avaliação de modelos (e.g. conjunto de teste ou validação), considere as previsões feitas pelo classificador $$g(X_1),\dots,g(X_n)\in \{0,1\}$$.
+
+Essas previsões podem ser separadas em quatro classes disjuntas: 
+
+- Verdadeiros positivos (TP): O valor real é 1 e nosso classificador acertou. Isto é, $$Y_i=1=g(X_i)$$; 
+- Falsos positivos (FP): O valor real é 0 e nosso classificador errou. Isto é, $$Y_i=0\neq g(X_i)=1$$;
+- Verdadeiros negativos (TN) : O valor real é 0 e nosso classificador acertou. Isto é, $$Y_i=0=g(X_i)$$;
+- Falsos negativos (FN): O valor real é 1 e nosso classificador errou. Isto é, $$Y_i=1\neq g(X_i)=0$$.
+
+Podemos organizar essas classes de previsões em formato de matriz, resultando no que chamamos de **matriz de confusão**.
+
+|               | Predição Negativa | Predição Positiva |
+| :------------- | :-----------------: | ------------------ |
+| **REAL NEGATIVO** | TN                | FP               |
+| **REAL POSITIVO** | FN                | TP               |
+
+Como veremos a seguir, sempre vamos conseguir representar as métricas de classificação usando as classes acima.
 
 ## Acurácia
 
-Dado um classificador $$g$$, denotamos por **Acurácia** a seguinte métrica:
+A primeira métrica que veremos já foi discutida na seção **Função de risco e classificador de Bayes**. Dado um classificador $$g$$, denotamos por **Acurácia** a seguinte métrica:
 
 $$
 \textrm{Acurácia}(g)=1 - \frac{1}{N}\sum_{i=1}^N\mathbb{1}[Y_y\neq g(X_i)]=\frac{1}{N}\sum_{i=1}^N\mathbb{1}[Y_y= g(X_i)].
@@ -101,9 +122,24 @@ $$
 
 Essencialmente, a Acurácia mede a proporção de observações para as quais o modelo $$g$$ prevê corretamente a classe em relação às observações totais. 
 
-Note que na expressão da acurácia é um pouco diferente da expressão que vimos na seção anterior, já que subtraímos o risco anterior de 1. Fizemos isso apenas para manter a consistência com a definição de acurácia na literatura. Note que para qualquer função de risco $$R$$ que gostaríamos de **minimizar**,  podemos fazer $$1-R$$ e agora temos uma métrica de avaliação que gostaríamos de **maximizar**. Ou seja, as expressões são equivalentes e a única mudança é que em um caso temos um problema de maximização e no outro minimização.
+Há uma pequena diferença entre essa expressão e a função de risco que  definimos no início do texto, pois agora subtraímos expressão de 1.  Fizemos isso apenas para manter consistência com a definição de acurácia na literatura. Observe que, para qualquer função de risco $$R$$ que desejamos **minimizar**, podemos usar $$1−R$$, transformando-a em uma métrica de avaliação que agora buscamos **maximizar**. Em outras palavras, as expressões são equivalentes, e a única mudança é que, em um caso, enfrentamos um problema de maximização, enquanto, no  outro, é de minimização."
+
+Além disso, note que conseguimos escrever a expressão da acurácia em termos das classes da matriz de confusão, e dessa forma temos o seguinte:
+
+$$
+{\rm Acurácia} = \frac{{\rm TP}+{\rm TP}}{{\rm TP}+{\rm TN}+{\rm FP}+{\rm FN}}.
+$$
+
+## Precisão
+
+**Precisão** é uma métrica que mede a proporção de instâncias  verdadeiramente positivas (TP) entre as instâncias previstas como  positivas pelo modelo. Em outras palavras, a precisão mede a precisão  das previsões positivas feitas pelo modelo. Uma pontuação de alta  precisão indica que o modelo é capaz de identificar com precisão as  instâncias positivas, enquanto uma pontuação de baixa precisão indica  que o modelo está fazendo muitas previsões falsas positivas (FP).
 
 
+$$
+{\rm Precisão} = \frac{{\rm TP}}{{\rm TP}+{\rm FP}}.
+$$
+
+# Qual a melhor métrica?
 
 # Referências
 
@@ -111,3 +147,5 @@ Note que na expressão da acurácia é um pouco diferente da expressão que vimo
 2. Mohri, M., Rostamizadeh, A., Talwalkar, A. (2018). Foundations of Machine Learning. United Kingdom: MIT Press.
 3. Hastie, T., Tibshirani, R., Friedman, J. (2013). The Elements of Statistical Learning: Data Mining, Inference, and Prediction. Germany: Springer New York.
 4. [https://web.eecs.umich.edu/~cscott/past_courses/eecs598w14/notes/02_bayes_classifier.pdf](https://web.eecs.umich.edu/~cscott/past_courses/eecs598w14/notes/02_bayes_classifier.pdf)
+5. [https://medium.com/@impythonprogrammer/evaluation-metrics-for-classification-fc770511052d](https://medium.com/@impythonprogrammer/evaluation-metrics-for-classification-fc770511052d)
+6. [https://txt.cohere.com/classification-eval-metrics/](https://txt.cohere.com/classification-eval-metrics/)
