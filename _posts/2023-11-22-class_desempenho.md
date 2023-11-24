@@ -106,9 +106,9 @@ Essas previsões podem ser separadas em quatro classes disjuntas:
 Podemos organizar essas classes de previsões em formato de matriz, resultando no que chamamos de **matriz de confusão**.
 
 |               | Predição Negativa | Predição Positiva |
-| :------------ | :---------------: | :---------------: |
-| Real negativo |        TN         |        FP         |
-| Real positivo |        FN         |        TP         |
+| :------------- | :-----------------: | ------------------ |
+| **REAL NEGATIVO** | TN                | FP               |
+| **REAL POSITIVO** | FN                | TP               |
 
 Como veremos a seguir, sempre vamos conseguir representar as métricas de classificação usando as classes acima.
 
@@ -132,7 +132,7 @@ $$
 
 ## Precisão
 
-Precisão é uma métrica que mede a proporção de instâncias  verdadeiramente positivas (TP) entre as instâncias previstas como  positivas pelo modelo. Em outras palavras, a precisão mede a precisão  das previsões positivas feitas pelo modelo. Uma pontuação de alta  precisão indica que o modelo é capaz de identificar com precisão as  instâncias positivas, enquanto uma pontuação de baixa precisão indica  que o modelo está fazendo muitas previsões falsas positivas (FP).
+**Precisão** é uma métrica que mede a proporção de instâncias  verdadeiramente positivas (TP) entre as instâncias previstas como  positivas pelo modelo. Em outras palavras, a precisão mede a precisão  das previsões positivas feitas pelo modelo. Uma pontuação de alta  precisão indica que o modelo é capaz de identificar com precisão as  instâncias positivas, enquanto uma pontuação de baixa precisão indica  que o modelo está fazendo muitas previsões falsas positivas (FP).
 
 $$
 {\rm Precisão} = \frac{\textrm{TP}}{\textrm{TP}+\textrm{FP}}.
