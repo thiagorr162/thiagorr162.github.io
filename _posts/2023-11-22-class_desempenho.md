@@ -5,7 +5,6 @@ date: 2023-11-22
 description: Vamos aprender algumas medidas de desempenho para problemas de classificação
 tags: machine-learning, classification, performance-metrics
 categories: machine-learning
-datatable: true
 ---
 
 Considere uma amostra i.i.d. de pares $$\{(X_1,Y_1),\dots,(X_n,Y_n)\}$$, em que  $$X_i\in\mathbb{R}^p$$ é um vetor que contém informações sobre um indivíduo $$i$$ e $$Y_i\in\{0,1\}$$ é a saída com respeito ao vetor $$X_i$$. Nosso objetivo é encontrar um classificador $$g:\mathbb{R}^p\to \{0,1\}$$ de modo que, para um novo par $$(X,Y)$$,  temos que $$g(X)$$  está "próximo" em algum sentido de $$Y$$.
@@ -106,10 +105,12 @@ Essas previsões podem ser separadas em quatro classes disjuntas:
 
 Podemos organizar essas classes de previsões em formato de matriz, resultando no que chamamos de **matriz de confusão**.
 
+```markdown
 |               | Predição Negativa | Predição Positiva |
 | :------------ | :---------------: | :---------------: |
 | Real negativo |        TN         |        FP         |
 | Real positivo |        FN         |        TP         |
+```
 
 Como veremos a seguir, sempre vamos conseguir representar as métricas de classificação usando as classes acima.
 
