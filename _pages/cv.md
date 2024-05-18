@@ -28,12 +28,6 @@ Education
     - **Institution**: Universidade de São Paulo, ICMC-USP
     - **Location**: São Paulo, Brazil
 
-Publications
-======
-  <ul>{% for post in site.publications reversed %}
-    {% include archive-single-cv.html %}
-  {% endfor %}</ul>
-
 Work experience
 ======
 
@@ -72,8 +66,14 @@ Work experience
   - **Client**: Stone Pagamentos (partnership with IMPA)
   - **Role**: Developed a machine learning algorithm to enhance credit decisions, unlocking market potential and solving a critical challenge for the company. [Project details](https://impa.br/noticias/impa-e-stone-matematica-e-industria-para-concessao-de-credito/).
 
+Publications
+======
+  <ul>{% for post in site.publications reversed %}
+    {% include archive-single-cv.html %}
+  {% endfor %}</ul>
+
   
-Skills
+<!-- Skills -->
 ======
 <!-- * Skill 1 -->
 <!-- * Skill 2 -->
@@ -83,15 +83,15 @@ Skills
 <!-- * Skill 3 -->
 
   
-Talks
-======
-  <ul>{% for post in site.talks reversed %}
-    {% include archive-single-talk-cv.html  %}
-  {% endfor %}</ul>
+<!-- Talks -->
+<!-- ====== -->
+<!--   <ul>{% for post in site.talks reversed %} -->
+<!--     {% include archive-single-talk-cv.html  %} -->
+<!--   {% endfor %}</ul> -->
   
-Teaching
-======
-  <ul>{% for post in site.teaching reversed %}
-    {% include archive-single-cv.html %}
-  {% endfor %}</ul>
+<!-- Teaching -->
+<!-- ====== -->
+<!--   <ul>{% for post in site.teaching reversed %} -->
+<!--     {% include archive-single-cv.html %} -->
+<!--   {% endfor %}</ul> -->
   
