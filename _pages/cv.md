@@ -31,7 +31,12 @@ Education
 Work experience
 ======
 
-- **Postdoctoral Researcher (Present)**
+- **Assistant Professor of Statistics (Present)**
+  - **Institution**: UFSCar, São Carlos/SP, Brazil
+  - **Role**: Assistant Professor at the Department of Statistics of the Federal University of São Carlos (UFSCar), Brazil.
+
+
+- **Postdoctoral Researcher (2024)**
   - **Institution**: ICMC-USP, São Carlos/SP, Brazil
   - **Funding**: FAPESP
   - **Role**: Mapping urban segments and crime types using satellite imagery, spatial metrics, and neural networks to understand socioeconomic and cultural influences on criminal dynamics.
