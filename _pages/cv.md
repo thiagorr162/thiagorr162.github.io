@@ -9,7 +9,7 @@ redirect_from:
 
 {% include base_path %}
 
-Download my CV [here](/files/cv/cv.pdf)
+Download my CV [here](/files/cv/cv.pdf){:target="_blank"}
 
 Education
 ======
@@ -17,7 +17,7 @@ Education
 - **Ph.D. in Mathematics (2018-2022)**
     - **Institution**: Instituto de Matemática Pura e Aplicada (IMPA)
     - **Location**: Rio de Janeiro, Brazil
-    - **Thesis**: Boosting and concentration of measure methods in Machine Learning
+    - **Thesis**: [Boosting and concentration of measure methods in Machine Learning](https://impa.br/wp-content/uploads/2022/10/dout_tese_Thiago_Rodrigo_Ramos.pdf){:target="_blank"}
 
 - **M.Sc. in Mathematics (2016-2018)**
     - **Institution**: Universidade de São Paulo, ICMC-USP
@@ -53,7 +53,7 @@ Work experience
 
 - **AI Consultant (2023)**
   - **Client**: Rio de Janeiro City Hall (partnership with IMPA)
-  - **Role**: Utilized radar and satellite data for short-term rainfall and flood predictions using classical machine learning models. [Project details](https://impa.br/en_US/noticias/impa-desenvolve-algoritmo-para-prever-chuvas-no-rio/).
+  - **Role**: Utilized radar and satellite data for short-term rainfall and flood predictions using classical machine learning models. [Project details](https://impa.br/en_US/noticias/impa-desenvolve-algoritmo-para-prever-chuvas-no-rio/){:target="_blank"}.
 
 - **AI Consultant (2022)**
   - **Client**: Cartesi Blockchain (partnership with IMPA)
@@ -61,15 +61,15 @@ Work experience
 
 - **AI Consultant (2022)**
   - **Client**: Rede Globo (partnership with IMPA)
-  - **Role**: Developed algorithms to extract keywords from over 1.5 million movies and TV series for recommendation systems. [Project details](https://impa.br/noticias/centro-pi-desenvolve-projeto-de-inteligencia-artificial-em-parceria-com-a-globo/).
+  - **Role**: Developed algorithms to extract keywords from over 1.5 million movies and TV series for recommendation systems. [Project details](https://impa.br/noticias/centro-pi-desenvolve-projeto-de-inteligencia-artificial-em-parceria-com-a-globo/){:target="_blank"}.
 
 - **AI Consultant (2021)**
   - **Client**: Grupo Dasa (partnership with IMPA)
-  - **Role**: Developed an algorithm to analyze MRI images for detecting pregnancy-related issues with a 93% accuracy rate, aiding early diagnosis in remote areas. [Project details](https://www1.folha.uol.com.br/ciencia/2021/09/inteligencia-artificial-criada-por-matematicos-brasileiros-previne-doencas-na-gravidez.shtml).
+  - **Role**: Developed an algorithm to analyze MRI images for detecting pregnancy-related issues with a 93% accuracy rate, aiding early diagnosis in remote areas. [Project details](https://www1.folha.uol.com.br/ciencia/2021/09/inteligencia-artificial-criada-por-matematicos-brasileiros-previne-doencas-na-gravidez.shtml){:target="_blank"}.
 
 - **AI Consultant (2020)**
   - **Client**: Stone Pagamentos (partnership with IMPA)
-  - **Role**: Developed a machine learning algorithm to enhance credit decisions, unlocking market potential and solving a critical challenge for the company. [Project details](https://impa.br/noticias/impa-e-stone-matematica-e-industria-para-concessao-de-credito/).
+  - **Role**: Developed a machine learning algorithm to enhance credit decisions, unlocking market potential and solving a critical challenge for the company. [Project details](https://impa.br/noticias/impa-e-stone-matematica-e-industria-para-concessao-de-credito/){:target="_blank"}.
 
 Publications
 ======
