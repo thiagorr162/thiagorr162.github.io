@@ -31,7 +31,7 @@ Education
 Work experience
 ======
 
-- **Assistant Professor of Statistics (Present)**
+- **Assistant Professor of Statistics (2024 - Present)**
   - **Institution**: UFSCar, São Carlos/SP, Brazil
   - **Role**: Assistant Professor at the Department of Statistics of the Federal University of São Carlos (UFSCar), Brazil.
 
