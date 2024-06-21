@@ -2,7 +2,7 @@
 title: "AmnioML: amniotic fluid segmentation and volume prediction with uncertainty quantification"
 collection: publications
 permalink: /publication/amnioml
-excerpt: "We present AmnioML, a machine learning solution that leverages deep learning and conformal prediction to output fast and accurate volume estimates and segmentation masks from fetal MRIs. <br />  ![AmnioML](/images/publications_preview/amnioml.png 'AmnioML')"
+excerpt: "We present AmnioML, a machine learning solution that leverages deep learning and conformal prediction to output fast and accurate volume estimates and segmentation masks from fetal MRIs."
 date: 2023-06-26
 venue: 'AAAI'
 paperurl: 'https://ojs.aaai.org/index.php/AAAI/article/view/26837'

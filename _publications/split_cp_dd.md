@@ -2,7 +2,7 @@
 title: "Split conformal prediction for dependent data"
 collection: publications
 permalink: /publication/split_cp_dd
-excerpt: "We show that coverage guarantees from split CP can be extended to dependent processes. ![Split Conformal](/images/publications_preview/split_cp.png 'Split CP for Dependent Data')"
+excerpt: "We show that coverage guarantees from split CP can be extended to dependent processes."
 date: 2022-03-29
 venue: 'ArXiv'
 paperurl: 'https://arxiv.org/abs/2203.15885'

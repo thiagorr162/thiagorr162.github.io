@@ -2,7 +2,7 @@
 title: "ExactBoost: Directly Boosting the Margin in Combinatorial and Non-decomposable Metrics"
 collection: publications
 permalink: /publication/exactboost
-excerpt: "This paper introduces a fast and exact stagewise optimization algorithm, dubbed ExactBoost, that boosts stumps to the actual loss function. <br /> ![ExactBoost](/images/publications_preview/exactboost.png 'ExactBoost')"
+excerpt: "This paper introduces a fast and exact stagewise optimization algorithm, dubbed ExactBoost, that boosts stumps to the actual loss function."
 date: 2022-05-03
 venue: 'AISTATS'
 paperurl: 'https://proceedings.mlr.press/v151/csillag22a.html'

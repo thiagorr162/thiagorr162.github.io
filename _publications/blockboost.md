@@ -2,7 +2,7 @@
 title: "BlockBoost: Scalable and Efficient Blocking through Boosting"
 collection: publications
 permalink: /publication/blockboost
-excerpt: "We introduce BlockBoost, a novel boosting-based method that generates compact binary hash codes for database entries, through which blocking can be performed efficiently<br /> ![BlockBoost](/images/publications_preview/blockboost.png 'BlockBoost')"
+excerpt: "We introduce BlockBoost, a novel boosting-based method that generates compact binary hash codes for database entries, through which blocking can be performed efficiently"
 date: 2024-04-18
 venue: 'AISTATS'
 paperurl: 'https://proceedings.mlr.press/v238/ramos24a.html'
