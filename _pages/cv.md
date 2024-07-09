@@ -17,7 +17,7 @@ Education
 - **Ph.D. in Mathematics (2018-2022)**
     - **Institution**: Instituto de Matemática Pura e Aplicada (IMPA)
     - **Location**: Rio de Janeiro, Brazil
-    - **Thesis**: [Boosting and concentration of measure methods in Machine Learning](https://impa.br/wp-content/uploads/2022/10/dout_tese_Thiago_Rodrigo_Ramos.pdf){:target="_blank"}
+    - **Thesis**: [Boosting and concentration of measure methods in Machine Learning](https://impa.br/wp-content/uploads/2022/10/dout_tese_Thiago_Rodrigo_Ramos.pdf){:target="_blank"} [(Video)](https://www.youtube.com/watch?v=9FjXXp6gy4w&feature=youtu.be){:target="_blank"} 
 
 - **M.Sc. in Mathematics (2016-2018)**
     - **Institution**: Universidade de São Paulo, ICMC-USP
