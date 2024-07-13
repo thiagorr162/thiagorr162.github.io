@@ -1,7 +1,7 @@
 ---
 permalink: /misc/
-title: "Misc"
-author_profile: true
+title: "README"
+author_profile: false
 ---
 
 ### Recommended Books on Machine Learning Theory and Related Topics
