@@ -17,3 +17,15 @@ For those interested in the theory of Machine Learning, I've compiled a selectio
 - [High-Dimensional Probability](https://www.math.uci.edu/~rvershyn/papers/HDP-book/HDP-book.html) - R. Vershynin
 - [The Concentration of Measure Phenomenon](https://www.ams.org/books/surv/089/surv089-endmatter.pdf) - M. Ledoux
 - [Understanding Machine Learning](https://www.cs.huji.ac.il/~shais/UnderstandingMachineLearning/copy.html) - S. Shalev-Shwartz, S. Ben-David
+
+
+### Basic Books on Probability and Statistics
+
+If you're new to Probability and Statistics, here are some great books to get you started.
+
+- [All of Nonparametric Statistics](https://www.stat.cmu.edu/~larry/all-of-nonpar/index.html) - L. Wasserman
+- [All of Statistics: A Concise Course in Statistical Inference](https://www.stat.cmu.edu/~larry/all-of-statistics/) - L. Wasserman
+- [Introduction to Probability](https://www.crcpress.com/Introduction-to-Probability/Blitzstein-Hwang/p/book/9781138369917) - J. Blitzstein, J. Hwang
+- [Probability with Martingales](https://www.cambridge.org/highereducation/books/probability-with-martingales/B4CFCE0D08930FB46C6E93E775503926#overview) - D. Williams
+- [Probability: Theory and Examples](https://services.math.duke.edu/~rtd/PTE/PTE5_011119.pdf) - R. Durrett
+- [Theoretical Statistics: Topics for a Core Course](https://link.springer.com/book/10.1007/978-0-387-93839-4) - R. Keener
