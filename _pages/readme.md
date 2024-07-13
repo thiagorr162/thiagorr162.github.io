@@ -1,5 +1,5 @@
 ---
-permalink: /misc/
+permalink: /readme/
 title: "README"
 author_profile: false
 ---
