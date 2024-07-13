@@ -6,7 +6,7 @@ author_profile: true
 
 ### Recommended Books on Machine Learning Theory and Related Topics
 
-For those interested in the theory of Machine Learning, I've compiled a selection of books that I find particularly important and insightful. If this is your first contact with the mathematical theory of Machine Learning, you recommend prioritize the books I've highlighted with ★.
+For those interested in the theory of Machine Learning, I've compiled a selection of books that I find particularly important and insightful. If this is your first contact with this subject, I recommend prioritizing the books highlighted with ★.
 
 
 - [★ Concentration Inequalities](https://academic.oup.com/book/26549) - S. Boucheron, G. Lugosi, P. Massart 
