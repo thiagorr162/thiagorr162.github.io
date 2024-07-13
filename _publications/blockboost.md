@@ -13,4 +13,6 @@ As datasets grow larger, matching and merging entries from different databases h
 
 ![BlockBoost](/images/publications_preview/blockboost.png 'BlockBoost')
 
-Download [here.](https://proceedings.mlr.press/v238/ramos24a.html)
+## References
+- [Main Paper](https://proceedings.mlr.press/v238/ramos24a.html)
+- [Github Repo](https://github.com/thiagorr162/blockboost)
