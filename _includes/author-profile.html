@@ -49,7 +49,11 @@
       {% endif %}                        
 
       {% if author.dblp %}
-        <li><a href="{{ author.dblp }}"><i class="ai ai-dblp ai-fw icon-pad-right"></i>DBLP</a></li>
+        <li><a href="{{ author.dblp }}"><i class="ai ai-dblp ai-fw icon-pad-right"></i>dblp</a></li>
+      {% endif %}                        
+
+      {% if author.lattes %}
+        <li><a href="{{ author.lattes }}"><i class="ai ai-lattes ai-fw icon-pad-right"></i>lattes</a></li>
       {% endif %}                        
 
       {% if author.impactstory %}

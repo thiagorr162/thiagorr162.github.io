@@ -38,7 +38,8 @@ author:
   pubmed           : # "https://www.semanticscholar.org/author/Thiago-Rodrigo-Ramos/2055918287"
   semantic         : "https://www.semanticscholar.org/author/Thiago-Rodrigo-Ramos/2055918287"
   researchgate     : # URL
-  dblp             : https://dblp.org/pid/320/6908.html
+  dblp             : "https://dblp.org/pid/320/6908.html"
+  lattes           : "http://lattes.cnpq.br/1634196230063965"
 
   # Repositories and software development
   bitbucket        : # Username - Update with your username on the site
