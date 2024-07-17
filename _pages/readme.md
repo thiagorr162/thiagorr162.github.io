@@ -4,10 +4,9 @@ title: "README"
 author_profile: false
 ---
 
-### Recommended Books on Machine Learning Theory and Related Topics
+### Recommended Books on Machine Learning Theory and Related Topics 🔍
 
-For those interested in the theory of Machine Learning, I've compiled a selection of books that I find particularly important and insightful. If this is your first contact with this subject, I recommend prioritizing the books highlighted with ★.
-
+For those interested in the theory of Machine Learning, I've compiled a selection of books that I find very cool. If this is your first contact with this subject, I recommend prioritizing the books highlighted with ★.
 
 - [★ Concentration Inequalities](https://academic.oup.com/book/26549) - S. Boucheron, G. Lugosi, P. Massart 
 - [★ Foundations of Machine Learning](https://cs.nyu.edu/~mohri/mlbook/) - M. Mohri, A. Rostamizadeh, A. Talwalkar
@@ -18,8 +17,7 @@ For those interested in the theory of Machine Learning, I've compiled a selectio
 - [The Concentration of Measure Phenomenon](https://www.ams.org/books/surv/089/surv089-endmatter.pdf) - M. Ledoux
 - [Understanding Machine Learning](https://www.cs.huji.ac.il/~shais/UnderstandingMachineLearning/copy.html) - S. Shalev-Shwartz, S. Ben-David
 
-
-### Basic Books on Probability and Statistics
+### Basic Books on Probability and Statistics 🤓
 
 If you're new to Probability and Statistics, here are some great books to get you started.
 
@@ -29,3 +27,10 @@ If you're new to Probability and Statistics, here are some great books to get yo
 - [Probability with Martingales](https://www.cambridge.org/highereducation/books/probability-with-martingales/B4CFCE0D08930FB46C6E93E775503926#overview) - D. Williams
 - [Probability: Theory and Examples](https://services.math.duke.edu/~rtd/PTE/PTE5_011119.pdf) - R. Durrett
 - [Theoretical Statistics: Topics for a Core Course](https://link.springer.com/book/10.1007/978-0-387-93839-4) - R. Keener
+
+### Favorite Papers 😍
+
+Some of my favorite papers.
+
+- [Laplacian Eigenmaps for Dimensionality Reduction and Data
+  Representation](https://www2.imm.dtu.dk/projects/manifold/Papers/Laplacian.pdf) - M. Belkin, P. Niyogi
