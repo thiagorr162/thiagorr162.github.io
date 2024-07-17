@@ -58,7 +58,7 @@ $$
 
 That is, we are interested in studying big sets (probability larger than 1/2), with small surface area (small blowup probability). But this is exactly what isoperimetric results try to understand!  
 
-In the upcoming posts, we will delve deeper into the relationship between isoperimetric inequalities and concentration of measure.
+
 
 ### References
 
