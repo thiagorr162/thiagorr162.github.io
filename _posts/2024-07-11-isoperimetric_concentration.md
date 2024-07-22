@@ -56,9 +56,7 @@ $$
 1 - \inf_{A\subset \mathcal{X}, P(A)\geq 1/2} P(d(X,A)< t).
 $$
 
-That is, we are interested in studying big sets (probability larger than 1/2), with small surface area (small blowup probability). But this is exactly what isoperimetric results try to understand!  
-
-
+That is, we are interested in studying maximal big sets (probability larger than 1/2), with small surface area (small blowup probability). But this is exactly what isoperimetric results try to understand!  
 
 ### References
 
