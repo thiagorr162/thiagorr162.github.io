@@ -32,5 +32,4 @@ If you're new to Probability and Statistics, here are some great books to get yo
 
 Some of my favorite papers in no particular order.
 
-- [Concentration of Measure and Isoperimetric Inequalities in Product Spaces](https://arxiv.org/abs/math/9406212) - M. Talagrand
 - [Laplacian Eigenmaps for Dimensionality Reduction and Data Representation](https://www2.imm.dtu.dk/projects/manifold/Papers/Laplacian.pdf) - M. Belkin, P. Niyogi
