@@ -31,9 +31,9 @@ $$
 \sum_{i=1}^d \left(\sum_{j=1}^d a_{ij}X_j'\right)X_i = \sum_{i=1}^d c_iX_i,
 $$
 
-which allows us to use results for sums of linear i.i.d. variables. Our goal is to make the $X$ on the right side of $X^TAX$ independent of the $X$ on the left side.
+which allows us to use results for sums of linear i.i.d. variables. 
 
-Note that if we fix a subset $I \subset [d]$, then the sum
+Our goal is to make the $X$ on the right side of $X^TAX$ independent of the $X$ on the left side. Note that if we fix a subset $I \subset [d]$, then the sum
 
 $$
 \sum_{i \in I, j \in I^c} a_{ij} X_i X_j
