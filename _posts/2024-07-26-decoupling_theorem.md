@@ -100,3 +100,6 @@ $$
 $$
 
 concluding the proof!
+
+### References
+- [High-Dimensional Probability](https://www.math.uci.edu/~rvershyn/papers/HDP-book/HDP-book.html) - R. Vershynin
