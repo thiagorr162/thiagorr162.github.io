@@ -1,5 +1,5 @@
 ---
-title: 'The Coolest Theorem You Are Going to Learn Today'
+title: 'The Coolest Proof You Are Going to Learn Today'
 date: 2024-07-26
 permalink: /posts/2024/07/decoupling_inequality/
 tags:
