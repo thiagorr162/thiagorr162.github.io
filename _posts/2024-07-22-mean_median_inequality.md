@@ -1,5 +1,5 @@
 ---
-title: 'Mean-Median Inequality'
+title: 'Mean-median inequality'
 date: 2024-07-22
 permalink: /posts/2024/07/mean_median_inequality/
 tags:

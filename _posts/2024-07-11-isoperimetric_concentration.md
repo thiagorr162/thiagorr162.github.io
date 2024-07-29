@@ -1,5 +1,5 @@
 ---
-title: 'Introduction to isoperimetric inequalities and concentration of measure'
+TITLE: 'Introduction to isoperimetric inequalities and concentration of measure'
 date: 2024-07-13
 permalink: /posts/2024/07/isoperimetric_concentration_1/
 tags:
