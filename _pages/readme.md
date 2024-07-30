@@ -8,6 +8,7 @@ author_profile: false
 
 For those interested in the theory of Machine Learning, I've compiled a selection of books that I find very cool. If this is your first contact with this subject, I recommend prioritizing the books highlighted with ★.
 
+- [A probabilistic theory of pattern recognition](https://www.szit.bme.hu/~gyorfi/pbook.pdf) - L. Devroye, G. Lugosi, L. Györfi
 - [Combinatorial Methods in Density Estimation](https://link.springer.com/book/10.1007/978-1-4613-0125-7) - L. Devroye, G. Lugosi
 - [Concentration Inequalities](https://academic.oup.com/book/26549) - S. Boucheron, G. Lugosi, P. Massart 
 - [Concentration of Measure for the Analysis of Randomized Algorithms](http://wwwusers.di.uniroma1.it/~ale/Papers/master.pdf) - D. Dubhashi, A. Panconesi
