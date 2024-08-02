@@ -17,6 +17,10 @@ main:
     
   - title: "CV"
     url: /cv/
+
+  - title: "Students"
+    url: /students/
     
   - title: "README"
     url: /readme/
+
