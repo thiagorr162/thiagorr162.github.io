@@ -1,37 +1,79 @@
 ---
 ---
 
-@string{aps = {American Physical Society,}}
 
-@book{einstein1920relativity,
-  title={Relativity: the Special and General Theory},
-  author={Einstein, Albert},
-  year={1920},
-  publisher={Methuen & Co Ltd},
-  html={relativity.html}
+@article{Csillag_Monteiro Paes_Ramos_Romano_Schuller_Seixas_Oliveira_Orenstein_2025,
+title={AmnioML: Amniotic Fluid Segmentation and Volume Prediction with Uncertainty Quantification},
+volume={37},
+html={https://ojs.aaai.org/index.php/AAAI/article/view/26837},
+DOI={10.1609/aaai.v37i13.26837},
+abstract={Accurately predicting the volume of amniotic fluid is fundamental to assessing pregnancy risks, though the task usually requires many hours of laborious work by medical experts. In this paper, we present AmnioML, a machine learning solution that leverages deep learning and conformal prediction to output fast and accurate volume estimates and segmentation masks from fetal MRIs with Dice coefficient over 0.9. Also, we make available a novel, curated dataset for fetal MRIs with 853 exams and benchmark the performance of many recent deep learning architectures. In addition, we introduce a conformal prediction tool that yields narrow predictive intervals with theoretically guaranteed coverage, thus aiding doctors in detecting pregnancy risks and saving lives. A successful case study of AmnioML deployed in a medical setting is also reported. Real-world clinical benefits include up to 20x segmentation time reduction, with most segmentations deemed by doctors as not needing any further manual refinement. Furthermore, AmnioML’s volume predictions were found to be highly accurate in practice, with mean absolute error below 56mL and tight predictive intervals, showcasing its impact in reducing pregnancy complications.}, 
+number={13}, 
+journal={Proceedings of the AAAI Conference on Artificial Intelligence}, 
+author={Csillag, Daniel and Monteiro Paes, Lucas and Ramos, Thiago and Romano, João Vitor and Schuller, Rodrigo and Seixas, Roberto B. and Oliveira, Roberto I. and Orenstein, Paulo},
+year={2023}, 
+month={Jul.},
+pages={15494-15502},
+award_name={Deployed application award},
+award={Innovative Application Award: Recognizes deployed AI applications with measurable benefits, judged on the problem description, innovative use of AI, application impact, and lessons learned. Awarded to papers showcasing real-world AI applications in production.},
+preview={amnioml.png},
+bibtex_show={true},
 }
 
-@book{einstein1956investigations,
+@InProceedings{pmlr-v238-ramos24a,
+  title = 	 {BlockBoost: Scalable and Efficient Blocking through Boosting},
+  author =       {Ramos, Thiago and Loro Schuller, Rodrigo and Akira Okuno, Alex and Nissenbaum, Lucas and I Oliveira, Roberto and Orenstein, Paulo},
+  booktitle = 	 {Proceedings of The 27th International Conference on Artificial Intelligence and Statistics},
+  pages = 	 {2575--2583},
+  year = 	 {2024},
+  editor = 	 {Dasgupta, Sanjoy and Mandt, Stephan and Li, Yingzhen},
+  volume = 	 {238},
+  series = 	 {Proceedings of Machine Learning Research},
+  month = 	 {02--04 May},
+  publisher =    {PMLR},
+  preview={blockboost.png},
+  pdf = 	 {https://proceedings.mlr.press/v238/ramos24a/ramos24a.pdf},
+  html = 	 {https://proceedings.mlr.press/v238/ramos24a.html},
+  abstract = 	 {As datasets grow larger, matching and merging entries from different databases has become a costly task in modern data pipelines. To avoid expensive comparisons between entries, blocking similar items is a popular preprocessing step. In this paper, we introduce BlockBoost, a novel boosting-based method that generates compact binary hash codes for database entries, through which blocking can be performed efficiently. The algorithm is fast and scalable, resulting in computational costs that are orders of magnitude lower than current benchmarks. Unlike existing alternatives, BlockBoost comes with associated feature importance measures for interpretability, and possesses strong theoretical guarantees, including lower bounds on critical performance metrics like recall and reduction ratio. Finally, we show that BlockBoost delivers great empirical results, outperforming state-of-the-art blocking benchmarks in terms of both performance metrics and computational cost.},
   bibtex_show={true},
-  title={Investigations on the Theory of the Brownian Movement},
-  author={Einstein, Albert},
-  year={1956},
-  publisher={Courier Corporation},
-  preview={brownian-motion.gif}
 }
 
-@article{einstein1950meaning,
-  abbr={AJP},
-  bibtex_show={true},
-  title={The meaning of relativity},
-  author={Einstein, Albert and Taub, AH},
-  journal={American Journal of Physics},
-  volume={18},
-  number={6},
-  pages={403--404},
-  year={1950},
-  publisher={American Association of Physics Teachers}
+
+
+@misc{oliveira2022splitconformalpredictiondependent,
+      title={Split Conformal Prediction for Dependent Data}, 
+      author={Roberto I. Oliveira and Paulo Orenstein and Thiago Ramos and João Vitor Romano},
+      year={2022},
+      eprint={2203.15885},
+      archivePrefix={arXiv},
+      primaryClass={math.ST},
+      html={https://arxiv.org/abs/2203.15885}, 
+      bibtex_show={true},
+      preview={split_conformal_2022.png},
 }
+
+
+@InProceedings{pmlr-v151-csillag22a,
+  title = 	 { ExactBoost: Directly Boosting the Margin in Combinatorial and Non-decomposable Metrics },
+  author =       {Csillag, Daniel and Piazza, Carolina and Ramos, Thiago and Vitor Romano, Jo\~ao and Oliveira, Roberto I. and Orenstein, Paulo},
+  booktitle = 	 {Proceedings of The 25th International Conference on Artificial Intelligence and Statistics},
+  pages = 	 {9017--9049},
+  year = 	 {2022},
+  editor = 	 {Camps-Valls, Gustau and Ruiz, Francisco J. R. and Valera, Isabel},
+  volume = 	 {151},
+  series = 	 {Proceedings of Machine Learning Research},
+  month = 	 {28--30 Mar},
+  publisher =    {PMLR},
+  pdf = 	 {https://proceedings.mlr.press/v151/csillag22a/csillag22a.pdf},
+  preview={exactboost.png},
+  html = 	 {https://proceedings.mlr.press/v151/csillag22a.html},
+  abstract = 	 { Many classification algorithms require the use of surrogate losses when the intended loss function is combinatorial or non-decomposable. This paper introduces a fast and exact stagewise optimization algorithm, dubbed ExactBoost, that boosts stumps to the actual loss function. By developing a novel extension of margin theory to the non-decomposable setting, it is possible to provably bound the generalization error of ExactBoost for many important metrics with different levels of non-decomposability. Through extensive examples, it is shown that such theoretical guarantees translate to competitive empirical performance. In particular, when used as an ensembler, ExactBoost is able to significantly outperform other surrogate-based and exact algorithms available. },
+  bibtex_show={true},
+}
+
+
+
+
 
 @article{PhysRev.47.777,
   abbr={PhysRev},
@@ -58,58 +100,10 @@
   additional_info={. *More Information* can be [found here](https://github.com/alshedivat/al-folio/)},
   annotation={* Example use of superscripts<br>† Albert Einstein},
   selected={true},
-  inspirehep_id = {3255}
-}
-
-@article{einstein1905molekularkinetischen,
-  title={{\"U}ber die von der molekularkinetischen Theorie der W{\"a}rme geforderte Bewegung von in ruhenden Fl{\"u}ssigkeiten suspendierten Teilchen},
-  author={Einstein, A.},
-  journal={Annalen der physik},
-  volume={322},
-  number={8},
-  pages={549--560},
-  year={1905},
-  publisher={Wiley Online Library}
-}
-
-@article{einstein1905movement,
-  abbr={Ann. Phys.},
-  title={Un the movement of small particles suspended in statiunary liquids required by the molecular-kinetic theory 0f heat},
-  author={Einstein, A.},
-  journal={Ann. Phys.},
-  volume={17},
-  pages={549--560},
-  year={1905}
-}
-
-@article{einstein1905electrodynamics,
-  title={On the electrodynamics of moving bodies},
-  author={Einstein, A.},
-  year={1905}
-}
-
-@Article{einstein1905photoelectriceffect,
+  inspirehep_id = {3255},
   bibtex_show={true},
-  abbr={Ann. Phys.},
-  title="{{\"U}ber einen die Erzeugung und Verwandlung des Lichtes betreffenden heuristischen Gesichtspunkt}",
-  author={Albert Einstein},
-  abstract={This is the abstract text.},
-  journal={Ann. Phys.},
-  volume={322},
-  number={6},
-  pages={132--148},
-  year={1905},
-  doi={10.1002/andp.19053220607},
-  award={Albert Einstein receveid the **Nobel Prize in Physics** 1921 *for his services to Theoretical Physics, and especially for his discovery of the law of the photoelectric effect*},
-  award_name={Nobel Prize}
 }
 
-@book{przibram1967letters,
-  bibtex_show={true},
-  title={Letters on wave mechanics},
-  author={Einstein, Albert and Schrödinger, Erwin and Planck, Max and Lorentz, Hendrik Antoon and Przibram, Karl},
-  year={1967},
-  publisher={Vision},
-  preview={wave-mechanics.gif},
-  abbr={Vision}
-}
+
+
+
