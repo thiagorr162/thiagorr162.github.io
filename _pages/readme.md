@@ -38,3 +38,10 @@ Some of my favorite papers in no particular order.
 
 - [Laplacian Eigenmaps for Dimensionality Reduction and Data Representation](https://www2.imm.dtu.dk/projects/manifold/Papers/Laplacian.pdf) - M. Belkin, P. Niyogi
 - [Strong Consistency, Graph Laplacians, and the Stochastic Block Model](https://jmlr.csail.mit.edu/papers/volume22/20-391/20-391.pdf) - S. Deng, S. Ling, T. Strohmer
+
+### Online Material
+
+Cool online material 
+
+- [Bayesian Modeling and Computation in Python](https://bayesiancomputationbook.com/welcome.html#)
+- [Causal Inference for The Brave and True](https://matheusfacure.github.io/python-causality-handbook/landing-page.html)
