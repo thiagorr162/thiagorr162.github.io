@@ -39,7 +39,7 @@ Some of my favorite papers in no particular order.
 - [Laplacian Eigenmaps for Dimensionality Reduction and Data Representation](https://www2.imm.dtu.dk/projects/manifold/Papers/Laplacian.pdf) - M. Belkin, P. Niyogi
 - [Strong Consistency, Graph Laplacians, and the Stochastic Block Model](https://jmlr.csail.mit.edu/papers/volume22/20-391/20-391.pdf) - S. Deng, S. Ling, T. Strohmer
 
-### Online Material
+### Online Material 🌐
 
 Cool online material 
 
