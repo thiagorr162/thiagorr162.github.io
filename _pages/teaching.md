@@ -1,12 +1,19 @@
 ---
 layout: page
 permalink: /teaching/
-title: teaching
-description: Materials for courses you taught. Replace this text with your description.
+title: Teaching
+description: Resources and materials for the courses I’ve taught.
 nav: true
 nav_order: 6
 ---
 
-For now, this page is assumed to be a static description of your courses. You can convert it to a collection similar to `_projects/` so that you can have a dedicated page for each course.
+##### 2024
 
-Organize your courses by years, topics, or universities, however you like!
+- **[Aprendizado Estatístico](/teaching/2024-2-aprendizado_estatistico)**  
+  *Department of Statistics at the Federal University of São Carlos*  
+  **Date:** Segundo Semestre, 2024 | **Location:** São Carlos, SP, Brazil
+
+- **[Programação Estatística](/teaching/2024-2-programacao_estatistica)**  
+  *Department of Statistics at the Federal University of São Carlos*  
+  **Date:** Segundo Semestre, 2024 | **Location:** São Carlos, SP, Brazil
+
