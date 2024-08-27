@@ -1,5 +1,6 @@
 ---
 ---
+
 @article{JMLR:v25:23-1553,
   author  = {Roberto I. Oliveira and Paulo Orenstein and Thiago Ramos and Jo{{\~a}}o Vitor Romano},
   title   = {Split Conformal Prediction and Non-Exchangeable Data},
@@ -14,24 +15,6 @@
   selected = {true},
   abstract={ Split conformal prediction (CP) is arguably the most popular CP method for uncertainty quantification, enjoying both academic interest and widespread deployment. However, the original theoretical analysis of split CP makes the crucial assumption of data exchangeability, which hinders many real-world applications. In this paper, we present a novel theoretical framework based on concentration inequalities and decoupling properties of the data, proving that split CP remains valid for many non-exchangeable processes by adding a small coverage penalty. Through experiments with both real and synthetic data, we show that our theoretical results translate to good empirical performance under non-exchangeability, e.g., for time series and spatiotemporal data. Compared to recent conformal algorithms designed to counter specific exchangeability violations, we show that split CP is competitive in terms of coverage and interval size, with the benefit of being extremely simple and orders of magnitude faster than alternatives. },
   bibtex_show={true},
-}
-
-@article{Csillag_Monteiro Paes_Ramos_Romano_Schuller_Seixas_Oliveira_Orenstein_2025,
-title={AmnioML: Amniotic Fluid Segmentation and Volume Prediction with Uncertainty Quantification},
-volume={37},
-html={https://ojs.aaai.org/index.php/AAAI/article/view/26837},
-DOI={10.1609/aaai.v37i13.26837},
-abstract={Accurately predicting the volume of amniotic fluid is fundamental to assessing pregnancy risks, though the task usually requires many hours of laborious work by medical experts. In this paper, we present AmnioML, a machine learning solution that leverages deep learning and conformal prediction to output fast and accurate volume estimates and segmentation masks from fetal MRIs with Dice coefficient over 0.9. Also, we make available a novel, curated dataset for fetal MRIs with 853 exams and benchmark the performance of many recent deep learning architectures. In addition, we introduce a conformal prediction tool that yields narrow predictive intervals with theoretically guaranteed coverage, thus aiding doctors in detecting pregnancy risks and saving lives. A successful case study of AmnioML deployed in a medical setting is also reported. Real-world clinical benefits include up to 20x segmentation time reduction, with most segmentations deemed by doctors as not needing any further manual refinement. Furthermore, AmnioML’s volume predictions were found to be highly accurate in practice, with mean absolute error below 56mL and tight predictive intervals, showcasing its impact in reducing pregnancy complications.}, 
-number={13}, 
-journal={Proceedings of the AAAI Conference on Artificial Intelligence}, 
-author={Csillag, Daniel and Monteiro Paes, Lucas and Ramos, Thiago and Romano, João Vitor and Schuller, Rodrigo and Seixas, Roberto B. and Oliveira, Roberto I. and Orenstein, Paulo},
-year={2023}, 
-month={Jul.},
-pages={15494-15502},
-award_name={Deployed application award},
-award={Innovative Application Award: Recognizes deployed AI applications with measurable benefits, judged on the problem description, innovative use of AI, application impact, and lessons learned. Awarded to papers showcasing real-world AI applications in production.},
-preview={amnioml.png},
-bibtex_show={true},
 }
 
 @InProceedings{pmlr-v238-ramos24a,
@@ -52,6 +35,43 @@ bibtex_show={true},
   bibtex_show={true},
   selected={true},
 }
+
+@INPROCEEDINGS{243068,
+    AUTHOR="Waqar Hassan and Marvin Cabral and Thiago Ramos and Antonio Castelo Filho and Luis Nonato",
+    TITLE="Modeling and Predicting Crimes in the City of São Paulo Using Graph Neural Networks",
+    BOOKTITLE="BRACIS 2024 () ",
+    ADDRESS="",
+    preview={evolve.png},
+    DAYS="23-21",
+    MONTH="may",
+    YEAR="2024",
+    ABSTRACT="Crime prediction is a critical research area for enhancing public safety and optimizing law enforcement resource allocation, and machine learning techniques have had a significant impact in this field. Traditional machine learning models have long struggled to capture complex crime patterns, primarily due to the intricate interdependence of spatial and temporal data. However, recent advancements in machine learning, particularly with Graph Neural Networks (GNNs), offer a new perspective. GNNs have demonstrated remarkable success in various applications and they can also play a significant role in crime analysis and prediction. Therefore, in this work, we explore such a potential by examining two distinct spatiotemporal GNN architectures, namely Dynamic Self-Attention Network (DySAT) and Evolving Graph Convolutional Network (EvolveGCN), assessing and comparing their effectiveness for crime prediction. Moreover, we propose a data modeling framework that integrates crime, street map graphs, and urban data, which is fundamental to properly train the GNN models. As far as we know, there is no consolidated methodology to integrate those three modalities of data, being a relevant contribution of this work. Our findings underscore the effectiveness of GNNs in crime prediction tasks, offering valuable insights for researchers and practitioners in the field of crime prevention and public safety enhancement.",
+    KEYWORDS="- Neural Networks; - Deep Learning; - Machine Learning and Data Mining; - Forecasting",
+    URL="http://XXXXX/243068.pdf"
+}
+
+
+
+
+
+@article{Csillag_Monteiro Paes_Ramos_Romano_Schuller_Seixas_Oliveira_Orenstein_2025,
+title={AmnioML: Amniotic Fluid Segmentation and Volume Prediction with Uncertainty Quantification},
+volume={37},
+html={https://ojs.aaai.org/index.php/AAAI/article/view/26837},
+DOI={10.1609/aaai.v37i13.26837},
+abstract={Accurately predicting the volume of amniotic fluid is fundamental to assessing pregnancy risks, though the task usually requires many hours of laborious work by medical experts. In this paper, we present AmnioML, a machine learning solution that leverages deep learning and conformal prediction to output fast and accurate volume estimates and segmentation masks from fetal MRIs with Dice coefficient over 0.9. Also, we make available a novel, curated dataset for fetal MRIs with 853 exams and benchmark the performance of many recent deep learning architectures. In addition, we introduce a conformal prediction tool that yields narrow predictive intervals with theoretically guaranteed coverage, thus aiding doctors in detecting pregnancy risks and saving lives. A successful case study of AmnioML deployed in a medical setting is also reported. Real-world clinical benefits include up to 20x segmentation time reduction, with most segmentations deemed by doctors as not needing any further manual refinement. Furthermore, AmnioML’s volume predictions were found to be highly accurate in practice, with mean absolute error below 56mL and tight predictive intervals, showcasing its impact in reducing pregnancy complications.}, 
+number={13}, 
+journal={Proceedings of the AAAI Conference on Artificial Intelligence}, 
+author={Csillag, Daniel and Monteiro Paes, Lucas and Ramos, Thiago and Romano, João Vitor and Schuller, Rodrigo and Seixas, Roberto B. and Oliveira, Roberto I. and Orenstein, Paulo},
+year={2023}, 
+month={Jul.},
+pages={15494-15502},
+award_name={Deployed application award},
+award={Innovative Application Award: Recognizes deployed AI applications with measurable benefits, judged on the problem description, innovative use of AI, application impact, and lessons learned. Awarded to papers showcasing real-world AI applications in production.},
+preview={amnioml.png},
+bibtex_show={true},
+}
+
 
 
 
