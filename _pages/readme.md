@@ -41,7 +41,7 @@ Some of my favorite papers in no particular order.
 
 ### Online Material 🌐
 
-Cool online material 
+Cool online material
 
 - [Bayesian Modeling and Computation in Python](https://bayesiancomputationbook.com/welcome.html#)
 - [Causal Inference for The Brave and True](https://matheusfacure.github.io/python-causality-handbook/landing-page.html)

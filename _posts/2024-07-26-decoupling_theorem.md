@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 'The coolest proof you are going to learn today'
+title: "The coolest proof you are going to learn today"
 date: 2024-07-26
 permalink: /posts/2024/07/decoupling_inequality/
 tags:
@@ -24,7 +24,7 @@ $$
 F(X^TA_*X) \leq F(4X^T A X'),
 $$
 
-where $$X'$$ is an independent copy of $$X$$ and $$A_*$$ is the matrix $$A$$ with 0's on  its diagonal.
+where $$X'$$ is an independent copy of $$X$$ and $$A_*$$ is the matrix $$A$$ with 0's on its diagonal.
 
 The advantage of the RHS is that it is linear in $$X$$ rather than quadratic. This implies, for example, that one can write
 
@@ -32,7 +32,7 @@ $$
 \sum_{i=1}^d \left(\sum_{j=1}^d a_{ij}X_j'\right)X_i = \sum_{i=1}^d c_iX_i,
 $$
 
-which allows us to use results for sums of linear i.i.d. variables. 
+which allows us to use results for sums of linear i.i.d. variables.
 
 Our goal is to make the $$X$$ on the right side of $$X^TAX$$ independent of the $$X$$ on the left side. Note that if we fix a subset $$I \subset [d]$$, then the sum
 
@@ -47,7 +47,7 @@ The first cool trick in this proof is to notice that for a fixed vector $$x \in 
 $$
 \begin{align*}
 x^TA_*x &= \sum_{i \neq j} a_{ij} x_i x_j \\
-        &= 4\mathbb{E}_\delta\left[ \sum_{i \neq j} \delta_i(1-\delta_j)a_{ij}x_ix_j\right] \\ 
+        &= 4\mathbb{E}_\delta\left[ \sum_{i \neq j} \delta_i(1-\delta_j)a_{ij}x_ix_j\right] \\
         &= 4\mathbb{E}_I\left[\sum_{i \in I, j \in I^c} a_{ij} x_i x_j\right],
 \end{align*}
 $$
@@ -74,13 +74,13 @@ $$
 
 From now on, we will work with this fixed $$I$$. Note that we have already changed the right term $$X_j$$ to its independent copy $$X_j'$$. We can do this because the terms $$i$$ and $$j$$ are in complementary sets, making $$X_i$$ and $$X_j$$ independent.
 
-Now, we need to show that 
+Now, we need to show that
 
 $$
  \mathbb{E}_X\left[F\left(4\sum_{i \in I, j \in I^c} a_{ij} X_i X_j'\right)\right] \leq \mathbb{E}_X\left[F\left(4\sum_{i,j=1}^n a_{ij} X_i X_j'\right)\right] .
 $$
 
-To do this, write  the sum in right expression as $$Y+Z_1+Z_2$$, where $$Y$$ is the sum over $$I \times I^c$$ (the sum in left expression), $$Z_1$$ is the sum over $$I \times I$$, and $$Z_2$$ is the sum over $$I^c \times [n]$$ (make a drawing!).
+To do this, write the sum in right expression as $$Y+Z_1+Z_2$$, where $$Y$$ is the sum over $$I \times I^c$$ (the sum in left expression), $$Z_1$$ is the sum over $$I \times I$$, and $$Z_2$$ is the sum over $$I^c \times [n]$$ (make a drawing!).
 
 Now, condition on all variables appearing in the $$Y$$ term, that is, $$i\in I$$ and $$j\in I^c$$. This makes $$Y$$ fixed, $$Z_1$$ with randomness only over $$j \in I$$, and $$Z_2$$ only with randomness over $$i \in I^c$$ and $$j \in I$$. This makes $$Z_1$$ and $$Z_2$$ zero mean random variables, so
 
@@ -103,4 +103,5 @@ $$
 concluding the proof!
 
 ### References
+
 - [High-Dimensional Probability](https://www.math.uci.edu/~rvershyn/papers/HDP-book/HDP-book.html) - R. Vershynin

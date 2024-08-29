@@ -10,13 +10,13 @@ nav_order: 6
 #### 2024
 
 - **[BlockBoost: Similarity Learning via Boosting](/talks/blockboost-pipges)**  
-  *Department of Statistics at the Federal University of São Carlos, PIPGES*  
+  _Department of Statistics at the Federal University of São Carlos, PIPGES_  
   **Date:** July 5, 2024 | **Location:** São Carlos, SP, Brazil
 
 - **[AmnioML: amniotic fluid segmentation and volume prediction with uncertainty quantification](/talks/amnioml-alek)**  
-  *Lab TDS, Online*  
+  _Lab TDS, Online_  
   **Date:** July 10, 2024 | **Location:** São Carlos, SP, Brazil
 
 - **[Da matemática à estatística: minha jornada acadêmica](/talks/intro_estat_cris)**  
-  *Department of Statistics at the Federal University of São Carlos*  
+  _Department of Statistics at the Federal University of São Carlos_  
   **Date:** August 6, 2024 | **Location:** São Carlos, SP, Brazil

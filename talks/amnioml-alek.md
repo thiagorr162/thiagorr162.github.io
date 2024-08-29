@@ -4,8 +4,8 @@ title: "AmnioML: Amniotic Fluid Segmentation and Volume Prediction with Uncertai
 permalink: /talks/amnioml-alek
 ---
 
-*Lab TDS, Online*  
-*Date:* July 10, 2024 | *Location:* São Carlos, SP, Brazil
+_Lab TDS, Online_  
+_Date:_ July 10, 2024 | _Location:_ São Carlos, SP, Brazil
 
 **Description:** This talk presents AmnioML, a machine learning solution that leverages deep learning and conformal prediction to predict amniotic fluid volume with high accuracy and provide uncertainty quantification.
 
@@ -13,7 +13,7 @@ permalink: /talks/amnioml-alek
 
 - [Slides](/assets/presentations/amnioML-alek-2024.pdf)
 - [Main Paper](https://ojs.aaai.org/index.php/AAAI/article/view/26837)
-  
+
 ### Video
 
 <figure>

@@ -4,8 +4,8 @@ title: "Da matemática à estatística: minha jornada acadêmica"
 permalink: /talks/intro_estat_cris
 ---
 
-*Department of Statistics at the Federal University of São Carlos*  
-*Date:* August 6, 2024 | *Location:* São Carlos, SP, Brazil
+_Department of Statistics at the Federal University of São Carlos_  
+_Date:_ August 6, 2024 | _Location:_ São Carlos, SP, Brazil
 
 **Description:** Breve apresentação sobre minha jornada acadêmica.
 
