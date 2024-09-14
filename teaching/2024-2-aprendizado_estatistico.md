@@ -27,7 +27,7 @@ Teremos uma avaliação composta por três componentes:
 - **Introdução**: (Cap. 1 de [1]) Apresentação do conceito de Aprendizado de Máquinas, incluindo os tipos de problemas que podem ser resolvidos, as técnicas clássicas utilizadas, os diferentes estágios de aprendizado e os cenários de aplicação. Enfoque na importância da generalização para garantir a robustez dos modelos. 
 - **Aprendizado PAC**: (Cap. 2 de [1]) Introdução ao framework Probably Approximately Correct (PAC), abordando questões sobre eficiência, dificuldade e quantidade de exemplos necessários para a aprendizagem.
 - **Concentração de Medida**: (Cap. 2 de [3]) Introdução às desigualdades de concentração, incluindo as desigualdades de Hoeffding, Chernoff e Bernstein, e às distribuições sub-gaussianas e sub-exponenciais.
-- **Maldição da Dimensão e dados em dimensão alta**: (Cap. 3 de [3]) Estudo de fenômenos em distribuições de vetores aleatórios em espaços de alta dimensão, explorando os desafios e implicações da abundância de espaço em dimensões elevadas, conhecidos como a "maldição da dimensionalidade".
+- **Maldição da Dimensão e Dados em Dimensão Alta**: (Cap. 3 de [3]) Estudo de fenômenos em distribuições de vetores aleatórios em espaços de alta dimensão, explorando os desafios e implicações da abundância de espaço em dimensões elevadas, conhecidos como a "maldição da dimensionalidade".
 - **Complexidade de Rademacher e Dimensão VC**: (Cap. 3 de [1]) Introdução à Complexidade de Rademacher e Dimensão VC, com foco em suas aplicações na análise de generalização e capacidade de modelos de aprendizado de máquina.
 - **Aplicações**: (Cap. 5, 6 e 7 de [1] e [2]) Aplicação dos conceitos estudados nos modelos de SVM, métodos de Kernel e Boosting.
 
