@@ -4,14 +4,13 @@ title: "Aprendizado Estatístico"
 permalink: /teaching/2024-2-aprendizado_estatistico
 ---
 
+**Período Letivo:** 2024/2 - Regular - **Horas:** 60
 
-**Período Letivo:** 2024/2 - Regular -  **Horas:** 60  
+| Dia | Horário       | Sala | Período                 |
+| --- | ------------- | ---- | ----------------------- |
+| Ter | 16:00 - 18:00 |      | 14/10/2024 - 01/03/2025 |
+| Qua | 16:00 - 18:00 |      | 14/10/2024 - 01/03/2025 |
 
-| Dia  | Horário         | Sala | Período                  |
-|------|-----------------|------|--------------------------|
-| Ter  | 16:00 - 18:00   |      | 14/10/2024 - 01/03/2025  |
-| Qua  | 16:00 - 18:00   |      | 14/10/2024 - 01/03/2025  |
-  
 <br>
 ## Avaliação
 
@@ -24,7 +23,7 @@ Teremos uma avaliação composta por três componentes:
 <br>
 ## Ementa
 
-- **Introdução**: (Cap. 1 de [1]) Apresentação do conceito de Aprendizado de Máquinas, incluindo os tipos de problemas que podem ser resolvidos, as técnicas clássicas utilizadas, os diferentes estágios de aprendizado e os cenários de aplicação. Enfoque na importância da generalização para garantir a robustez dos modelos. 
+- **Introdução**: (Cap. 1 de [1]) Apresentação do conceito de Aprendizado de Máquinas, incluindo os tipos de problemas que podem ser resolvidos, as técnicas clássicas utilizadas, os diferentes estágios de aprendizado e os cenários de aplicação. Enfoque na importância da generalização para garantir a robustez dos modelos.
 - **Aprendizado PAC**: (Cap. 2 de [1]) Introdução ao framework Probably Approximately Correct (PAC), abordando questões sobre eficiência, dificuldade e quantidade de exemplos necessários para a aprendizagem.
 - **Concentração de Medida**: (Cap. 2 de [3]) Introdução às desigualdades de concentração, incluindo as desigualdades de Hoeffding, Chernoff e Bernstein, e às distribuições sub-gaussianas e sub-exponenciais.
 - **Maldição da Dimensão e Dados em Dimensão Alta**: (Cap. 3 de [3]) Estudo de fenômenos em distribuições de vetores aleatórios em espaços de alta dimensão, explorando os desafios e implicações da abundância de espaço em dimensões elevadas, conhecidos como a "maldição da dimensionalidade".
@@ -36,6 +35,4 @@ Teremos uma avaliação composta por três componentes:
 
 2. [Foundations of Machine Learning](https://cs.nyu.edu/~mohri/mlbook/) - M. Mohri, A. Rostamizadeh, A. Talwalkar
 1. [The Elements of Statistical Learning](https://hastie.su.domains/Papers/ESLII.pdf) - T. Hastie, R. Tibshirani, J. Friedman
-3. [High-Dimensional Probability](https://www.math.uci.edu/~rvershyn/papers/HDP-book/HDP-book.html) - R. Vershynin
-
-
+1. [High-Dimensional Probability](https://www.math.uci.edu/~rvershyn/papers/HDP-book/HDP-book.html) - R. Vershynin
