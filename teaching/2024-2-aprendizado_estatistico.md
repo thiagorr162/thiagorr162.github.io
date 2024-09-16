@@ -13,6 +13,8 @@ permalink: /teaching/2024-2-aprendizado_estatistico
 
 **Horário para dúvidas:** Quintas, das 17:00 às 18:00.
 
+Material da discplina pode ser encontrado [aqui.](https://github.com/thiagorr162/disciplinas/tree/main/material/2024/aprendizado)
+
 <br>
 ## Avaliação
 
