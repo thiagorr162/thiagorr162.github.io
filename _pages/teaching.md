@@ -7,7 +7,7 @@ nav: true
 nav_order: 6
 ---
 
-Lecture notes are available [here.](The lecture notes are available here.)
+Lecture notes are available [here.](https://github.com/thiagorr162/disciplinas/)
 
 ##### 2024
 
