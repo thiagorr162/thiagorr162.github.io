@@ -7,6 +7,8 @@ nav: true
 nav_order: 6
 ---
 
+Lecture notes are available [here.](The lecture notes are available here.)
+
 ##### 2024
 
 - **[Aprendizado Estatístico](/teaching/2024-2-aprendizado_estatistico)**  
