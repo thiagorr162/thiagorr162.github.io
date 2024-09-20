@@ -9,6 +9,10 @@ nav_order: 6
 
 #### 2024
 
+- **[Graph Neural Networks for Time Series](/talks/gnn4ts)**  
+  _University of São Paulo, ICMC_  
+  **Date:** September 24 and October 2, 2024 | **Location:** São Carlos, SP, Brazil
+
 - **[BlockBoost: Similarity Learning via Boosting](/talks/blockboost-pipges)**  
   _Department of Statistics at the Federal University of São Carlos, PIPGES_  
   **Date:** July 5, 2024 | **Location:** São Carlos, SP, Brazil
