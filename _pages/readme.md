@@ -40,6 +40,7 @@ Some of my favorite papers in no particular order.
 - [Laplacian Eigenmaps for Dimensionality Reduction and Data Representation](https://www2.imm.dtu.dk/projects/manifold/Papers/Laplacian.pdf) - M. Belkin, P. Niyogi
 - [Strong Consistency, Graph Laplacians, and the Stochastic Block Model](https://jmlr.csail.mit.edu/papers/volume22/20-391/20-391.pdf) - S. Deng, S. Ling, T. Strohmer
 - [Finding community structure in networks using the eigenvectors of matrices](https://arxiv.org/abs/physics/0605087) - M. E. Newman
+- [A Decision-Theoretic Generalization of On-Line Learning and an Application to Boosting☆](https://www.sciencedirect.com/science/article/pii/S002200009791504X) - Y. Freund, R. E. Shapire
 
 ### Online Material 🌐
 
