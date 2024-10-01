@@ -5,8 +5,8 @@ repo_description_lines_max: 2
 
 github_repos:
   - jv-rv/split-conformal-nonexchangeable
+  - thiagorr162/disciplinas
   - Lionelsy/Conference-Accepted-Paper-List
   - alshedivat/al-folio
-  - academicpages/academicpages.github.io
   - thiagorr162/python-project-template
   - thiagorr162/blockboost
