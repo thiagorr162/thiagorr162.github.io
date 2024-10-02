@@ -14,7 +14,7 @@ permalink: /teaching/2024-2-programacao_estatistica
 **Horário para dúvidas:** Quintas, das 16:00 às 17:00.
 
 
-Material da discplina pode ser encontrado [aqui.](https://github.com/thiagorr162/disciplinas/tree/main/material/2024/prog)
+Material da discplina pode ser encontrado [aqui.](https://thiagorr162.github.io/prog-estat/)
 
 <br>
 ## Avaliação
