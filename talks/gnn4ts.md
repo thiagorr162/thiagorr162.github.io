@@ -1,6 +1,6 @@
 ---
-layout: page  
-title: "Graph Neural Networks for Time Series"  
+layout: page
+title: "Graph Neural Networks for Time Series"
 permalink: /talks/gnn4ts
 ---
 
@@ -12,6 +12,5 @@ _University of São Paulo, ICMC_
 ### References:
 
 - [Github repository with code](https://github.com/thiagorr162/gnns4ts)
-
 
 <img src="/assets/img/talks/gnn4ts/graph.png" alt="Graph Neural Networks for Time Series" width="600">
