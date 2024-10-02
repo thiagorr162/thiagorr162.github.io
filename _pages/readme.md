@@ -17,6 +17,7 @@ For those interested in the theory of Machine Learning, I've compiled a selectio
 - [Concentration of Measure for the Analysis of Randomized Algorithms](http://wwwusers.di.uniroma1.it/~ale/Papers/master.pdf) - D. Dubhashi, A. Panconesi
 - [★ Foundations of Machine Learning](https://cs.nyu.edu/~mohri/mlbook/) - M. Mohri, A. Rostamizadeh, A. Talwalkar
 - [★ High-Dimensional Probability](https://www.math.uci.edu/~rvershyn/papers/HDP-book/HDP-book.html) - R. Vershynin
+- [Learning Theory from First Principles](https://www.di.ens.fr/~fbach/ltfp_book.pdf) - F. Bach
 - [The Concentration of Measure Phenomenon](https://www.ams.org/books/surv/089/surv089-endmatter.pdf) - M. Ledoux
 - [★ Understanding Machine Learning](https://www.cs.huji.ac.il/~shais/UnderstandingMachineLearning/copy.html) - S. Shalev-Shwartz, S. Ben-David
 
