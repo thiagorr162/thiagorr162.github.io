@@ -13,7 +13,6 @@ permalink: /teaching/2024-2-programacao_estatistica
 
 **Horário para dúvidas:** Quintas, das 16:00 às 17:00.
 
-Material da discplina pode ser encontrado [aqui.](/books/prog_estat)
 
 <br>
 ## Avaliação
