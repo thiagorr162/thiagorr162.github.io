@@ -11,7 +11,8 @@ permalink: /teaching/2024-2-programacao_estatistica
 | Ter | 14:00 - 16:00 |      | 14/10/2024 - 01/03/2025 |
 | Qui | 14:00 - 16:00 |      | 14/10/2024 - 01/03/2025 |
 
-**Horário para dúvidas:** Quintas, das 16:00 às 17:00.
+**Horário para dúvidas:** Quintas, das 16:00 às 17:00.  
+[Notas de aula](https://thiagorr162.github.io/prog-estat/)
 
 
 <br>
