@@ -47,5 +47,6 @@ Some of my favorite papers in no particular order.
 
 Cool online material
 
+- [Graph Convolutional Neural Networks](https://mbernste.github.io/posts/gcn/)
 - [Bayesian Modeling and Computation in Python](https://bayesiancomputationbook.com/welcome.html#)
 - [Causal Inference for The Brave and True](https://matheusfacure.github.io/python-causality-handbook/landing-page.html)
