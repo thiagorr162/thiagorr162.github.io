@@ -16,3 +16,7 @@ nav_order: 6
 - **[Programação Estatística](/teaching/2024-2-programacao_estatistica)**  
   _Department of Statistics at the Federal University of São Carlos_  
   **Date:** Segundo Semestre, 2024 | **Location:** São Carlos, SP, Brazil  
+
+- **[Minicurso de Machine Learning](/teaching/2024-2-mini_ml)**  
+  _ICMC-USP, São Carlos_  
+  **Date:** 8, 9 e 10 de outubro, 2024 | **Location:** São Carlos, SP, Brazil  
