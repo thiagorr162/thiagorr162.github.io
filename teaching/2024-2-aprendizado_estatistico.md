@@ -11,8 +11,8 @@ permalink: /teaching/2024-2-aprendizado_estatistico
 | Ter | 16:00 - 18:00 |      | 14/10/2024 - 01/03/2025 |
 | Qua | 16:00 - 18:00 |      | 14/10/2024 - 01/03/2025 |
 
-**Horário para dúvidas:** Quintas, das 17:00 às 18:00.
-
+**Horário para dúvidas:** Quintas, das 17:00 às 18:00.  
+[Notas de aula](https://thiagorr162.github.io/aprendizado-estatistico/)
 
 <br>
 ## Avaliação
