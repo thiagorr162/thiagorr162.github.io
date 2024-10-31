@@ -31,7 +31,7 @@ If you're new to Probability and Statistics, here are some great books to get yo
 - [Introduction to Probability](https://www.crcpress.com/Introduction-to-Probability/Blitzstein-Hwang/p/book/9781138369917) - J. Blitzstein, J. Hwang
 - [Probability with Martingales](https://www.cambridge.org/highereducation/books/probability-with-martingales/B4CFCE0D08930FB46C6E93E775503926#overview) - D. Williams
 - [Probability: Theory and Examples](https://services.math.duke.edu/~rtd/PTE/PTE5_011119.pdf) - R. Durrett
-- [The Elements of Statistical Learning](https://hastie.su.domains/Papers/ESLII.pdf) - T. Hastie, R. Tibshirani, J. Friedman
+- [The Elements of Statistical Learning](https://link.springer.com/book/10.1007/978-0-387-84858-7) - T. Hastie, R. Tibshirani, J. Friedman
 - [Theoretical Statistics: Topics for a Core Course](https://link.springer.com/book/10.1007/978-0-387-93839-4) - R. Keener
 
 ### Favorite Papers 😍

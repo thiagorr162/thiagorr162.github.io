@@ -39,5 +39,5 @@ Teremos uma avaliação composta por três componentes:
 ## Bibliografia sugerida
 
 2. [Foundations of Machine Learning](https://cs.nyu.edu/~mohri/mlbook/) - M. Mohri, A. Rostamizadeh, A. Talwalkar
-1. [The Elements of Statistical Learning](https://hastie.su.domains/Papers/ESLII.pdf) - T. Hastie, R. Tibshirani, J. Friedman
+1. [The Elements of Statistical Learning](https://link.springer.com/book/10.1007/978-0-387-84858-7) - T. Hastie, R. Tibshirani, J. Friedman
 1. [High-Dimensional Probability](https://www.math.uci.edu/~rvershyn/papers/HDP-book/HDP-book.html) - R. Vershynin
