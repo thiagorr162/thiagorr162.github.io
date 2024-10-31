@@ -9,6 +9,11 @@ nav_order: 6
 
 #### 2024
 
+- **[Colóquio Interinstitucional de Modelos Estocásticos e Aplicações (COLMEA)](/talks/colmea2024)**  
+  _IMPA_  
+  **Date:** Outubro 30, 2024 | **Location:** Rio de Janeiro, RJ, Brazil
+
+
 - **[Graph Neural Networks for Time Series](/talks/gnn4ts)**  
   _University of São Paulo, ICMC_  
   **Date:** September 24 and October 2, 2024 | **Location:** São Carlos, SP, Brazil
