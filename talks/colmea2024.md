@@ -7,8 +7,7 @@ permalink: /talks/colmea2024
 _IMPA_  
 _Date:_ October 30, 2024 | _Location:_ Rio de Janeiro, RJ, Brazil
 
-**Description:** Esta palestra, apresentada no Colóquio Interinstitucional de Modelos Estocásticos e Aplicações (COLMEA), abordou modelos espectrais em grafos e suas aplicações na detecção de comunidades. 
-
+**Description:** Esta palestra, apresentada no Colóquio Interinstitucional de Modelos Estocásticos e Aplicações (COLMEA), abordou modelos espectrais em grafos e suas aplicações na detecção de comunidades.
 
 ## Video
 
