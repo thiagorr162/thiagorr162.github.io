@@ -40,7 +40,7 @@ Teremos uma avaliação composta por três componentes:
 <!-- - [Introdução](/assets/pdf/aprendizado2024/introdução.pdf) - Autores das notas: Patrícia Garcia e Letícia Sartori -->
 
 - Introdução - Responsáveis pelas notas: Patrícia Garcia e Letícia Sartori
-- [Desigualdade de Hoeffding](/assets/pdf/aprendizado2024/hoeffding.pdf) - Responsáveis pelas notas: Bruno Marcondes e Resende e Felipe Luis Giacomin
+- [Desigualdade de Hoeffding](/assets/pdf/aprendizado2024/hoeffding.pdf) - Responsáveis pelas notas: Bruno Marcondes e Resende e Felipe Luis Giacomini
 
 <br>
 ## Bibliografia sugerida
