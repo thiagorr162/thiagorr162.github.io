@@ -11,8 +11,7 @@ permalink: /teaching/2024-2-aprendizado_estatistico
 | Ter | 16:00 - 18:00 | Lab6 Cina | 14/10/2024 - 01/03/2025 |
 | Qua | 16:00 - 18:00 | Lab6 Cina | 14/10/2024 - 01/03/2025 |
 
-**Horário para dúvidas:** Quintas, das 17:00 às 18:00.  
-[Notas de aula.](https://thiagorr162.github.io/aprendizado-estatistico/)
+**Horário para dúvidas:** Quintas, das 17:00 às 18:00.
 
 Mais informações no nosso Google Classroom.
 
@@ -34,6 +33,14 @@ Teremos uma avaliação composta por três componentes:
 - **Maldição da Dimensão e Dados em Dimensão Alta**: (Cap. 3 de [3]) Estudo de fenômenos em distribuições de vetores aleatórios em espaços de alta dimensão, explorando os desafios e implicações da abundância de espaço em dimensões elevadas, conhecidos como a "maldição da dimensionalidade".
 - **Complexidade de Rademacher e Dimensão VC**: (Cap. 3 de [1]) Introdução à Complexidade de Rademacher e Dimensão VC, com foco em suas aplicações na análise de generalização e capacidade de modelos de aprendizado de máquina.
 - **Aplicações**: (Cap. 5, 6 e 7 de [1] e [2]) Aplicação dos conceitos estudados nos modelos de SVM, métodos de Kernel e Boosting.
+
+<br>
+## Notas de aula
+
+<!-- - [Introdução](/assets/pdf/aprendizado2024/introdução.pdf) - Autores das notas: Patrícia Garcia e Letícia Sartori -->
+
+- Introdução - Responsáveis pelas notas: Patrícia Garcia e Letícia Sartori
+- [Desigualdade de Hoeffding](/assets/pdf/aprendizado2024/hoeffding.pdf) - Responsáveis pelas notas: Bruno Marcondes e Resende e Felipe Luis Giacomin
 
 <br>
 ## Bibliografia sugerida
