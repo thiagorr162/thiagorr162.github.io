@@ -12,3 +12,4 @@ _Date:_ November 25, 2024 | _Location:_ Ribeirão Preto, SP, Brazil
 ### References:
 
 - [More information.](https://danieltiezzi.pro.br/seminars/seminars.html)
+- [Slides](/assets/presentations/personalizedus.pdf)
