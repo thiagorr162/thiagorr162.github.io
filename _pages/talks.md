@@ -9,6 +9,10 @@ nav_order: 6
 
 #### 2024
 
+- **[PersonalizedUS](/talks/personalizedus)**  
+  _Programa de Pós-Graduação do Departamento de Ginecologia e Obstetrícia da FMRP USP_  
+  **Date:** Novembro 25, 2024 | **Location:** Ribeirão Preto, SP, Brazil
+
 - **[Colóquio Interinstitucional de Modelos Estocásticos e Aplicações (COLMEA)](/talks/colmea2024)**  
   _IMPA_  
   **Date:** Outubro 30, 2024 | **Location:** Rio de Janeiro, RJ, Brazil
