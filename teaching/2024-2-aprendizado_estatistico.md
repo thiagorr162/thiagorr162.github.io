@@ -41,8 +41,9 @@ Teremos uma avaliação composta por três componentes:
 
 - Introdução - Responsáveis pelas notas: Patrícia Garcia e Letícia Sartori
 - [Desigualdade de Hoeffding](/assets/pdf/aprendizado2024/hoeffding.pdf) - Responsáveis pelas notas: Bruno Marcondes e Resende e Felipe Luis Giacomini
+- [Desigualdade de McDiarmid](/assets/pdf/aprendizado2024/mcdiarmid.pdf) - Responsáveis pelas notas: Gabriela Ishida e Vagner Santos
+  <br>
 
-<br>
 ## Bibliografia sugerida
 
 2. [Foundations of Machine Learning](https://cs.nyu.edu/~mohri/mlbook/) - M. Mohri, A. Rostamizadeh, A. Talwalkar
