@@ -34,14 +34,14 @@ If you're new to Probability and Statistics, here are some great books to get yo
 - [The Elements of Statistical Learning](https://link.springer.com/book/10.1007/978-0-387-84858-7) - T. Hastie, R. Tibshirani, J. Friedman
 - [Theoretical Statistics: Topics for a Core Course](https://link.springer.com/book/10.1007/978-0-387-93839-4) - R. Keener
 
-### Favorite Papers 😍
+<!-- ### Important Papers 😍 -->
 
-Some of my favorite papers in no particular order.
+<!-- Some of my favorite papers in no particular order. -->
 
-- [A Decision-Theoretic Generalization of On-Line Learning and an Application to Boosting☆](https://www.sciencedirect.com/science/article/pii/S002200009791504X) - Y. Freund, R. E. Shapire
-- [Finding community structure in networks using the eigenvectors of matrices](https://arxiv.org/abs/physics/0605087) - M. E. Newman
-- [Laplacian Eigenmaps for Dimensionality Reduction and Data Representation](https://www2.imm.dtu.dk/projects/manifold/Papers/Laplacian.pdf) - M. Belkin, P. Niyogi
-- [Strong Consistency, Graph Laplacians, and the Stochastic Block Model](https://jmlr.csail.mit.edu/papers/volume22/20-391/20-391.pdf) - S. Deng, S. Ling, T. Strohmer
+<!-- - [A Decision-Theoretic Generalization of On-Line Learning and an Application to Boosting☆](https://www.sciencedirect.com/science/article/pii/S002200009791504X) - Y. Freund, R. E. Shapire -->
+<!-- - [Finding community structure in networks using the eigenvectors of matrices](https://arxiv.org/abs/physics/0605087) - M. E. Newman -->
+<!-- - [Laplacian Eigenmaps for Dimensionality Reduction and Data Representation](https://www2.imm.dtu.dk/projects/manifold/Papers/Laplacian.pdf) - M. Belkin, P. Niyogi -->
+<!-- - [Strong Consistency, Graph Laplacians, and the Stochastic Block Model](https://jmlr.csail.mit.edu/papers/volume22/20-391/20-391.pdf) - S. Deng, S. Ling, T. Strohmer -->
 
 ### Online Material 🌐
 

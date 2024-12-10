@@ -15,8 +15,8 @@ Interested in working with me? First, check out the recruitment poster [here](/a
 
 ### Master
 
-😔
+- Sabrina Teodoro
 
 ### IC
 
-😔
+- 
