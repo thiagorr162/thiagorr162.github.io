@@ -50,4 +50,4 @@ Cool online material
 - [Bayesian Modeling and Computation in Python](https://bayesiancomputationbook.com/welcome.html#)
 - [Causal Inference for The Brave and True](https://matheusfacure.github.io/python-causality-handbook/landing-page.html)
 - [Graph Convolutional Neural Networks](https://mbernste.github.io/posts/gcn/)
-- [The Modern Algorithmic Toolbox](https://web.stanford.edu/class/cs168/
+- [The Modern Algorithmic Toolbox](https://web.stanford.edu/class/cs168/)
