@@ -11,3 +11,4 @@ nav_order: 6
 - **[Minicurso de Machine Learning](https://thiagorr162.github.io/mini_ml)**
 - **[Programação Estatística](https://thiagorr162.github.io/prog-estat)**
 - **[Raspagem de Dados](https://github.com/thiagorr162/web_scraping/blob/main/noticias_senado.ipynb)**
+- **[Álgebra Linear Numérica Aleatória](/assets/pdf/notes/rnla.pdf)**
