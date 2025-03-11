@@ -28,5 +28,6 @@ Em breve.
 
 ## Bibliografia sugerida
 
-1. [An Introduction to Statistical Learning ](https://www.statlearning.com/) - T. Hastie, R. Tibshirani, J. Friedman
-2. [The Elements of Statistical Learning](https://link.springer.com/book/10.1007/978-0-387-84858-7) - G. James, D. Witten, T. Hastie, R. Tibshirani
+1. [An Introduction to Statistical Learning ](https://www.statlearning.com/) - G. James, D. Witten, T. Hastie, R. Tibshirani
+2. [The Elements of Statistical Learning](https://link.springer.com/book/10.1007/978-0-387-84858-7) -  T. Hastie, R. Tibshirani, J. Friedman
+3. [Aprendizado de Máquina: Uma Abordagem Estatística](https://rafaelizbicki.com/ame/) - R. Izbicki, T. M. Santos
