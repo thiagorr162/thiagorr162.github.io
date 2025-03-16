@@ -24,7 +24,7 @@ Teremos duas provas e trabalhos.
 
 ## Notas de aula
 
-Em breve.
+[Material do curso.](https://github.com/thiagorr162/curso_aprendizado/blob/main/material/AprendizadoMaquinas.pdf)
 
 ## Bibliografia sugerida
 

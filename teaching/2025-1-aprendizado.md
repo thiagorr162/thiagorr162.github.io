@@ -17,13 +17,12 @@ Mais informações no nosso Google Classroom.
 
 ## Avaliação
 
-Teremos duas provas e um trabalho.
-Nota final **NF = 0.4P1 + .4P2 + .2T**
+Em breve.
 
 
 ## Notas de aula
 
-Em breve.
+[Material do curso.](https://github.com/thiagorr162/curso_aprendizado/blob/main/material/AprendizadoMaquinas.pdf)
 
 ## Bibliografia sugerida
 
