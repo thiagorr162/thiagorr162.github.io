@@ -8,7 +8,7 @@ nav_order: 6
 ---
 
 - **[Álgebra Linear Numérica Aleatória](/assets/pdf/notes/rnla.pdf)**
-- **[Aprendizado de máquinas](/assets/pdf/notes/aprendizado.pdf)**
+- **[Aprendizado de máquinas](https://github.com/thiagorr162/curso_aprendizado/blob/main/material/AprendizadoMaquinas.pdf)**
 - **[Concentração de Medida](/assets/pdf/notes/concentracao.pdf)**
 <!-- - **[Minicurso de Machine Learning](https://thiagorr162.github.io/mini_ml)** -->
 - **[Programação Estatística](https://thiagorr162.github.io/prog-estat)**
