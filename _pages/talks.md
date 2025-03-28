@@ -6,6 +6,10 @@ description: Academic Talks
 nav: true
 nav_order: 6
 ---
+#### 2025
+- **[Não é só treinar e testar - Matemática do Aprendizado de Máquinas](/talks/legais2025)**  
+  _Instituto de ciências matemáticas e computação, USP_  
+  **Date:** Março 28, 2025 | **Location:** São Carlos, SP, Brazil
 
 #### 2024
 
