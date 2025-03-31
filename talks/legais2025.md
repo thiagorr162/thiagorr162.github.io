@@ -14,3 +14,4 @@ Neste seminário, exploraremos como princípios matemáticos garantem que os mod
 ### References:
 
 - [Slides](/assets/presentations/legais2025.pdf)
+- [Video](https://www.youtube.com/watch?v=Q-zXYCiEoR4)
