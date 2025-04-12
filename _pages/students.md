@@ -16,13 +16,16 @@ Interested in working with me? First, check out the recruitment poster [here](/a
 ### Master
 
 - João Victor Izzi – (current student)
-- Reinaldo Cardoso Anacleto - (current student)
+- Reinaldo Cardoso Anacleto - (current, co-supervised with Daiane Zuanetti)
 - Sabrina Teodoro – (current student)
 
 ### Undergraduate
 
-- Eric Trevelato Costa - (current student)
-- Felipe Luis Giacomini – (current student)
-- Fernando Borges – (current student)
-- Murilo Rejani Franzotti – (current student)
-- Vagner Silva Santos – (current student)
+- Felipe Luis Giacomini - (current)
+- Fernando Borges – (current)
+- Murilo Rejani Franzotti - (current)
+- Eric Trevelato Costa -  (current, co-supervised with Daiane Zuanetti and Edgar Zanotto)
+- Gustavo Laranja Thomaello - (current, co-supervised with Daiane Zuanetti and Edgar Zanotto)
+- Thomaz Yeiden Busnardo Aguena - (current, co-supervised with Daiane Zuanetti and Edgar Zanotto)
+- Lucas Sala Battisti - (current, co-supervised with Rafael Izbicki)
+- Vagner Silva Santos - (current, co-supervised with Rafael Izbicki)
