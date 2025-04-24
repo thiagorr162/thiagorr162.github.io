@@ -17,4 +17,9 @@ selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
 ---
 
-I am an Assistant Professor in the Department of Statistics at the Federal University of São Carlos (UFSCar) in Brazil. I completed my Ph.D. in Mathematics at the Institute for Pure and Applied Mathematics (IMPA) in Rio de Janeiro, focusing on boosting methods and concentration of measure in machine learning. I also earned my M.Sc. and Bachelor's degrees in Mathematics from the Universidade de São Paulo (ICMC-USP).
+I am an Assistant Professor in the Department of Statistics at the Federal University of São Carlos (UFSCar) in Brazil. I received my Ph.D. in Mathematics from the Institute for Pure and Applied Mathematics (IMPA), with research focused on boosting methods and concentration of measure in machine learning. I also hold a Master’s and a Bachelor’s degree in Mathematics from the University of São Paulo (ICMC-USP).
+
+I am part of the [Statistical Machine Learning Lab (SMALL-UFSCar)](https://small-research.github.io/website/), where we explore statistical and machine learning methods to address real-world problems across different areas.
+
+![SMALL-UFSCar](assets/img/small.png)
+
