@@ -21,5 +21,4 @@ I am an Assistant Professor in the Department of Statistics at the Federal Unive
 
 I am part of the [Statistical Machine Learning Lab (SMALL-UFSCar)](https://small-research.github.io/website/), where we explore statistical and machine learning methods to address real-world problems across different areas.
 
-![SMALL-UFSCar](assets/img/small.png)
-
+<img src="assets/img/small.png" alt="SMALL-UFSCar" width="300"/>
