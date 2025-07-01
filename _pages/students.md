@@ -21,17 +21,18 @@ Interested in working with me? First, check out the recruitment poster [here](/a
 
 - João Victor Izzi  
 - Reinaldo Cardoso Anacleto (co-supervised with Daiane Zuanetti)  
+- Vitor Mello
 
 ---
 
 ## Undergraduate
 
-- Felipe Luis Giacomini  
-- Murilo Rejani Franzotti  
 - Eric Trevelato Costa (co-supervised with Daiane Zuanetti and Edgar Zanotto)  
+- Felipe Luis Giacomini  
 - Gustavo Laranja Thomaello (co-supervised with Daiane Zuanetti and Edgar Zanotto)  
-- Thomaz Yeiden Busnardo Aguena (co-supervised with Daiane Zuanetti and Edgar Zanotto)  
 - Lucas Sala Battisti (co-supervised with Rafael Izbicki)  
+- Murilo Rejani Franzotti  
+- Thomaz Yeiden Busnardo Aguena (co-supervised with Daiane Zuanetti and Edgar Zanotto)  
 
 ---
 
