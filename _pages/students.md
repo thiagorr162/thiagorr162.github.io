@@ -9,23 +9,33 @@ nav_order: 6
 
 Interested in working with me? First, check out the recruitment poster [here](/assets/img/math_stats_recruitment_poster-original.png "by free GPT").
 
-### PhD
+---
+
+## PhD
 
 😔
 
-### Master
+---
 
-- João Victor Izzi – (current student)
-- Reinaldo Cardoso Anacleto - (current, co-supervised with Daiane Zuanetti)
-- Sabrina Teodoro – (current student)
+## Master
 
-### Undergraduate
+- João Victor Izzi  
+- Reinaldo Cardoso Anacleto (co-supervised with Daiane Zuanetti)  
 
-- Felipe Luis Giacomini - (current)
-- Fernando Borges – (current)
-- Murilo Rejani Franzotti - (current)
-- Eric Trevelato Costa -  (current, co-supervised with Daiane Zuanetti and Edgar Zanotto)
-- Gustavo Laranja Thomaello - (current, co-supervised with Daiane Zuanetti and Edgar Zanotto)
-- Thomaz Yeiden Busnardo Aguena - (current, co-supervised with Daiane Zuanetti and Edgar Zanotto)
-- Lucas Sala Battisti - (current, co-supervised with Rafael Izbicki)
-- Vagner Silva Santos - (current, co-supervised with Rafael Izbicki)
+---
+
+## Undergraduate
+
+- Felipe Luis Giacomini  
+- Murilo Rejani Franzotti  
+- Eric Trevelato Costa (co-supervised with Daiane Zuanetti and Edgar Zanotto)  
+- Gustavo Laranja Thomaello (co-supervised with Daiane Zuanetti and Edgar Zanotto)  
+- Thomaz Yeiden Busnardo Aguena (co-supervised with Daiane Zuanetti and Edgar Zanotto)  
+- Lucas Sala Battisti (co-supervised with Rafael Izbicki)  
+
+---
+
+## Past Students
+
+- **Fernando Borges** (Undergraduate) — *Classificação de caracteres japoneses cursivos utilizando modelos de aprendizado profundo* (jun/2025)  
+- **Vagner Silva Santos** (Undergraduate) — *Técnicas de quantificação de incerteza em redes neurais para densidades condicionais por meio de modelos de misturas* (jun/2025)
