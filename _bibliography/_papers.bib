@@ -1,0 +1,166 @@
+---
+---
+@misc{cabezas2025epistemicuncertaintyconformalscores,
+      title={Epistemic Uncertainty in Conformal Scores: A Unified Approach}, 
+      author={Luben M. C. Cabezas and Vagner S. Santos and Thiago R. Ramos and Rafael Izbicki},
+      year={2025},
+      eprint={2502.06995},
+      preview={epic.png},
+      archivePrefix={arXiv},
+      primaryClass={stat.ML},
+      abstract={Conformal prediction methods create prediction bands with distribution-free guarantees but do not explicitly capture epistemic uncertainty, which can lead to overconfident predictions in data-sparse regions. Although recent conformal scores have been developed to address this limitation, they are typically designed for specific tasks, such as regression or quantile regression. Moreover, they rely on particular modeling choices for epistemic uncertainty, restricting their applicability. We introduce EPICSCORE, a model-agnostic approach that enhances any conformal score by explicitly integrating epistemic uncertainty. Leveraging Bayesian techniques such as Gaussian Processes, Monte Carlo Dropout, or Bayesian Additive Regression Trees, EPICSCORE adaptively expands predictive intervals in regions with limited data while maintaining compact intervals where data is abundant. As with any conformal method, it preserves finite-sample marginal coverage. Additionally, it also achieves asymptotic conditional coverage. Experiments demonstrate its good performance compared to existing methods. Designed for compatibility with any Bayesian model, but equipped with distribution-free guarantees, EPICSCORE provides a general-purpose framework for uncertainty quantification in prediction problems.},
+      bibtex_show={true},
+      html={https://arxiv.org/abs/2502.06995}, 
+      pdf={https://arxiv.org/pdf/2502.06995},
+
+}
+@article{JMLR:v25:23-1553,
+  author  = {Roberto I. Oliveira and Paulo Orenstein and Thiago Ramos and Jo{{\~a}}o Vitor Romano},
+  title   = {Split Conformal Prediction and Non-Exchangeable Data},
+  journal = {Journal of Machine Learning Research},
+  year    = {2024},
+  volume  = {25},
+  number  = {225},
+  pages   = {1--38},
+  html     = {http://jmlr.org/papers/v25/23-1553.html},
+  preview={split_conformal_2024.png},
+  pdf = {https://jmlr.org/papers/volume25/23-1553/23-1553.pdf},
+  selected = {true},
+  abstract={ Split conformal prediction (CP) is arguably the most popular CP method for uncertainty quantification, enjoying both academic interest and widespread deployment. However, the original theoretical analysis of split CP makes the crucial assumption of data exchangeability, which hinders many real-world applications. In this paper, we present a novel theoretical framework based on concentration inequalities and decoupling properties of the data, proving that split CP remains valid for many non-exchangeable processes by adding a small coverage penalty. Through experiments with both real and synthetic data, we show that our theoretical results translate to good empirical performance under non-exchangeability, e.g., for time series and spatiotemporal data. Compared to recent conformal algorithms designed to counter specific exchangeability violations, we show that split CP is competitive in terms of coverage and interval size, with the benefit of being extremely simple and orders of magnitude faster than alternatives. },
+  bibtex_show={true},
+}
+
+@misc{cabezas2024distributionfreecalibrationstatisticalconfidence,
+      title={Distribution-Free Calibration of Statistical Confidence Sets}, 
+      author={Luben M. C. Cabezas and Guilherme P. Soares and Thiago R. Ramos and Rafael B. Stern and Rafael Izbicki},
+      year={2024},
+      eprint={2411.19368},
+      archivePrefix={arXiv},
+      pdf={https://arxiv.org/pdf/2411.19368},
+      primaryClass={stat.ME},
+      html={https://arxiv.org/abs/2411.19368}, 
+      bibtex_show={true},
+      preview={trust.png},
+      abstract={     Constructing valid confidence sets is a crucial task in statistical inference, yet traditional methods often face challenges when dealing with complex models or limited observed sample sizes. These challenges are frequently encountered in modern applications, such as Likelihood-Free Inference (LFI). In these settings, confidence sets may fail to maintain a confidence level close to the nominal value. In this paper, we introduce two novel methods, TRUST and TRUST++, for calibrating confidence sets to achieve distribution-free conditional coverage. These methods rely entirely on simulated data from the statistical model to perform calibration. Leveraging insights from conformal prediction techniques adapted to the statistical inference context, our methods ensure both finite-sample local coverage and asymptotic conditional coverage as the number of simulations increases, even if n is small. They effectively handle nuisance parameters and provide computationally efficient uncertainty quantification for the estimated confidence sets. This allows users to assess whether additional simulations are necessary for robust inference. Through theoretical analysis and experiments on models with both tractable and intractable likelihoods, we demonstrate that our methods outperform existing approaches, particularly in small-sample regimes. This work bridges the gap between conformal prediction and statistical inference, offering practical tools for constructing valid confidence sets in complex models.},
+}
+
+@InProceedings{pmlr-v238-ramos24a,
+  title = 	 {BlockBoost: Scalable and Efficient Blocking through Boosting},
+  author =       {Ramos, Thiago and Loro Schuller, Rodrigo and Akira Okuno, Alex and Nissenbaum, Lucas and I Oliveira, Roberto and Orenstein, Paulo},
+  booktitle = 	 {Proceedings of The 27th International Conference on Artificial Intelligence and Statistics},
+  pages = 	 {2575--2583},
+  year = 	 {2024},
+  editor = 	 {Dasgupta, Sanjoy and Mandt, Stephan and Li, Yingzhen},
+  volume = 	 {238},
+  series = 	 {Proceedings of Machine Learning Research},
+  month = 	 {02--04 May},
+  publisher =    {PMLR},
+  preview={blockboost.png},
+  pdf = 	 {https://proceedings.mlr.press/v238/ramos24a/ramos24a.pdf},
+  html = 	 {https://proceedings.mlr.press/v238/ramos24a.html},
+  abstract = 	 {As datasets grow larger, matching and merging entries from different databases has become a costly task in modern data pipelines. To avoid expensive comparisons between entries, blocking similar items is a popular preprocessing step. In this paper, we introduce BlockBoost, a novel boosting-based method that generates compact binary hash codes for database entries, through which blocking can be performed efficiently. The algorithm is fast and scalable, resulting in computational costs that are orders of magnitude lower than current benchmarks. Unlike existing alternatives, BlockBoost comes with associated feature importance measures for interpretability, and possesses strong theoretical guarantees, including lower bounds on critical performance metrics like recall and reduction ratio. Finally, we show that BlockBoost delivers great empirical results, outperforming state-of-the-art blocking benchmarks in terms of both performance metrics and computational cost.},
+  bibtex_show={true},
+  selected={true},
+}
+
+@misc{fröhlich2024personalizedusinterpretablebreastcancer,
+      title={PersonalizedUS: Interpretable Breast Cancer Risk Assessment with Local Coverage Uncertainty Quantification}, 
+      author={Alek Fröhlich and Thiago Ramos and Gustavo Cabello and Isabela Buzatto and Rafael Izbicki and Daniel Tiezzi},
+      year={2024},
+      eprint={2408.15458},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2408.15458}, 
+      html={https://arxiv.org/abs/2408.15458},
+      pdf={https://arxiv.org/pdf/2408.15458},
+      bibtex_show={true},
+      preview={personalizedus.png},
+}
+
+
+
+
+
+@InProceedings{10.1007/978-3-031-79035-5_26,
+author="Hassan, Waqar
+and Cabral, Marvin Mendes
+and Ramos, Thiago Rodrigo
+and Filho, Antonio Castelo
+and Nonato, Luis Gustavo",
+editor="Paes, Aline
+and Verri, Filipe A. N.",
+title="Modeling and Predicting Crimes in the City of S{\~a}o Paulo Using Graph Neural Networks",
+booktitle="Intelligent Systems",
+year="2025",
+publisher="Springer Nature Switzerland",
+preview={evolve.png},
+address="Cham",
+html={https://link.springer.com/chapter/10.1007/978-3-031-79035-5_26},
+bibtex_show={true},
+pages="372--386",
+abstract="Crime prediction is a critical research area for enhancing public safety and optimizing law enforcement resource allocation, and machine learning techniques have had a significant impact in this field. Traditional machine learning models have long struggled to capture complex crime patterns, primarily due to the intricate interdependence of spatial and temporal data. However, recent advancements in machine learning, particularly with Graph Neural Networks (GNNs), offer a new perspective. GNNs have demonstrated remarkable success in various applications and they can also play a significant role in crime analysis and prediction. Therefore, in this work, we explore such a potential by examining two distinct spatiotemporal GNN architectures, namely Dynamic Self-Attention Network (DySAT) and Evolving Graph Convolutional Network (EvolveGCN), assessing and comparing their effectiveness for crime prediction. Moreover, we propose a data modeling framework that integrates crime, street map graphs, and urban data, which is fundamental to properly train the GNN models. As far as we know, there is no consolidated methodology to integrate those three modalities of data, being a relevant contribution of this work. Our findings underscore the effectiveness of GNNs in crime prediction tasks, offering valuable insights for researchers and practitioners in the field of crime prevention and public safety enhancement.",
+isbn="978-3-031-79035-5"
+}
+
+
+
+
+@article{Csillag_Monteiro Paes_Ramos_Romano_Schuller_Seixas_Oliveira_Orenstein_2025,
+title={AmnioML: Amniotic Fluid Segmentation and Volume Prediction with Uncertainty Quantification},
+volume={37},
+html={https://ojs.aaai.org/index.php/AAAI/article/view/26837},
+DOI={10.1609/aaai.v37i13.26837},
+abstract={Accurately predicting the volume of amniotic fluid is fundamental to assessing pregnancy risks, though the task usually requires many hours of laborious work by medical experts. In this paper, we present AmnioML, a machine learning solution that leverages deep learning and conformal prediction to output fast and accurate volume estimates and segmentation masks from fetal MRIs with Dice coefficient over 0.9. Also, we make available a novel, curated dataset for fetal MRIs with 853 exams and benchmark the performance of many recent deep learning architectures. In addition, we introduce a conformal prediction tool that yields narrow predictive intervals with theoretically guaranteed coverage, thus aiding doctors in detecting pregnancy risks and saving lives. A successful case study of AmnioML deployed in a medical setting is also reported. Real-world clinical benefits include up to 20x segmentation time reduction, with most segmentations deemed by doctors as not needing any further manual refinement. Furthermore, AmnioML’s volume predictions were found to be highly accurate in practice, with mean absolute error below 56mL and tight predictive intervals, showcasing its impact in reducing pregnancy complications.}, 
+number={13}, 
+journal={Proceedings of the AAAI Conference on Artificial Intelligence}, 
+author={Csillag, Daniel and Monteiro Paes, Lucas and Ramos, Thiago and Romano, João Vitor and Schuller, Rodrigo and Seixas, Roberto B. and Oliveira, Roberto I. and Orenstein, Paulo},
+year={2023}, 
+month={Jul.},
+pages={15494-15502},
+award_name={Deployed application award},
+award={Innovative Application Award: Recognizes deployed AI applications with measurable benefits, judged on the problem description, innovative use of AI, application impact, and lessons learned. Awarded to papers showcasing real-world AI applications in production.},
+preview={amnioml.png},
+bibtex_show={true},
+}
+
+
+
+
+@misc{oliveira2022splitconformalpredictiondependent,
+      title={Split Conformal Prediction for Dependent Data}, 
+      author={Roberto I. Oliveira and Paulo Orenstein and Thiago Ramos and João Vitor Romano},
+      year={2022},
+      eprint={2203.15885},
+      archivePrefix={arXiv},
+      primaryClass={math.ST},
+      html={https://arxiv.org/abs/2203.15885}, 
+      pdf={https://arxiv.org/pdf/2203.15885},
+      bibtex_show={true},
+      preview={split_conformal_2022.png},
+}
+
+
+@InProceedings{pmlr-v151-csillag22a,
+  title = 	 { ExactBoost: Directly Boosting the Margin in Combinatorial and Non-decomposable Metrics },
+  author =       {Csillag, Daniel and Piazza, Carolina and Ramos, Thiago and Vitor Romano, Jo\~ao and Oliveira, Roberto I. and Orenstein, Paulo},
+  booktitle = 	 {Proceedings of The 25th International Conference on Artificial Intelligence and Statistics},
+  pages = 	 {9017--9049},
+  year = 	 {2022},
+  editor = 	 {Camps-Valls, Gustau and Ruiz, Francisco J. R. and Valera, Isabel},
+  volume = 	 {151},
+  series = 	 {Proceedings of Machine Learning Research},
+  month = 	 {28--30 Mar},
+  publisher =    {PMLR},
+  pdf = 	 {https://proceedings.mlr.press/v151/csillag22a/csillag22a.pdf},
+  preview={exactboost.png},
+  html = 	 {https://proceedings.mlr.press/v151/csillag22a.html},
+  abstract = 	 { Many classification algorithms require the use of surrogate losses when the intended loss function is combinatorial or non-decomposable. This paper introduces a fast and exact stagewise optimization algorithm, dubbed ExactBoost, that boosts stumps to the actual loss function. By developing a novel extension of margin theory to the non-decomposable setting, it is possible to provably bound the generalization error of ExactBoost for many important metrics with different levels of non-decomposability. Through extensive examples, it is shown that such theoretical guarantees translate to competitive empirical performance. In particular, when used as an ensembler, ExactBoost is able to significantly outperform other surrogate-based and exact algorithms available. },
+  bibtex_show={true},
+}
+
+
+
+
+
+
+
