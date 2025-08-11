@@ -16,5 +16,5 @@ Teremos duas provas, cada uma valendo 35%. Um trabalho valendo 15% e atividades 
 ## Notas de aula
 
 
-- **[Simulação estocástica](/assets/pdf/notes/metodosComputacionais.pdf)**
+- **[Simulação estocástica](https://github.com/thiagorr162/metodos_computacionais)**
 
