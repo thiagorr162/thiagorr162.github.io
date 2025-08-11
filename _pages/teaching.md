@@ -9,6 +9,7 @@ nav_order: 6
 
 ##### 2025
 
+- **[Simulação Estocástica](/teaching/2025-2-simulacao)**  
 - **[Mineração de dados](/teaching/2025-1-mineracao)**  
 - **[Aprendizado de máquinas - Pós graduação](/teaching/2025-1-aprendizado)**  
 
