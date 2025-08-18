@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Simulação Estocástica"
+title: "Simulação Estocástica/Programação Estatística"
 permalink: /teaching/2025-2-simulacao
 ---
 
