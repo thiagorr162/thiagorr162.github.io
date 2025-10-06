@@ -9,12 +9,13 @@ nav_order: 6
 
 ##### 2025
 
-- **[Simulação Estocástica](/teaching/2025-2-simulacao)**  
-- **[Mineração de dados](/teaching/2025-1-mineracao)**  
-- **[Aprendizado de máquinas - Pós graduação](/teaching/2025-1-aprendizado)**  
+- **[Programação Estatística](https://github.com/thiagorr162/metodos_computacionais)**  
+- **[Simulação Estocástica - PIPGEs](https://github.com/thiagorr162/metodos_computacionais)**  
+- **[Mineração de dados](https://github.com/thiagorr162/curso_aprendizado)**  
+- **[Aprendizado de máquinas - PIPGEs](https://github.com/thiagorr162/curso_aprendizado)**  
 
 ##### 2024
 
-- **[Aprendizado estatístico](/teaching/2024-2-aprendizado_estatistico)**  
-- **[Programação estatística](/teaching/2024-2-programacao_estatistica)**  
-- **[Minicurso de machine learning](/teaching/2024-2-mini_ml)**  
+- **[Aprendizado estatístico](https://github.com/thiagorr162/curso_aprendizado)**  
+- **[Programação estatística](https://github.com/thiagorr162/metodos_computacionais)**  
+- **[Minicurso de machine learning](https://github.com/thiagorr162/curso_aprendizado)**  
