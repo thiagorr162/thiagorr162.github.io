@@ -14,3 +14,4 @@ nav_order: 6
 - **[Simulação Estocástica](https://github.com/thiagorr162/metodos_computacionais)**
 
 **Research Notes**
+- Importance Sampling
