@@ -30,7 +30,6 @@ Interested in working with me? First, check out the recruitment poster [here](/a
 - Eric Trevelato Costa (co-supervised with Daiane Zuanetti and Edgar Zanotto)  
 - Felipe Luis Giacomini  
 - Gustavo Laranja Thomaello (co-supervised with Daiane Zuanetti and Edgar Zanotto)  
-- Lucas Sala Battisti (co-supervised with Rafael Izbicki)  
 - Murilo Rejani Franzotti  
 - Thomaz Yeiden Busnardo Aguena (co-supervised with Daiane Zuanetti and Edgar Zanotto)  
 
