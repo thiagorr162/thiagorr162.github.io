@@ -2,37 +2,89 @@
 layout: page
 permalink: /talks/
 title: talks
-description: Academic Talks
+description: Academic presentations and invited talks
 nav: true
 nav_order: 6
 ---
-#### 2025
-- **[Não é só treinar e testar - Matemática do Aprendizado de Máquinas](/talks/legais2025)**  
-  _Instituto de ciências matemáticas e computação, USP_  
-  **Date:** Março 28, 2025 | **Location:** São Carlos, SP, Brazil
 
-#### 2024
+## 2025
 
-- **[PersonalizedUS](/talks/personalizedus)**  
-  _Programa de Pós-Graduação do Departamento de Ginecologia e Obstetrícia da FMRP USP_  
-  **Date:** Novembro 25, 2024 | **Location:** Ribeirão Preto, SP, Brazil
+- **Talk SEST — Thiago Rodrigo Ramos**  
+  _Semana da Estatística (SEST), Departamento de Estatística — UFSCar_  
+  📅 Outubro 13, 2025 — São Carlos, SP  
 
-- **[Colóquio Interinstitucional de Modelos Estocásticos e Aplicações (COLMEA)](/talks/colmea2024)**  
-  _IMPA_  
-  **Date:** Outubro 30, 2024 | **Location:** Rio de Janeiro, RJ, Brazil
+  Apresentação realizada durante a Semana da Estatística da UFSCar, abordando temas atuais em aprendizado de máquina e estatística moderna.  
 
-- **[Graph Neural Networks for Time Series](/talks/gnn4ts)**  
-  _University of São Paulo, ICMC_  
-  **Date:** September 24 and October 2, 2024 | **Location:** São Carlos, SP, Brazil
+  [Vídeo no YouTube](https://www.youtube.com/watch?v=DMJlWZN8Wg8)
 
-- **[BlockBoost: Similarity Learning via Boosting](/talks/blockboost-pipges)**  
-  _Department of Statistics at the Federal University of São Carlos, PIPGES_  
-  **Date:** July 5, 2024 | **Location:** São Carlos, SP, Brazil
+---
 
-- **[AmnioML: amniotic fluid segmentation and volume prediction with uncertainty quantification](/talks/amnioml-alek)**  
-  _Lab TDS, Online_  
-  **Date:** July 10, 2024 | **Location:** São Carlos, SP, Brazil
+- **Não é só treinar e testar — Matemática do Aprendizado de Máquinas**  
+  _Instituto de Ciências Matemáticas e de Computação (ICMC/USP)_  
+  📅 Março 28, 2025 — São Carlos, SP  
 
-- **[Da matemática à estatística: minha jornada acadêmica](/talks/intro_estat_cris)**  
-  _Department of Statistics at the Federal University of São Carlos_  
-  **Date:** August 6, 2024 | **Location:** São Carlos, SP, Brazil
+  Discussão sobre os fundamentos matemáticos que garantem a confiabilidade e generalização dos modelos de aprendizado de máquina.  
+
+  [Slides](https://thiagorramos.github.io/assets/presentations/legais2025.pdf) | [Vídeo](https://www.youtube.com/watch?v=Q-zXYCiEoR4)
+
+---
+
+## 2024
+
+- **PersonalizedUS**  
+  _Programa de Pós-Graduação em Ginecologia e Obstetrícia — FMRP/USP_  
+  📅 Novembro 25, 2024 — Ribeirão Preto, SP  
+
+  Seminário sobre aplicações recentes de aprendizado de máquina em medicina, com participação de Rafael Izbicki, Thiago R. Ramos e Luben M. C. Cabezas.  
+
+  [Slides](https://thiagorramos.github.io/assets/presentations/personalizedus.pdf) | [Mais informações](https://danieltiezzi.pro.br/seminars/seminars.html)
+
+---
+
+- **Modelos Espectrais em Grafos e Aplicações para Detecção de Comunidades**  
+  _IMPA — COLMEA 2024_  
+  📅 Outubro 30, 2024 — Rio de Janeiro, RJ  
+
+  Palestra sobre modelos espectrais em grafos e suas aplicações na detecção de comunidades.  
+
+  [Vídeo no YouTube](https://www.youtube.com/watch?v=B9439Z_7DiU)
+
+---
+
+- **Graph Neural Networks for Time Series**  
+  _University of São Paulo (ICMC)_  
+  📅 Setembro 24 e Outubro 2, 2024 — São Carlos, SP  
+
+  Introdução às Graph Neural Networks aplicadas à previsão de séries temporais.  
+
+  [Repositório no GitHub](https://github.com/thiagorr162/gnns4ts)
+
+---
+
+- **Da Matemática à Estatística: minha jornada acadêmica**  
+  _Departamento de Estatística — UFSCar_  
+  📅 Agosto 6, 2024 — São Carlos, SP  
+
+  Breve relato sobre trajetória acadêmica e transição entre áreas.  
+
+  [Slides](https://thiagorramos.github.io/assets/presentations/jornada_academica.pdf)
+
+---
+
+- **AmnioML — Amniotic Fluid Segmentation and Volume Prediction with Uncertainty Quantification**  
+  _Lab TDS (Online)_  
+  📅 Julho 10, 2024 — São Carlos, SP  
+
+  Apresentação do AmnioML, um modelo de deep learning com conformal prediction para estimar volume de fluido amniótico com incerteza quantificada.  
+
+  [Slides](https://thiagorramos.github.io/assets/presentations/amnioML-alek-2024.pdf) | [Paper (AAAI)](https://ojs.aaai.org/index.php/AAAI/article/view/26837)
+
+---
+
+- **BlockBoost — Similarity Learning via Boosting**  
+  _Departamento de Estatística — UFSCar / PIPGEs_  
+  📅 Julho 5, 2024 — São Carlos, SP  
+
+  Método baseado em boosting para criação eficiente de blocos de itens similares em bases de dados extensas.  
+
+  [Slides](https://thiagorramos.github.io/assets/presentations/pipge_2024.pdf)
