@@ -9,8 +9,10 @@ profile:
   image: prof_pic.jpg
   image_circular: false # crops the image to make it circular
   more_info: >
-    <p>Department of Statistics<br>UFSCar</p>
+    <p>Department of Statistics</p>
+    <p>Federal University of São Carlos</p>
     <p>São Carlos, SP-Brazil</p>
+    <p>thiagorr[at]ufscar[dot]br</p>
 
 news: true # includes a list of news items
 selected_papers: true # includes a list of papers marked as "selected={true}"
@@ -21,4 +23,9 @@ I am an Assistant Professor in the Department of Statistics at the Federal Unive
 
 I am part of the [Statistical Machine Learning Lab (SMALL-UFSCar)](https://small-research.github.io/website/), where we explore statistical and machine learning methods to address real-world problems across different areas.
 
-<img src="assets/img/small.png" alt="SMALL-UFSCar" width="300"/>
+<a href="https://small-research.github.io/website/">
+  <img src="assets/img/small.png" alt="SMALL-UFSCar" width="300"/>
+</a>
+
+
+
