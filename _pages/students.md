@@ -28,14 +28,16 @@ Interested in working with me? First, check out the recruitment poster [here](/a
 ## Undergraduate
 
 - Eric Trevelato Costa (co-supervised with Daiane Zuanetti and Edgar Zanotto)  
-- Felipe Luis Giacomini  
 - Gustavo Laranja Thomaello (co-supervised with Daiane Zuanetti and Edgar Zanotto)  
-- Murilo Rejani Franzotti  
 - Thomaz Yeiden Busnardo Aguena (co-supervised with Daiane Zuanetti and Edgar Zanotto)  
 
 ---
 
-## Past Students
+## Former Students
 
-- **Fernando Borges** (Undergraduate) — *Classificação de caracteres japoneses cursivos utilizando modelos de aprendizado profundo* (jun/2025)  
-- **Vagner Silva Santos** (Undergraduate) — *Técnicas de quantificação de incerteza em redes neurais para densidades condicionais por meio de modelos de misturas* (jun/2025)
+
+**2025:**
+- Fernando Borges (Undergraduate)
+- Vagner Silva Santos (Undergraduate)
+- Felipe Luis Giacomini (Undergraduate)
+- Murilo Rejani Franzotti (Undergraduate) 
