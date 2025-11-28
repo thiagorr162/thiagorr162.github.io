@@ -9,6 +9,15 @@ nav_order: 6
 
 ## 2025
 
+- **Difusão: Um relato honesto do que acho que sei — Thiago Rodrigo Ramos**  
+  _Departamento de Estatística — UFSCar / PIPGEs_  
+  📅 Novembro 28, 2025 — São Carlos, SP  
+
+  Apresentação realizada no ciclo de seminários do PIPGEs
+
+  [Slides](https://thiagorramos.github.io/assets/presentations/pipges_difusao.pdf)
+
+---
 - **Talk SEST — Thiago Rodrigo Ramos**  
   _Semana da Estatística (SEST), Departamento de Estatística — UFSCar_  
   📅 Outubro 13, 2025 — São Carlos, SP  
