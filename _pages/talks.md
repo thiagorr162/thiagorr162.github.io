@@ -15,7 +15,7 @@ nav_order: 6
 
   Apresentação realizada no ciclo de seminários do PIPGEs
 
-  [Slides](https://thiagorramos.github.io/assets/presentations/pipges_difusao.pdf)
+  [Slides](../assets/presentations/pipges_difusao.pdf)
 
 ---
 - **Talk SEST — Thiago Rodrigo Ramos**  
@@ -34,7 +34,7 @@ nav_order: 6
 
   Discussão sobre os fundamentos matemáticos que garantem a confiabilidade e generalização dos modelos de aprendizado de máquina.  
 
-  [Slides](https://thiagorramos.github.io/assets/presentations/legais2025.pdf) | [Vídeo](https://www.youtube.com/watch?v=Q-zXYCiEoR4)
+  [Slides](../assets/presentations/legais2025.pdf) | [Vídeo](https://www.youtube.com/watch?v=Q-zXYCiEoR4)
 
 ---
 
@@ -46,7 +46,7 @@ nav_order: 6
 
   Seminário sobre aplicações recentes de aprendizado de máquina em medicina, com participação de Rafael Izbicki, Thiago R. Ramos e Luben M. C. Cabezas.  
 
-  [Slides](https://thiagorramos.github.io/assets/presentations/personalizedus.pdf) | [Mais informações](https://danieltiezzi.pro.br/seminars/seminars.html)
+  [Slides](../assets/presentations/personalizedus.pdf) | [Mais informações](https://danieltiezzi.pro.br/seminars/seminars.html)
 
 ---
 
@@ -76,7 +76,7 @@ nav_order: 6
 
   Breve relato sobre trajetória acadêmica e transição entre áreas.  
 
-  [Slides](https://thiagorramos.github.io/assets/presentations/jornada_academica.pdf)
+  [Slides](../assets/presentations/jornada_academica.pdf)
 
 ---
 
@@ -86,7 +86,7 @@ nav_order: 6
 
   Apresentação do AmnioML, um modelo de deep learning com conformal prediction para estimar volume de fluido amniótico com incerteza quantificada.  
 
-  [Slides](https://thiagorramos.github.io/assets/presentations/amnioML-alek-2024.pdf) | [Paper (AAAI)](https://ojs.aaai.org/index.php/AAAI/article/view/26837)
+  [Slides](../assets/presentations/amnioML-alek-2024.pdf) | [Paper (AAAI)](https://ojs.aaai.org/index.php/AAAI/article/view/26837)
 
 ---
 
@@ -96,4 +96,4 @@ nav_order: 6
 
   Método baseado em boosting para criação eficiente de blocos de itens similares em bases de dados extensas.  
 
-  [Slides](https://thiagorramos.github.io/assets/presentations/pipge_2024.pdf)
+  [Slides](../assets/presentations/pipge_2024.pdf)
