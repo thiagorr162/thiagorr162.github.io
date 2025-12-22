@@ -21,7 +21,6 @@ Interested in working with me? First, check out the recruitment poster [here](/a
 
 - João Victor Izzi  
 - Reinaldo Cardoso Anacleto (co-supervised with Daiane Zuanetti)  
-- Vitor Mello
 
 ---
 
