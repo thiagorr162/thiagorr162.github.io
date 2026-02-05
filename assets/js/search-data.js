@@ -95,6 +95,13 @@ ninja.data = [{
           window.open("https://orcid.org/0000-0001-6271-7099", "_blank");
         },
       },{
+        id: 'social-researchgate',
+        title: 'ResearchGate',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://www.researchgate.net/profile/https://www.researchgate.net/profile/Thiago-Ramos-22?ev=hdr_xprf/", "_blank");
+        },
+      },{
         id: 'social-scholar',
         title: 'Google Scholar',
         section: 'Socials',
