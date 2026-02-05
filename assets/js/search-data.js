@@ -109,13 +109,6 @@ ninja.data = [{
           window.open("https://scholar.google.com/citations?user=exPUOy4AAAAJ", "_blank");
         },
       },{
-        id: 'social-semanticscholar',
-        title: 'Semantic Scholar',
-        section: 'Socials',
-        handler: () => {
-          window.open("https://www.semanticscholar.org/author/Thiago-Rodrigo-Ramos/2055918287", "_blank");
-        },
-      },{
         id: 'social-github',
         title: 'GitHub',
         section: 'Socials',
@@ -128,13 +121,6 @@ ninja.data = [{
         section: 'Socials',
         handler: () => {
           window.open("https://www.linkedin.com/in/thiago-rodrigo-ramos-91aa35159", "_blank");
-        },
-      },{
-        id: 'social-dblp',
-        title: 'DBLP',
-        section: 'Socials',
-        handler: () => {
-          window.open("https://dblp.org/pid/320/6908.html", "_blank");
         },
       },{
         id: 'social-lattes',
