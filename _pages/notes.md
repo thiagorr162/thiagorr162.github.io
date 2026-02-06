@@ -8,10 +8,10 @@ nav_order: 6
 
 **Lecture Notes**
 
-- **[Aprendizado de máquinas](https://github.com/thiagorr162/curso_aprendizado/blob/main/material/AprendizadoMaquinas.pdf)**
-- **[Concentração de Medida](/assets/pdf/notes/concentracao.pdf)**
-- **[Raspagem de Dados](https://github.com/thiagorr162/web_scraping/blob/main/noticias_senado.ipynb)**
-- **[Simulação Estocástica](https://zenodo.org/records/17585377)**
+
+- **Aprendizado de Máquinas:** [PDF](https://thiagorr162.github.io/assets/pdf/notes/AprendizadoMaquinas.pdf), [Github](https://github.com/thiagorr162/curso_aprendizado).
+- **Raspagem de Dados:**  [Github](https://github.com/thiagorr162/web_scraping).
+- **Simulação Estocástica:** [PDF](https://thiagorr162.github.io/assets/pdf/notes/metodosComputacionais.pdf), [Zenodo](https://zenodo.org/records/17585377), [Github](https://github.com/thiagorr162/metodos_computacionais).
 
 **Research Notes**
-- **[Exponential Tilting, Concentration, and Convex Duality](/assets/pdf/notes/tilted.pdf)**
+- **Exponential Tilting, Concentration, and Convex Duality:** [PDF](https://thiagorr162.github.io/assets/pdf/notes/tilted.pdf).
