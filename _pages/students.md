@@ -36,6 +36,7 @@ Interested in working with me? First, check out the recruitment poster [here](/a
 
 
 **2025:**
+- Raphael Rodrigues Coelho (Master Degree - co-supervised with Roberto I. Oliveira)
 - Fernando Borges (Undergraduate)
 - Vagner Silva Santos (Undergraduate)
 - Felipe Luis Giacomini (Undergraduate)
