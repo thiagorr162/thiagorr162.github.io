@@ -7,6 +7,16 @@ nav: true
 nav_order: 6
 ---
 
+## 2026
+
+- **The Concentration Inequalities Survival Kit — Machine Learning Edition**  
+  _Workshop on Probabilistic and Statistical Methods (WPSM) — Joint Graduate Program in Statistics UFSCar/USP (PIPGEs)_  
+  📅 February 26, 2026 — São Carlos, SP  
+
+  Talk presented at the **Workshop on Probabilistic and Statistical Methods (WPSM)**, a meeting organized by the **Joint Graduate Program in Statistics UFSCar/USP (PIPGEs, São Carlos, SP, Brazil)** with the aim of discussing new developments in **Probability, Statistics**, and their applications.
+
+  [Slides](../assets/presentations/wpsm2026.pdf) | [Event website](https://wpsm.icmc.usp.br/)
+
 ## 2025
 
 - **Difusão: Um relato honesto do que acho que sei**  
