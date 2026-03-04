@@ -13,17 +13,15 @@ nav_order: 6
   _Workshop on Probabilistic and Statistical Methods (WPSM) — Joint Graduate Program in Statistics UFSCar/USP (PIPGEs)_  
   📅 February 26, 2026 — São Carlos, SP  
 
-  Talk presented at the **Workshop on Probabilistic and Statistical Methods (WPSM)**, a meeting organized by the **Joint Graduate Program in Statistics UFSCar/USP (PIPGEs, São Carlos, SP, Brazil)** with the aim of discussing new developments in **Probability, Statistics**, and their applications.
-
   [Slides](../assets/presentations/wpsm2026.pdf) | [Event website](https://wpsm.icmc.usp.br/)
+
+---
 
 ## 2025
 
 - **Difusão: Um relato honesto do que acho que sei**  
   _Departamento de Estatística — UFSCar / PIPGEs_  
   📅 Novembro 28, 2025 — São Carlos, SP  
-
-  Apresentação realizada no ciclo de seminários do PIPGEs
 
   [Slides](../assets/presentations/pipges_difusao.pdf)
 
@@ -32,8 +30,6 @@ nav_order: 6
   _Semana da Estatística (SEST), Departamento de Estatística — UFSCar_  
   📅 Outubro 13, 2025 — São Carlos, SP  
 
-  Apresentação realizada durante a Semana da Estatística da UFSCar, abordando temas atuais em aprendizado de máquina e estatística moderna.  
-
   [Vídeo no YouTube](https://www.youtube.com/watch?v=DMJlWZN8Wg8)
 
 ---
@@ -41,8 +37,6 @@ nav_order: 6
 - **Não é só treinar e testar — Matemática do Aprendizado de Máquinas**  
   _Instituto de Ciências Matemáticas e de Computação (ICMC/USP)_  
   📅 Março 28, 2025 — São Carlos, SP  
-
-  Discussão sobre os fundamentos matemáticos que garantem a confiabilidade e generalização dos modelos de aprendizado de máquina.  
 
   [Slides](../assets/presentations/legais2025.pdf) | [Vídeo](https://www.youtube.com/watch?v=Q-zXYCiEoR4)
 
@@ -54,8 +48,6 @@ nav_order: 6
   _Programa de Pós-Graduação em Ginecologia e Obstetrícia — FMRP/USP_  
   📅 Novembro 25, 2024 — Ribeirão Preto, SP  
 
-  Seminário sobre aplicações recentes de aprendizado de máquina em medicina, com participação de Rafael Izbicki, Thiago R. Ramos e Luben M. C. Cabezas.  
-
   [Slides](../assets/presentations/personalizedus.pdf) | [Mais informações](https://danieltiezzi.pro.br/seminars/seminars.html)
 
 ---
@@ -63,8 +55,6 @@ nav_order: 6
 - **Modelos Espectrais em Grafos e Aplicações para Detecção de Comunidades**  
   _IMPA — COLMEA 2024_  
   📅 Outubro 30, 2024 — Rio de Janeiro, RJ  
-
-  Palestra sobre modelos espectrais em grafos e suas aplicações na detecção de comunidades.  
 
   [Vídeo no YouTube](https://www.youtube.com/watch?v=B9439Z_7DiU)
 
@@ -74,8 +64,6 @@ nav_order: 6
   _University of São Paulo (ICMC)_  
   📅 Setembro 24 e Outubro 2, 2024 — São Carlos, SP  
 
-  Introdução às Graph Neural Networks aplicadas à previsão de séries temporais.  
-
   [Repositório no GitHub](https://github.com/thiagorr162/gnns4ts)
 
 ---
@@ -83,8 +71,6 @@ nav_order: 6
 - **Da Matemática à Estatística: minha jornada acadêmica**  
   _Departamento de Estatística — UFSCar_  
   📅 Agosto 6, 2024 — São Carlos, SP  
-
-  Breve relato sobre trajetória acadêmica e transição entre áreas.  
 
   [Slides](../assets/presentations/jornada_academica.pdf)
 
@@ -94,8 +80,6 @@ nav_order: 6
   _Lab TDS (Online)_  
   📅 Julho 10, 2024 — São Carlos, SP  
 
-  Apresentação do AmnioML, um modelo de deep learning com conformal prediction para estimar volume de fluido amniótico com incerteza quantificada.  
-
   [Slides](../assets/presentations/amnioML-alek-2024.pdf) | [Paper (AAAI)](https://ojs.aaai.org/index.php/AAAI/article/view/26837)
 
 ---
@@ -104,6 +88,13 @@ nav_order: 6
   _Departamento de Estatística — UFSCar / PIPGEs_  
   📅 Julho 5, 2024 — São Carlos, SP  
 
-  Método baseado em boosting para criação eficiente de blocos de itens similares em bases de dados extensas.  
-
   [Slides](../assets/presentations/pipge_2024.pdf)
+
+--- 
+
+- **BlockBoost: Scalable and Efficient Blocking through Boosting**  
+  _The 27th International Conference on Artificial Intelligence and Statistics (AISTATS-2024)_  
+  📅 May 2, 2024 — Valencia, Spain  
+
+  [Paper](https://proceedings.mlr.press/v238/ramos24a.html)
+
