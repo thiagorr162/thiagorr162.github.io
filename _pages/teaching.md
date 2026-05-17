@@ -7,6 +7,11 @@ nav: true
 nav_order: 6
 ---
 
+##### 2026
+
+- **[Ciência de dados](https://github.com/thiagorr162/ciencia_dados)**  
+- **[Aprendizado de máquinas - PIPGEs](https://github.com/thiagorr162/curso_aprendizado)**  
+
 ##### 2025
 
 - **[Programação Estatística](https://github.com/thiagorr162/metodos_computacionais)**  
