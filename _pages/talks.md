@@ -9,6 +9,22 @@ nav_order: 6
 
 ## 2026
 
+- **Learning Conditional Expectation Operators via a Functional Newton Method**  
+  _VI Congresso Brasileiro de Jovens Pesquisadoras e Pesquisadores em Matemática Pura, Aplicada e Estatística (VI CBJME)_  
+  📅 Maio 18–22, 2026 — Teresina, PI  
+
+  [Slides](#) | [Event website](https://www.vijovens.com.br)
+
+---
+
+- **Manual de Sobrevivência para Concentração de Medida**  
+  _Ciclo de Seminários de Estatística e Ciência de Dados — Departamento de Estatística, UFBA_  
+  📅 Maio 15, 2026 — Salvador, BA (Online)  
+
+  [Slides](../assets/presentations/wpsm2026.pdf) | [Sala de transmissão](https://conferenciaweb.rnp.br/ufba/ciclo-de-seminarios-de-estatistica-e-ciencia-de-dados)
+
+---
+
 - **The Concentration Inequalities Survival Kit — Machine Learning Edition**  
   _Workshop on Probabilistic and Statistical Methods (WPSM) — Joint Graduate Program in Statistics UFSCar/USP (PIPGEs)_  
   📅 February 26, 2026 — São Carlos, SP  
