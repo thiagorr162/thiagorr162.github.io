@@ -13,7 +13,7 @@ nav_order: 6
   _VI Congresso Brasileiro de Jovens Pesquisadoras e Pesquisadores em Matemática Pura, Aplicada e Estatística (VI CBJME)_  
   📅 Maio 18–22, 2026 — Teresina, PI  
 
-  [Slides](#) | [Event website](https://www.vijovens.com.br)
+  [Slides](../assets/presentations/cbjme2026.pdf) | [Event website](https://www.vijovens.com.br)
 
 ---
 
