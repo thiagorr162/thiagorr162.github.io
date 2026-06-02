@@ -20,19 +20,23 @@ Interested in working with me? First, check out the recruitment poster [here](/a
 ## Master
 
 - João Victor Izzi  
-- Reinaldo Cardoso Anacleto (co-supervised with Daiane Zuanetti)  
+- Guilherme Chaveiro Soares
 
 ---
 
 ## Undergraduate
 
-- Eric Trevelato Costa (co-supervised with Daiane Zuanetti and Edgar Zanotto)  
+- Andressa Nascimento Santos (co-supervised with Andressa Cerqueira)
+- Mateus Jardim Benvenuti
 - Gustavo Laranja Thomaello (co-supervised with Daiane Zuanetti and Edgar Zanotto)  
-- Thomaz Yeiden Busnardo Aguena (co-supervised with Daiane Zuanetti and Edgar Zanotto)  
+- Thomaz Yeiden Busnardo Aguena (FAPESP - co-supervised with Daiane Zuanetti and Edgar Zanotto)  
 
 ---
 
 ## Former Students
+
+**2026:**
+- Reinaldo Cardoso Anacleto (Master Degree - co-supervised with Daiane Zuanetti)  
 
 
 **2025:**
