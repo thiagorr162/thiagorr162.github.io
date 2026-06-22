@@ -9,6 +9,15 @@ nav_order: 6
 
 ## 2026
 
+- **Conformal Prediction via Transported Beta Laws — Predição conforme, leis beta de estatística de ordem e transporte ótimo**  
+  _Small (CINA)_  
+  📅 Junho 22, 2026, às 10h — CINA, São Carlos, SP (presencial e online)  
+
+
+  [Slides](../assets/presentations/small2026.pdf) | [Group website](https://small-research.github.io/website/)
+
+---
+
 - **Learning Conditional Expectation Operators via a Functional Newton Method**  
   _VI Congresso Brasileiro de Jovens Pesquisadoras e Pesquisadores em Matemática Pura, Aplicada e Estatística (VI CBJME)_  
   📅 Maio 18–22, 2026 — Teresina, PI  
@@ -21,7 +30,7 @@ nav_order: 6
   _Ciclo de Seminários de Estatística e Ciência de Dados — Departamento de Estatística, UFBA_  
   📅 Maio 15, 2026 — Salvador, BA (Online)  
 
-  [Slides](../assets/presentations/wpsm2026.pdf) | [Sala de transmissão](https://conferenciaweb.rnp.br/ufba/ciclo-de-seminarios-de-estatistica-e-ciencia-de-dados)
+  [Slides](../assets/presentations/wpsm2026.pdf) | [transmission](https://conferenciaweb.rnp.br/ufba/ciclo-de-seminarios-de-estatistica-e-ciencia-de-dados)
 
 ---
 
@@ -113,4 +122,3 @@ nav_order: 6
   📅 May 2, 2024 — Valencia, Spain  
 
   [Paper](https://proceedings.mlr.press/v238/ramos24a.html)
-
