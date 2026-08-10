@@ -9,6 +9,14 @@ nav_order: 6
 
 ## 2026
 
+- **Functional Newton Methods for Operator Learning**  
+  _How can Mathematics contribute to AI? — INCT-NUMEC / IME-USP_  
+  📅 August 10, 2026 — São Paulo, SP  
+
+  [Slides](../assets/presentations/how_math_ai.pdf) | [Event website](https://numec.ime.usp.br/how-can-mathematics-contribute-to-ai/)
+
+---
+
 - **Conformal Prediction via Transported Beta Laws — Predição conforme, leis beta de estatística de ordem e transporte ótimo**  
   _Small (CINA)_  
   📅 Junho 22, 2026, às 10h — CINA, São Carlos, SP (presencial e online)  
