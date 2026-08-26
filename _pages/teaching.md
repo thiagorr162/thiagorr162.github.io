@@ -9,6 +9,7 @@ nav_order: 6
 
 ##### 2026
 
+- **[Fundamentos de Matemática](https://github.com/thiagorr162/fundamentos_matematica)**  
 - **[Ciência de dados](https://github.com/thiagorr162/ciencia_dados)**  
 - **[Aprendizado de máquinas - PIPGEs](https://github.com/thiagorr162/curso_aprendizado)**  
 
