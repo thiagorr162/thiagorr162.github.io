@@ -1,0 +1,2954 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bootstrap · simulation bench</title>
+<style>
+:root{
+  --bench:#D9DEDA;
+  --bench-2:#CFD6D1;
+  --field:#FBFBF9;
+  --ink:#16211F;
+  --ink-soft:#5C6A68;
+  --rule:#B4BEB9;
+  --pop:#33505F;
+  --sample:#B0722A;
+  --truth:#14707C;
+  --boot:#A02E7A;
+  --serif:"Iowan Old Style","Charter","Bitstream Charter","Sitka Text",Cambria,Georgia,serif;
+  --sans:"Avenir Next","Avenir","Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,"Roboto Mono",monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bench);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:15px;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ---------- header ---------- */
+.top{
+  display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;
+  padding:20px 26px 14px;
+  border-bottom:1px solid var(--rule);
+}
+.top h1{
+  font-family:var(--serif);
+  font-weight:600;
+  font-size:26px;
+  letter-spacing:-.01em;
+  margin:0;
+}
+.top .sub{
+  font-family:var(--serif);
+  font-style:italic;
+  color:var(--ink-soft);
+  font-size:15px;
+  margin-right:auto;
+}
+.modes{display:flex;border:1px solid var(--ink);background:transparent}
+.modes button{
+  font:inherit;font-size:13px;
+  padding:5px 14px;border:0;background:transparent;color:var(--ink);
+  cursor:pointer;
+}
+.modes button[aria-pressed="true"]{background:var(--ink);color:var(--bench)}
+.modes button:focus-visible{outline:2px solid var(--boot);outline-offset:2px}
+
+/* ---------- structure ---------- */
+.layout{display:grid;grid-template-columns:272px minmax(0,1fr);align-items:start}
+.rail{
+  padding:20px 22px 60px;
+  border-right:1px solid var(--rule);
+  position:sticky;top:0;
+  max-height:100vh;overflow-y:auto;
+}
+.bench{padding:22px 26px 80px;min-width:0}
+
+/* ---------- controls ---------- */
+.group{margin-bottom:22px}
+.group > h2{
+  font-family:var(--serif);font-size:15px;font-weight:600;
+  margin:0 0 9px;padding-bottom:5px;
+  border-bottom:1px solid var(--rule);
+}
+.field{margin-bottom:11px}
+.field label{display:block;font-size:12.5px;color:var(--ink-soft);margin-bottom:3px}
+select,input[type=text],textarea{
+  width:100%;font:inherit;font-size:13.5px;
+  background:var(--field);color:var(--ink);
+  border:1px solid var(--rule);border-radius:2px;
+  padding:5px 7px;
+}
+textarea{font-family:var(--mono);font-size:12px;resize:vertical;min-height:64px}
+select:focus,input:focus,textarea:focus{outline:2px solid var(--boot);outline-offset:0}
+input[type=range]{width:100%;accent-color:var(--boot);margin:2px 0}
+.rowval{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.rowval b{font-family:var(--mono);font-size:13px;font-weight:500}
+.btn{
+  display:block;width:100%;font:inherit;font-size:13.5px;
+  padding:7px 10px;margin-bottom:7px;cursor:pointer;
+  background:var(--field);color:var(--ink);
+  border:1px solid var(--ink);border-radius:2px;
+}
+.btn:hover{background:var(--ink);color:var(--field)}
+.btn:focus-visible{outline:2px solid var(--boot);outline-offset:2px}
+.btn.primary{background:var(--ink);color:var(--field)}
+.btn.primary:hover{background:var(--boot);border-color:var(--boot)}
+.btn[disabled]{opacity:.4;cursor:not-allowed}
+
+/* ---------- bench sections ---------- */
+.panel{margin-bottom:30px}
+.panel > h2{
+  font-family:var(--serif);font-size:19px;font-weight:600;margin:0 0 3px;
+}
+.panel > p.lede{
+  font-family:var(--serif);font-size:15.5px;line-height:1.62;
+  color:var(--ink-soft);max-width:66ch;margin:0 0 16px;
+}
+
+/* two worlds */
+.worlds{display:grid;grid-template-columns:minmax(0,1fr) 46px minmax(0,1fr);}
+.world{min-width:0}
+.world-head{
+  display:flex;align-items:baseline;gap:8px;
+  padding-bottom:6px;margin-bottom:12px;
+  border-bottom:2px solid currentColor;
+}
+.world-head h3{font-family:var(--serif);font-size:16px;font-weight:600;margin:0}
+.world-head span{font-size:12.5px;font-family:var(--mono);opacity:.75}
+.world.real{color:var(--pop)}
+.world.boot{color:var(--boot)}
+
+.divider{display:flex;flex-direction:column;align-items:center;gap:8px;padding-top:34px}
+.divider .bar{flex:1;width:1px;background:var(--rule)}
+.divider .mark{
+  writing-mode:vertical-rl;transform:rotate(180deg);
+  font-family:var(--mono);font-size:11px;color:var(--ink-soft);
+  letter-spacing:.02em;white-space:nowrap;
+}
+
+.cell{margin-bottom:14px}
+.cell h4{
+  font-size:12.5px;font-weight:600;margin:0 0 1px;color:var(--ink);
+}
+.cell .hint{font-size:11.5px;color:var(--ink-soft);margin:0 0 5px;line-height:1.35}
+.cv{
+  display:block;width:100%;background:var(--field);
+  border:1px solid var(--rule);border-radius:2px;
+}
+.cv.h130{height:130px}
+.cv.h108{height:108px}
+.cv.h150{height:150px}
+.cv.h180{height:180px}
+.cv.h190{height:190px}
+.cv.h210{height:210px}
+.cv.h240{height:240px}
+.cv.h260{height:260px}
+.cv.h320{height:320px}
+
+/* tables */
+table.ci{
+  width:100%;border-collapse:collapse;margin-top:14px;
+  background:var(--field);border:1px solid var(--rule);
+}
+table.ci th{
+  text-align:left;font-weight:600;font-size:11.5px;color:var(--ink-soft);
+  padding:7px 10px;border-bottom:1px solid var(--rule);white-space:nowrap;
+}
+table.ci th.num,table.ci td.num{text-align:right}
+table.ci td{
+  padding:6px 10px;border-bottom:1px solid var(--bench-2);
+  font-family:var(--mono);font-size:12.5px;white-space:nowrap;
+}
+table.ci td.m{font-family:var(--sans);font-size:13px}
+table.ci tr:last-child td{border-bottom:0}
+table.ci .dot{display:inline-block;width:9px;height:9px;margin-right:7px}
+table.ci .miss{color:#9A3324;font-weight:600}
+table.ci .hit{color:var(--ink-soft)}
+
+/* inline run controls */
+.runbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:4px 0 14px}
+.runbar .btn{width:auto;margin:0;padding:6px 14px}
+.runbar label{font-size:12.5px;color:var(--ink-soft)}
+.runbar select{width:auto;padding:4px 6px}
+.runbar .status{font-size:12.5px;color:var(--ink-soft);font-family:var(--mono)}
+.empty{
+  font-family:var(--serif);font-size:15px;color:var(--ink-soft);
+  border:1px dashed var(--rule);padding:18px;text-align:center;border-radius:2px;
+}
+
+/* numeric readouts */
+.readout{
+  border:1px solid var(--rule);background:var(--field);border-radius:2px;
+  padding:2px 0;
+}
+.readout .r{
+  display:flex;justify-content:space-between;align-items:baseline;gap:12px;
+  padding:6px 12px;border-bottom:1px solid var(--bench-2);
+}
+.readout .r:last-child{border-bottom:0}
+.readout .r span{font-size:13px;line-height:1.35}
+.readout .r b{font-family:var(--mono);font-size:13.5px;font-weight:500;white-space:nowrap}
+.readout .r.strong{background:var(--bench-2)}
+.swatch{display:inline-block;width:9px;height:9px;margin-right:6px;vertical-align:baseline}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;align-items:start}
+
+/* theory note */
+.note{
+  font-family:var(--serif);font-size:15px;line-height:1.65;
+  max-width:68ch;margin:12px 0 0;color:var(--ink);
+}
+.note p{margin:0 0 9px}
+.note p:last-child{margin-bottom:0}
+.note code,.eq{
+  font-family:var(--mono);font-size:13px;
+  background:var(--bench-2);padding:1px 4px;border-radius:2px;
+}
+.note em{color:var(--ink-soft)}
+
+/* mode */
+body[data-mode="basico"] .adv{display:none !important}
+.adv-tag{
+  font-family:var(--sans);font-size:10px;color:var(--boot);
+  border:1px solid var(--boot);border-radius:2px;
+  padding:0 4px;margin-left:7px;vertical-align:1px;
+}
+
+/* progress */
+.progress{height:3px;background:var(--bench-2);margin:0 0 10px;display:none}
+.progress.on{display:block}
+.progress i{display:block;height:100%;background:var(--boot);width:0%}
+
+.warn{
+  font-family:var(--serif);font-size:14px;line-height:1.55;
+  border-left:3px solid var(--sample);padding:2px 0 2px 11px;
+  margin:10px 0 0;color:var(--ink-soft);max-width:64ch;
+}
+
+footer{
+  border-top:1px solid var(--rule);margin-top:10px;padding:18px 26px 40px;
+  font-family:var(--serif);font-size:14.5px;color:var(--ink-soft);max-width:78ch;
+}
+footer b{color:var(--ink);font-weight:600}
+
+@media (max-width:940px){
+  .layout{grid-template-columns:1fr}
+  .rail{position:static;max-height:none;border-right:0;border-bottom:1px solid var(--rule)}
+  .worlds{grid-template-columns:1fr}
+  .divider{flex-direction:row;padding:14px 0;gap:12px}
+  .divider .bar{height:1px;width:auto;flex:1}
+  .divider .mark{writing-mode:horizontal-tb;transform:none}
+  .grid2{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none !important}}
+</style>
+</head>
+<body data-mode="basico">
+
+<div class="top">
+  <h1>Bootstrap</h1>
+  <span class="sub">simulation bench &middot; stages 0&ndash;1</span>
+  <div class="modes" role="group" aria-label="Detail level">
+    <button id="m-bas" aria-pressed="true">Basic</button>
+    <button id="m-adv" aria-pressed="false">Advanced</button>
+  </div>
+</div>
+
+<div class="layout">
+
+<aside class="rail">
+  <div class="group">
+    <h2>Population <span class="eq">F</span></h2>
+    <div class="field">
+      <label for="pop">Distribution</label>
+      <select id="pop"></select>
+    </div>
+    <div id="popParams"></div>
+    <div class="field adv" id="pasteWrap" style="display:none">
+      <label for="paste">Your data (one number per line, or separated by commas)</label>
+      <textarea id="paste" spellcheck="false"></textarea>
+      <button class="btn" id="applyPaste" style="margin-top:6px">Use this data</button>
+    </div>
+  </div>
+
+  <div class="group">
+    <h2>Statistic <span class="eq">&theta;&#770; = T(F&#770;&#8345;)</span></h2>
+    <div class="field">
+      <label for="stat">Functional</label>
+      <select id="stat"></select>
+    </div>
+    <div class="field" id="pWrap" style="display:none">
+      <div class="rowval"><label for="pq">Quantile order <span class="eq">p</span></label><b id="pqv">0.50</b></div>
+      <input type="range" id="pq" min="1" max="99" step="1" value="50">
+    </div>
+  </div>
+
+  <div class="group">
+    <h2>Sampling</h2>
+    <div class="field">
+      <div class="rowval"><label for="n">Sample size <span class="eq">n</span></label><b id="nv">25</b></div>
+      <input type="range" id="n" min="0" max="14" step="1" value="4">
+    </div>
+    <div class="field">
+      <div class="rowval"><label for="B">Resamples <span class="eq">B</span></label><b id="Bv">2000</b></div>
+      <input type="range" id="B" min="0" max="8" step="1" value="5">
+    </div>
+    <div class="field">
+      <div class="rowval"><label for="seed">Seed</label><b id="seedv">7</b></div>
+      <input type="range" id="seed" min="1" max="200" step="1" value="7">
+    </div>
+    <button class="btn primary" id="newSample">Draw a new sample</button>
+  </div>
+
+  <div class="group">
+    <h2>Resampling</h2>
+    <button class="btn" id="stepOne">Draw one resample</button>
+    <button class="btn" id="runAll">Run all B resamples</button>
+  </div>
+
+  <div class="group">
+    <h2>Intervals</h2>
+    <div class="field">
+      <label for="alpha">Confidence level</label>
+      <select id="alpha">
+        <option value="0.10">90%</option>
+        <option value="0.05" selected>95%</option>
+        <option value="0.01">99%</option>
+      </select>
+    </div>
+  </div>
+</aside>
+
+<main class="bench">
+
+<!-- ============ PANEL 1: TWO WORLDS ============ -->
+<section class="panel">
+  <h2>The two worlds</h2>
+  <p class="lede">
+    On the left, what nature does and you never see: a population <span class="eq">F</span> generates a sample,
+    and the sample generates an estimate. On the right, what the bootstrap does and you see in full: the
+    observed sample becomes the population, and the whole thing repeats. The wager is that the right-hand
+    world imitates the left-hand one.
+  </p>
+
+  <div class="progress" id="prog"><i></i></div>
+
+  <div class="worlds">
+    <!-- REAL WORLD -->
+    <div class="world real">
+      <div class="world-head"><h3>Real world</h3><span>F &rarr; X&#8321;&hellip;X&#8345; &rarr; &theta;&#770;</span></div>
+
+      <div class="cell">
+        <h4>Population <span class="eq">F</span></h4>
+        <p class="hint">The true density. In practice, out of reach.</p>
+        <canvas class="cv h130" id="cvPop"></canvas>
+      </div>
+
+      <div class="cell">
+        <h4>One sample of size <span class="eq">n</span></h4>
+        <p class="hint">The only object you actually hold in your hands.</p>
+        <canvas class="cv h108" id="cvSample"></canvas>
+      </div>
+
+      <div class="cell">
+        <h4>Sampling distribution of <span class="eq">&theta;&#770;</span></h4>
+        <p class="hint">Repeating the collection 4,000 times from <span class="eq">F</span>. It only exists because this is a simulation.</p>
+        <canvas class="cv h150" id="cvSampDist"></canvas>
+      </div>
+    </div>
+
+    <!-- DIVIDER -->
+    <div class="divider" aria-hidden="true">
+      <div class="bar"></div>
+      <div class="mark">the plug-in leap &middot; F &#10230; F&#770;&#8345;</div>
+      <div class="bar"></div>
+    </div>
+
+    <!-- BOOTSTRAP WORLD -->
+    <div class="world boot">
+      <div class="world-head"><h3>Bootstrap world</h3><span>F&#770;&#8345; &rarr; X*&#8321;&hellip;X*&#8345; &rarr; &theta;&#770;*</span></div>
+
+      <div class="cell">
+        <h4>Stand-in population <span class="eq">F&#770;&#8345;</span></h4>
+        <p class="hint">Mass 1/n on each observed point. This is the population the bootstrap draws from.</p>
+        <canvas class="cv h130" id="cvFhat"></canvas>
+      </div>
+
+      <div class="cell">
+        <h4>One resample with replacement</h4>
+        <p class="hint" id="resampleHint">Stack height = how many times that point was drawn.</p>
+        <canvas class="cv h108" id="cvResample"></canvas>
+      </div>
+
+      <div class="cell">
+        <h4>Bootstrap distribution of <span class="eq">&theta;&#770;*</span></h4>
+        <p class="hint" id="bootHint">Resampling the sample B times. This one you can compute with real data.</p>
+        <canvas class="cv h150" id="cvBootDist"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="note adv">
+    <p>
+      The bootstrap distribution is the result of two substitutions chained together. The first is the
+      <b>plug-in principle</b>: the parameter is a functional of the distribution, <span class="eq">&theta; = T(F)</span>,
+      and you estimate it by applying the same functional to the empirical distribution, <span class="eq">&theta;&#770; = T(F&#770;&#8345;)</span>.
+      The second is the bootstrap substitution proper: the distribution of <span class="eq">&theta;&#770; &minus; &theta;</span>
+      under <span class="eq">F</span> is approximated by the distribution of <span class="eq">&theta;&#770;* &minus; &theta;&#770;</span>
+      under <span class="eq">F&#770;&#8345;</span>.
+    </p>
+    <p>
+      What holds up the first step is Glivenko&ndash;Cantelli: <span class="eq">sup|F&#770;&#8345;(x) &minus; F(x)| &rarr; 0</span>
+      almost surely. The grey band in the <span class="eq">F&#770;&#8345;</span> panel is the 95% Dvoretzky&ndash;Kiefer&ndash;Wolfowitz
+      bound, of half-width <span class="eq">&radic;(ln(2/&alpha;)/2n)</span>: with probability 0.95 the entire true CDF fits
+      inside it. Notice that it shrinks like <span class="eq">n^(&minus;1/2)</span> &mdash; drag <span class="eq">n</span> and watch.
+      But <span class="eq">F&#770;&#8345;</span> being close to <span class="eq">F</span> only translates into closeness of the
+      distributions of <span class="eq">&theta;&#770;</span> when the functional <span class="eq">T</span> is smooth enough.
+      When it is not &mdash; the maximum being the classic counterexample &mdash; the chain snaps at the second link,
+      not the first.
+    </p>
+  </div>
+
+  <div class="warn adv" id="maxWarn" style="display:none">
+    You picked the maximum. The bootstrap distribution will be stuck on a discrete set of values, with roughly
+    63% of its mass sitting exactly on <span class="eq">&theta;&#770;</span>, and it does not converge to the true
+    sampling distribution however large <span class="eq">n</span> gets. This is the most instructive failure mode
+    of the method, and it comes back in full detail in stage 6.
+  </div>
+</section>
+
+<!-- ============ PANEL 2: OVERLAY ============ -->
+<section class="panel">
+  <h2>The comparison that matters</h2>
+  <p class="lede">
+    The bootstrap does not try to imitate the distribution of <span class="eq">&theta;&#770;</span>, but that of the
+    <em>error</em> <span class="eq">&theta;&#770; &minus; &theta;</span>. That is why the two curves below are shown
+    centred: the true one at <span class="eq">&theta;</span>, the bootstrap one at <span class="eq">&theta;&#770;</span>.
+    The more they overlap, the better any confidence interval built from the magenta one will work.
+  </p>
+
+  <div class="grid2">
+    <div>
+      <canvas class="cv h210" id="cvOverlay"></canvas>
+    </div>
+    <div>
+      <div class="readout">
+        <div class="r"><span><i class="swatch" style="background:var(--sample)"></i>Estimate on the sample <span class="eq">&theta;&#770;</span></span><b id="ro-hat">&mdash;</b></div>
+        <div class="r"><span><i class="swatch" style="background:var(--pop)"></i>True parameter <span class="eq">&theta; = T(F)</span></span><b id="ro-true">&mdash;</b></div>
+        <div class="r strong"><span><i class="swatch" style="background:var(--boot)"></i>Bootstrap standard error <span class="eq">se&#770;*</span></span><b id="ro-seb">&mdash;</b></div>
+        <div class="r strong"><span><i class="swatch" style="background:var(--truth)"></i>True standard error</span><b id="ro-set">&mdash;</b></div>
+        <div class="r adv"><span>Bootstrap bias <span class="eq">&theta;&#772;* &minus; &theta;&#770;</span></span><b id="ro-biasb">&mdash;</b></div>
+        <div class="r adv"><span>True bias <span class="eq">E[&theta;&#770;] &minus; &theta;</span></span><b id="ro-biast">&mdash;</b></div>
+        <div class="r adv"><span>Skewness of the bootstrap distribution</span><b id="ro-skew">&mdash;</b></div>
+        <div class="r adv"><span>Kolmogorov distance between the two</span><b id="ro-ks">&mdash;</b></div>
+      </div>
+
+      <div class="note" style="margin-top:14px">
+        <p id="verdict"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PANEL 3: THE TWO ERRORS ============ -->
+<section class="panel adv">
+  <h2>The two errors <span class="adv-tag">advanced</span></h2>
+  <p class="lede">
+    Every bootstrap number carries two errors of opposite natures, and conflating them is the source of most
+    misuse of the method. Raising <span class="eq">B</span> kills one of them and leaves the other untouched.
+  </p>
+
+  <div class="grid2">
+    <div>
+      <canvas class="cv h180" id="cvTrace"></canvas>
+      <p class="hint" style="margin-top:6px">
+        Bootstrap standard error computed from the first <span class="eq">b</span> resamples, for
+        <span class="eq">b = 1&hellip;B</span> (log scale). The solid line is the true target; the band is the
+        expected Monte Carlo noise.
+      </p>
+    </div>
+    <div>
+      <div class="readout">
+        <div class="r"><span>Monte Carlo error in <span class="eq">se&#770;*</span> &mdash; <em>vanishes with B</em></span><b id="ro-mc">&mdash;</b></div>
+        <div class="r"><span>Approximation error &mdash; <em>does not vanish with B</em></span><b id="ro-approx">&mdash;</b></div>
+        <div class="r"><span>Ratio of the two</span><b id="ro-ratio">&mdash;</b></div>
+      </div>
+      <div class="note" style="margin-top:14px">
+        <p>
+          The <b>Monte Carlo error</b> comes from having run <span class="eq">B</span> resamples instead of all
+          <span class="eq">n&#8319;</span> possible ones. For the standard deviation it is roughly
+          <span class="eq">se&#770;*/&radic;(2(B&minus;1))</span> and goes to zero at rate <span class="eq">B^(&minus;1/2)</span>.
+          It is cheap to kill: raise <span class="eq">B</span>.
+        </p>
+        <p>
+          The <b>approximation error</b> comes from <span class="eq">F&#770;&#8345;</span> not being <span class="eq">F</span>.
+          It is governed by <span class="eq">n</span>, not by <span class="eq">B</span>, and no amount of compute
+          removes it. Running a million resamples on 12 observations still delivers an answer about 12
+          observations &mdash; with three decimal places of precision on the wrong quantity.
+        </p>
+        <p>
+          Rule of thumb: pick <span class="eq">B</span> large enough that the first error sits well below the
+          second. Once the ratio above drops under 0.1, raising <span class="eq">B</span> has stopped buying
+          you precision.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PANEL 4: ANATOMY OF A RESAMPLE ============ -->
+<section class="panel adv">
+  <h2>Anatomy of a resample <span class="adv-tag">advanced</span></h2>
+  <div class="grid2">
+    <div>
+      <div class="readout">
+        <div class="r"><span>Distinct points in this resample</span><b id="ro-distinct">&mdash;</b></div>
+        <div class="r"><span>Distinct proportion</span><b id="ro-distprop">&mdash;</b></div>
+        <div class="r"><span>Expected value <span class="eq">1 &minus; (1 &minus; 1/n)&#8319;</span></span><b id="ro-exp632">&mdash;</b></div>
+        <div class="r"><span>Limit as <span class="eq">n &rarr; &infin;</span></span><b>0.6321</b></div>
+        <div class="r"><span>Largest multiplicity observed</span><b id="ro-maxmult">&mdash;</b></div>
+        <div class="r"><span><span class="eq">&theta;&#770;*</span> of this resample</span><b id="ro-starhat">&mdash;</b></div>
+      </div>
+    </div>
+    <div class="note" style="margin-top:0">
+      <p>
+        Each resample leaves out, on average, about 37% of the original observations. The probability that a
+        given point escapes all <span class="eq">n</span> draws is
+        <span class="eq">(1 &minus; 1/n)&#8319; &rarr; e^(&minus;1) &asymp; 0.3679</span>, which is where the
+        complementary fraction 0.632 comes from &mdash; the one that names the <span class="eq">.632</span>
+        estimator of prediction error in machine learning.
+      </p>
+      <p>
+        The multiplicity vector <span class="eq">(M&#8321;,&hellip;,M&#8345;)</span> is
+        Multinomial<span class="eq">(n; 1/n,&hellip;,1/n)</span>, and it helps to read a resample as a vector of
+        <em>random weights</em> <span class="eq">M&#7522;/n</span> with mean <span class="eq">1/n</span> applied
+        to fixed data. That reading is the door into the Bayesian bootstrap, which swaps the multinomial weights
+        for Dirichlet ones, and into the wild bootstrap, which swaps them for continuous weights applied to
+        residuals. Both arrive in stage 5.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ PANEL 5: THE CI LADDER (stage 2) ============ -->
+<section class="panel">
+  <h2>The confidence interval ladder</h2>
+  <p class="lede">
+    Six ways to turn one bootstrap distribution into an interval. They differ in which quantiles they reach
+    for, and the differences only matter when the distribution is skewed. The bars sit under the histogram
+    they were computed from; the tick marks on the histogram show the quantiles each percentile-type method
+    actually pulled.
+  </p>
+
+  <canvas class="cv h320" id="cvLadder"></canvas>
+  <div id="ciTable"></div>
+
+  <div class="note">
+    <p id="ladderNote"></p>
+  </div>
+
+  <div class="note adv">
+    <p>
+      <b>Normal</b> throws away the shape of the bootstrap distribution and keeps only its spread. <b>Basic</b>
+      keeps the shape but reflects it: it treats <span class="eq">&theta;&#770;* &minus; &theta;&#770;</span> as a
+      pivot, so a bootstrap distribution with a long right tail produces an interval with a long <em>left</em>
+      arm. <b>Percentile</b> does the opposite, inheriting the tail directly. The two disagree by exactly twice
+      the distance from <span class="eq">&theta;&#770;</span> to the bootstrap median, which is why they coincide
+      when the distribution is symmetric and centred.
+    </p>
+    <p>
+      <b>BC</b> adds one number, <span class="eq">z&#770;&#8320; = &Phi;&#8315;&#185;(G&#770;(&theta;&#770;))</span>,
+      which measures how far off centre <span class="eq">&theta;&#770;</span> sits in its own bootstrap
+      distribution, and shifts the quantile levels to compensate. <b>BCa</b> adds a second,
+      the acceleration <span class="eq">a&#770;</span>, estimated from the jackknife, which corrects for the
+      standard error changing with <span class="eq">&theta;</span>. <b>Bootstrap-t</b> takes a different route
+      entirely: it studentizes each replicate, <span class="eq">t* = (&theta;&#770;* &minus; &theta;&#770;)/se&#770;*</span>,
+      and reads the quantiles of that, which requires a variance estimate inside every resample.
+    </p>
+    <p>
+      Both BCa and bootstrap-t are <em>second-order accurate</em>: their one-sided coverage error is
+      <span class="eq">O(n&#8315;&#185;)</span> rather than <span class="eq">O(n&#8315;&#185;&#8260;&#178;)</span>.
+      The coverage laboratory below measures that claim, and the panel after it explains where the extra order
+      comes from.
+    </p>
+  </div>
+</section>
+
+<!-- ============ PANEL 6: COVERAGE LABORATORY (stage 3) ============ -->
+<section class="panel">
+  <h2>Coverage laboratory</h2>
+  <p class="lede">
+    An interval is only as good as the fraction of the time it actually contains
+    <span class="eq">&theta;</span>. Here the whole procedure is repeated on fresh datasets drawn from
+    <span class="eq">F</span>, and the two tails are counted separately &mdash; because an interval can hit its
+    nominal coverage while missing badly on one side and compensating on the other.
+  </p>
+
+  <div class="runbar">
+    <button class="btn primary" id="runCov">Measure coverage at n = <span id="covN">25</span></button>
+    <label for="covReps">Datasets</label>
+    <select id="covReps">
+      <option value="200">200</option>
+      <option value="400" selected>400</option>
+      <option value="1000">1000</option>
+    </select>
+    <label for="covB">Resamples each</label>
+    <select id="covB">
+      <option value="200">200</option>
+      <option value="400" selected>400</option>
+      <option value="1000">1000</option>
+    </select>
+    <span class="status" id="covStatus"></span>
+  </div>
+  <div class="progress" id="covProg"><i></i></div>
+
+  <div id="covEmpty" class="empty">
+    Nothing measured yet. Coverage has to be simulated, and the run takes a few seconds.
+  </div>
+  <canvas class="cv h240" id="cvCoverage" style="display:none"></canvas>
+  <div id="covTable"></div>
+
+  <div class="note adv">
+    <p>
+      Read the chart as two separate failures. The left arm is
+      <span class="eq">P(&theta; &lt; lower)</span>, the right arm is <span class="eq">P(&theta; &gt; upper)</span>,
+      and each should equal <span class="eq">&alpha;/2</span> &mdash; the dashed marks. A method whose arms are
+      lopsided is systematically placing the interval on the wrong side of
+      <span class="eq">&theta;&#770;</span>, and the total coverage hides it: 2% on one side and 8% on the other
+      still adds up to a 90% interval that is wrong in a way that matters for every one-sided claim you make
+      from it.
+    </p>
+    <p>
+      With a skewed population and the mean, the percentile and normal intervals will show exactly this
+      lopsidedness, while BCa and bootstrap-t straighten it out. That asymmetry is the visible signature of the
+      <span class="eq">n&#8315;&#185;&#8260;&#178;</span> Edgeworth term, and it is what the next panel is about.
+    </p>
+  </div>
+</section>
+
+<!-- ============ PANEL 7: COVERAGE AGAINST n (stage 3b) ============ -->
+<section class="panel adv">
+  <h2>How fast the error dies <span class="adv-tag">advanced</span></h2>
+  <p class="lede">
+    The same measurement repeated across a grid of sample sizes, plotting the <em>one-sided</em> error
+    &mdash; how far the left-tail miss is from <span class="eq">&alpha;/2</span> &mdash; on log&ndash;log axes.
+    On these axes a rate becomes a slope, and the two families separate.
+  </p>
+
+  <div class="runbar">
+    <button class="btn primary" id="runSweep">Run the sweep over n = 10, 20, 40, 80, 160</button>
+    <span class="status" id="sweepStatus"></span>
+  </div>
+  <div class="progress" id="sweepProg"><i></i></div>
+
+  <div id="sweepEmpty" class="empty">
+    Not run yet. This one is heavy &mdash; five sample sizes, each a full coverage study.
+  </div>
+  <canvas class="cv h260" id="cvSweep" style="display:none"></canvas>
+
+  <div class="note">
+    <p>
+      The two grey guides have slopes <span class="eq">&minus;1/2</span> and <span class="eq">&minus;1</span>.
+      First-order methods should run parallel to the shallow one, second-order methods parallel to the steep
+      one. Expect noise: with a few hundred datasets the measured error has a Monte Carlo uncertainty of its
+      own, and at large <span class="eq">n</span> the true error can fall below that noise floor.
+    </p>
+  </div>
+</section>
+
+<!-- ============ PANEL 8: EDGEWORTH (stage 4) ============ -->
+<section class="panel adv">
+  <h2>Where the extra order comes from <span class="adv-tag">advanced</span></h2>
+  <p class="lede">
+    The central limit theorem says the studentized mean is approximately normal. The Edgeworth expansion says
+    how approximately, and the leading correction term is a polynomial in <span class="eq">x</span> times
+    <span class="eq">&phi;(x)</span>, scaled by <span class="eq">n&#8315;&#185;&#8260;&#178;</span> and by the
+    population skewness. Plotting CDFs would show nothing &mdash; they look identical &mdash; so what is
+    plotted is the residual, the simulated CDF minus <span class="eq">&Phi;</span>.
+  </p>
+
+  <div class="runbar">
+    <button class="btn primary" id="runEdge">Simulate the expansion at n = <span id="edgeN">25</span></button>
+    <span class="status" id="edgeStatus"></span>
+  </div>
+
+  <div id="edgeEmpty" class="empty">
+    Not simulated yet. This panel is written for the mean; pick <em>Mean</em> as the functional to use it.
+  </div>
+
+  <div class="grid2" id="edgeWrap" style="display:none">
+    <div>
+      <h4 style="font-size:12.5px;margin:0 0 1px">Standardized: <span class="eq">&radic;n(x&#772; &minus; &mu;)/&sigma;</span></h4>
+      <p class="hint">Known <span class="eq">&sigma;</span>. Correction term <span class="eq">&minus;(&gamma;/6)(x&#178; &minus; 1)&phi;(x)/&radic;n</span>.</p>
+      <canvas class="cv h190" id="cvEdgeS"></canvas>
+    </div>
+    <div>
+      <h4 style="font-size:12.5px;margin:0 0 1px">Studentized: <span class="eq">&radic;n(x&#772; &minus; &mu;)/s</span></h4>
+      <p class="hint">Estimated <span class="eq">s</span>. Correction term <span class="eq">+(&gamma;/6)(2x&#178; + 1)&phi;(x)/&radic;n</span>.</p>
+      <canvas class="cv h190" id="cvEdgeT"></canvas>
+    </div>
+  </div>
+
+  <div class="note">
+    <p id="edgeNote"></p>
+  </div>
+
+  <div class="note adv">
+    <p>
+      Both correction polynomials are <b>even</b> in <span class="eq">x</span>, and
+      <span class="eq">&phi;</span> is even too, so the whole
+      <span class="eq">n&#8315;&#185;&#8260;&#178;</span> term takes the same value at
+      <span class="eq">x</span> and <span class="eq">&minus;x</span>. Subtract the two tails to get a two-sided
+      probability and the term cancels exactly. That single fact explains why a plain normal interval has
+      one-sided coverage error <span class="eq">O(n&#8315;&#185;&#8260;&#178;)</span> but two-sided error
+      <span class="eq">O(n&#8315;&#185;)</span>, and it is why two-sided coverage is a poor diagnostic: it
+      flatters every method equally.
+    </p>
+    <p>
+      Note also the sign flip between the two panels. Studentizing does not remove the skewness effect, it
+      reverses and roughly doubles it &mdash; the <span class="eq">s</span> in the denominator is itself
+      correlated with <span class="eq">x&#772;</span> when the population is skewed. This is why you cannot fix
+      a skewness problem by switching from <span class="eq">&sigma;</span> to <span class="eq">s</span>.
+    </p>
+  </div>
+</section>
+
+<!-- ============ PANEL 9: CORNISH-FISHER (stage 4b) ============ -->
+<section class="panel adv">
+  <h2>The correction the bootstrap finds on its own <span class="adv-tag">advanced</span></h2>
+  <p class="lede">
+    Inverting the Edgeworth expansion gives the Cornish&ndash;Fisher expansion for the quantiles:
+    <span class="eq">t&#7509; &asymp; z&#7509; &minus; (&gamma;/6&radic;n)(2z&#7509;&#178; + 1)</span>. Plotted below
+    is the correction itself, <span class="eq">quantile &minus; z</span>, so that a normal approximation is the
+    flat line at zero. The point of the panel is the magenta curve: the bootstrap reproduces the correction
+    without ever being told what <span class="eq">&gamma;</span> is.
+  </p>
+
+  <div id="cfEmpty" class="empty">Run the simulation in the panel above to populate this one.</div>
+  <canvas class="cv h240" id="cvCF" style="display:none"></canvas>
+
+  <div class="readout adv" style="margin-top:14px" id="cfReadout">
+    <div class="r"><span>Population skewness <span class="eq">&gamma;</span></span><b id="ro-gamma">&mdash;</b></div>
+    <div class="r"><span>Skewness correction scale <span class="eq">&gamma;&#770;/(6&radic;n)</span></span><b id="ro-gscale">&mdash;</b></div>
+    <div class="r strong"><span>BCa bias correction <span class="eq">z&#770;&#8320;</span></span><b id="ro-z0">&mdash;</b></div>
+    <div class="r strong"><span>BCa acceleration <span class="eq">a&#770;</span></span><b id="ro-accel">&mdash;</b></div>
+  </div>
+
+  <div class="note adv">
+    <p>
+      For the mean in the smooth-function model, both BCa constants are asymptotically the same quantity:
+      <span class="eq">z&#770;&#8320; &asymp; a&#770; &asymp; &gamma;&#770;/(6&radic;n)</span>. The three numbers above
+      should sit in the same neighbourhood, and they drift apart only through Monte Carlo noise and terms of
+      order <span class="eq">n&#8315;&#185;</span>. That coincidence is not a curiosity &mdash; it <em>is</em> the
+      reason BCa is second-order accurate. The two corrections it applies are precisely the two things the
+      Cornish&ndash;Fisher expansion says are missing from the naive percentile interval.
+    </p>
+  </div>
+</section>
+
+<!-- ============ PANEL 10: DELTA METHOD (stage 4c) ============ -->
+<section class="panel adv">
+  <h2>The delta method, for comparison <span class="adv-tag">advanced</span></h2>
+  <p class="lede">
+    Before resampling was cheap, standard errors came from a Taylor expansion:
+    <span class="eq">Var(g(&theta;&#770;)) &asymp; g&prime;(&theta;)&#178;&sigma;&#178;/n</span>. Where a closed form
+    exists it is free and exact to first order, and the bootstrap should agree with it. Where it disagrees, one
+    of them is telling you something.
+  </p>
+
+  <div class="runbar">
+    <button class="btn primary" id="runDelta">Compare across n</button>
+    <span class="status" id="deltaStatus"></span>
+  </div>
+
+  <div id="deltaEmpty" class="empty">Not run yet.</div>
+  <canvas class="cv h240" id="cvSEn" style="display:none"></canvas>
+
+  <div class="note">
+    <p id="deltaNote"></p>
+  </div>
+
+  <div class="note adv">
+    <p>
+      All three curves should decay like <span class="eq">n&#8315;&#185;&#8260;&#178;</span>, appearing as parallel
+      straight lines on log&ndash;log axes. The delta method curve is computed from a single sample, so it
+      carries that sample's noise; the bootstrap curve is computed from the same sample and should track it
+      closely for smooth functionals. Systematic separation at small <span class="eq">n</span> is the Taylor
+      remainder making itself felt &mdash; the delta method is an asymptotic statement, and it is exactly at
+      small <span class="eq">n</span> that you wanted a standard error in the first place.
+    </p>
+    <p>
+      The delta method is available here for the mean, variance, standard deviation and coefficient of
+      variation. For the median, quantiles and trimmed means there is a delta-type formula too, but it involves
+      the population density at the quantile &mdash; a quantity that is itself hard to estimate, and whose
+      estimation error swamps the gain. That difficulty is the practical reason the bootstrap took over.
+    </p>
+  </div>
+</section>
+
+</main>
+</div>
+
+<footer>
+  <b>Where we are.</b> Stages 0 to 4 are done: the simulation engine, the two worlds, the six-rung interval
+  ladder, the coverage laboratory with its one-sided error sweep, and the Edgeworth, Cornish&ndash;Fisher and
+  delta-method panels that explain what the sweep measures.
+  <b>Still to come, stage 5:</b> the variants &mdash; parametric, smoothed, Bayesian, regression by residuals,
+  pairs and wild, block bootstraps for time series, and the jackknife.
+  <b>Stage 6:</b> the failure modes, and the repairs &mdash; <span class="eq">m</span>-out-of-<span class="eq">n</span>
+  and subsampling.
+</footer>
+
+<script>
+"use strict";
+
+/* ============================================================
+   0. SEEDED RANDOM NUMBER GENERATOR
+   ============================================================ */
+function mulberry32(a){
+  a = a|0;
+  return function(){
+    a = (a + 0x6D2B79F5)|0;
+    let t = Math.imul(a ^ (a>>>15), 1|a);
+    t = (t + Math.imul(t ^ (t>>>7), 61|t)) ^ t;
+    return ((t ^ (t>>>14))>>>0) / 4294967296;
+  };
+}
+function makeRNG(seed){
+  const u = mulberry32(seed*2654435761 % 4294967296 | 0);
+  let spare = null;
+  function norm(){
+    if(spare !== null){ const s = spare; spare = null; return s; }
+    let x,y,s2;
+    do { x = 2*u()-1; y = 2*u()-1; s2 = x*x+y*y; } while(s2 >= 1 || s2 === 0);
+    const m = Math.sqrt(-2*Math.log(s2)/s2);
+    spare = y*m;
+    return x*m;
+  }
+  function gamma(k){
+    if(k < 1) return gamma(1+k) * Math.pow(u(), 1/k);
+    const d = k - 1/3, c = 1/Math.sqrt(9*d);
+    for(;;){
+      let x, v;
+      do { x = norm(); v = 1 + c*x; } while(v <= 0);
+      v = v*v*v;
+      const uu = u();
+      if(uu < 1 - 0.0331*x*x*x*x) return d*v;
+      if(Math.log(uu) < 0.5*x*x + d*(1 - v + Math.log(v))) return d*v;
+    }
+  }
+  return {u, norm, gamma};
+}
+
+/* Lanczos log-gamma, for the t density */
+function lgamma(z){
+  const g = [676.5203681218851,-1259.1392167224028,771.32342877765313,
+             -176.61502916214059,12.507343278686905,-0.13857109526572012,
+             9.9843695780195716e-6,1.5056327351493116e-7];
+  if(z < 0.5) return Math.log(Math.PI/Math.sin(Math.PI*z)) - lgamma(1-z);
+  z -= 1;
+  let x = 0.99999999999980993;
+  for(let i=0;i<8;i++) x += g[i]/(z+i+1);
+  const t = z + 7.5;
+  return 0.5*Math.log(2*Math.PI) + (z+0.5)*Math.log(t) - t + Math.log(x);
+}
+
+/* ============================================================
+   1. POPULATIONS
+   ============================================================ */
+const POPS = {
+  normal:{
+    label:"Normal", eq:"N(μ, σ²)",
+    params:[{k:"mu",label:"μ",min:-5,max:5,step:.25,def:0},
+            {k:"sigma",label:"σ",min:.25,max:4,step:.25,def:1}],
+    draw:(r,p)=> p.mu + p.sigma*r.norm(),
+    pdf:(x,p)=> Math.exp(-0.5*Math.pow((x-p.mu)/p.sigma,2))/(p.sigma*Math.sqrt(2*Math.PI))
+  },
+  lognormal:{
+    label:"Lognormal", eq:"logN(μ, σ²)",
+    params:[{k:"mu",label:"μ (log scale)",min:-1,max:2,step:.1,def:0},
+            {k:"sigma",label:"σ (log scale)",min:.1,max:1.6,step:.05,def:.75}],
+    draw:(r,p)=> Math.exp(p.mu + p.sigma*r.norm()),
+    pdf:(x,p)=> x<=0 ? 0 : Math.exp(-0.5*Math.pow((Math.log(x)-p.mu)/p.sigma,2))/(x*p.sigma*Math.sqrt(2*Math.PI))
+  },
+  exponential:{
+    label:"Exponential", eq:"Exp(λ)",
+    params:[{k:"rate",label:"λ",min:.2,max:4,step:.1,def:1}],
+    draw:(r,p)=> -Math.log(1-r.u())/p.rate,
+    pdf:(x,p)=> x<0 ? 0 : p.rate*Math.exp(-p.rate*x)
+  },
+  t:{
+    label:"Student's t", eq:"t(ν)",
+    params:[{k:"df",label:"ν (degrees of freedom)",min:1,max:30,step:1,def:3}],
+    draw:(r,p)=> r.norm()/Math.sqrt(r.gamma(p.df/2)*2/p.df),
+    pdf:(x,p)=>{ const v=p.df;
+      return Math.exp(lgamma((v+1)/2)-lgamma(v/2))/Math.sqrt(v*Math.PI)*Math.pow(1+x*x/v,-(v+1)/2); }
+  },
+  cauchy:{
+    label:"Cauchy", eq:"Cauchy(0, γ)",
+    params:[{k:"scale",label:"γ",min:.25,max:3,step:.25,def:1}],
+    draw:(r,p)=> p.scale*Math.tan(Math.PI*(r.u()-0.5)),
+    pdf:(x,p)=> 1/(Math.PI*p.scale*(1+Math.pow(x/p.scale,2)))
+  },
+  pareto:{
+    label:"Pareto", eq:"Pareto(1, α)",
+    params:[{k:"alpha",label:"α (tail index)",min:.6,max:6,step:.2,def:2}],
+    draw:(r,p)=> Math.pow(1-r.u(), -1/p.alpha),
+    pdf:(x,p)=> x<1 ? 0 : p.alpha*Math.pow(x,-(p.alpha+1))
+  },
+  uniform:{
+    label:"Uniform", eq:"U(0, θ)",
+    params:[{k:"b",label:"θ (upper limit)",min:1,max:10,step:.5,def:1}],
+    draw:(r,p)=> p.b*r.u(),
+    pdf:(x,p)=> (x<0||x>p.b) ? 0 : 1/p.b
+  },
+  bimodal:{
+    label:"Bimodal mixture", eq:"0,65·N(0,1) + 0,35·N(δ, 0,6²)",
+    params:[{k:"delta",label:"δ (separation)",min:1,max:8,step:.25,def:4}],
+    draw:(r,p)=> r.u() < 0.65 ? r.norm() : p.delta + 0.6*r.norm(),
+    pdf:(x,p)=> 0.65*Math.exp(-0.5*x*x)/Math.sqrt(2*Math.PI)
+              + 0.35*Math.exp(-0.5*Math.pow((x-p.delta)/0.6,2))/(0.6*Math.sqrt(2*Math.PI))
+  },
+  bernoulli:{
+    label:"Bernoulli", eq:"Bern(p)", discrete:true,
+    params:[{k:"p",label:"p",min:.05,max:.95,step:.05,def:.3}],
+    draw:(r,p)=> r.u() < p.p ? 1 : 0,
+    pdf:null
+  },
+  custom:{
+    label:"Your own data", eq:"F̂ of the pasted data", custom:true,
+    params:[], draw:null, pdf:null
+  }
+};
+
+/* ============================================================
+   2. STATISTICS
+   ============================================================ */
+const STATS = {
+  mean:     {label:"Mean",                    eq:"x̄",     sort:false},
+  median:   {label:"Median",                  eq:"q₀.₅",  sort:true },
+  trim10:   {label:"10% trimmed mean",        eq:"x̄₀.₁",  sort:true },
+  sd:       {label:"Standard deviation",      eq:"s",     sort:false},
+  variance: {label:"Variance",                eq:"s²",    sort:false},
+  cv:       {label:"Coefficient of variation", eq:"s/x̄", sort:false},
+  quantile: {label:"Quantile of order p",     eq:"q_p",   sort:true, hasP:true},
+  max:      {label:"Maximum",                 eq:"x₍ₙ₎",  sort:false, fragile:true}
+};
+
+function quantileSorted(a, n, p){
+  if(n === 1) return a[0];
+  const h = (n-1)*p, lo = Math.floor(h), frac = h - lo;
+  if(lo+1 >= n) return a[n-1];
+  return a[lo] + frac*(a[lo+1] - a[lo]);
+}
+
+/* computes the statistic on arr[0..n-1]; uses scratch as the sorting buffer */
+function computeStat(kind, arr, n, scratch, p){
+  let i, s = 0;
+  switch(kind){
+    case "mean":
+      for(i=0;i<n;i++) s += arr[i];
+      return s/n;
+    case "sd": case "variance": case "cv": {
+      for(i=0;i<n;i++) s += arr[i];
+      const m = s/n;
+      let ss = 0;
+      for(i=0;i<n;i++){ const d = arr[i]-m; ss += d*d; }
+      const v = ss/(n-1);
+      if(kind === "variance") return v;
+      if(kind === "sd") return Math.sqrt(v);
+      return Math.sqrt(v)/m;
+    }
+    case "max": {
+      let mx = -Infinity;
+      for(i=0;i<n;i++) if(arr[i] > mx) mx = arr[i];
+      return mx;
+    }
+    case "median": case "quantile": {
+      const sub = scratch.subarray(0,n);
+      sub.set(arr.subarray(0,n)); sub.sort();
+      return quantileSorted(sub, n, kind === "median" ? 0.5 : p);
+    }
+    case "trim10": {
+      const sub = scratch.subarray(0,n);
+      sub.set(arr.subarray(0,n)); sub.sort();
+      const k = Math.floor(n*0.1);
+      let t = 0, c = 0;
+      for(i=k;i<n-k;i++){ t += sub[i]; c++; }
+      return c ? t/c : quantileSorted(sub,n,0.5);
+    }
+  }
+  return NaN;
+}
+
+/* statistical helpers */
+function meanOf(a,n){ let s=0; for(let i=0;i<n;i++) s+=a[i]; return s/n; }
+function sdOf(a,n){
+  const m = meanOf(a,n); let ss=0;
+  for(let i=0;i<n;i++){ const d=a[i]-m; ss+=d*d; }
+  return Math.sqrt(ss/(n-1));
+}
+function skewOf(a,n){
+  const m = meanOf(a,n); let s2=0, s3=0;
+  for(let i=0;i<n;i++){ const d=a[i]-m; s2+=d*d; s3+=d*d*d; }
+  s2/=n; s3/=n;
+  return s2 > 0 ? s3/Math.pow(s2,1.5) : 0;
+}
+function sortedCopy(a,n){ const c = new Float64Array(n); c.set(a.subarray(0,n)); c.sort(); return c; }
+function quantileOfSorted(s,p){ return quantileSorted(s, s.length, p); }
+
+/* Kolmogorov distance between two sorted samples */
+function ksDistance(A,B){
+  let i=0,j=0,d=0;
+  const na=A.length, nb=B.length;
+  while(i<na && j<nb){
+    const x = Math.min(A[i],B[j]);
+    while(i<na && A[i]<=x) i++;
+    while(j<nb && B[j]<=x) j++;
+    d = Math.max(d, Math.abs(i/na - j/nb));
+  }
+  return d;
+}
+
+/* ============================================================
+   3. PLOTTING ENGINE
+   ============================================================ */
+const CSSV = getComputedStyle(document.documentElement);
+function col(name){ return CSSV.getPropertyValue(name).trim(); }
+
+function Plot(cv, pad){
+  const dpr = Math.min(2, window.devicePixelRatio || 1);
+  const rect = cv.getBoundingClientRect();
+  const w = Math.max(40, rect.width), h = Math.max(40, rect.height);
+  cv.width = Math.round(w*dpr); cv.height = Math.round(h*dpr);
+  const ctx = cv.getContext("2d");
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  ctx.clearRect(0,0,w,h);
+  const P = Object.assign({l:10,r:10,t:10,b:20}, pad||{});
+  const o = {
+    ctx, w, h, P,
+    x0:0, x1:1, y0:0, y1:1,
+    dom(x0,x1,y0,y1){ o.x0=x0; o.x1=x1; o.y0=y0; o.y1=y1; return o; },
+    X(v){ return P.l + (v-o.x0)/(o.x1-o.x0)*(w-P.l-P.r); },
+    Y(v){ return h - P.b - (v-o.y0)/(o.y1-o.y0)*(h-P.t-P.b); },
+    get iw(){ return w-P.l-P.r; },
+    get ih(){ return h-P.t-P.b; }
+  };
+  return o;
+}
+
+function niceTicks(lo, hi, count){
+  const span = hi-lo;
+  if(!(span > 0) || !isFinite(span)) return [lo];
+  const raw = span/Math.max(1,count);
+  const mag = Math.pow(10, Math.floor(Math.log10(raw)));
+  const norm = raw/mag;
+  const step = (norm < 1.5 ? 1 : norm < 3 ? 2 : norm < 7 ? 5 : 10)*mag;
+  const out = [];
+  for(let v = Math.ceil(lo/step)*step; v <= hi+1e-9; v += step) out.push(v);
+  return out;
+}
+function fmtNum(v){
+  if(!isFinite(v)) return "—";
+  const a = Math.abs(v);
+  if(a === 0) return "0";
+  if(a >= 1e5 || a < 1e-3) return v.toExponential(1);
+  const d = a >= 100 ? 0 : a >= 10 ? 1 : a >= 1 ? 2 : 3;
+  return v.toFixed(d);
+}
+function fmtVal(v,d){
+  if(!isFinite(v)) return "—";
+  const a = Math.abs(v);
+  if(a !== 0 && (a >= 1e5 || a < 1e-4)) return v.toExponential(2);
+  return v.toFixed(d===undefined?4:d);
+}
+
+function axisX(p, opts){
+  opts = opts || {};
+  const {ctx, h, P, w} = p;
+  ctx.save();
+  ctx.strokeStyle = col("--rule"); ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(P.l, h-P.b+.5); ctx.lineTo(w-P.r, h-P.b+.5); ctx.stroke();
+  ctx.fillStyle = col("--ink-soft");
+  ctx.font = "10px "+col("--mono");
+  ctx.textAlign = "center"; ctx.textBaseline = "top";
+  const ticks = niceTicks(p.x0, p.x1, opts.count||5);
+  for(const t of ticks){
+    const X = p.X(t);
+    if(X < P.l-1 || X > w-P.r+1) continue;
+    ctx.beginPath(); ctx.moveTo(X, h-P.b); ctx.lineTo(X, h-P.b+3); ctx.stroke();
+    ctx.fillText(fmtNum(t), X, h-P.b+5);
+  }
+  ctx.restore();
+}
+
+/* density-scaled histogram */
+function histogram(vals, n, lo, hi, bins){
+  const counts = new Float64Array(bins);
+  const bw = (hi-lo)/bins;
+  let used = 0;
+  for(let i=0;i<n;i++){
+    const v = vals[i];
+    if(!isFinite(v)) continue;
+    let k = Math.floor((v-lo)/bw);
+    if(k < 0 || k >= bins) continue;
+    counts[k]++; used++;
+  }
+  const dens = new Float64Array(bins);
+  for(let k=0;k<bins;k++) dens[k] = used ? counts[k]/(used*bw) : 0;
+  return {dens, counts, bw, lo, hi, bins, used};
+}
+
+function drawHist(p, H, color, alpha, outline){
+  const {ctx} = p;
+  ctx.save();
+  ctx.globalAlpha = alpha;
+  ctx.fillStyle = color;
+  for(let k=0;k<H.bins;k++){
+    if(H.dens[k] <= 0) continue;
+    const x = p.X(H.lo + k*H.bw), x2 = p.X(H.lo + (k+1)*H.bw);
+    const y = p.Y(H.dens[k]), y0 = p.Y(0);
+    ctx.fillRect(x, y, Math.max(.6, x2-x-0.4), y0-y);
+  }
+  if(outline){
+    ctx.globalAlpha = 1; ctx.strokeStyle = color; ctx.lineWidth = 1.4;
+    ctx.beginPath();
+    let started = false;
+    for(let k=0;k<H.bins;k++){
+      const x = p.X(H.lo + k*H.bw), x2 = p.X(H.lo + (k+1)*H.bw), y = p.Y(H.dens[k]);
+      if(!started){ ctx.moveTo(x, p.Y(0)); started = true; }
+      ctx.lineTo(x,y); ctx.lineTo(x2,y);
+    }
+    ctx.lineTo(p.X(H.hi), p.Y(0));
+    ctx.stroke();
+  }
+  ctx.restore();
+}
+
+function drawCurve(p, xs, ys, color, width, dash){
+  const {ctx} = p;
+  ctx.save();
+  ctx.strokeStyle = color; ctx.lineWidth = width||1.6;
+  if(dash) ctx.setLineDash(dash);
+  ctx.beginPath();
+  let started = false;
+  for(let i=0;i<xs.length;i++){
+    if(!isFinite(ys[i])) { started = false; continue; }
+    const X = p.X(xs[i]), Y = p.Y(ys[i]);
+    if(!started){ ctx.moveTo(X,Y); started = true; } else ctx.lineTo(X,Y);
+  }
+  ctx.stroke();
+  ctx.restore();
+}
+
+function drawVLine(p, x, color, label, dash){
+  const {ctx, P, h} = p;
+  if(x < p.x0 || x > p.x1) return;
+  const X = p.X(x);
+  ctx.save();
+  ctx.strokeStyle = color; ctx.lineWidth = 1.3;
+  if(dash) ctx.setLineDash(dash);
+  ctx.beginPath(); ctx.moveTo(X, P.t); ctx.lineTo(X, h-P.b); ctx.stroke();
+  if(label){
+    ctx.setLineDash([]);
+    ctx.fillStyle = color; ctx.font = "11px "+col("--mono");
+    ctx.textBaseline = "top";
+    const tw = ctx.measureText(label).width;
+    const right = X + 4 + tw < p.w - P.r;
+    ctx.textAlign = right ? "left" : "right";
+    ctx.fillText(label, right ? X+4 : X-4, P.t+1);
+  }
+  ctx.restore();
+}
+
+function legend(p, items){
+  const {ctx, P} = p;
+  ctx.save();
+  ctx.font = "10.5px "+col("--sans");
+  ctx.textBaseline = "middle"; ctx.textAlign = "left";
+  let y = P.t + 7;
+  for(const it of items){
+    const x = p.w - P.r - 6;
+    const tw = ctx.measureText(it.t).width;
+    ctx.fillStyle = it.c;
+    ctx.fillRect(x - tw - 14, y-4, 8, 8);
+    ctx.fillStyle = col("--ink");
+    ctx.fillText(it.t, x - tw, y);
+    y += 14;
+  }
+  ctx.restore();
+}
+
+/* ============================================================
+   4. STATE
+   ============================================================ */
+const N_VALUES = [5,8,10,15,20,25,30,40,50,75,100,150,200,300,500];
+const B_VALUES = [50,100,250,500,1000,2000,5000,10000,20000];
+const R_TRUE   = 4000;     /* replications of the true sampling distribution */
+const N_REF    = 100000;   /* draws used to represent F */
+
+const S = {
+  popKind:"lognormal",
+  popParams:{},
+  statKind:"mean",
+  p:0.5,
+  n:25, B:2000, seed:7,
+  mode:"basico",
+  customData:null,
+  alpha:0.05,
+  accel:0, seOuter:NaN, tStarSorted:null, innerKind:"none",
+  cov:null, sweep:null, edge:null, deltaRes:null,
+
+  ref:null, thetaTrue:null, popDomain:[0,1],
+  sample:null, sampleSorted:null, thetaHat:null,
+  sampDist:null, sampDistSorted:null,
+  bootDist:null, bootDistSorted:null, seTrace:null,
+  shownBoot:0, stepVals:[],
+  mult:null, currentResample:null, currentStar:null,
+  busy:false
+};
+
+function defaultsFor(kind){
+  const o = {};
+  for(const q of POPS[kind].params) o[q.k] = q.def;
+  return o;
+}
+
+/* ---------- drawing from the population ---------- */
+function drawPopulation(out, count, rng){
+  const P = POPS[S.popKind];
+  if(P.custom){
+    const d = S.customData, m = d.length;
+    for(let i=0;i<count;i++) out[i] = d[(rng.u()*m)|0];
+    return out;
+  }
+  for(let i=0;i<count;i++) out[i] = P.draw(rng, S.popParams);
+  return out;
+}
+
+/* ---------- recomputation levels ---------- */
+function recompute(level){
+  if(level <= 1) buildReference();
+  if(level <= 2) buildSample();
+  if(level <= 2) buildTrueSamplingDist();
+  if(level <= 3){ runBootstrap(); return; }
+  renderAll();
+}
+
+function buildReference(){
+  const rng = makeRNG(9001 + S.seed*0);   /* reference is independent of the sample seed */
+  const ref = new Float64Array(N_REF);
+  drawPopulation(ref, N_REF, rng);
+  S.ref = ref;
+  const sorted = sortedCopy(ref, N_REF);
+  S.refSorted = sorted;
+  /* plotting domain */
+  let lo = quantileOfSorted(sorted, 0.002), hi = quantileOfSorted(sorted, 0.998);
+  if(!(hi > lo)){ lo -= 1; hi += 1; }
+  const pad = (hi-lo)*0.06;
+  S.popDomain = [lo-pad, hi+pad];
+  /* θ = T(F), evaluated on the huge reference draw */
+  const scratch = new Float64Array(N_REF);
+  S.thetaTrue = computeStat(S.statKind, ref, N_REF, scratch, S.p);
+}
+
+function buildSample(){
+  const rng = makeRNG(S.seed*7919 + 13);
+  const x = new Float64Array(S.n);
+  drawPopulation(x, S.n, rng);
+  S.sample = x;
+  S.sampleSorted = sortedCopy(x, S.n);
+  const scratch = new Float64Array(S.n);
+  S.thetaHat = computeStat(S.statKind, x, S.n, scratch, S.p);
+  S.accel = jackAccel(x, S.n, S.statKind, S.p);
+  S.mult = null; S.currentResample = null; S.currentStar = null;
+}
+
+function buildTrueSamplingDist(){
+  const rng = makeRNG(S.seed*104729 + 5);
+  const n = S.n, R = R_TRUE;
+  const buf = new Float64Array(n), scratch = new Float64Array(n);
+  const out = new Float64Array(R);
+  for(let r=0;r<R;r++){
+    drawPopulation(buf, n, rng);
+    out[r] = computeStat(S.statKind, buf, n, scratch, S.p);
+  }
+  S.sampDist = out;
+  S.sampDistSorted = sortedCopy(out, R);
+}
+
+/* ---------- bootstrap, chunked so the interface stays responsive ---------- */
+let bootToken = 0;
+function runBootstrap(){
+  const token = ++bootToken;
+  const n = S.n, B = S.B;
+  const rng = makeRNG(S.seed*15485863 + 77);
+  const x = S.sample;
+  const buf = new Float64Array(n), scratch = new Float64Array(n);
+  const out = new Float64Array(B);
+  const thetaHat = S.thetaHat;
+
+  /* studentization: closed-form delta when we have one, nested bootstrap otherwise */
+  const dOuter = deltaSE(S.statKind, x, n, S.p);
+  const deltaOK = isFinite(dOuter) && dOuter > 0;
+  const innerB = deltaOK ? 0 : (n*B*50 < 3.5e7 ? 50 : 0);
+  S.innerKind = deltaOK ? "delta" : (innerB ? "nested" : "none");
+  S.seOuter = deltaOK ? dOuter : (innerB ? nestedSE(x, n, 400, S.statKind, S.p, makeRNG(S.seed*31 + 3)) : NaN);
+  const tArr = (deltaOK || innerB) ? new Float64Array(B) : null;
+  const inBuf = innerB ? new Float64Array(n) : null;
+  const inVal = innerB ? new Float64Array(innerB) : null;
+  const innerRng = innerB ? makeRNG(S.seed*7717 + 91) : null;
+
+  const heavy = n*B > 1.2e6 || (innerB && n*B*innerB > 4e6);
+  const chunk = Math.max(50, Math.floor(4e5/n));
+  const prog = document.getElementById("prog");
+  let b = 0;
+
+  S.busy = true;
+  document.getElementById("runAll").disabled = true;
+  if(heavy){ prog.classList.add("on"); prog.firstElementChild.style.width = "0%"; }
+
+  function step(){
+    if(token !== bootToken) return;
+    const end = Math.min(B, b + chunk);
+    for(; b<end; b++){
+      for(let i=0;i<n;i++) buf[i] = x[(rng.u()*n)|0];
+      const th = computeStat(S.statKind, buf, n, scratch, S.p);
+      out[b] = th;
+      if(tArr){
+        let se;
+        if(deltaOK) se = deltaSE(S.statKind, buf, n, S.p);
+        else {
+          for(let k=0;k<innerB;k++){
+            for(let i=0;i<n;i++) inBuf[i] = buf[(innerRng.u()*n)|0];
+            inVal[k] = computeStat(S.statKind, inBuf, n, scratch, S.p);
+          }
+          se = sdOf(inVal, innerB);
+        }
+        tArr[b] = (isFinite(se) && se > 0) ? (th - thetaHat)/se : NaN;
+      }
+    }
+    if(b < B){
+      if(heavy) prog.firstElementChild.style.width = (100*b/B).toFixed(1)+"%";
+      requestAnimationFrame(step);
+    } else {
+      S.bootDist = out;
+      S.bootDistSorted = sortedCopy(out, B);
+      S.seTrace = runningSE(out, B);
+      S.tStarSorted = tArr ? sortedFinite(tArr, B) : null;
+      S.shownBoot = B;
+      S.stepVals = [];
+      S.busy = false;
+      document.getElementById("runAll").disabled = false;
+      prog.classList.remove("on");
+      renderAll();
+    }
+  }
+  step();
+}
+
+/* running standard error over the first b resamples (Welford) */
+function runningSE(a, B){
+  const tr = new Float64Array(B);
+  let mean = 0, M2 = 0;
+  for(let i=0;i<B;i++){
+    const d = a[i] - mean;
+    mean += d/(i+1);
+    M2 += d*(a[i]-mean);
+    tr[i] = i > 0 ? Math.sqrt(M2/i) : NaN;
+  }
+  return tr;
+}
+
+/* ---------- a single isolated resample, for the anatomy panel ---------- */
+let stepRNG = makeRNG(424242);
+function drawOneResample(){
+  const n = S.n;
+  const idx = new Int32Array(n);
+  const mult = new Int32Array(n);
+  const buf = new Float64Array(n), scratch = new Float64Array(n);
+  for(let i=0;i<n;i++){
+    const k = (stepRNG.u()*n)|0;
+    idx[i] = k; mult[k]++; buf[i] = S.sample[k];
+  }
+  S.mult = mult;
+  S.currentResample = buf;
+  S.currentStar = computeStat(S.statKind, buf, n, scratch, S.p);
+  S.stepVals.push(S.currentStar);
+}
+
+/* ============================================================
+   5. PANEL DRAWING
+   ============================================================ */
+
+/* -- population F -- */
+function drawPop(){
+  const p = Plot(document.getElementById("cvPop"), {l:10,r:10,t:12,b:20});
+  const P = POPS[S.popKind];
+  const [lo,hi] = S.popDomain;
+
+  if(P.discrete){
+    p.dom(-0.6, 1.6, 0, 1.1);
+    const pr = S.popParams.p;
+    p.ctx.fillStyle = col("--pop");
+    for(const [v,h] of [[0,1-pr],[1,pr]]){
+      const X = p.X(v), wd = p.iw*0.16;
+      p.ctx.fillRect(X-wd/2, p.Y(h), wd, p.Y(0)-p.Y(h));
+    }
+    axisX(p,{count:2});
+  } else {
+    const M = 320, xs = new Float64Array(M), ys = new Float64Array(M);
+    let ymax = 0;
+    if(P.pdf){
+      for(let i=0;i<M;i++){
+        xs[i] = lo + (hi-lo)*i/(M-1);
+        ys[i] = P.pdf(xs[i], S.popParams);
+        if(ys[i] > ymax) ymax = ys[i];
+      }
+    } else {
+      const H = histogram(S.ref, N_REF, lo, hi, 64);
+      for(let i=0;i<M;i++){
+        xs[i] = lo + (hi-lo)*i/(M-1);
+        const k = Math.min(63, Math.max(0, Math.floor((xs[i]-lo)/H.bw)));
+        ys[i] = H.dens[k];
+        if(ys[i] > ymax) ymax = ys[i];
+      }
+    }
+    p.dom(lo, hi, 0, ymax*1.18 || 1);
+    p.ctx.save();
+    p.ctx.globalAlpha = .16; p.ctx.fillStyle = col("--pop");
+    p.ctx.beginPath(); p.ctx.moveTo(p.X(xs[0]), p.Y(0));
+    for(let i=0;i<M;i++) p.ctx.lineTo(p.X(xs[i]), p.Y(ys[i]));
+    p.ctx.lineTo(p.X(xs[M-1]), p.Y(0)); p.ctx.closePath(); p.ctx.fill();
+    p.ctx.restore();
+    drawCurve(p, xs, ys, col("--pop"), 1.8);
+    axisX(p);
+  }
+  if(isFinite(S.thetaTrue)) drawVLine(p, S.thetaTrue, col("--pop"), "θ = "+fmtVal(S.thetaTrue,3), [4,3]);
+}
+
+/* -- observed sample -- */
+function drawSample(){
+  const p = Plot(document.getElementById("cvSample"), {l:10,r:10,t:12,b:20});
+  const [lo,hi] = S.popDomain;
+  p.dom(lo, hi, 0, 1);
+  const {ctx} = p;
+  const y0 = p.Y(0);
+
+  /* points offset vertically so overlaps stay legible */
+  const bins = 120, occ = new Int32Array(bins);
+  ctx.save();
+  for(let i=0;i<S.n;i++){
+    const v = S.sample[i];
+    if(v < lo || v > hi) continue;
+    const X = p.X(v);
+    const k = Math.min(bins-1, Math.max(0, Math.floor((v-lo)/(hi-lo)*bins)));
+    const lvl = occ[k]++;
+    const Y = y0 - 5 - lvl*5.2;
+    ctx.fillStyle = col("--sample");
+    ctx.globalAlpha = .85;
+    ctx.beginPath(); ctx.arc(X, Math.max(p.P.t+3, Y), 2.5, 0, 6.2832); ctx.fill();
+  }
+  ctx.restore();
+  axisX(p);
+  if(isFinite(S.thetaHat)) drawVLine(p, S.thetaHat, col("--sample"), "θ̂ = "+fmtVal(S.thetaHat,3));
+}
+
+/* -- true sampling distribution -- */
+function drawSampDist(){
+  const p = Plot(document.getElementById("cvSampDist"), {l:10,r:10,t:12,b:20});
+  const dom = estDomain();
+  p.dom(dom[0], dom[1], 0, 1);
+  const H = histogram(S.sampDist, R_TRUE, dom[0], dom[1], 52);
+  let ymax = 0; for(let k=0;k<H.bins;k++) ymax = Math.max(ymax, H.dens[k]);
+  p.dom(dom[0], dom[1], 0, ymax*1.2 || 1);
+  drawHist(p, H, col("--truth"), .32, true);
+  axisX(p);
+  drawVLine(p, S.thetaTrue, col("--pop"), "θ", [4,3]);
+}
+
+/* -- F̂n : ECDF + DKW band -- */
+function drawFhat(){
+  const p = Plot(document.getElementById("cvFhat"), {l:10,r:10,t:12,b:20});
+  const [lo,hi] = S.popDomain;
+  p.dom(lo, hi, 0, 1.06);
+  const {ctx} = p;
+  const adv = S.mode === "avancado";
+
+  if(adv){
+    /* 95% DKW band */
+    const eps = Math.sqrt(Math.log(2/0.05)/(2*S.n));
+    ctx.save(); ctx.globalAlpha = .18; ctx.fillStyle = col("--ink-soft");
+    const M = 200;
+    ctx.beginPath();
+    for(let i=0;i<M;i++){
+      const x = lo + (hi-lo)*i/(M-1);
+      ctx.lineTo(p.X(x), p.Y(Math.min(1, ecdfAt(S.sampleSorted, x)+eps)));
+    }
+    for(let i=M-1;i>=0;i--){
+      const x = lo + (hi-lo)*i/(M-1);
+      ctx.lineTo(p.X(x), p.Y(Math.max(0, ecdfAt(S.sampleSorted, x)-eps)));
+    }
+    ctx.closePath(); ctx.fill(); ctx.restore();
+
+    /* true CDF, from the huge reference draw */
+    const M2 = 260, xs = new Float64Array(M2), ys = new Float64Array(M2);
+    for(let i=0;i<M2;i++){
+      xs[i] = lo + (hi-lo)*i/(M2-1);
+      ys[i] = ecdfAt(S.refSorted, xs[i]);
+    }
+    drawCurve(p, xs, ys, col("--pop"), 1.6);
+  }
+
+  /* ECDF steps */
+  ctx.save();
+  ctx.strokeStyle = col("--sample"); ctx.lineWidth = 1.7;
+  ctx.beginPath();
+  ctx.moveTo(p.X(lo), p.Y(0));
+  for(let i=0;i<S.n;i++){
+    const v = S.sampleSorted[i];
+    const X = p.X(Math.min(hi, Math.max(lo, v)));
+    ctx.lineTo(X, p.Y(i/S.n));
+    ctx.lineTo(X, p.Y((i+1)/S.n));
+  }
+  ctx.lineTo(p.X(hi), p.Y(1));
+  ctx.stroke();
+  ctx.restore();
+
+  axisX(p);
+  if(adv) legend(p, [{c:col("--pop"), t:"F"}, {c:col("--sample"), t:"F̂ₙ"}, {c:col("--ink-soft"), t:"DKW 95% band"}]);
+  else    legend(p, [{c:col("--sample"), t:"F̂ₙ"}]);
+}
+function ecdfAt(sorted, x){
+  let lo = 0, hi = sorted.length;
+  while(lo < hi){ const m = (lo+hi)>>1; if(sorted[m] <= x) lo = m+1; else hi = m; }
+  return lo/sorted.length;
+}
+
+/* -- one resample, stacked multiplicities -- */
+function drawResample(){
+  const p = Plot(document.getElementById("cvResample"), {l:10,r:10,t:12,b:20});
+  const [lo,hi] = S.popDomain;
+  p.dom(lo, hi, 0, 1);
+  const {ctx} = p;
+  const y0 = p.Y(0);
+
+  if(!S.mult){
+    ctx.fillStyle = col("--ink-soft");
+    ctx.font = "13px "+col("--serif");
+    ctx.textAlign = "center"; ctx.textBaseline = "middle";
+    ctx.fillText("Press \u201cDraw one resample\u201d to see a draw.", p.w/2, p.h/2 - 4);
+    axisX(p);
+    return;
+  }
+
+  for(let i=0;i<S.n;i++){
+    const v = S.sample[i];
+    if(v < lo || v > hi) continue;
+    const X = p.X(v), m = S.mult[i];
+    if(m === 0){
+      ctx.strokeStyle = col("--rule"); ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.arc(X, y0-5, 2.4, 0, 6.2832); ctx.stroke();
+    } else {
+      ctx.fillStyle = col("--boot");
+      for(let j=0;j<Math.min(m,7);j++){
+        ctx.globalAlpha = .9;
+        const Y = Math.max(p.P.t+3, y0 - 5 - j*5.2);
+        ctx.beginPath(); ctx.arc(X, Y, 2.5, 0, 6.2832); ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+    }
+  }
+  axisX(p);
+  if(isFinite(S.currentStar)) drawVLine(p, S.currentStar, col("--boot"), "θ̂* = "+fmtVal(S.currentStar,3));
+}
+
+/* -- bootstrap distribution -- */
+function drawBootDist(){
+  const p = Plot(document.getElementById("cvBootDist"), {l:10,r:10,t:12,b:20});
+  const dom = estDomain();
+  const showStep = S.stepVals.length > 0;
+  const vals = showStep ? Float64Array.from(S.stepVals) : S.bootDist;
+  const m = vals.length;
+  const nb = showStep ? Math.max(12, Math.min(40, Math.ceil(Math.sqrt(m)*2))) : 52;
+  const H = histogram(vals, m, dom[0], dom[1], nb);
+  let ymax = 0; for(let k=0;k<H.bins;k++) ymax = Math.max(ymax, H.dens[k]);
+  p.dom(dom[0], dom[1], 0, ymax*1.2 || 1);
+  drawHist(p, H, col("--boot"), .32, true);
+  axisX(p);
+  drawVLine(p, S.thetaHat, col("--sample"), "θ̂", [4,3]);
+  document.getElementById("bootHint").textContent = showStep
+    ? "Accumulating one at a time: " + m + (m===1 ? " resample drawn." : " resamples drawn.")
+    : "Resampling the sample B times. This one you can compute with real data.";
+}
+
+/* common domain for the two distributions of estimates */
+function estDomain(){
+  const a = S.sampDistSorted, b = S.bootDistSorted;
+  let lo = Math.min(quantileOfSorted(a,0.001), quantileOfSorted(b,0.001));
+  let hi = Math.max(quantileOfSorted(a,0.999), quantileOfSorted(b,0.999));
+  lo = Math.min(lo, S.thetaTrue, S.thetaHat);
+  hi = Math.max(hi, S.thetaTrue, S.thetaHat);
+  if(!(hi > lo)){ lo -= 1; hi += 1; }
+  const pad = (hi-lo)*0.08;
+  return [lo-pad, hi+pad];
+}
+
+/* -- centred overlay -- */
+function drawOverlay(){
+  const p = Plot(document.getElementById("cvOverlay"), {l:12,r:12,t:14,b:24});
+  const R = R_TRUE, B = S.B;
+  const A = new Float64Array(R), Bv = new Float64Array(B);
+  for(let i=0;i<R;i++) A[i] = S.sampDist[i] - S.thetaTrue;
+  for(let i=0;i<B;i++) Bv[i] = S.bootDist[i] - S.thetaHat;
+  const As = sortedCopy(A,R), Bs = sortedCopy(Bv,B);
+  let lo = Math.min(quantileOfSorted(As,0.002), quantileOfSorted(Bs,0.002));
+  let hi = Math.max(quantileOfSorted(As,0.998), quantileOfSorted(Bs,0.998));
+  if(!(hi > lo)){ lo -= 1; hi += 1; }
+  const pad = (hi-lo)*0.06; lo -= pad; hi += pad;
+
+  const HA = histogram(A,R,lo,hi,60), HB = histogram(Bv,B,lo,hi,60);
+  let ymax = 0;
+  for(let k=0;k<60;k++){ ymax = Math.max(ymax, HA.dens[k], HB.dens[k]); }
+  p.dom(lo, hi, 0, ymax*1.16 || 1);
+
+  drawHist(p, HA, col("--truth"), .30, false);
+  drawHist(p, HB, col("--boot"),  .30, false);
+  drawHist(p, HA, col("--truth"), 1, true);
+  drawHist(p, HB, col("--boot"),  1, true);
+  axisX(p, {count:6});
+  drawVLine(p, 0, col("--ink-soft"), null, [3,3]);
+  legend(p, [{c:col("--truth"), t:"true:  θ̂ − θ"},
+             {c:col("--boot"),  t:"bootstrap:  θ̂* − θ̂"}]);
+
+  S._ks = ksDistance(As, Bs);
+}
+
+/* -- convergence trace in B -- */
+function drawTrace(){
+  const cv = document.getElementById("cvTrace");
+  if(!cv || S.mode !== "avancado") return;
+  const p = Plot(cv, {l:40,r:12,t:14,b:24});
+  const B = S.B, tr = S.seTrace;
+  const seTrue = sdOf(S.sampDist, R_TRUE);
+  const seB = sdOf(S.bootDist, B);
+
+  let lo = Infinity, hi = -Infinity;
+  const from = Math.max(1, Math.floor(B*0.004));
+  for(let i=from;i<B;i++){ if(isFinite(tr[i])){ lo = Math.min(lo,tr[i]); hi = Math.max(hi,tr[i]); } }
+  lo = Math.min(lo, seTrue, seB); hi = Math.max(hi, seTrue, seB);
+  if(!(hi > lo)){ lo *= .9; hi *= 1.1; }
+  const pd = (hi-lo)*0.15;
+  const lx = Math.log10(Math.max(2,from+1)), hx = Math.log10(B);
+  p.dom(lx, hx, lo-pd, hi+pd);
+
+  const {ctx} = p;
+
+  /* Monte Carlo error band around the true target */
+  ctx.save(); ctx.globalAlpha = .15; ctx.fillStyle = col("--boot");
+  ctx.beginPath();
+  for(let e=0;e<=80;e++){
+    const b = Math.pow(10, lx + (hx-lx)*e/80);
+    ctx.lineTo(p.X(Math.log10(b)), p.Y(seB*(1+1.96/Math.sqrt(2*(b-1)))));
+  }
+  for(let e=80;e>=0;e--){
+    const b = Math.pow(10, lx + (hx-lx)*e/80);
+    ctx.lineTo(p.X(Math.log10(b)), p.Y(seB*(1-1.96/Math.sqrt(2*(b-1)))));
+  }
+  ctx.closePath(); ctx.fill(); ctx.restore();
+
+  /* true target */
+  ctx.save();
+  ctx.strokeStyle = col("--truth"); ctx.lineWidth = 1.6;
+  ctx.beginPath(); ctx.moveTo(p.X(lx), p.Y(seTrue)); ctx.lineTo(p.X(hx), p.Y(seTrue)); ctx.stroke();
+  ctx.restore();
+
+  /* the trace */
+  ctx.save();
+  ctx.strokeStyle = col("--boot"); ctx.lineWidth = 1.3;
+  ctx.beginPath();
+  let started = false;
+  for(let i=from;i<B;i++){
+    if(!isFinite(tr[i])) continue;
+    const X = p.X(Math.log10(i+1)), Y = p.Y(tr[i]);
+    if(!started){ ctx.moveTo(X,Y); started = true; } else ctx.lineTo(X,Y);
+  }
+  ctx.stroke(); ctx.restore();
+
+  /* axes */
+  ctx.save();
+  ctx.strokeStyle = col("--rule"); ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(p.P.l, p.h-p.P.b+.5); ctx.lineTo(p.w-p.P.r, p.h-p.P.b+.5); ctx.stroke();
+  ctx.fillStyle = col("--ink-soft"); ctx.font = "10px "+col("--mono");
+  ctx.textAlign = "center"; ctx.textBaseline = "top";
+  for(let e=Math.ceil(lx);e<=Math.floor(hx);e++){
+    const X = p.X(e);
+    ctx.beginPath(); ctx.moveTo(X,p.h-p.P.b); ctx.lineTo(X,p.h-p.P.b+3); ctx.stroke();
+    ctx.fillText("10"+["⁰","¹","²","³","⁴","⁵"][e]||"", X, p.h-p.P.b+5);
+  }
+  ctx.textAlign = "right"; ctx.textBaseline = "middle";
+  for(const t of niceTicks(lo-pd, hi+pd, 4)){
+    const Y = p.Y(t);
+    if(Y < p.P.t || Y > p.h-p.P.b) continue;
+    ctx.fillText(fmtNum(t), p.P.l-5, Y);
+  }
+  ctx.restore();
+  legend(p, [{c:col("--boot"), t:"ŝe* from b resamples"},
+             {c:col("--truth"), t:"true standard error"}]);
+}
+
+/* ============================================================
+   6. NUMERIC READOUTS AND PROSE
+   ============================================================ */
+function updateReadouts(){
+  const B = S.B;
+  const seB = sdOf(S.bootDist, B);
+  const seT = sdOf(S.sampDist, R_TRUE);
+  const biasB = meanOf(S.bootDist, B) - S.thetaHat;
+  const biasT = meanOf(S.sampDist, R_TRUE) - S.thetaTrue;
+  const mc = seB/Math.sqrt(2*(B-1));
+  const approx = Math.abs(seB - seT);
+
+  const set = (id,v)=>{ document.getElementById(id).textContent = v; };
+  set("ro-hat",   fmtVal(S.thetaHat,4));
+  set("ro-true",  fmtVal(S.thetaTrue,4));
+  set("ro-seb",   fmtVal(seB,4));
+  set("ro-set",   fmtVal(seT,4));
+  set("ro-biasb", fmtVal(biasB,4));
+  set("ro-biast", fmtVal(biasT,4));
+  set("ro-skew",  fmtVal(skewOf(S.bootDist,B),3));
+  set("ro-ks",    fmtVal(S._ks,3));
+  set("ro-mc",    fmtVal(mc,5));
+  set("ro-approx",fmtVal(approx,5));
+  set("ro-ratio", approx > 0 ? fmtVal(mc/approx,3) : "—");
+
+  /* resample anatomy */
+  if(S.mult){
+    let d = 0, mx = 0;
+    for(let i=0;i<S.n;i++){ if(S.mult[i] > 0) d++; if(S.mult[i] > mx) mx = S.mult[i]; }
+    set("ro-distinct", d + " de " + S.n);
+    set("ro-distprop", fmtVal(d/S.n,4));
+    set("ro-maxmult", String(mx));
+    set("ro-starhat", fmtVal(S.currentStar,4));
+  } else {
+    ["ro-distinct","ro-distprop","ro-maxmult","ro-starhat"].forEach(i=>set(i,"—"));
+  }
+  set("ro-exp632", fmtVal(1-Math.pow(1-1/S.n, S.n),4));
+
+  /* prose verdict */
+  const ratioSE = seB/seT;
+  const ks = S._ks;
+  let v;
+  if(!isFinite(seT) || !isFinite(seB)){
+    v = "With this combination the standard error does not even exist — the population lacks the required "
+      + "moments. That is not a defect of the simulation, it is the correct answer.";
+  } else if(ks < 0.06 && Math.abs(ratioSE-1) < 0.12){
+    v = "The two distributions practically coincide. At n = " + S.n + " the bootstrap is reproducing the "
+      + "error distribution faithfully, and the bootstrap standard error misses the true one by "
+      + (Math.abs(ratioSE-1)*100).toFixed(1) + "%.";
+  } else if(ks < 0.14){
+    v = "Agreement is reasonable but already visible to the naked eye: Kolmogorov distance of " + fmtVal(ks,3)
+      + ", with the bootstrap standard error " + (ratioSE < 1 ? "understating" : "overstating")
+      + " the true one by " + (Math.abs(ratioSE-1)*100).toFixed(1) + "%. "
+      + "Raise n and watch the gap close.";
+  } else {
+    v = "The two distributions disagree substantially — Kolmogorov distance of " + fmtVal(ks,3) + ". "
+      + (STATS[S.statKind].fragile
+          ? "The problem here is not a small n: this functional is not smooth, and the bootstrap would not converge even for enormous n."
+          : "At n = " + S.n + " the empirical distribution is still a poor copy of the population, and the bootstrap world inherits that poverty.");
+  }
+  document.getElementById("verdict").textContent = v;
+
+  document.getElementById("maxWarn").style.display = STATS[S.statKind].fragile ? "" : "none";
+}
+
+/* ============================================================
+   7. RENDER
+   ============================================================ */
+function renderAll(){
+  if(!S.bootDist) return;
+  drawPop(); drawSample(); drawSampDist();
+  drawFhat(); drawResample(); drawBootDist();
+  drawOverlay();
+  drawTrace();
+  drawLadder();
+  if(S.cov) drawCoverage();
+  if(S.sweep) drawSweep();
+  if(S.edge) drawEdgeworth();
+  if(S.deltaRes) drawDeltaSweep();
+  updateReadouts();
+  document.getElementById("covN").textContent = S.n;
+  document.getElementById("edgeN").textContent = S.n;
+}
+
+/* ============================================================
+   8. INTERFACE
+   ============================================================ */
+function buildPopSelect(){
+  const sel = document.getElementById("pop");
+  for(const k in POPS){
+    const o = document.createElement("option");
+    o.value = k; o.textContent = POPS[k].label;
+    sel.appendChild(o);
+  }
+  sel.value = S.popKind;
+}
+function buildStatSelect(){
+  const sel = document.getElementById("stat");
+  for(const k in STATS){
+    const o = document.createElement("option");
+    o.value = k; o.textContent = STATS[k].label;
+    sel.appendChild(o);
+  }
+  sel.value = S.statKind;
+}
+function buildPopParams(){
+  const wrap = document.getElementById("popParams");
+  wrap.innerHTML = "";
+  const P = POPS[S.popKind];
+  document.getElementById("pasteWrap").style.display = P.custom ? "" : "none";
+  for(const q of P.params){
+    const d = document.createElement("div");
+    d.className = "field";
+    d.innerHTML =
+      '<div class="rowval"><label for="pp-'+q.k+'">'+q.label+'</label>'+
+      '<b id="ppv-'+q.k+'">'+String(S.popParams[q.k])+'</b></div>'+
+      '<input type="range" id="pp-'+q.k+'" min="'+q.min+'" max="'+q.max+'" step="'+q.step+'" value="'+S.popParams[q.k]+'">';
+    wrap.appendChild(d);
+    d.querySelector("input").addEventListener("input", e=>{
+      S.popParams[q.k] = parseFloat(e.target.value);
+      document.getElementById("ppv-"+q.k).textContent = String(S.popParams[q.k]);
+      recompute(1);
+    });
+  }
+}
+
+function setMode(m){
+  S.mode = m;
+  document.body.dataset.mode = m;
+  document.getElementById("m-bas").setAttribute("aria-pressed", m==="basico");
+  document.getElementById("m-adv").setAttribute("aria-pressed", m==="avancado");
+  requestAnimationFrame(renderAll);
+}
+
+function wire(){
+  document.getElementById("m-bas").onclick = ()=>setMode("basico");
+  document.getElementById("m-adv").onclick = ()=>setMode("avancado");
+
+  document.getElementById("pop").addEventListener("change", e=>{
+    S.popKind = e.target.value;
+    S.popParams = defaultsFor(S.popKind);
+    buildPopParams();
+    if(POPS[S.popKind].custom && !S.customData){
+      S.customData = Float64Array.from({length:60},(_,i)=>{
+        const r = makeRNG(3+i); return Math.exp(r.norm()*0.7);
+      });
+      document.getElementById("paste").value = Array.from(S.customData).map(v=>v.toFixed(3)).join("\n");
+    }
+    recompute(1);
+  });
+
+  document.getElementById("applyPaste").addEventListener("click", ()=>{
+    const raw = document.getElementById("paste").value;
+    const vals = raw.split(/[\s,;]+/).map(t=>parseFloat(t.replace(",","."))).filter(v=>isFinite(v));
+    if(vals.length < 5){ alert("Paste at least 5 numbers."); return; }
+    S.customData = Float64Array.from(vals);
+    recompute(1);
+  });
+
+  document.getElementById("stat").addEventListener("change", e=>{
+    S.statKind = e.target.value;
+    document.getElementById("pWrap").style.display = STATS[S.statKind].hasP ? "" : "none";
+    recompute(1);
+  });
+
+  document.getElementById("pq").addEventListener("input", e=>{
+    S.p = parseInt(e.target.value,10)/100;
+    document.getElementById("pqv").textContent = S.p.toFixed(2);
+    if(STATS[S.statKind].hasP) recompute(1);
+  });
+
+  const nEl = document.getElementById("n");
+  nEl.addEventListener("input", e=>{
+    S.n = N_VALUES[parseInt(e.target.value,10)];
+    document.getElementById("nv").textContent = S.n;
+    recompute(2);
+  });
+
+  const BEl = document.getElementById("B");
+  BEl.addEventListener("input", e=>{
+    S.B = B_VALUES[parseInt(e.target.value,10)];
+    document.getElementById("Bv").textContent = S.B;
+    recompute(3);
+  });
+
+  document.getElementById("seed").addEventListener("input", e=>{
+    S.seed = parseInt(e.target.value,10);
+    document.getElementById("seedv").textContent = S.seed;
+    recompute(2);
+  });
+
+  document.getElementById("newSample").addEventListener("click", ()=>{
+    S.seed = S.seed % 200 + 1;
+    document.getElementById("seed").value = S.seed;
+    document.getElementById("seedv").textContent = S.seed;
+    recompute(2);
+  });
+
+  document.getElementById("stepOne").addEventListener("click", ()=>{
+    if(S.busy) return;
+    drawOneResample();
+    renderAll();
+  });
+
+  document.getElementById("runAll").addEventListener("click", ()=>{
+    S.stepVals = [];
+    recompute(3);
+  });
+
+  document.getElementById("alpha").addEventListener("change", e=>{
+    S.alpha = parseFloat(e.target.value);
+    renderAll();
+  });
+
+  document.getElementById("runCov").addEventListener("click", ()=>{
+    const btn = document.getElementById("runCov");
+    const prog = document.getElementById("covProg");
+    const status = document.getElementById("covStatus");
+    const N = parseInt(document.getElementById("covReps").value, 10);
+    const Bc = parseInt(document.getElementById("covB").value, 10);
+    btn.disabled = true; prog.classList.add("on"); status.textContent = "running…";
+    coverageRun(S.n, N, Bc, S.alpha, S.seed*911 + 17,
+      f => { prog.firstElementChild.style.width = (100*f).toFixed(1)+"%"; },
+      res => {
+        S.cov = res;
+        btn.disabled = false; prog.classList.remove("on");
+        status.textContent = "done";
+        drawCoverage();
+      });
+  });
+
+  document.getElementById("runSweep").addEventListener("click", runSweep);
+
+  document.getElementById("runEdge").addEventListener("click", ()=>{
+    const btn = document.getElementById("runEdge");
+    const status = document.getElementById("edgeStatus");
+    if(S.statKind !== "mean"){
+      status.textContent = "switch the functional to Mean first";
+      return;
+    }
+    btn.disabled = true; status.textContent = "simulating…";
+    setTimeout(()=>{
+      runEdgeworth();
+      drawEdgeworth();
+      btn.disabled = false;
+      status.textContent = S.edge.R.toLocaleString("en-US") + " samples";
+    }, 30);
+  });
+
+  document.getElementById("runDelta").addEventListener("click", ()=>{
+    const btn = document.getElementById("runDelta");
+    const status = document.getElementById("deltaStatus");
+    btn.disabled = true; status.textContent = "running…";
+    setTimeout(()=>{
+      runDeltaSweep();
+      drawDeltaSweep();
+      btn.disabled = false; status.textContent = "done";
+    }, 30);
+  });
+
+  let rt = null;
+  window.addEventListener("resize", ()=>{
+    clearTimeout(rt);
+    rt = setTimeout(renderAll, 140);
+  });
+}
+
+
+/* ============================================================
+   9. NORMAL DISTRIBUTION, DELTA METHOD, JACKKNIFE
+   ============================================================ */
+function erf(x){
+  const z = Math.abs(x), t = 2/(2+z);
+  const y = t*Math.exp(-z*z - 1.26551223 + t*(1.00002368 + t*(0.37409196 + t*(0.09678418 +
+    t*(-0.18628806 + t*(0.27886807 + t*(-1.13520398 + t*(1.48851587 +
+    t*(-0.82215223 + t*0.17087277)))))))));
+  return x >= 0 ? 1-y : y-1;
+}
+function normCDF(x){ return 0.5*(1 + erf(x/Math.SQRT2)); }
+function normPDF(x){ return Math.exp(-0.5*x*x)/Math.sqrt(2*Math.PI); }
+function normQ(p){
+  if(p <= 0) return -Infinity;
+  if(p >= 1) return Infinity;
+  const a=[-3.969683028665376e+01,2.209460984245205e+02,-2.759285104469687e+02,
+            1.383577518672690e+02,-3.066479806614716e+01,2.506628277459239e+00];
+  const b=[-5.447609879822406e+01,1.615858368580409e+02,-1.556989798598866e+02,
+            6.680131188771972e+01,-1.328068155288572e+01];
+  const c=[-7.784894002430293e-03,-3.223964580411365e-01,-2.400758277161838e+00,
+           -2.549732539343734e+00,4.374664141464968e+00,2.938163982698783e+00];
+  const d=[7.784695709041462e-03,3.224671290700398e-01,2.445134137142996e+00,
+           3.754408661907416e+00];
+  const pl = 0.02425;
+  let q, r, x;
+  if(p < pl){
+    q = Math.sqrt(-2*Math.log(p));
+    x = (((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5]) / ((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1);
+  } else if(p <= 1-pl){
+    q = p-0.5; r = q*q;
+    x = (((((a[0]*r+a[1])*r+a[2])*r+a[3])*r+a[4])*r+a[5])*q /
+        (((((b[0]*r+b[1])*r+b[2])*r+b[3])*r+b[4])*r+1);
+  } else {
+    q = Math.sqrt(-2*Math.log(1-p));
+    x = -(((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5]) / ((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1);
+  }
+  const e = normCDF(x) - p, u = e*Math.sqrt(2*Math.PI)*Math.exp(x*x/2);
+  return x - u/(1 + x*u/2);
+}
+
+/* closed-form delta-method standard error; NaN when unavailable */
+function deltaSE(kind, a, n, p){
+  if(n < 3) return NaN;
+  let m = 0;
+  for(let i=0;i<n;i++) m += a[i];
+  m /= n;
+  let m2 = 0, m3 = 0, m4 = 0;
+  for(let i=0;i<n;i++){
+    const d = a[i]-m, d2 = d*d;
+    m2 += d2; m3 += d2*d; m4 += d2*d2;
+  }
+  m2 /= n; m3 /= n; m4 /= n;
+  const s2 = m2*n/(n-1), s = Math.sqrt(s2);
+  const varS2 = (m4 - m2*m2)/n;
+  switch(kind){
+    case "mean":     return Math.sqrt(m2/n);
+    case "variance": return varS2 > 0 ? Math.sqrt(varS2) : NaN;
+    case "sd":       return (varS2 > 0 && s > 0) ? Math.sqrt(varS2)/(2*s) : NaN;
+    case "cv": {
+      if(s <= 0 || m === 0) return NaN;
+      const varS = varS2/(4*s2);
+      const varM = m2/n;
+      const covMS = m3/(2*s*n);
+      const cv = s/m;
+      const v = cv*cv*( varS/s2 + varM/(m*m) - 2*covMS/(s*m) );
+      return v > 0 ? Math.sqrt(v) : NaN;
+    }
+  }
+  return NaN;
+}
+
+/* nested-bootstrap standard error of the statistic on a given sample */
+function nestedSE(a, n, reps, kind, p, rng){
+  const buf = new Float64Array(n), sc = new Float64Array(n), out = new Float64Array(reps);
+  for(let r=0;r<reps;r++){
+    for(let i=0;i<n;i++) buf[i] = a[(rng.u()*n)|0];
+    out[r] = computeStat(kind, buf, n, sc, p);
+  }
+  return sdOf(out, reps);
+}
+
+/* BCa acceleration from the jackknife */
+function jackAccel(a, n, kind, p){
+  if(n < 4) return 0;
+  const th = new Float64Array(n);
+  if(kind === "mean"){
+    let S0 = 0;
+    for(let i=0;i<n;i++) S0 += a[i];
+    for(let i=0;i<n;i++) th[i] = (S0 - a[i])/(n-1);
+  } else {
+    const buf = new Float64Array(n-1), sc = new Float64Array(n-1);
+    for(let i=0;i<n;i++){
+      let k = 0;
+      for(let j=0;j<n;j++) if(j !== i) buf[k++] = a[j];
+      th[i] = computeStat(kind, buf, n-1, sc, p);
+    }
+  }
+  const mbar = meanOf(th, n);
+  let s2 = 0, s3 = 0;
+  for(let i=0;i<n;i++){
+    const d = mbar - th[i];
+    s2 += d*d; s3 += d*d*d;
+  }
+  if(!(s2 > 0)) return 0;
+  const acc = s3/(6*Math.pow(s2, 1.5));
+  return isFinite(acc) ? acc : 0;
+}
+
+function sortedFinite(a, n){
+  let k = 0;
+  const tmp = new Float64Array(n);
+  for(let i=0;i<n;i++) if(isFinite(a[i])) tmp[k++] = a[i];
+  if(k < 10) return null;
+  const out = tmp.slice(0, k);
+  out.sort();
+  return out;
+}
+
+/* proportion of a sorted array strictly below v */
+function propBelow(sorted, v){
+  let lo = 0, hi = sorted.length;
+  while(lo < hi){ const m = (lo+hi)>>1; if(sorted[m] < v) lo = m+1; else hi = m; }
+  return lo/sorted.length;
+}
+
+/* ============================================================
+   10. THE SIX INTERVALS
+   ============================================================ */
+const CI_METHODS = [
+  {key:"normal", label:"Normal",              color:"#7C8E96", order:"first"},
+  {key:"basic",  label:"Basic",               color:"#5E7F8C", order:"first"},
+  {key:"perc",   label:"Percentile",          color:"#3F6F86", order:"first"},
+  {key:"bc",     label:"Bias-corrected",      color:"#6A5A8C", order:"first"},
+  {key:"bca",    label:"BCa",                 color:"#8C4487", order:"second"},
+  {key:"stud",   label:"Bootstrap-t",         color:"#A02E7A", order:"second"}
+];
+
+function buildCIs(bootSorted, seBoot, thetaHat, alpha, accel, tStarSorted, seOuter){
+  const Q = pp => quantileOfSorted(bootSorted, pp);
+  const zLo = normQ(alpha/2), zHi = normQ(1 - alpha/2);
+  const out = {};
+
+  out.normal = [thetaHat + zLo*seBoot, thetaHat + zHi*seBoot];
+  out.basic  = [2*thetaHat - Q(1 - alpha/2), 2*thetaHat - Q(alpha/2)];
+  out.perc   = [Q(alpha/2), Q(1 - alpha/2)];
+
+  let g = propBelow(bootSorted, thetaHat);
+  g = Math.min(1 - 1e-7, Math.max(1e-7, g));
+  const z0 = normQ(g);
+
+  const level = (aa, acc) => {
+    const num = z0 + normQ(aa);
+    const den = 1 - acc*num;
+    if(!(den > 1e-8)) return NaN;
+    const v = normCDF(z0 + num/den);
+    return Math.min(1 - 1e-6, Math.max(1e-6, v));
+  };
+
+  const bcL = level(alpha/2, 0), bcH = level(1 - alpha/2, 0);
+  out.bc = [Q(bcL), Q(bcH)];
+  const caL = level(alpha/2, accel), caH = level(1 - alpha/2, accel);
+  out.bca = [Q(caL), Q(caH)];
+
+  if(tStarSorted && isFinite(seOuter) && seOuter > 0){
+    const tL = quantileOfSorted(tStarSorted, alpha/2);
+    const tH = quantileOfSorted(tStarSorted, 1 - alpha/2);
+    out.stud = [thetaHat - seOuter*tH, thetaHat - seOuter*tL];
+  } else {
+    out.stud = [NaN, NaN];
+  }
+
+  out._meta = {z0:z0, accel:accel, perc:[alpha/2, 1-alpha/2], bc:[bcL,bcH], bca:[caL,caH]};
+  return out;
+}
+
+/* ============================================================
+   11. STAGE 2 — THE LADDER
+   ============================================================ */
+function currentCIs(){
+  return buildCIs(S.bootDistSorted, sdOf(S.bootDist, S.B), S.thetaHat,
+                  S.alpha, S.accel, S.tStarSorted, S.seOuter);
+}
+
+function drawLadder(){
+  const cv = document.getElementById("cvLadder");
+  if(!cv || !S.bootDistSorted) return;
+  const cis = currentCIs();
+  const rows = CI_METHODS.length;
+
+  const dpr = Math.min(2, window.devicePixelRatio || 1);
+  const rect = cv.getBoundingClientRect();
+  const w = Math.max(60, rect.width), h = Math.max(60, rect.height);
+  cv.width = Math.round(w*dpr); cv.height = Math.round(h*dpr);
+  const ctx = cv.getContext("2d");
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  ctx.clearRect(0,0,w,h);
+
+  /* x domain: bootstrap distribution plus every interval endpoint */
+  let lo = quantileOfSorted(S.bootDistSorted, 0.0005);
+  let hi = quantileOfSorted(S.bootDistSorted, 0.9995);
+  for(const m of CI_METHODS){
+    const c = cis[m.key];
+    if(isFinite(c[0])) lo = Math.min(lo, c[0]);
+    if(isFinite(c[1])) hi = Math.max(hi, c[1]);
+  }
+  lo = Math.min(lo, S.thetaTrue, S.thetaHat);
+  hi = Math.max(hi, S.thetaTrue, S.thetaHat);
+  if(!(hi > lo)){ lo -= 1; hi += 1; }
+  const pad = (hi-lo)*0.05; lo -= pad; hi += pad;
+
+  const L = 14, R = 14;
+  const rowH = 20, barsH = rows*rowH + 10;
+  const histH = h - barsH - 26;
+  const X = v => L + (v-lo)/(hi-lo)*(w-L-R);
+
+  /* histogram */
+  const H = histogram(S.bootDist, S.B, lo, hi, 58);
+  let ymax = 0;
+  for(let k=0;k<H.bins;k++) ymax = Math.max(ymax, H.dens[k]);
+  const Y = d => 12 + histH - (d/(ymax*1.1 || 1))*histH;
+  ctx.save();
+  ctx.globalAlpha = .26; ctx.fillStyle = col("--boot");
+  for(let k=0;k<H.bins;k++){
+    if(H.dens[k] <= 0) continue;
+    const x1 = X(lo + k*H.bw), x2 = X(lo + (k+1)*H.bw);
+    ctx.fillRect(x1, Y(H.dens[k]), Math.max(.6, x2-x1-0.4), Y(0)-Y(H.dens[k]));
+  }
+  ctx.restore();
+
+  /* theta-hat and theta */
+  const vline = (v, c, dash, lab) => {
+    if(v < lo || v > hi) return;
+    ctx.save();
+    ctx.strokeStyle = c; ctx.lineWidth = 1.3;
+    if(dash) ctx.setLineDash(dash);
+    ctx.beginPath(); ctx.moveTo(X(v), 10); ctx.lineTo(X(v), 12+histH); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = c; ctx.font = "11px "+col("--mono"); ctx.textBaseline = "top";
+    const tw = ctx.measureText(lab).width;
+    const right = X(v)+4+tw < w-R;
+    ctx.textAlign = right ? "left" : "right";
+    ctx.fillText(lab, right ? X(v)+4 : X(v)-4, 10);
+    ctx.restore();
+  };
+  vline(S.thetaTrue, col("--pop"), [4,3], "θ");
+  vline(S.thetaHat, col("--sample"), null, "θ̂");
+
+  /* quantile ticks used by the percentile family */
+  const tickFor = (key, levels) => {
+    const m = CI_METHODS.find(z => z.key === key);
+    ctx.save();
+    ctx.strokeStyle = m.color; ctx.lineWidth = 1.6;
+    for(const lv of levels){
+      if(!isFinite(lv)) continue;
+      const v = quantileOfSorted(S.bootDistSorted, lv);
+      if(v < lo || v > hi) continue;
+      ctx.beginPath();
+      ctx.moveTo(X(v), 12+histH); ctx.lineTo(X(v), 12+histH+5);
+      ctx.stroke();
+    }
+    ctx.restore();
+  };
+  tickFor("perc", cis._meta.perc);
+  tickFor("bc",   cis._meta.bc);
+  tickFor("bca",  cis._meta.bca);
+
+  /* baseline */
+  ctx.save();
+  ctx.strokeStyle = col("--rule"); ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(L, 12+histH+.5); ctx.lineTo(w-R, 12+histH+.5); ctx.stroke();
+  ctx.fillStyle = col("--ink-soft"); ctx.font = "10px "+col("--mono");
+  ctx.textAlign = "center"; ctx.textBaseline = "top";
+  for(const t of niceTicks(lo, hi, 6)){
+    if(X(t) < L-1 || X(t) > w-R+1) continue;
+    ctx.fillText(fmtNum(t), X(t), h-14);
+  }
+  ctx.restore();
+
+  /* interval bars */
+  let y = 12 + histH + 16;
+  for(const m of CI_METHODS){
+    const c = cis[m.key];
+    ctx.save();
+    ctx.font = "11px "+col("--sans");
+    ctx.textBaseline = "middle"; ctx.textAlign = "left";
+    ctx.fillStyle = col("--ink-soft");
+    ctx.fillText(m.label, L, y);
+    if(isFinite(c[0]) && isFinite(c[1])){
+      const x1 = Math.max(L, X(c[0])), x2 = Math.min(w-R, X(c[1]));
+      ctx.strokeStyle = m.color; ctx.lineWidth = 2.6;
+      ctx.beginPath(); ctx.moveTo(x1, y); ctx.lineTo(x2, y); ctx.stroke();
+      ctx.lineWidth = 1.6;
+      ctx.beginPath();
+      ctx.moveTo(x1, y-4); ctx.lineTo(x1, y+4);
+      ctx.moveTo(x2, y-4); ctx.lineTo(x2, y+4);
+      ctx.stroke();
+      /* a miss is worth seeing */
+      if(S.thetaTrue < c[0] || S.thetaTrue > c[1]){
+        ctx.fillStyle = "#9A3324"; ctx.font = "10px "+col("--sans");
+        ctx.textAlign = "right";
+        ctx.fillText("misses θ", w-R, y-9);
+      }
+    } else {
+      ctx.fillStyle = col("--ink-soft"); ctx.font = "italic 11px "+col("--serif");
+      ctx.fillText("unavailable for this statistic", L+90, y);
+    }
+    ctx.restore();
+    y += rowH;
+  }
+
+  buildCITable(cis);
+  writeLadderNote(cis);
+}
+
+function buildCITable(cis){
+  const el = document.getElementById("ciTable");
+  if(!el) return;
+  let html = '<table class="ci"><thead><tr>' +
+    '<th>Method</th><th class="num">Lower</th><th class="num">Upper</th>' +
+    '<th class="num">Width</th><th class="num">Relative width</th><th>Contains θ</th>' +
+    '</tr></thead><tbody>';
+  const wPerc = cis.perc[1] - cis.perc[0];
+  for(const m of CI_METHODS){
+    const c = cis[m.key];
+    const ok = isFinite(c[0]) && isFinite(c[1]);
+    const hit = ok && S.thetaTrue >= c[0] && S.thetaTrue <= c[1];
+    html += '<tr>' +
+      '<td class="m"><span class="dot" style="background:'+m.color+'"></span>'+m.label+'</td>' +
+      '<td class="num">'+(ok?fmtVal(c[0],4):"—")+'</td>' +
+      '<td class="num">'+(ok?fmtVal(c[1],4):"—")+'</td>' +
+      '<td class="num">'+(ok?fmtVal(c[1]-c[0],4):"—")+'</td>' +
+      '<td class="num">'+(ok && wPerc>0 ? fmtVal((c[1]-c[0])/wPerc,3) : "—")+'</td>' +
+      '<td class="'+(ok?(hit?"hit":"miss"):"hit")+'">'+(ok?(hit?"yes":"no"):"—")+'</td>' +
+      '</tr>';
+  }
+  html += '</tbody></table>';
+  el.innerHTML = html;
+}
+
+function writeLadderNote(cis){
+  const el = document.getElementById("ladderNote");
+  if(!el) return;
+  const shiftPerc = cis.perc[0] + cis.perc[1] - 2*S.thetaHat;
+  const skew = skewOf(S.bootDist, S.B);
+  let t;
+  if(Math.abs(skew) < 0.15){
+    t = "The bootstrap distribution is close to symmetric (skewness " + fmtVal(skew,2) + "), so the six " +
+        "methods land nearly on top of each other. Every correction below the percentile interval is a " +
+        "correction for asymmetry, and there is none to correct. Switch to a lognormal or exponential " +
+        "population, or to the standard deviation, and watch them separate.";
+  } else {
+    t = "The bootstrap distribution is skewed (skewness " + fmtVal(skew,2) + "), and the methods now disagree. " +
+        "The percentile and basic intervals are mirror images of each other about θ̂, offset by " +
+        fmtVal(Math.abs(shiftPerc),4) + " in total. " +
+        (S.innerKind === "delta"
+          ? "Bootstrap-t is using a closed-form variance inside each resample."
+          : S.innerKind === "nested"
+            ? "Bootstrap-t is using a nested bootstrap of 50 inner resamples to get a variance inside each resample — this is the double bootstrap, and it costs what it looks like it costs."
+            : "Bootstrap-t is unavailable here: no closed-form variance exists for this statistic and a nested bootstrap at this n and B would be too expensive.");
+  }
+  el.textContent = t;
+}
+
+/* ============================================================
+   12. STAGE 3 — COVERAGE LABORATORY
+   ============================================================ */
+let covToken = 0;
+
+function coverageRun(n, N, Bc, alpha, seed, onProgress, onDone){
+  const token = ++covToken;
+  const rng = makeRNG(seed);
+  const brng = makeRNG(seed*7 + 11);
+  const x = new Float64Array(n), buf = new Float64Array(n), sc = new Float64Array(n);
+  const boot = new Float64Array(Bc);
+  const acc = {};
+  for(const m of CI_METHODS) acc[m.key] = {cover:0, left:0, right:0, width:0, valid:0};
+
+  const kind = S.statKind, pq = S.p, theta = S.thetaTrue;
+  const needNested = !isFinite(deltaSE(kind, S.sample, S.n, pq));
+  const innerB = needNested ? (n*Bc*25*N < 6e8 ? 25 : 0) : 0;
+  const inBuf = innerB ? new Float64Array(n) : null;
+  const inVal = innerB ? new Float64Array(innerB) : null;
+  const tArr = new Float64Array(Bc);
+
+  let r = 0;
+  const chunk = Math.max(1, Math.floor(2.5e5/(n*Bc*(innerB||1)/ (innerB?8:1) + 1)) || 1);
+
+  function step(){
+    if(token !== covToken) return;
+    const end = Math.min(N, r + Math.max(1, chunk));
+    for(; r<end; r++){
+      drawPopulation(x, n, rng);
+      const thetaHat = computeStat(kind, x, n, sc, pq);
+      const seOuter = innerB || !needNested
+        ? (needNested ? nestedSE(x, n, 200, kind, pq, brng) : deltaSE(kind, x, n, pq))
+        : NaN;
+      let tOK = isFinite(seOuter) && seOuter > 0;
+      for(let b=0;b<Bc;b++){
+        for(let i=0;i<n;i++) buf[i] = x[(brng.u()*n)|0];
+        const th = computeStat(kind, buf, n, sc, pq);
+        boot[b] = th;
+        if(tOK){
+          let se;
+          if(!needNested) se = deltaSE(kind, buf, n, pq);
+          else {
+            for(let k=0;k<innerB;k++){
+              for(let i=0;i<n;i++) inBuf[i] = buf[(brng.u()*n)|0];
+              inVal[k] = computeStat(kind, inBuf, n, sc, pq);
+            }
+            se = sdOf(inVal, innerB);
+          }
+          tArr[b] = (isFinite(se) && se > 0) ? (th - thetaHat)/se : NaN;
+        }
+      }
+      const bs = sortedCopy(boot, Bc);
+      const ts = tOK ? sortedFinite(tArr, Bc) : null;
+      const cis = buildCIs(bs, sdOf(boot, Bc), thetaHat, alpha,
+                           jackAccel(x, n, kind, pq), ts, seOuter);
+      for(const m of CI_METHODS){
+        const c = cis[m.key];
+        if(!isFinite(c[0]) || !isFinite(c[1])) continue;
+        const a = acc[m.key];
+        a.valid++;
+        a.width += c[1]-c[0];
+        if(theta < c[0]) a.left++;
+        else if(theta > c[1]) a.right++;
+        else a.cover++;
+      }
+    }
+    if(r < N){
+      if(onProgress) onProgress(r/N);
+      requestAnimationFrame(step);
+    } else {
+      const res = {n:n, N:N, B:Bc, alpha:alpha, methods:{}};
+      for(const m of CI_METHODS){
+        const a = acc[m.key];
+        res.methods[m.key] = a.valid ? {
+          cover: a.cover/a.valid, left: a.left/a.valid,
+          right: a.right/a.valid, width: a.width/a.valid, valid: a.valid
+        } : null;
+      }
+      onDone(res);
+    }
+  }
+  step();
+}
+
+function drawCoverage(){
+  const res = S.cov;
+  const cv = document.getElementById("cvCoverage");
+  if(!cv || !res) return;
+  cv.style.display = "";
+  document.getElementById("covEmpty").style.display = "none";
+
+  const dpr = Math.min(2, window.devicePixelRatio || 1);
+  const rect = cv.getBoundingClientRect();
+  const w = Math.max(60, rect.width), h = Math.max(60, rect.height);
+  cv.width = Math.round(w*dpr); cv.height = Math.round(h*dpr);
+  const ctx = cv.getContext("2d");
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  ctx.clearRect(0,0,w,h);
+
+  const nom = res.alpha/2;
+  let maxMiss = nom*2.2;
+  for(const m of CI_METHODS){
+    const d = res.methods[m.key];
+    if(d) maxMiss = Math.max(maxMiss, d.left, d.right);
+  }
+  maxMiss *= 1.15;
+
+  const cx = w/2, half = w/2 - 78;
+  const X = (side, v) => cx + side*(v/maxMiss)*half;
+  const rowH = (h - 42)/CI_METHODS.length;
+
+  /* nominal marks */
+  ctx.save();
+  ctx.strokeStyle = col("--ink-soft"); ctx.lineWidth = 1; ctx.setLineDash([3,3]);
+  for(const s of [-1,1]){
+    ctx.beginPath(); ctx.moveTo(X(s,nom), 16); ctx.lineTo(X(s,nom), h-26); ctx.stroke();
+  }
+  ctx.setLineDash([]);
+  ctx.strokeStyle = col("--rule");
+  ctx.beginPath(); ctx.moveTo(cx, 16); ctx.lineTo(cx, h-26); ctx.stroke();
+  ctx.fillStyle = col("--ink-soft"); ctx.font = "10.5px "+col("--sans");
+  ctx.textBaseline = "top"; ctx.textAlign = "center";
+  ctx.fillText("misses low  ←", cx - half*0.55, 2);
+  ctx.fillText("→  misses high", cx + half*0.55, 2);
+  ctx.font = "10px "+col("--mono");
+  ctx.fillText("nominal "+(nom*100).toFixed(1)+"%", X(-1,nom), h-22);
+  ctx.fillText("nominal "+(nom*100).toFixed(1)+"%", X(1,nom), h-22);
+  ctx.restore();
+
+  let y = 24;
+  for(const m of CI_METHODS){
+    const d = res.methods[m.key];
+    const yc = y + rowH/2;
+    ctx.save();
+    ctx.font = "11px "+col("--sans");
+    ctx.textBaseline = "middle";
+    if(!d){
+      ctx.fillStyle = col("--ink-soft"); ctx.textAlign = "center";
+      ctx.fillText(m.label + " — unavailable", cx, yc);
+      ctx.restore(); y += rowH; continue;
+    }
+    const bh = Math.min(13, rowH*0.52);
+    ctx.fillStyle = m.color; ctx.globalAlpha = .85;
+    ctx.fillRect(X(-1,d.left), yc-bh/2, cx - X(-1,d.left), bh);
+    ctx.fillRect(cx, yc-bh/2, X(1,d.right) - cx, bh);
+    ctx.globalAlpha = 1;
+    ctx.fillStyle = col("--ink-soft");
+    ctx.textAlign = "right";
+    ctx.fillText((d.left*100).toFixed(1)+"%", X(-1,d.left)-6, yc);
+    ctx.textAlign = "left";
+    ctx.fillText((d.right*100).toFixed(1)+"%", X(1,d.right)+6, yc);
+    ctx.restore();
+    y += rowH;
+  }
+
+  /* method labels down the centre line */
+  ctx.save();
+  ctx.font = "11px "+col("--sans");
+  ctx.textBaseline = "middle"; ctx.textAlign = "center";
+  y = 24;
+  for(const m of CI_METHODS){
+    const yc = y + rowH/2;
+    const tw = ctx.measureText(m.label).width;
+    ctx.fillStyle = col("--field");
+    ctx.fillRect(cx-tw/2-5, yc-8, tw+10, 16);
+    ctx.fillStyle = col("--ink");
+    ctx.fillText(m.label, cx, yc);
+    y += rowH;
+  }
+  ctx.restore();
+
+  buildCovTable(res);
+}
+
+function buildCovTable(res){
+  const el = document.getElementById("covTable");
+  if(!el) return;
+  const nominal = 1 - res.alpha;
+  const mcse = Math.sqrt(nominal*(1-nominal)/res.N);
+  let html = '<table class="ci"><thead><tr>' +
+    '<th>Method</th><th class="num">Coverage</th><th class="num">Misses low</th>' +
+    '<th class="num">Misses high</th><th class="num">Mean width</th><th>Order</th>' +
+    '</tr></thead><tbody>';
+  for(const m of CI_METHODS){
+    const d = res.methods[m.key];
+    html += '<tr><td class="m"><span class="dot" style="background:'+m.color+'"></span>'+m.label+'</td>';
+    if(!d){
+      html += '<td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td>';
+    } else {
+      const off = Math.abs(d.cover - nominal) > 2*mcse;
+      html += '<td class="num '+(off?"miss":"hit")+'">'+(d.cover*100).toFixed(1)+'%</td>' +
+              '<td class="num">'+(d.left*100).toFixed(1)+'%</td>' +
+              '<td class="num">'+(d.right*100).toFixed(1)+'%</td>' +
+              '<td class="num">'+fmtVal(d.width,4)+'</td>';
+    }
+    html += '<td class="m">'+(m.order === "second" ? "second" : "first")+'</td></tr>';
+  }
+  html += '</tbody></table>' +
+    '<p class="hint" style="margin-top:8px">' + res.N + ' datasets, ' + res.B +
+    ' resamples each, nominal ' + (nominal*100).toFixed(0) + '%. Monte Carlo uncertainty on each coverage figure is about ±' +
+    (mcse*100).toFixed(1) + ' percentage points; figures further than two of those from nominal are marked.</p>';
+  el.innerHTML = html;
+}
+
+/* ---- the sweep over n ---- */
+function runSweep(){
+  const grid = [10,20,40,80,160];
+  const N = 300, Bc = 300;
+  const out = [];
+  const prog = document.getElementById("sweepProg");
+  const status = document.getElementById("sweepStatus");
+  prog.classList.add("on");
+  document.getElementById("runSweep").disabled = true;
+
+  let gi = 0;
+  function next(){
+    if(gi >= grid.length){
+      S.sweep = {grid:grid, data:out, alpha:S.alpha, N:N};
+      prog.classList.remove("on");
+      status.textContent = "done";
+      document.getElementById("runSweep").disabled = false;
+      document.getElementById("sweepEmpty").style.display = "none";
+      document.getElementById("cvSweep").style.display = "";
+      drawSweep();
+      return;
+    }
+    const n = grid[gi];
+    status.textContent = "n = " + n + "  (" + (gi+1) + " of " + grid.length + ")";
+    coverageRun(n, N, Bc, S.alpha, 1234 + gi*97,
+      f => { prog.firstElementChild.style.width = (100*(gi+f)/grid.length).toFixed(1)+"%"; },
+      res => { out.push(res); gi++; next(); });
+  }
+  next();
+}
+
+function drawSweep(){
+  const sw = S.sweep;
+  const cv = document.getElementById("cvSweep");
+  if(!cv || !sw) return;
+  const p = Plot(cv, {l:52, r:14, t:16, b:30});
+  const alpha = sw.alpha, nom = alpha/2;
+
+  /* one-sided error on the left tail */
+  const series = [];
+  let emin = Infinity, emax = -Infinity;
+  for(const m of CI_METHODS){
+    const pts = [];
+    for(const res of sw.data){
+      const d = res.methods[m.key];
+      if(!d) continue;
+      const e = Math.abs(d.left - nom);
+      const floor = 0.15*Math.sqrt(nom*(1-nom)/res.N);
+      const v = Math.max(e, floor);
+      pts.push([res.n, v]);
+      emin = Math.min(emin, v); emax = Math.max(emax, v);
+    }
+    if(pts.length) series.push({m:m, pts:pts});
+  }
+  if(!isFinite(emin)) return;
+
+  const lx = Math.log10(sw.grid[0]*0.85), hx = Math.log10(sw.grid[sw.grid.length-1]*1.2);
+  const ly = Math.log10(emin*0.6), hy = Math.log10(emax*1.6);
+  p.dom(lx, hx, ly, hy);
+  const ctx = p.ctx;
+
+  /* reference slopes */
+  ctx.save();
+  ctx.strokeStyle = col("--rule"); ctx.lineWidth = 1.2; ctx.setLineDash([5,4]);
+  for(const [slope, lab] of [[-0.5,"slope −1/2"], [-1,"slope −1"]]){
+    const y0 = hy - 0.15;
+    ctx.beginPath();
+    ctx.moveTo(p.X(lx), p.Y(y0));
+    ctx.lineTo(p.X(hx), p.Y(y0 + slope*(hx-lx)));
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = col("--ink-soft"); ctx.font = "10px "+col("--mono");
+    ctx.textAlign = "right"; ctx.textBaseline = "bottom";
+    ctx.fillText(lab, p.X(hx)-2, p.Y(y0 + slope*(hx-lx))-2);
+    ctx.setLineDash([5,4]);
+  }
+  ctx.restore();
+
+  for(const s of series){
+    ctx.save();
+    ctx.strokeStyle = s.m.color; ctx.lineWidth = s.m.order === "second" ? 2.2 : 1.4;
+    ctx.beginPath();
+    s.pts.forEach((q,i) => {
+      const X = p.X(Math.log10(q[0])), Y = p.Y(Math.log10(q[1]));
+      if(i === 0) ctx.moveTo(X,Y); else ctx.lineTo(X,Y);
+    });
+    ctx.stroke();
+    ctx.fillStyle = s.m.color;
+    for(const q of s.pts){
+      ctx.beginPath();
+      ctx.arc(p.X(Math.log10(q[0])), p.Y(Math.log10(q[1])), 2.6, 0, 6.2832);
+      ctx.fill();
+    }
+    ctx.restore();
+  }
+
+  /* axes */
+  ctx.save();
+  ctx.strokeStyle = col("--rule"); ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(p.P.l, p.h-p.P.b+.5); ctx.lineTo(p.w-p.P.r, p.h-p.P.b+.5); ctx.stroke();
+  ctx.fillStyle = col("--ink-soft"); ctx.font = "10px "+col("--mono");
+  ctx.textAlign = "center"; ctx.textBaseline = "top";
+  for(const n of sw.grid){
+    const X = p.X(Math.log10(n));
+    ctx.beginPath(); ctx.moveTo(X, p.h-p.P.b); ctx.lineTo(X, p.h-p.P.b+3); ctx.stroke();
+    ctx.fillText(String(n), X, p.h-p.P.b+5);
+  }
+  ctx.textAlign = "right"; ctx.textBaseline = "middle";
+  for(let e = Math.ceil(ly); e <= Math.floor(hy); e++){
+    const Y = p.Y(e);
+    if(Y < p.P.t || Y > p.h-p.P.b) continue;
+    ctx.fillText(fmtNum(Math.pow(10,e)), p.P.l-5, Y);
+  }
+  ctx.save();
+  ctx.translate(12, p.h/2); ctx.rotate(-Math.PI/2);
+  ctx.textAlign = "center"; ctx.textBaseline = "middle";
+  ctx.font = "10.5px "+col("--sans");
+  ctx.fillText("one-sided coverage error", 0, 0);
+  ctx.restore();
+  ctx.restore();
+
+  legend(p, CI_METHODS.map(m => ({c:m.color, t:m.label})));
+}
+
+/* ============================================================
+   13. STAGE 4 — EDGEWORTH, CORNISH-FISHER, DELTA
+   ============================================================ */
+function runEdgeworth(){
+  const n = S.n, R = Math.min(40000, Math.max(8000, Math.floor(3e6/n)));
+  const rng = makeRNG(S.seed*2027 + 5);
+  const x = new Float64Array(n), sc = new Float64Array(n);
+  const Sstd = new Float64Array(R), Tstu = new Float64Array(R);
+
+  const mu = meanOf(S.ref, N_REF);
+  const sg = sdOf(S.ref, N_REF);
+  const gm = skewOf(S.ref, N_REF);
+
+  for(let r=0;r<R;r++){
+    drawPopulation(x, n, rng);
+    const m = meanOf(x, n);
+    const s = sdOf(x, n);
+    Sstd[r] = Math.sqrt(n)*(m - mu)/sg;
+    Tstu[r] = s > 0 ? Math.sqrt(n)*(m - mu)/s : NaN;
+  }
+  S.edge = {
+    n:n, R:R, gamma:gm,
+    S: sortedFinite(Sstd, R),
+    T: sortedFinite(Tstu, R)
+  };
+}
+
+function drawEdgeOne(cvId, sorted, poly, label){
+  const cv = document.getElementById(cvId);
+  if(!cv || !sorted) return;
+  const p = Plot(cv, {l:44, r:12, t:14, b:24});
+  const n = S.edge.n, g = S.edge.gamma;
+  const M = 140;
+  const xs = new Float64Array(M), emp = new Float64Array(M), th = new Float64Array(M);
+  let lo2 = Infinity, hi2 = -Infinity;
+  for(let i=0;i<M;i++){
+    const xv = -3.2 + 6.4*i/(M-1);
+    xs[i] = xv;
+    emp[i] = ecdfAt(sorted, xv) - normCDF(xv);
+    th[i]  = poly(xv, g, n)*normPDF(xv)/Math.sqrt(n);
+    lo2 = Math.min(lo2, emp[i], th[i]);
+    hi2 = Math.max(hi2, emp[i], th[i]);
+  }
+  const sp = Math.max(1e-4, (hi2-lo2)*0.2);
+  p.dom(-3.2, 3.2, lo2-sp, hi2+sp);
+
+  const ctx = p.ctx;
+  ctx.save();
+  ctx.strokeStyle = col("--rule"); ctx.lineWidth = 1; ctx.setLineDash([3,3]);
+  ctx.beginPath(); ctx.moveTo(p.X(-3.2), p.Y(0)); ctx.lineTo(p.X(3.2), p.Y(0)); ctx.stroke();
+  ctx.restore();
+
+  drawCurve(p, xs, emp, col("--truth"), 1.9);
+  drawCurve(p, xs, th, col("--boot"), 1.6, [5,3]);
+
+  ctx.save();
+  ctx.strokeStyle = col("--rule"); ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(p.P.l, p.h-p.P.b+.5); ctx.lineTo(p.w-p.P.r, p.h-p.P.b+.5); ctx.stroke();
+  ctx.fillStyle = col("--ink-soft"); ctx.font = "10px "+col("--mono");
+  ctx.textAlign = "center"; ctx.textBaseline = "top";
+  for(const t of [-3,-2,-1,0,1,2,3]) ctx.fillText(String(t), p.X(t), p.h-p.P.b+5);
+  ctx.textAlign = "right"; ctx.textBaseline = "middle";
+  for(const t of niceTicks(lo2-sp, hi2+sp, 4)){
+    const Y = p.Y(t);
+    if(Y < p.P.t || Y > p.h-p.P.b) continue;
+    ctx.fillText(fmtNum(t), p.P.l-5, Y);
+  }
+  ctx.restore();
+
+  legend(p, [{c:col("--truth"), t:"simulated − Φ"},
+             {c:col("--boot"),  t:"Edgeworth term"}]);
+}
+
+const POLY_STD = (x,g) => -(g/6)*(x*x - 1);
+const POLY_STU = (x,g) =>  (g/6)*(2*x*x + 1);
+
+function drawEdgeworth(){
+  if(!S.edge) return;
+  document.getElementById("edgeEmpty").style.display = "none";
+  document.getElementById("edgeWrap").style.display = "";
+  drawEdgeOne("cvEdgeS", S.edge.S, POLY_STD);
+  drawEdgeOne("cvEdgeT", S.edge.T, POLY_STU);
+
+  const g = S.edge.gamma, n = S.edge.n;
+  document.getElementById("edgeNote").textContent =
+    "Population skewness γ = " + fmtVal(g,3) + ", n = " + n + ", so the correction is scaled by " +
+    "γ/(6√n) = " + fmtVal(g/(6*Math.sqrt(n)),4) + ". " +
+    (Math.abs(g) < 0.15
+      ? "With a near-symmetric population the term is essentially zero and both residual curves hug the axis — the normal approximation is already right to this order. Pick a lognormal or exponential population to see the term appear."
+      : "The solid curve is what the simulation actually produced; the dashed curve is the single Edgeworth term, computed from γ and n alone with no fitting. Raise n and both shrink like n^(−1/2), while staying on top of each other.");
+
+  drawCF();
+}
+
+function drawCF(){
+  const cv = document.getElementById("cvCF");
+  if(!cv || !S.edge || !S.edge.T) return;
+  document.getElementById("cfEmpty").style.display = "none";
+  cv.style.display = "";
+  const p = Plot(cv, {l:52, r:14, t:16, b:28});
+  const n = S.edge.n, g = S.edge.gamma;
+
+  const M = 120;
+  const zs = new Float64Array(M), trueC = new Float64Array(M), cfC = new Float64Array(M), bootC = new Float64Array(M);
+  const haveBoot = !!S.tStarSorted && S.statKind === "mean";
+  let lo2 = Infinity, hi2 = -Infinity;
+  for(let i=0;i<M;i++){
+    const a = 0.01 + 0.98*i/(M-1);
+    const z = normQ(a);
+    zs[i] = z;
+    trueC[i] = quantileOfSorted(S.edge.T, a) - z;
+    cfC[i]   = -POLY_STU(z, g)/Math.sqrt(n);
+    bootC[i] = haveBoot ? quantileOfSorted(S.tStarSorted, a) - z : NaN;
+    lo2 = Math.min(lo2, trueC[i], cfC[i]);
+    hi2 = Math.max(hi2, trueC[i], cfC[i]);
+    if(haveBoot && isFinite(bootC[i])){
+      lo2 = Math.min(lo2, bootC[i]); hi2 = Math.max(hi2, bootC[i]);
+    }
+  }
+  const sp = Math.max(1e-4, (hi2-lo2)*0.15);
+  p.dom(zs[0]*1.05, zs[M-1]*1.05, lo2-sp, hi2+sp);
+
+  const ctx = p.ctx;
+  ctx.save();
+  ctx.strokeStyle = col("--rule"); ctx.lineWidth = 1; ctx.setLineDash([3,3]);
+  ctx.beginPath(); ctx.moveTo(p.X(p.x0), p.Y(0)); ctx.lineTo(p.X(p.x1), p.Y(0)); ctx.stroke();
+  ctx.restore();
+
+  drawCurve(p, zs, trueC, col("--truth"), 2.0);
+  drawCurve(p, zs, cfC, col("--pop"), 1.6, [5,3]);
+  if(haveBoot) drawCurve(p, zs, bootC, col("--boot"), 1.6);
+
+  ctx.save();
+  ctx.strokeStyle = col("--rule"); ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(p.P.l, p.h-p.P.b+.5); ctx.lineTo(p.w-p.P.r, p.h-p.P.b+.5); ctx.stroke();
+  ctx.fillStyle = col("--ink-soft"); ctx.font = "10px "+col("--mono");
+  ctx.textAlign = "center"; ctx.textBaseline = "top";
+  for(const t of [-2,-1,0,1,2]){
+    if(t < p.x0 || t > p.x1) continue;
+    ctx.fillText(String(t), p.X(t), p.h-p.P.b+5);
+  }
+  ctx.font = "10.5px "+col("--sans");
+  ctx.fillText("normal quantile z", (p.P.l + p.w - p.P.r)/2, p.h-p.P.b+16);
+  ctx.font = "10px "+col("--mono");
+  ctx.textAlign = "right"; ctx.textBaseline = "middle";
+  for(const t of niceTicks(lo2-sp, hi2+sp, 4)){
+    const Y = p.Y(t);
+    if(Y < p.P.t || Y > p.h-p.P.b) continue;
+    ctx.fillText(fmtNum(t), p.P.l-5, Y);
+  }
+  ctx.restore();
+
+  const items = [{c:col("--truth"), t:"true quantile − z"}, {c:col("--pop"), t:"Cornish−Fisher"}];
+  if(haveBoot) items.push({c:col("--boot"), t:"bootstrap-t − z"});
+  legend(p, items);
+
+  /* BCa constants readout */
+  const cis = currentCIs();
+  const gHat = skewOf(S.sample, S.n);
+  document.getElementById("ro-gamma").textContent  = fmtVal(g,4);
+  document.getElementById("ro-gscale").textContent = fmtVal(gHat/(6*Math.sqrt(S.n)),4);
+  document.getElementById("ro-z0").textContent     = fmtVal(cis._meta.z0,4);
+  document.getElementById("ro-accel").textContent  = fmtVal(cis._meta.accel,4);
+}
+
+/* ---- delta vs bootstrap vs true, across n ---- */
+function runDeltaSweep(){
+  const grid = [10,20,40,80,160,320];
+  const R = 3000, Bc = 800;
+  const out = [];
+  for(const n of grid){
+    const rng = makeRNG(S.seed*613 + n);
+    const x = new Float64Array(n), sc = new Float64Array(n);
+    const rep = new Float64Array(R);
+    for(let r=0;r<R;r++){
+      drawPopulation(x, n, rng);
+      rep[r] = computeStat(S.statKind, x, n, sc, S.p);
+    }
+    const trueSE = sdOf(rep, R);
+    /* one representative sample */
+    const brng = makeRNG(S.seed*7919 + 13 + n);
+    drawPopulation(x, n, brng);
+    const dSE = deltaSE(S.statKind, x, n, S.p);
+    const buf = new Float64Array(n), bv = new Float64Array(Bc);
+    for(let b=0;b<Bc;b++){
+      for(let i=0;i<n;i++) buf[i] = x[(brng.u()*n)|0];
+      bv[b] = computeStat(S.statKind, buf, n, sc, S.p);
+    }
+    out.push({n:n, trueSE:trueSE, bootSE:sdOf(bv, Bc), deltaSE:dSE});
+  }
+  S.deltaRes = out;
+}
+
+function drawDeltaSweep(){
+  const res = S.deltaRes;
+  const cv = document.getElementById("cvSEn");
+  if(!cv || !res) return;
+  document.getElementById("deltaEmpty").style.display = "none";
+  cv.style.display = "";
+  const p = Plot(cv, {l:56, r:14, t:16, b:30});
+
+  let lo2 = Infinity, hi2 = -Infinity;
+  for(const r of res){
+    for(const v of [r.trueSE, r.bootSE, r.deltaSE]){
+      if(isFinite(v) && v > 0){ lo2 = Math.min(lo2,v); hi2 = Math.max(hi2,v); }
+    }
+  }
+  if(!isFinite(lo2)) return;
+  const lx = Math.log10(res[0].n*0.85), hx = Math.log10(res[res.length-1].n*1.2);
+  p.dom(lx, hx, Math.log10(lo2*0.7), Math.log10(hi2*1.4));
+
+  const ctx = p.ctx;
+  const series = [
+    {k:"trueSE",  c:col("--truth"),  t:"true standard error", w:2.2},
+    {k:"bootSE",  c:col("--boot"),   t:"bootstrap", w:1.7},
+    {k:"deltaSE", c:col("--pop"),    t:"delta method", w:1.7, dash:[5,3]}
+  ];
+  for(const s of series){
+    ctx.save();
+    ctx.strokeStyle = s.c; ctx.lineWidth = s.w;
+    if(s.dash) ctx.setLineDash(s.dash);
+    ctx.beginPath();
+    let started = false;
+    for(const r of res){
+      const v = r[s.k];
+      if(!(isFinite(v) && v > 0)){ started = false; continue; }
+      const X = p.X(Math.log10(r.n)), Y = p.Y(Math.log10(v));
+      if(!started){ ctx.moveTo(X,Y); started = true; } else ctx.lineTo(X,Y);
+    }
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = s.c;
+    for(const r of res){
+      const v = r[s.k];
+      if(!(isFinite(v) && v > 0)) continue;
+      ctx.beginPath();
+      ctx.arc(p.X(Math.log10(r.n)), p.Y(Math.log10(v)), 2.5, 0, 6.2832);
+      ctx.fill();
+    }
+    ctx.restore();
+  }
+
+  ctx.save();
+  ctx.strokeStyle = col("--rule"); ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(p.P.l, p.h-p.P.b+.5); ctx.lineTo(p.w-p.P.r, p.h-p.P.b+.5); ctx.stroke();
+  ctx.fillStyle = col("--ink-soft"); ctx.font = "10px "+col("--mono");
+  ctx.textAlign = "center"; ctx.textBaseline = "top";
+  for(const r of res) ctx.fillText(String(r.n), p.X(Math.log10(r.n)), p.h-p.P.b+5);
+  ctx.font = "10.5px "+col("--sans");
+  ctx.fillText("sample size n", (p.P.l + p.w - p.P.r)/2, p.h-p.P.b+17);
+  ctx.font = "10px "+col("--mono");
+  ctx.textAlign = "right"; ctx.textBaseline = "middle";
+  for(let e = Math.ceil(p.y0); e <= Math.floor(p.y1); e++){
+    const Y = p.Y(e);
+    if(Y < p.P.t || Y > p.h-p.P.b) continue;
+    ctx.fillText(fmtNum(Math.pow(10,e)), p.P.l-5, Y);
+  }
+  ctx.restore();
+  legend(p, series.map(s => ({c:s.c, t:s.t})));
+
+  const last = res[res.length-1];
+  const el = document.getElementById("deltaNote");
+  if(isFinite(last.deltaSE)){
+    const rel = Math.abs(last.deltaSE - last.trueSE)/last.trueSE;
+    const first = res[0];
+    const rel0 = isFinite(first.deltaSE) ? Math.abs(first.deltaSE - first.trueSE)/first.trueSE : NaN;
+    el.textContent = "At n = " + first.n + " the delta-method standard error is off by " +
+      (isFinite(rel0) ? (rel0*100).toFixed(1)+"%" : "an undefined amount") +
+      "; by n = " + last.n + " it is off by " + (rel*100).toFixed(1) + "%. " +
+      "Part of that shrinkage is the Taylor remainder dying, and part is the single sample it is computed " +
+      "from becoming more representative — the two are tangled together here, exactly as they would be with real data.";
+  } else {
+    el.textContent = "No closed-form delta standard error exists for " +
+      STATS[S.statKind].label.toLowerCase() + " in this playground, so only the true and bootstrap curves " +
+      "are drawn. They should sit on top of each other and decay like n^(−1/2); any gap is the bootstrap's " +
+      "approximation error, visible here as a function of n.";
+  }
+}
+
+/* ---------- initialisation ---------- */
+S.popParams = defaultsFor(S.popKind);
+buildPopSelect(); buildStatSelect(); buildPopParams(); wire();
+document.getElementById("nv").textContent = S.n;
+document.getElementById("Bv").textContent = S.B;
+document.getElementById("seedv").textContent = S.seed;
+recompute(1);
+</script>
+</body>
+</html>

@@ -11,3 +11,4 @@ nav_order: 60
 ## Simulation
 
 - [How inversion method works](https://thiagorr162.github.io/assets/html/inversion.html)
+- [How bootstrap works](https://thiagorr162.github.io/assets/html/bootstrap.html)
