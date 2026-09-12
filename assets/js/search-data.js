@@ -44,6 +44,13 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/teaching/";
           },
+        },{id: "nav-ai-stuff",
+          title: "ai stuff",
+          description: "Some visualization tools that AI made for me.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/ia/";
+          },
         },{
         id: 'social-email',
         title: 'email',
