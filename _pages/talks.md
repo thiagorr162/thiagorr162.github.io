@@ -9,6 +9,19 @@ nav_order: 6
 
 ## 2026
 
+
+* **Functional Newton Methods for Operator Learning**
+  *Ciclo de Palestras do Programa de Pós-graduação em Estatística (PPGE) — UFRJ*
+  📅 September 16, 2026 — Online
+
+  [Slides](../assets/presentations/how_math_ai.pdf)
+
+* **Functional Newton Methods for Operator Learning**
+  *Seminário do Programa Interinstitucional de Pós-Graduação em Estatística (PIPGEs) — UFSCar-USP*
+  📅 September 18, 2026
+
+  [Slides](../assets/presentations/how_math_ai.pdf)
+
 - **Functional Newton Methods for Operator Learning**  
   _How can Mathematics contribute to AI? — INCT-NUMEC / IME-USP_  
   📅 August 10, 2026 — São Paulo, SP  
