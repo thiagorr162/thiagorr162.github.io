@@ -6,7 +6,6 @@ nav: true
 nav_order: 6
 ---
 
-- **Fatos agora:** [html](https://thiagorr162.github.io/assets/fato-agora.html) 
 - **Notes on Operator Learning:** [PDF](https://thiagorr162.github.io/assets/pdf/notes/operator_learning.pdf).
 - **Ciências de Dados Cheat Sheet:** [PDF](https://thiagorr162.github.io/assets/pdf/notes/ml_sheet_cheat.pdf).
 - **Lecture Notes on Diffusion Processes:** [PDF](https://thiagorr162.github.io/assets/pdf/notes/sde.pdf).
