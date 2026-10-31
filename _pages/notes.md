@@ -13,3 +13,5 @@ nav_order: 6
 - **Raspagem de Dados:**  [Github](https://github.com/thiagorr162/web_scraping).
 - **Simulação Estocástica:** [PDF](https://thiagorr162.github.io/assets/pdf/notes/metodosComputacionais.pdf), [Zenodo](https://zenodo.org/records/17585377), [Github](https://github.com/thiagorr162/metodos_computacionais).
 - **Exponential Tilting, Concentration, and Convex Duality:** [PDF](https://thiagorr162.github.io/assets/pdf/notes/tilted.pdf).
+- **Bootstrap:** [PDF](https://thiagorr162.github.io/assets/pdf/notes/aula_boot.pdf).
+
