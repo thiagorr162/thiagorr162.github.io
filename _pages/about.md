@@ -28,4 +28,3 @@ I am part of the [Statistical Machine Learning Lab (SMALL-UFSCar)](https://small
 </a>
 
 You can download my cv [here.](https://thiagorr162.github.io/assets/pdf/cv.pdf)
-

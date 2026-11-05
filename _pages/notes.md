@@ -10,8 +10,7 @@ nav_order: 6
 - **Ciências de Dados Cheat Sheet:** [PDF](https://thiagorr162.github.io/assets/pdf/notes/ml_sheet_cheat.pdf).
 - **Lecture Notes on Diffusion Processes:** [PDF](https://thiagorr162.github.io/assets/pdf/notes/sde.pdf).
 - **Aprendizado de Máquinas:** [PDF](https://thiagorr162.github.io/assets/pdf/notes/AprendizadoMaquinas.pdf), [Github](https://github.com/thiagorr162/curso_aprendizado).
-- **Raspagem de Dados:**  [Github](https://github.com/thiagorr162/web_scraping).
+- **Raspagem de Dados:** [Github](https://github.com/thiagorr162/web_scraping).
 - **Simulação Estocástica:** [PDF](https://thiagorr162.github.io/assets/pdf/notes/metodosComputacionais.pdf), [Zenodo](https://zenodo.org/records/17585377), [Github](https://github.com/thiagorr162/metodos_computacionais).
 - **Exponential Tilting, Concentration, and Convex Duality:** [PDF](https://thiagorr162.github.io/assets/pdf/notes/tilted.pdf).
 - **Bootstrap:** [PDF](https://thiagorr162.github.io/assets/pdf/notes/aula_boot.pdf).
-
