@@ -9,5 +9,6 @@ nav_order: 60
 
 ## Simulation
 
+- [Carros no Brasil](https://thiagorr162.github.io/assets/html/carros.html)
 - [How inversion method works](https://thiagorr162.github.io/assets/html/inversion.html)
 - [How bootstrap works](https://thiagorr162.github.io/assets/html/bootstrap.html)
