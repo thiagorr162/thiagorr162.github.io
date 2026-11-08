@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><style>:root{color-scheme:light;padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style></head><body>
-<title>Jogo patológico no SUS</title>
+<title>Bets e saúde mental</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,12 +16,17 @@
   --rule: #dfe2e3;
   --axis: #c3c6c7;
   --accent: #1d5fae;      /* tinta de destaque (texto/links), mais escura que a série */
-  --s1: #2a78d6;          /* série: F63.0 jogo patológico */
+  --s1: #2a78d6;          /* atenção primária (azul) */
+  --caps: #d03b3b;        /* CAPS (vermelho) */
+  --caps-soft: #f1aea8;   /* mesma família: parte "já estava no CAPS" */
   --s1-soft: #9ec5f4;     /* mesma família: parte "já estava no CAPS" */
-  --s2: #eb6834;          /* série: busca por apostas (gráfico próprio) */
+  --s2: #c98500;          /* busca por apostas (âmbar) */
   --ref: #9a9c9e;         /* referência: placebo / saúde mental */
+  --pro: #1baf7a;          /* Congresso: proibir o cassino / reforça a proibição */
+  --contra: #eda100;       /* Congresso: liberar o cassino / afrouxa a proibição */
   --band-pand: rgba(120,124,128,.13);
-  --mark: #c8352f;        /* marcos regulatórios */
+  --band-cpi: rgba(98,80,214,.13);   /* CPI das Bets */
+  --mark: #4c4f52;        /* marcos regulatórios (neutro: o vermelho é do CAPS) */
   --f-display: "IBM Plex Sans Condensed", "Arial Narrow", system-ui, sans-serif;
   --f-body: "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", sans-serif;
   --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
@@ -29,12 +34,12 @@
 }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
   --bg: #0f1112; --surface: #17191a; --ink: #eef0f0; --ink-2: #c2c6c8; --muted: #8a8e91; --rule: #2a2d2f; --axis: #3a3e40;
-  --accent: #7fb2f0; --s1: #3987e5; --s1-soft: #1c5cab; --s2: #d95926; --ref: #7c8083;
-  --band-pand: rgba(160,165,170,.12); --mark: #e66767; color-scheme: dark } }
+  --accent: #7fb2f0; --s1: #3987e5; --s1-soft: #1c5cab; --caps: #e8615a; --caps-soft: #8a2e2a; --s2: #d9a21f; --ref: #7c8083; --pro: #199e70; --contra: #c98500;
+  --band-pand: rgba(160,165,170,.12); --band-cpi: rgba(144,133,233,.18); --mark: #c2c6c8; color-scheme: dark } }
 :root[data-theme="dark"] {
   --bg: #0f1112; --surface: #17191a; --ink: #eef0f0; --ink-2: #c2c6c8; --muted: #8a8e91; --rule: #2a2d2f; --axis: #3a3e40;
-  --accent: #7fb2f0; --s1: #3987e5; --s1-soft: #1c5cab; --s2: #d95926; --ref: #7c8083;
-  --band-pand: rgba(160,165,170,.12); --mark: #e66767; color-scheme: dark }
+  --accent: #7fb2f0; --s1: #3987e5; --s1-soft: #1c5cab; --caps: #e8615a; --caps-soft: #8a2e2a; --s2: #d9a21f; --ref: #7c8083; --pro: #199e70; --contra: #c98500;
+  --band-pand: rgba(160,165,170,.12); --band-cpi: rgba(144,133,233,.18); --mark: #c2c6c8; color-scheme: dark }
 
 * { box-sizing: border-box }
 body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: var(--s0); line-height: 1.55;
@@ -53,11 +58,20 @@ a { color: var(--accent) }
 .small { font-size: var(--s-1); color: var(--ink-2) }
 .tnum { font-variant-numeric: tabular-nums }
 
-header.top { padding-block: 3rem 2rem; display: grid; gap: 1rem }
+header.top { padding-block: 2rem 2rem; display: grid; gap: 1rem }
+.topo { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap }
+.topo-link, .voltar { font-family: var(--f-display); font-weight: 600; font-size: var(--s0); color: var(--accent); text-decoration: none; border-bottom: 1.5px solid currentColor }
+.topo-link:hover, .voltar:hover { color: var(--ink) }
+.voltar { justify-self: start }
 header.top .lede { font-size: var(--s1t); color: var(--ink-2); max-width: 60ch }
 .carimbo { display: flex; flex-wrap: wrap; gap: .4rem 1.2rem }
 
 .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 10px; overflow: hidden; margin-block: .5rem 3rem }
+.destaques { margin-block: .5rem 3rem; display: grid; gap: .5rem }
+.destaques .tiles { margin: 0 0 .9rem; border-top: 3px solid var(--cor) }
+@media (max-width: 640px) { .destaques .tiles { grid-template-columns: 1fr 1fr } .destaques .tile { padding: .9rem .8rem } .destaques .tile .v { font-size: var(--s2t) } .destaques .tile .d { font-size: .85rem } .destaques .tile:first-child { grid-column: 1 / -1 } }
+.tiles-rot { font-family: var(--f-display); font-weight: 700; font-size: var(--s0); display: flex; align-items: center; gap: .45rem }
+.tiles-rot::before { content: ""; width: .7rem; height: .7rem; border-radius: 50%; background: var(--cor) }
 .tile { background: var(--surface); padding: 1.1rem 1.2rem 1.2rem; display: grid; gap: .25rem; align-content: start; min-width: 0 }
 .tile .v { font-family: var(--f-display); font-size: var(--s3t); font-weight: 700; line-height: 1 }
 .tile .v small { font-size: var(--s1t); font-weight: 600; color: var(--ink-2) }
@@ -83,94 +97,370 @@ svg .strong { fill: var(--ink); font-weight: 700 }
 .tip .k { color: var(--ink-2) }
 .tip b { font-variant-numeric: tabular-nums }
 
-.duo { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 1rem; align-items: start }
+.duo { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1rem; align-items: start }
 @media (max-width: 820px) { .duo { grid-template-columns: 1fr } }
 
 .nota { font-size: var(--s-1); color: var(--ink-2); border-left: 3px solid var(--rule); padding-left: .7rem; margin: 0 }
 
+.limites code { overflow-wrap: anywhere }
+section > * { min-width: 0 }
+#metodo pre { max-width: 100%; white-space: pre }
 .limites { padding-left: 1.1rem; margin: 0; display: grid; gap: .45rem; max-width: 72ch }
 footer { padding-top: 2rem; border-top: 1px solid var(--rule); font-size: var(--s-1); color: var(--ink-2) }
+.cong-busca { display: grid; gap: .5rem; max-width: 640px }
+.cong-busca input { width: 100%; font: inherit; padding: .65rem .85rem; border: 1px solid var(--axis); border-radius: 8px; background: var(--surface); color: var(--ink) }
+.sug2 { list-style: none; margin: 0; padding: 0; border: 1px solid var(--rule); border-radius: 8px; background: var(--surface); max-height: 260px; overflow: auto }
+.sug2 button { all: unset; box-sizing: border-box; display: flex; justify-content: space-between; gap: 1rem; width: 100%; padding: .45rem .8rem; cursor: pointer }
+.sug2 button:hover, .sug2 button:focus-visible { background: color-mix(in srgb, var(--pro) 12%, transparent) }
+.ficha { background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; padding: 1rem 1.1rem; display: grid; gap: .6rem }
+.ficha h3 { font-size: var(--s2t) }
+.ficha ul { margin: 0; padding-left: 1.1rem; display: grid; gap: .3rem }
+.chip { display: inline-block; font-size: var(--s-1); font-weight: 700; padding: .1rem .5rem; border-radius: 999px; border: 1.5px solid currentColor }
+.chip.pro { color: var(--pro) } .chip.contra { color: var(--contra) } .chip.neutro { color: var(--muted) }
+.tbl { width: 100%; border-collapse: collapse; font-size: .92rem }
+.tbl th, .tbl td { text-align: left; padding: .4rem .5rem; border-bottom: 1px solid var(--rule); vertical-align: top }
+.tbl th { color: var(--ink-2); font-size: var(--s-1) }
+.tbl-wrap { overflow-x: auto }
+.tbl.ex { font-size: .82rem; margin-block: .2rem .4rem } .tbl.ex td, .tbl.ex th { white-space: nowrap; font-family: var(--f-mono) } .tbl.ex th code { font-size: inherit }
+.prose h4 { font-size: var(--s0); margin-top: 1rem }
+.abas { display: flex; gap: .3rem; border-bottom: 1px solid var(--rule); margin-bottom: 1.5rem; position: sticky; top: env(safe-area-inset-top, 0px); background: var(--bg); z-index: 8; padding-top: .4rem; flex-wrap: wrap }
+.abas button { font: inherit; font-family: var(--f-display); font-weight: 600; font-size: var(--s1t); border: 0; background: transparent; color: var(--ink-2); padding: .6rem .9rem; cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -1px }
+.abas button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--s1) }
+.abas button:hover { color: var(--ink) }
+.mapa { font-size: .92rem }
+.mapa td, .mapa th { text-align: center; white-space: nowrap }
+.mapa td:first-child, .mapa th:first-child { text-align: left; white-space: normal }
+.mapa td.c { font-variant-numeric: tabular-nums }
+.mapa td.diag { color: var(--muted) }
+.mapa tr.jogo td { font-weight: 700; border-bottom: 2px solid var(--cor, var(--caps)) }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg) }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important } }
 </style>
 
 <div class="wrap">
 <header class="top">
-  <div class="eyebrow">Vigilância em saúde mental · CAPS / SUS · 2018–2026</div>
-  <h1>Jogo patológico no SUS</h1>
-  <p class="lede">Quantas pessoas chegam aos Centros de Atenção Psicossocial com diagnóstico de <span class="cid">F63.0</span> (jogo patológico), como isso mudou com a chegada das bets e quem são essas pessoas.</p>
-  <div class="carimbo small"><span id="carimbo-dados"></span><span>Fonte principal: DATASUS, SIA-PS (RAAS)</span><span>Só dados agregados</span></div>
+  <div class="topo"><div class="eyebrow">Jogo patológico no SUS<span data-congresso> · Congresso</span> · 2018–2026</div><a class="topo-link" href="#metodo">Como foi feito</a></div>
+  <h1>Bets e saúde mental no Brasil</h1>
+  <p class="lede"><span data-sem-congresso>Desde que as apostas online foram liberadas, em 2018, cada vez mais gente procura o SUS por causa do jogo. Esta página mostra quantas pessoas passaram a ser atendidas por jogo patológico nas unidades básicas de saúde e nos CAPS, quem são elas, o que acontece com elas depois do diagnóstico e como tudo isso acompanhou a regulação das bets, a CPI e a proibição de 2026.</span><span data-congresso>O que mudou desde que as apostas online foram liberadas, em 2018: quantas pessoas passaram a procurar tratamento por jogo patológico no SUS, e como o Congresso votou e o que propõe para a proibição de 2026.</span></p>
+  <div class="carimbo small"><span><b>Atenção primária:</b> SISAB, até <span id="carimbo-aps"></span></span><span><b>CAPS:</b> DATASUS, até <span id="carimbo-dados"></span></span><span data-congresso><b>Congresso:</b> dados abertos da Câmara e do Senado</span><span>Só dados agregados e registros públicos</span></div>
 </header>
 
-<div class="tiles" id="tiles"></div>
+<nav class="abas" data-congresso role="tablist" aria-label="Seções do site">
+  <button type="button" role="tab" id="tab-saude" data-aba="saude" aria-controls="aba-saude" aria-selected="true">Saúde mental</button>
+  <button type="button" role="tab" data-congresso id="tab-votacao" data-aba="votacao" aria-controls="aba-votacao" aria-selected="false">Votação no Congresso</button>
+</nav>
+
+<div id="aba-saude" role="tabpanel" aria-labelledby="tab-saude">
+
+<div class="destaques">
+  <div class="tiles-rot" style="--cor:var(--s1)">Atenção primária</div>
+  <div class="tiles" id="tiles-aps" style="--cor:var(--s1)"></div>
+  <div class="tiles-rot" style="--cor:var(--caps)">CAPS</div>
+  <div class="tiles" id="tiles-caps" style="--cor:var(--caps)"></div>
+</div>
 
 <section id="serie">
   <div class="prose">
     <h2>Busca por apostas e procura por tratamento</h2>
-    <p>As buscas por apostas no Google explodiram de 2021 a 2023. No CAPS, o jogo patológico quase não se mexeu nesse período. A alta começa em meados de 2024, cerca de um ano depois do pico das buscas, e acelera em 2025–2026, quando as buscas já estão caindo. Os outros transtornos de impulso (piromania, cleptomania, tricotilomania), que não têm relação com jogo, ficaram estáveis.</p>
+    <p>O SUS atende o jogo patológico em dois lugares. A atenção primária (unidades básicas de saúde e equipes de saúde da família) é a porta de entrada. Os Centros de Atenção Psicossocial (CAPS) são os serviços especializados em saúde mental, para onde vão os casos mais graves.</p>
+    <p>As buscas por apostas no Google explodiram de 2021 a 2023. Na atenção primária, os atendimentos por jogo patológico começam a subir em 2023, ainda no pico das buscas. No CAPS, a alta vem cerca de um ano depois, em meados de 2024, e acelera em 2025–2026, quando as buscas já estão caindo.</p>
+    <p>Os outros transtornos de impulso (piromania, cleptomania, tricotilomania) não têm relação com jogo e servem de controle. No CAPS, ficaram estáveis. Na atenção primária, cresceram cerca de 2,5 vezes de 2022 para 2026, no ritmo em que ela passou a registrar mais diagnósticos em geral, enquanto o jogo patológico cresceu mais de 30 vezes.</p>
+    <p>A aceleração coincide com a <b>CPI das Bets</b> do Senado (nov/2024 a jun/2025), que deu grande visibilidade ao tema, com depoimentos de donos de casas de apostas e de influenciadoras. Mais atenção pública ao problema pode ter levado mais gente a procurar ajuda.</p>
   </div>
   <div class="fig" id="fig-serie">
-    <div class="fig-title">Pessoas em acompanhamento nos CAPS, por mês</div>
-    <div class="legend"><span><i style="background:var(--s1)"></i>Jogo patológico <span class="cid">F63.0</span></span><span><i style="background:var(--ref)"></i>Outros transtornos de impulso <span class="cid">F63.1–F63.3</span></span><span><i class="box" style="background:var(--band-pand)"></i>Pandemia</span></div>
+    <div class="fig-title">Atenção primária: atendimentos por mês</div>
+    <div class="legend"><span><i style="background:var(--s1)"></i>Jogo patológico <span class="cid">F63.0</span></span><span><i style="background:var(--ref)"></i>Outros transtornos de impulso <span class="cid">F63.1–F63.3</span></span><span><i class="box" style="background:var(--band-pand)"></i>Pandemia</span><span><i class="box" style="background:var(--band-cpi)"></i><a href="" class="lk-cpi" target="_blank" rel="noopener">CPI das Bets</a> (Senado, nov/2024–jun/2025)</span></div>
+    <div id="ch-aps"></div>
+    <div class="fig-title" style="margin-top:.8rem">CAPS: pessoas em acompanhamento por mês</div>
+    <div class="legend"><span><i style="background:var(--caps)"></i>Jogo patológico <span class="cid">F63.0</span></span><span><i style="background:var(--ref)"></i>Outros transtornos de impulso <span class="cid">F63.1–F63.3</span></span></div>
     <div id="ch-caps"></div>
     <div class="fig-title" style="margin-top:.8rem">Busca por apostas no Google, Brasil (0–100)</div>
     <div class="legend"><span><i style="background:var(--s2)"></i>bet, apostas, betano, bet365, tigrinho</span></div>
     <div id="ch-trends"></div>
     <ol class="marcos" id="marcos"></ol>
   </div>
-  <p class="nota">Os dois gráficos usam escalas diferentes e por isso estão separados. Pessoas distintas por mês, com F63.0 como diagnóstico principal ou associado. Meses com menos de 5 pessoas ficam em branco. Os dados do CAPS vão até jun/2026; os efeitos da proibição (MP 1.394) ainda não aparecem.</p>
+  <p class="nota">Os gráficos usam escalas diferentes e por isso estão separados. Atenção primária: atendimentos individuais registrados no e-SUS APS com o diagnóstico entre os problemas avaliados; quem volta várias vezes conta várias vezes. CAPS: pessoas distintas por mês, com o diagnóstico principal ou associado. Meses com menos de 5 ficam em branco. Os dados vão até <span class="aps-fim"></span> (atenção primária) e <span class="caps-fim"></span> (CAPS); os efeitos da proibição (MP 1.394) ainda não aparecem.</p>
+</section>
+
+<section id="peso">
+  <div class="prose">
+    <h2>Não é só o SUS registrando mais</h2>
+    <p>O número de atendimentos registrados na atenção primária também cresce todo ano, por qualquer motivo, porque mais unidades passaram a usar o sistema. Para descontar isso, comparamos o jogo patológico com os atendimentos de saúde mental por outros diagnósticos: depressão, ansiedade, estresse, álcool e esquizofrenia.</p>
+    <p>Na atenção primária, em 2022, para cada 10 mil desses atendimentos, havia <span id="aps-r22"></span> por jogo patológico. Em 2025 eram <span id="aps-r25"></span>, e em 2026, <span id="aps-r26"></span>. Se a alta fosse só mais registro, essa conta ficaria parada.</p>
+    <p>O segundo gráfico mostra o mesmo de outro jeito: quantas vezes cada linha está maior do que estava em 2022. Os outros diagnósticos de saúde mental dobraram. O jogo patológico ficou mais de 40 vezes maior na atenção primária e mais de 10 vezes maior no CAPS.</p>
+  </div>
+  <div class="fig" id="fig-aps-taxa">
+    <div class="fig-title">Atendimentos por jogo patológico para cada 10 mil atendimentos de saúde mental com outros diagnósticos</div>
+    <div class="legend"><span><i style="background:var(--s1)"></i>Jogo patológico <span class="cid">F63.0</span></span><span><i class="box" style="background:var(--band-pand)"></i>Pandemia</span><span><i class="box" style="background:var(--band-cpi)"></i><a href="" class="lk-cpi" target="_blank" rel="noopener">CPI das Bets</a> (Senado, nov/2024–jun/2025)</span></div>
+    <div id="ch-aps-taxa"></div>
+    <div class="fig-title" style="margin-top:.8rem">Quantas vezes maior que em 2022</div>
+    <div class="legend"><span><i style="background:var(--s1)"></i>Jogo patológico, atenção primária (atendimentos)</span><span><i style="background:var(--caps)"></i>Jogo patológico, CAPS (pessoas)</span><span><i style="background:var(--ref)"></i>Outros diagnósticos de saúde mental, atenção primária</span></div>
+    <div id="ch-indice"></div>
+    <ol class="marcos" id="marcos-aps-taxa"></ol>
+    <p class="small" style="margin:0">Cada mês comparado com a média mensal de 2022: 10× quer dizer dez vezes mais que em 2022; o tracejado (1×) é igual a 2022. A linha cinza mal sai do chão porque os outros diagnósticos de saúde mental só dobraram: é até onde o jogo patológico teria subido se a alta fosse só o SUS registrando mais. Dados até <span class="aps-fim"></span> (atenção primária) e <span class="caps-fim"></span> (CAPS). O CAPS conta pessoas e a atenção primária conta atendimentos, por isso só o ritmo de crescimento é comparável.</p>
+  </div>
 </section>
 
 <section id="perfil">
   <div class="prose">
     <h2>Quem está sendo atendido</h2>
-    <p>São sobretudo adultos de 25 a 34 anos, uma faixa que tem o dobro do peso que tem entre os pacientes de saúde mental em geral. Quase não há menores de idade. As mulheres são <b id="pct-mulheres"></b> dos atendidos por jogo patológico, perto da proporção de mulheres no conjunto do CAPS (<span id="pct-mulheres-caps"></span>). Entre os apostadores, segundo o DataSenado, elas são cerca de 38%. Homens apostam mais e procuram menos tratamento.</p>
-    <p>O que mudou foi o ritmo: de 2022 para 2025, o número de mulheres de 18 a 44 anos atendidas por jogo patológico cresceu muito mais que o de homens da mesma idade.</p>
+    <p>Nos dois serviços, quase dois terços dos atendidos por jogo patológico têm de 25 a 44 anos. No resto da saúde mental essa faixa pesa bem menos: na atenção primária, mais da metade dos atendimentos é de pessoas com 45 anos ou mais, e no CAPS um em cada cinco pacientes é criança ou adolescente.</p>
+    <p>Na atenção primária chama a atenção o peso dos homens jovens: os de 18 a 24 anos são <span id="aps-h1824"></span> dos atendimentos por jogo patológico, contra <span id="aps-h1824-ref"></span> na saúde mental em geral. Homens e mulheres aparecem em proporção parecida, e há poucos menores de idade (<span id="aps-menores"></span> na atenção primária, <span id="caps-menores"></span> no CAPS).</p>
   </div>
   <div class="duo">
     <div class="fig">
-      <div class="fig-title">Composição por sexo e idade, 2025</div>
-      <div class="legend"><span><i class="box" style="background:var(--s1)"></i>Jogo patológico <span class="cid">F63.0</span></span><span><i style="background:var(--ink-2);height:2px"></i>Todos os pacientes de saúde mental do CAPS</span></div>
-      <div id="ch-piramide"></div>
-      <p class="small" style="margin:0">% dos pacientes-mês de cada grupo. Barra = jogo patológico; traço = saúde mental em geral.</p>
+      <div class="fig-title">Atenção primária: atendimentos por sexo e idade, 2025 (%)</div>
+      <div class="legend"><span><i class="box" style="background:var(--s1)"></i>Jogo patológico</span><span><i style="background:var(--ink-2);height:2px"></i>Saúde mental em geral</span></div>
+      <div id="ch-aps-idade"></div>
     </div>
     <div class="fig">
-      <div class="fig-title">Quantas vezes cresceu de 2022 para 2025</div>
-      <div class="legend"><span><i class="box" style="background:var(--s1);border-radius:50%"></i>Jogo patológico</span><span><i class="box" style="background:var(--ref);border-radius:50%"></i>Saúde mental em geral</span></div>
-      <div id="ch-cresc"></div>
-      <p class="small" style="margin:0">Escala logarítmica. Grupos com menos de 5 pacientes-mês em algum dos anos não aparecem.</p>
+      <div class="fig-title">CAPS: pacientes por sexo e idade, 2025 (%)</div>
+      <div class="legend"><span><i class="box" style="background:var(--caps)"></i>Jogo patológico</span><span><i style="background:var(--ink-2);height:2px"></i>Saúde mental em geral</span></div>
+      <div id="ch-caps-idade"></div>
     </div>
+  </div>
+  <p class="nota">Em cada gráfico, as barras de mulheres e homens somam 100% e mostram como os atendidos por jogo patológico se dividem por sexo e idade. Os traços mostram a mesma divisão na saúde mental em geral. Saúde mental em geral: na atenção primária, os atendimentos com CID de depressão, ansiedade, estresse, álcool ou esquizofrenia; no CAPS, todos os pacientes com diagnóstico do capítulo F da CID-10, contados em pacientes-mês. Na atenção primária, o diagnóstico pode ser registrado pela CID-10 ou pela CIAP-2, a classificação própria da atenção básica. A CIAP-2 não tem código para jogo, então só aparecem aqui os atendimentos em que o profissional usou a CID.</p>
+</section>
+
+<section id="conduta">
+  <div class="prose">
+    <h2>Na atenção primária, o que acontece depois do atendimento</h2>
+    <p>Ao fim de cada atendimento, o profissional registra o que foi feito: alta, retorno marcado ou encaminhamento para outro serviço. Em 2025 e 2026, <span id="cd-esp"></span> dos atendimentos por jogo patológico terminaram com encaminhamento para um serviço especializado, mais que o dobro do que acontece com ansiedade, depressão ou álcool. O jogo patológico também recebe menos alta (<span id="cd-alta"></span>, contra cerca de metade nos outros diagnósticos) e mais retornos marcados.</p>
+    <p>O encaminhamento direto para o CAPS é raro (<span id="cd-caps"></span>), mas fica no mesmo nível do álcool e bem acima da ansiedade e da depressão. Juntando tudo, a atenção primária acompanha e encaminha o jogo patológico com mais frequência que os outros diagnósticos de saúde mental, e dá alta menos vezes.</p>
+  </div>
+  <div class="fig tbl-wrap">
+    <div class="fig-title">Conduta registrada nos atendimentos da atenção primária, jan/2025 a <span class="aps-fim"></span> (% dos atendimentos)</div>
+    <table class="tbl mapa" id="tbl-conduta" style="--cor:var(--s1)"><thead><tr><th>Diagnóstico</th><th>Atendimentos</th><th>Alta</th><th>Retorno<br>agendado</th><th>Retorno para<br>cuidado contínuo</th><th>Serviço<br>especializado</th><th>CAPS</th></tr></thead><tbody></tbody></table>
+    <p class="small" style="margin:.6rem 0 0">Um atendimento pode ter mais de uma conduta, então as linhas não somam 100%. Em cada coluna, o tom mais escuro marca o maior valor e o mais claro, o menor. O registro não diz qual é o serviço especializado (psiquiatria, psicologia ou outro).</p>
   </div>
 </section>
 
 <section id="novos">
   <div class="prose">
-    <h2>Gente nova chegando, não diagnóstico trocado</h2>
+    <h2>No CAPS, gente nova chegando, não diagnóstico trocado</h2>
     <p>Uma explicação possível para a alta seria os profissionais passarem a registrar o jogo patológico em quem já estava em tratamento por outro motivo. Os dados não mostram isso. Entre as pessoas que recebem o diagnóstico de <span class="cid">F63.0</span> pela primeira vez, a fração que <b>não tinha nenhum atendimento no CAPS nos 12 meses anteriores</b> subiu de cerca de 60% para quase 80%.</p>
   </div>
   <div class="fig">
     <div class="fig-title">Pessoas que receberam F63.0 pela primeira vez, por ano</div>
-    <div class="legend"><span><i class="box" style="background:var(--s1)"></i>Novas no CAPS</span><span><i class="box" style="background:var(--s1-soft)"></i>Já estavam no CAPS com outro diagnóstico</span></div>
+    <div class="legend"><span><i class="box" style="background:var(--caps)"></i>Novas no CAPS</span><span><i class="box" style="background:var(--caps-soft)"></i>Já estavam no CAPS com outro diagnóstico</span></div>
     <div id="ch-novos"></div>
     <p class="small" style="margin:0">Rótulo acima da barra: % de novas. 2026 vai só até junho. "Novo no CAPS" não quer dizer caso novo de vício: a pessoa pode ter sido tratada antes na rede privada.</p>
   </div>
 </section>
 
-<section id="metodo">
-  <h2>Como foi feito e limites</h2>
-  <ul class="limites">
-    <li><b>Fonte.</b> Microdados do SIA-PS (RAAS), a produção dos CAPS no SUS, baixados do FTP do DATASUS para todos os estados, jan/2018 a jun/2026. Pessoas contadas pelo código do cartão SUS, que o DATASUS já publica criptografado.</li>
-    <li><b>Diagnóstico.</b> <span class="cid">F63.0</span> (jogo patológico) como CID principal ou associado. Os códigos <span class="cid">F63.8</span> e <span class="cid">F63.9</span> ficam de fora porque mais de um terço dos registros com eles são de menores de idade, em que indicam outros transtornos de impulso.</li>
-    <li><b>Atendimento, não prevalência.</b> Os dados contam quem chegou ao CAPS. Não separam mais casos de mais procura, e não incluem a rede privada, a atenção básica nem quem não procura ajuda.</li>
-    <li><b>Busca e aposta.</b> Google Trends (cesta de termos: bet, apostas, betano, bet365, tigrinho) e DataSenado, Panorama Político 2024 (proporção de mulheres entre os apostadores).</li>
-    <li><b>Privacidade.</b> A página só contém totais. Toda contagem com menos de 5 pessoas é suprimida. Os dados de pacientes usados no cálculo ficam fora da página, com código pseudonimizado de novo, idade em faixas e localização só por estado.</li>
-    <li><b>Resultados preliminares,</b> sem revisão por pares.</li>
-  </ul>
+<section id="trajetoria">
+  <div class="prose">
+    <h2>No CAPS, o que aparece depois do diagnóstico</h2>
+    <p>Acompanhamos as <b id="traj-n"></b> pessoas que receberam o diagnóstico de jogo patológico no CAPS entre jan/2019 e jun/2025 e olhamos os 12 meses seguintes. <span id="traj-ans"></span> receberam um diagnóstico novo de ansiedade, <span id="traj-dep"></span> de depressão e <span id="traj-drog"></span> de uso de drogas. "Novo" quer dizer que esse diagnóstico não aparecia nos 12 meses anteriores.</p>
+    <p>Para saber se isso é muito ou pouco, comparamos com quem chega ao CAPS por outros motivos, ajustando para a mesma composição de sexo e idade. O jogo patológico fica entre os dois mundos. A ansiedade e a depressão novas aparecem no mesmo patamar de quem já chega por ansiedade ou depressão, bem acima do que acontece com quem chega por álcool ou drogas. Já o uso de drogas novo é o dobro do que se vê entre quem chega por ansiedade ou depressão. A permanência também é a das dependências: só cerca de um terço ainda está no CAPS de 6 a 12 meses depois.</p>
+  </div>
+  <div class="fig tbl-wrap">
+    <div class="fig-title">Diagnóstico novo nos 12 meses seguintes, por motivo de entrada no CAPS (%)</div>
+    <table class="tbl mapa" id="tbl-traj"><thead><tr><th>Entrou no CAPS por</th><th>Pessoas</th><th>Ansiedade</th><th>Depressão</th><th>Drogas</th><th>Álcool</th><th>Ainda no CAPS<br>6–12 meses depois</th></tr></thead><tbody></tbody></table>
+    <p class="small" style="margin:.6rem 0 0">Entrada de jan/2019 a jun/2025. As linhas dos outros grupos estão padronizadas para a composição por sexo e idade dos pacientes de jogo patológico. Tom mais escuro = taxa maior. Ansiedade inclui estresse (<span class="cid">F40–F48</span>), depressão inclui os outros transtornos do humor (<span class="cid">F30–F39</span>). Só vemos o que é registrado no CAPS: quem sai do CAPS some dos dados, então as taxas são um piso.</p>
+  </div>
 </section>
 
-<footer>Dados: DATASUS (SIA-PS), Google Trends, DataSenado. <span id="rodape"></span></footer>
 </div>
 
-<script>const D = {"corte":"202606","choques":{"2018-12-12":"Lei 13.756 (legaliza quota fixa)","2023-12-29":"Lei 14.790 (regulação)","2024-10-01":"Bloqueio de sites não autorizados","2025-01-01":"Mercado regulado","2026-09-25":"MP 1.394 (proibição)"},"noticias":{"2018-12-12":["Agência Brasil","https://agenciabrasil.ebc.com.br/politica/noticia/2026-10/origem-das-bets-passa-por-lobby-estrangeiro-e-jabutis-no-congresso"],"2023-12-29":["Agência Senado","https://www12.senado.leg.br/noticias/materias/2024/01/05/regras-para-apostas-veja-o-que-muda-com-a-nova-lei"],"2024-10-01":["Agência Brasil","https://agenciabrasil.ebc.com.br/economia/noticia/2024-10/bets-nao-autorizadas-serao-suspensas-nesta-terca"],"2025-01-01":["CNN Brasil","https://www.cnnbrasil.com.br/economia/money/macroeconomia/mercado-regulado-de-bets-comeca-nesta-quarta-1o-veja-o-que-muda/"],"2026-09-25":["Agência Brasil","https://agenciabrasil.ebc.com.br/economia/noticia/2026-09/mp-proibe-bets-no-brasil-e-determina-devolucao-de-saldo-ao-apostador"]},"pandemia":["2020-03-01","2021-12-31"],"serie":{"caps":[{"cmp":"201801","f630":8,"placebo":56},{"cmp":"201802","f630":5,"placebo":63},{"cmp":"201803","f630":9,"placebo":72},{"cmp":"201804","f630":8,"placebo":76},{"cmp":"201805","f630":10,"placebo":74},{"cmp":"201806","f630":12,"placebo":61},{"cmp":"201807","f630":10,"placebo":63},{"cmp":"201808","f630":10,"placebo":63},{"cmp":"201809","f630":9,"placebo":71},{"cmp":"201810","f630":13,"placebo":66},{"cmp":"201811","f630":10,"placebo":81},{"cmp":"201812","f630":6,"placebo":61},{"cmp":"201901","f630":6,"placebo":58},{"cmp":"201902","f630":12,"placebo":71},{"cmp":"201903","f630":8,"placebo":60},{"cmp":"201904","f630":18,"placebo":63},{"cmp":"201905","f630":12,"placebo":58},{"cmp":"201906","f630":14,"placebo":57},{"cmp":"201907","f630":17,"placebo":76},{"cmp":"201908","f630":18,"placebo":71},{"cmp":"201909","f630":18,"placebo":69},{"cmp":"201910","f630":17,"placebo":78},{"cmp":"201911","f630":19,"placebo":71},{"cmp":"201912","f630":7,"placebo":65},{"cmp":"202001","f630":9,"placebo":66},{"cmp":"202002","f630":8,"placebo":71},{"cmp":"202003","f630":8,"placebo":72},{"cmp":"202004","f630":null,"placebo":52},{"cmp":"202005","f630":8,"placebo":58},{"cmp":"202006","f630":13,"placebo":49},{"cmp":"202007","f630":13,"placebo":58},{"cmp":"202008","f630":9,"placebo":58},{"cmp":"202009","f630":13,"placebo":63},{"cmp":"202010","f630":20,"placebo":54},{"cmp":"202011","f630":18,"placebo":63},{"cmp":"202012","f630":10,"placebo":52},{"cmp":"202101","f630":13,"placebo":53},{"cmp":"202102","f630":13,"placebo":60},{"cmp":"202103","f630":17,"placebo":61},{"cmp":"202104","f630":23,"placebo":54},{"cmp":"202105","f630":19,"placebo":51},{"cmp":"202106","f630":18,"placebo":73},{"cmp":"202107","f630":20,"placebo":65},{"cmp":"202108","f630":18,"placebo":70},{"cmp":"202109","f630":18,"placebo":63},{"cmp":"202110","f630":13,"placebo":62},{"cmp":"202111","f630":15,"placebo":61},{"cmp":"202112","f630":15,"placebo":68},{"cmp":"202201","f630":15,"placebo":66},{"cmp":"202202","f630":15,"placebo":66},{"cmp":"202203","f630":22,"placebo":77},{"cmp":"202204","f630":18,"placebo":72},{"cmp":"202205","f630":16,"placebo":66},{"cmp":"202206","f630":19,"placebo":66},{"cmp":"202207","f630":21,"placebo":71},{"cmp":"202208","f630":28,"placebo":84},{"cmp":"202209","f630":19,"placebo":63},{"cmp":"202210","f630":21,"placebo":71},{"cmp":"202211","f630":26,"placebo":73},{"cmp":"202212","f630":19,"placebo":57},{"cmp":"202301","f630":23,"placebo":67},{"cmp":"202302","f630":26,"placebo":57},{"cmp":"202303","f630":32,"placebo":74},{"cmp":"202304","f630":28,"placebo":63},{"cmp":"202305","f630":35,"placebo":68},{"cmp":"202306","f630":24,"placebo":72},{"cmp":"202307","f630":29,"placebo":78},{"cmp":"202308","f630":37,"placebo":70},{"cmp":"202309","f630":32,"placebo":66},{"cmp":"202310","f630":36,"placebo":78},{"cmp":"202311","f630":33,"placebo":69},{"cmp":"202312","f630":24,"placebo":68},{"cmp":"202401","f630":19,"placebo":62},{"cmp":"202402","f630":35,"placebo":79},{"cmp":"202403","f630":28,"placebo":68},{"cmp":"202404","f630":41,"placebo":52},{"cmp":"202405","f630":25,"placebo":60},{"cmp":"202406","f630":43,"placebo":80},{"cmp":"202407","f630":53,"placebo":77},{"cmp":"202408","f630":61,"placebo":74},{"cmp":"202409","f630":76,"placebo":80},{"cmp":"202410","f630":77,"placebo":71},{"cmp":"202411","f630":67,"placebo":54},{"cmp":"202412","f630":68,"placebo":59},{"cmp":"202501","f630":69,"placebo":51},{"cmp":"202502","f630":72,"placebo":46},{"cmp":"202503","f630":80,"placebo":63},{"cmp":"202504","f630":119,"placebo":65},{"cmp":"202505","f630":111,"placebo":67},{"cmp":"202506","f630":117,"placebo":75},{"cmp":"202507","f630":148,"placebo":61},{"cmp":"202508","f630":148,"placebo":74},{"cmp":"202509","f630":194,"placebo":74},{"cmp":"202510","f630":193,"placebo":72},{"cmp":"202511","f630":201,"placebo":62},{"cmp":"202512","f630":182,"placebo":53},{"cmp":"202601","f630":176,"placebo":63},{"cmp":"202602","f630":203,"placebo":63},{"cmp":"202603","f630":275,"placebo":70},{"cmp":"202604","f630":254,"placebo":65},{"cmp":"202605","f630":269,"placebo":74},{"cmp":"202606","f630":280,"placebo":74}],"trends":[{"cmp":"201801","trends":3},{"cmp":"201802","trends":3},{"cmp":"201803","trends":3},{"cmp":"201804","trends":4},{"cmp":"201805","trends":4},{"cmp":"201806","trends":4},{"cmp":"201807","trends":4},{"cmp":"201808","trends":4},{"cmp":"201809","trends":4},{"cmp":"201810","trends":4},{"cmp":"201811","trends":4},{"cmp":"201812","trends":4},{"cmp":"201901","trends":4},{"cmp":"201902","trends":4},{"cmp":"201903","trends":5},{"cmp":"201904","trends":5},{"cmp":"201905","trends":6},{"cmp":"201906","trends":6},{"cmp":"201907","trends":6},{"cmp":"201908","trends":7},{"cmp":"201909","trends":7},{"cmp":"201910","trends":7},{"cmp":"201911","trends":8},{"cmp":"201912","trends":8},{"cmp":"202001","trends":7},{"cmp":"202002","trends":8},{"cmp":"202003","trends":6},{"cmp":"202004","trends":3},{"cmp":"202005","trends":4},{"cmp":"202006","trends":6},{"cmp":"202007","trends":8},{"cmp":"202008","trends":11},{"cmp":"202009","trends":11},{"cmp":"202010","trends":11},{"cmp":"202011","trends":12},{"cmp":"202012","trends":13},{"cmp":"202101","trends":14},{"cmp":"202102","trends":14},{"cmp":"202103","trends":14},{"cmp":"202104","trends":17},{"cmp":"202105","trends":19},{"cmp":"202106","trends":21},{"cmp":"202107","trends":23},{"cmp":"202108","trends":22},{"cmp":"202109","trends":30},{"cmp":"202110","trends":33},{"cmp":"202111","trends":34},{"cmp":"202112","trends":33},{"cmp":"202201","trends":29},{"cmp":"202202","trends":39},{"cmp":"202203","trends":39},{"cmp":"202204","trends":55},{"cmp":"202205","trends":60},{"cmp":"202206","trends":63},{"cmp":"202207","trends":69},{"cmp":"202208","trends":74},{"cmp":"202209","trends":76},{"cmp":"202210","trends":81},{"cmp":"202211","trends":96},{"cmp":"202212","trends":89},{"cmp":"202301","trends":81},{"cmp":"202302","trends":95},{"cmp":"202303","trends":84},{"cmp":"202304","trends":99},{"cmp":"202305","trends":100},{"cmp":"202306","trends":90},{"cmp":"202307","trends":93},{"cmp":"202308","trends":99},{"cmp":"202309","trends":98},{"cmp":"202310","trends":100},{"cmp":"202311","trends":94},{"cmp":"202312","trends":93},{"cmp":"202401","trends":78},{"cmp":"202402","trends":68},{"cmp":"202403","trends":68},{"cmp":"202404","trends":75},{"cmp":"202405","trends":76},{"cmp":"202406","trends":76},{"cmp":"202407","trends":81},{"cmp":"202408","trends":74},{"cmp":"202409","trends":70},{"cmp":"202410","trends":61},{"cmp":"202411","trends":56},{"cmp":"202412","trends":56},{"cmp":"202501","trends":48},{"cmp":"202502","trends":47},{"cmp":"202503","trends":47},{"cmp":"202504","trends":53},{"cmp":"202505","trends":52},{"cmp":"202506","trends":52},{"cmp":"202507","trends":53},{"cmp":"202508","trends":51},{"cmp":"202509","trends":51},{"cmp":"202510","trends":55},{"cmp":"202511","trends":51},{"cmp":"202512","trends":54},{"cmp":"202601","trends":50},{"cmp":"202602","trends":55},{"cmp":"202603","trends":54},{"cmp":"202604","trends":56},{"cmp":"202605","trends":56},{"cmp":"202606","trends":56},{"cmp":"202607","trends":46},{"cmp":"202608","trends":39},{"cmp":"202609","trends":40},{"cmp":"202610","trends":13}]},"anual":[{"ano":2018,"f630":46,"placebo":296,"meses":12},{"ano":2019,"f630":67,"placebo":283,"meses":12},{"ano":2020,"f630":63,"placebo":269,"meses":12},{"ano":2021,"f630":81,"placebo":314,"meses":12},{"ano":2022,"f630":124,"placebo":338,"meses":12},{"ano":2023,"f630":158,"placebo":311,"meses":12},{"ano":2024,"f630":299,"placebo":328,"meses":12},{"ano":2025,"f630":856,"placebo":338,"meses":12},{"ano":2026,"f630":849,"placebo":216,"meses":6}],"novos":[{"ano":2019,"novos":35,"ja":19},{"ano":2020,"novos":20,"ja":20},{"ano":2021,"novos":38,"ja":24},{"ano":2022,"novos":63,"ja":36},{"ano":2023,"novos":80,"ja":41},{"ano":2024,"novos":178,"ja":74},{"ano":2025,"novos":526,"ja":229},{"ano":2026,"novos":495,"ja":140}],"perfil":[{"sexo":"F","faixa":"0-17","f630_2022":11,"f630_2025":17,"mental_2022":361528,"mental_2025":483119,"pct_f630_2025":1.040391676866585,"pct_mental_2025":9.011973272183907,"cresc_f630":1.5454545454545454,"cresc_mental":1.336325263879976},{"sexo":"F","faixa":"18-24","f630_2022":9,"f630_2025":110,"mental_2022":216383,"mental_2025":268314,"pct_f630_2025":6.731946144430845,"pct_mental_2025":5.005057959949314,"cresc_f630":12.222222222222221,"cresc_mental":1.2399957482796709},{"sexo":"F","faixa":"25-34","f630_2022":14,"f630_2025":322,"mental_2022":372100,"mental_2025":479284,"pct_f630_2025":19.7062423500612,"pct_mental_2025":8.940436202644465,"cresc_f630":23.0,"cresc_mental":1.288051599032518},{"sexo":"F","faixa":"35-44","f630_2022":9,"f630_2025":179,"mental_2022":457908,"mental_2025":592479,"pct_f630_2025":10.954712362301102,"pct_mental_2025":11.051945612427266,"cresc_f630":19.88888888888889,"cresc_mental":1.2938821772059017},{"sexo":"F","faixa":"45-59","f630_2022":20,"f630_2025":106,"mental_2022":512208,"mental_2025":669077,"pct_f630_2025":6.487148102815178,"pct_mental_2025":12.480784322357415,"cresc_f630":5.3,"cresc_mental":1.3062603473588854},{"sexo":"F","faixa":"60+","f630_2022":14,"f630_2025":37,"mental_2022":160779,"mental_2025":207661,"pct_f630_2025":2.2643818849449207,"pct_mental_2025":3.873653037191628,"cresc_f630":2.642857142857143,"cresc_mental":1.291592807518395},{"sexo":"M","faixa":"0-17","f630_2022":24,"f630_2025":50,"mental_2022":461167,"mental_2025":701364,"pct_f630_2025":3.0599755201958385,"pct_mental_2025":13.083057429064047,"cresc_f630":2.0833333333333335,"cresc_mental":1.5208460275778624},{"sexo":"M","faixa":"18-24","f630_2022":26,"f630_2025":139,"mental_2022":272071,"mental_2025":316597,"pct_f630_2025":8.50673194614443,"pct_mental_2025":5.905716194257747,"cresc_f630":5.346153846153846,"cresc_mental":1.1636558104318357},{"sexo":"M","faixa":"25-34","f630_2022":38,"f630_2025":309,"mental_2022":390840,"mental_2025":484551,"pct_f630_2025":18.910648714810282,"pct_mental_2025":9.038685419141007,"cresc_f630":8.131578947368421,"cresc_mental":1.2397681915873504},{"sexo":"M","faixa":"35-44","f630_2022":28,"f630_2025":221,"mental_2022":396400,"mental_2025":496533,"pct_f630_2025":13.525091799265606,"pct_mental_2025":9.262194458833727,"cresc_f630":7.892857142857143,"cresc_mental":1.2526059535822403},{"sexo":"M","faixa":"45-59","f630_2022":29,"f630_2025":111,"mental_2022":401383,"mental_2025":512031,"pct_f630_2025":6.7931456548347615,"pct_mental_2025":9.551290026949049,"cresc_f630":3.8275862068965516,"cresc_mental":1.2756668817563275},{"sexo":"M","faixa":"60+","f630_2022":17,"f630_2025":33,"mental_2022":113386,"mental_2025":149847,"pct_f630_2025":2.0195838433292534,"pct_mental_2025":2.795206065000428,"cresc_f630":1.9411764705882353,"cresc_mental":1.3215652726086113}],"mulheres":{"f630_2025":47.184822521419825,"mental_2025":50.363850406754}};</script>
+<div id="aba-votacao" data-congresso role="tabpanel" aria-labelledby="tab-votacao" hidden>
+<section id="congresso">
+  <div class="prose">
+    <h2>O que o Congresso decidiu e propõe</h2>
+    <p>As bets chegaram ao Brasil por decisão do Congresso, e é lá que a proibição de 2026 será confirmada ou mudada. Três registros públicos mostram a posição de cada parlamentar: a votação de 2023 que permitiu os cassinos online, as emendas apresentadas à MP 1.394 e os projetos de lei para proibir as apostas.</p>
+  </div>
+
+  <div class="prose">
+    <h3>2023: o Congresso liberou o "jogo do tigrinho"</h3>
+    <p>Em 2023, o Congresso votou a lei das bets. Uma parte já estava decidida: <b>apostar em jogos de futebol e outros esportes seria permitido</b>. Faltava decidir só uma coisa: permitir ou não os <b>cassinos online</b>, como o "jogo do tigrinho".</p>
+    <ul class="limites" style="max-width:68ch">
+      <li>Primeiro, o <b>Senado</b> votou para <b>proibir</b> os cassinos online: 37 votos a 27.</li>
+      <li>Depois, a <b>Câmara</b> votou de novo e decidiu <b>permitir</b>: 261 votos a 120. Como a decisão da Câmara era a última, valeu a dela.</li>
+    </ul>
+    <p>Por isso, de 2025 até a proibição de setembro de 2026, jogar o tigrinho em sites de apostas era legal no Brasil.</p>
+  </div>
+  <div class="duo">
+    <div class="fig">
+      <div class="fig-title">Câmara, 21/12/2023: 120 votos para proibir, 261 para permitir</div>
+      <div class="legend"><span><i class="box" style="background:var(--pro)"></i>Votou para proibir os cassinos online</span><span><i class="box" style="background:var(--contra)"></i>Votou para permitir os cassinos online</span></div>
+      <div id="ch-camara"></div>
+      <p class="small" style="margin:0">Partidos com pelo menos 3 votos. Partido na data da votação.</p>
+    </div>
+    <div class="fig">
+      <div class="fig-title">Senado, 12/12/2023: 37 votos para proibir, 27 para permitir</div>
+      <div class="legend"><span><i class="box" style="background:var(--pro)"></i>Votou para proibir os cassinos online</span><span><i class="box" style="background:var(--contra)"></i>Votou para permitir os cassinos online</span></div>
+      <div id="ch-senado"></div>
+      <p class="small" style="margin:0">17 senadores não votaram (ausentes, em missão ou presidente da sessão).</p>
+    </div>
+  </div>
+
+  <div class="prose">
+    <h3>Por que o PT votou para permitir e o PL para proibir?</h3>
+    <p>Em 2023, o PT votou com o governo. O projeto da lei das bets era do governo Lula. Naquele ano, o Ministério da Fazenda buscava aumentar a arrecadação, e permitir os cassinos online aumentava o imposto pago pelas empresas. O governo orientou a votar por permitir, e todos os 57 deputados do PT seguiram.</p>
+    <p>O PL votou como oposição. Boa parte do partido é ligada à bancada evangélica, contrária a jogos de azar, e a proposta de proibir os cassinos online foi de um senador do PL. Mesmo assim, 21 deputados do PL votaram para permitir.</p>
+    <p>Em 2026, os lados se inverteram. Foi o governo do PT que proibiu todas as bets, com a MP 1.394, e o PL 1.808/2026, de proibição total, é assinado por dezenas de deputados do PT. Já entre as emendas à MP, quem mais propõe afrouxar a proibição são deputados do PL e do PP.</p>
+    <p class="small">Fonte: <a href="https://www.cnnbrasil.com.br/politica/governo-lula-foi-contra-proibir-do-jogo-do-tigrinho-em-2023/" target="_blank" rel="noopener">CNN Brasil, "Base de Lula no Congresso votou contra proibir 'jogo do tigrinho' em 2023"</a>.</p>
+  </div>
+
+  <div class="prose">
+    <h3>2026: as emendas à proibição</h3>
+    <p>A MP 1.394 ainda não foi votada. Até agora, 25 parlamentares apresentaram 99 emendas a ela. Cerca de metade afrouxa a proibição: algumas derrubam a MP, várias trocam a proibição total por uma proibição só do cassino online e mantêm as apostas esportivas, outras devolvem dinheiro às empresas ou criam prazos de transição. Cerca de um terço reforça a proibição. As demais tratam de saúde ou de ajustes técnicos.</p>
+  </div>
+  <div class="fig">
+    <div class="fig-title">Emendas por autor: quantas afrouxam e quantas reforçam a proibição</div>
+    <div class="legend"><span><i class="box" style="background:var(--contra)"></i>Afrouxa</span><span><i class="box" style="background:var(--pro)"></i>Reforça</span><span>Emendas de saúde ou técnicas não aparecem no gráfico.</span></div>
+    <div id="ch-emendas"></div>
+    <p class="small" style="margin:0">Classificação feita lendo o texto de cada emenda (dados abertos do Senado). Passe o mouse para ver os tipos. Emenda não é voto: mostra o que o parlamentar propôs mudar.</p>
+  </div>
+
+  <div class="prose">
+    <h3>Projetos de lei para proibir as bets</h3>
+    <p>Antes da MP, deputados de vários partidos já tinham apresentado projetos para proibir as apostas. Nenhum foi votado.</p>
+  </div>
+  <div class="fig tbl-wrap"><table class="tbl" id="tbl-pls"><thead><tr><th>Projeto</th><th>Apresentado</th><th>Proíbe</th><th>Autoria</th></tr></thead><tbody></tbody></table>
+    <p class="small" style="margin:.5rem 0 0">Câmara dos Deputados. Partido atual do deputado, que pode ser diferente do partido na data do projeto.</p></div>
+
+  <div class="cong-busca">
+    <label for="q-parl" class="eyebrow">Buscar um deputado ou senador</label>
+    <input id="q-parl" type="search" autocomplete="off" placeholder="Digite um nome, por exemplo: Portinho, Tabata, Alden">
+    <ul class="sug2" id="sug-parl" hidden></ul>
+  </div>
+  <div id="ficha-parl"></div>
+  <p class="nota">Votar para permitir os cassinos online, ou propor afrouxar a proibição, não equivale a defender o vício em apostas: os argumentos incluem regular um mercado que já existia na ilegalidade, arrecadar impostos e proteger o apostador. O site registra posições, sem julgá-las.</p>
+</section>
+
+</div>
+
+<div id="aba-metodo" hidden>
+<section id="metodo" style="border-top:0;padding-top:0">
+  <a class="voltar" href="#">← Voltar para os dados</a>
+  <div class="prose">
+    <h2>Como foi feito</h2>
+    <p data-sem-congresso>Este site analisa a procura por tratamento de jogo patológico no SUS, na atenção primária e nos CAPS, desde a liberação das apostas online. Tudo foi feito com dados públicos e código aberto, e qualquer pessoa pode refazer os cálculos.</p>
+    <p data-congresso>Este site junta duas análises sobre as apostas online no Brasil: a procura por tratamento de jogo patológico no SUS e as posições do Congresso. Tudo foi feito com dados públicos e código aberto, e qualquer pessoa pode refazer os cálculos.</p>
+  </div>
+
+  <div class="prose">
+    <h3>Atenção primária</h3>
+    <ul class="limites">
+      <li><b>De onde vêm os dados.</b> Do relatório público de produção do SISAB, o sistema que reúne os registros do e-SUS APS das unidades básicas de saúde. Consultamos os atendimentos individuais por problema ou condição avaliada, mês a mês, de jan/2018 a set/2026, no total do Brasil, por sexo e por faixa de idade.</li>
+      <li><b>O que contamos.</b> Atendimentos individuais com a CID-10 <span class="cid">F63.0</span>. O relatório não identifica pessoas, então não dá para contar pacientes nem ver se a mesma pessoa voltou.</li>
+      <li><b>A referência.</b> A soma dos atendimentos com CID de depressão (<span class="cid">F32</span>, <span class="cid">F33</span>), ansiedade (<span class="cid">F41</span>), estresse (<span class="cid">F43</span>), álcool (<span class="cid">F10</span>) e esquizofrenia (<span class="cid">F20</span>). Dividir por ela tira o efeito de o SUS estar registrando mais diagnósticos em geral.</li>
+      <li><b>Conduta.</b> O mesmo relatório, com a coluna "Conduta" no lugar do diagnóstico, consultado separadamente para cada diagnóstico (jogo patológico, ansiedade, depressão, álcool). Cada conduta é dividida pelo número de atendimentos do mesmo diagnóstico no período. Um atendimento pode ter mais de uma conduta.</li>
+      <li><b>Limites.</b> Muitos profissionais da atenção primária registram pela CIAP-2, que não tem código para jogo. Os meses mais recentes ainda podem receber registros atrasados.</li>
+    </ul>
+  </div>
+
+  <div class="prose">
+    <h3>CAPS</h3>
+    <ul class="limites">
+      <li><b>De onde vêm os dados.</b> Do SIA-PS (RAAS), o registro mensal dos atendimentos nos Centros de Atenção Psicossocial (CAPS) do SUS, publicado pelo DATASUS. Baixamos os arquivos de todos os estados, de jan/2018 a jun/2026. Os dois meses mais recentes ficaram de fora porque os CAPS ainda estão enviando a produção.</li>
+      <li><b>O que contamos.</b> Pessoas distintas atendidas por mês com o diagnóstico <span class="cid">F63.0</span> (jogo patológico, na CID-10), como diagnóstico principal ou secundário. Cada pessoa é identificada pelo número do cartão do SUS, que o DATASUS já publica criptografado.</li>
+      <li><b>A comparação.</b> Os outros transtornos de impulso (<span class="cid">F63.1</span> a <span class="cid">F63.3</span>: piromania, cleptomania e tricotilomania) não têm relação com apostas. Eles servem de controle: se subissem junto, a alta seria uma mudança no jeito de registrar, não nas apostas. Ficaram estáveis.</li>
+      <li><b>Novos ou já em tratamento.</b> Para cada pessoa, olhamos os 12 meses antes do primeiro diagnóstico de jogo patológico. Quem não tinha nenhum atendimento no CAPS nesse período conta como "nova no CAPS".</li>
+      <li><b>O que aparece depois.</b> Para cada pessoa e grupo de diagnóstico, marcamos o primeiro mês em que o grupo aparece no CAPS. Entram quem teve esse primeiro mês entre jan/2019 e jun/2025, para haver 12 meses de histórico antes e 12 de seguimento depois. Um diagnóstico conta como novo se aparece nos 12 meses seguintes e não aparecia nos 12 anteriores. Para comparar com outros grupos de entrada (ansiedade, depressão, álcool, drogas), recalculamos as taxas deles como se tivessem a mesma composição por sexo e idade dos pacientes de jogo patológico (padronização direta).</li>
+      <li><b>Por que não usamos <span class="cid">F63.8</span> e <span class="cid">F63.9</span>.</b> Mais de um terço dos registros com esses códigos é de crianças e adolescentes, em que eles indicam outros transtornos de impulso, não jogo.</li>
+      <li><b>Busca por apostas.</b> Google Trends para o Brasil, com os termos bet, apostas, betano, bet365 e tigrinho. O índice vai de 0 a 100 e mede o interesse relativo, não o número de buscas.</li>
+      <li><b>Limites.</b> Os dados contam quem chegou ao CAPS. Não dizem quantas pessoas têm o problema, e não incluem a rede privada, a atenção básica nem quem não procura ajuda. Mais casos e mais procura por ajuda aparecem do mesmo jeito.</li>
+    </ul>
+  </div>
+
+  <div class="prose" data-congresso>
+    <h3>Congresso</h3>
+    <ul class="limites">
+      <li><b>Votação de 2023.</b> Votos nominais das APIs de dados abertos da Câmara (votação 2374400-121, em 21/12/2023) e do Senado (votação 6797, emenda nº 139 ao PL 3.626/2023, em 12/12/2023).</li>
+      <li><b>Emendas à MP 1.394.</b> As 99 emendas e seus autores vêm dos dados abertos do Senado. O texto de cada uma foi extraído do PDF original. A classificação em afrouxa, reforça ou neutra foi feita <b>lendo o texto de cada emenda</b>, e pode ter erros. Ela está publicada, com um resumo de uma linha por emenda, no arquivo <code>src/politica/classificacao_mp1394.csv</code> do repositório.</li>
+      <li><b>Projetos de lei.</b> Busca na API da Câmara por projetos que proíbem as apostas, conferidos pela ementa. O partido mostrado é o atual do deputado.</li>
+      <li><b>Limites.</b> Emenda não é voto. Só 25 parlamentares apresentaram emendas, e os demais não têm posição registrada. A posição real sobre a proibição só aparecerá quando a MP for votada, até mar/2027.</li>
+    </ul>
+  </div>
+
+  <div class="prose">
+    <h3>As tabelas e como foram cruzadas</h3>
+    <p>Usamos dois tipos de tabela. As do CAPS têm uma linha por pessoa e mês, identificada por um código que não revela quem ela é, e por isso permitem seguir a mesma pessoa no tempo. As da atenção primária e das buscas só têm totais. Abaixo, cada tabela aparece com as colunas exatamente como estão nos arquivos. Nas tabelas por pessoa, os códigos e as linhas são inventados; nas de totais, os números são reais.</p>
+    <h4>1. CAPS: atendimentos com jogo patológico (<code>sia_f63_registros</code>)</h4>
+    <p>Uma linha por pessoa e mês em que ela teve algum diagnóstico do grupo F63 no CAPS. <code>cmp</code> é o mês (AAAAMM), <code>cod_uf</code> o estado (35 = SP), <code>CIDPRI</code> e <code>CIDASSOC</code> os diagnósticos principal e associado, <code>inicio_cmp</code> o mês em que a pessoa entrou no CAPS e <code>n_proc</code> os procedimentos no mês.</p>
+    <div class="tbl-wrap"><table class="tbl ex"><thead><tr><th><code>id</code></th><th><code>cmp</code></th><th><code>cod_uf</code></th><th><code>faixa</code></th><th><code>SEXOPAC</code></th><th><code>CIDPRI</code></th><th><code>CIDASSOC</code></th><th><code>inicio_cmp</code></th><th><code>n_proc</code></th></tr></thead><tbody><tr><td>a1b2c3d4…</td><td>202503</td><td>35</td><td>25-34</td><td>M</td><td>F630</td><td></td><td>202503</td><td>2</td></tr><tr><td>a1b2c3d4…</td><td>202504</td><td>35</td><td>25-34</td><td>M</td><td>F630</td><td></td><td>202503</td><td>4</td></tr><tr><td>a1b2c3d4…</td><td>202507</td><td>35</td><td>25-34</td><td>M</td><td>F630</td><td>F412</td><td>202503</td><td>3</td></tr><tr><td>b7c8d9e0…</td><td>202505</td><td>31</td><td>35-44</td><td>F</td><td>F630</td><td></td><td>202408</td><td>2</td></tr></tbody></table></div>
+    <h4>2. CAPS: todos os atendimentos dessas pessoas (<code>sia_f63_historico</code>)</h4>
+    <p>Todos os atendimentos no CAPS, com qualquer diagnóstico, das pessoas que alguma vez tiveram F63. Serve para ver o que havia antes do jogo patológico.</p>
+    <div class="tbl-wrap"><table class="tbl ex"><thead><tr><th><code>id</code></th><th><code>cmp</code></th><th><code>CIDPRI</code></th><th><code>inicio_cmp</code></th><th><code>n_proc</code></th></tr></thead><tbody><tr><td>b7c8d9e0…</td><td>202408</td><td>F322</td><td>202408</td><td>3</td></tr><tr><td>b7c8d9e0…</td><td>202411</td><td>F322</td><td>202408</td><td>2</td></tr><tr><td>b7c8d9e0…</td><td>202505</td><td>F630</td><td>202408</td><td>2</td></tr></tbody></table></div>
+    <h4>3. CAPS: totais por sexo e idade (<code>sia_perfil</code>)</h4>
+    <p>Pessoas atendidas por mês, grupo de diagnóstico, sexo e faixa de idade, sem identificar ninguém. <code>mental</code> é todo o capítulo F da CID-10, <code>subst</code> é álcool e drogas (F10–F19). É a "saúde mental em geral" do perfil. Números reais de mar/2025, homens de 25 a 34 anos:</p>
+    <div class="tbl-wrap"><table class="tbl ex"><thead><tr><th><code>cmp</code></th><th><code>grupo</code></th><th><code>SEXOPAC</code></th><th><code>faixa</code></th><th><code>pacientes</code></th></tr></thead><tbody><tr><td>202503</td><td>f630</td><td>M</td><td>25-34</td><td>10</td></tr><tr><td>202503</td><td>f63</td><td>M</td><td>25-34</td><td>26</td></tr><tr><td>202503</td><td>subst</td><td>M</td><td>25-34</td><td>14.280</td></tr><tr><td>202503</td><td>mental</td><td>M</td><td>25-34</td><td>37.566</td></tr></tbody></table></div>
+    <h4>4. CAPS: todos os pacientes de saúde mental (<code>sia_trajetorias</code>)</h4>
+    <p>38,7 milhões de linhas, de 5,5 milhões de pessoas: uma por pessoa, mês e grupo de diagnóstico. Tudo vira número para caber na memória. <code>mes</code> conta meses desde jan/2018 (mar/2025 = 86), <code>sexo</code> é 0 para homem e 1 para mulher, <code>faixa</code> vai de 0 (0–17) a 5 (60+) e <code>grupo</code> é 1 jogo, 2 álcool, 3 drogas, 4 psicoses, 5 humor/depressão, 6 ansiedade, 7 personalidade, 8 outros. A mesma pessoa do exemplo 1:</p>
+    <div class="tbl-wrap"><table class="tbl ex"><thead><tr><th><code>id</code></th><th><code>mes</code></th><th><code>sexo</code></th><th><code>faixa</code></th><th><code>grupo</code></th></tr></thead><tbody><tr><td>-1234567890123456789</td><td>86</td><td>0</td><td>2</td><td>1</td></tr><tr><td>-1234567890123456789</td><td>87</td><td>0</td><td>2</td><td>1</td></tr><tr><td>-1234567890123456789</td><td>90</td><td>0</td><td>2</td><td>1</td></tr><tr><td>-1234567890123456789</td><td>90</td><td>0</td><td>2</td><td>6</td></tr></tbody></table></div>
+    <h4>5. Atenção primária: atendimentos (<code>sisab_aps</code>)</h4>
+    <p>O SISAB não identifica pessoas: cada linha é o número de atendimentos em um mês com um diagnóstico, no total do Brasil ou num recorte (<code>sexo</code>, <code>faixa</code> ou <code>sexofaixa</code>). No <code>codigo</code>, o sufixo -1 indica CID-10 e -4 indica CIAP-2. Números reais de mar/2025:</p>
+    <div class="tbl-wrap"><table class="tbl ex"><thead><tr><th><code>cmp</code></th><th><code>recorte</code></th><th><code>valor</code></th><th><code>codigo</code></th><th><code>grupo</code></th><th><code>atendimentos</code></th></tr></thead><tbody><tr><td>202503</td><td>total</td><td>total</td><td>F630-1</td><td>jogo_cid</td><td>162</td></tr><tr><td>202503</td><td>total</td><td>total</td><td>F41-1</td><td>ansiedade_cid</td><td>85.085</td></tr><tr><td>202503</td><td>total</td><td>total</td><td>F633-1</td><td>tricotilomania_cid</td><td>231</td></tr><tr><td>202503</td><td>sexo</td><td>F</td><td>F630-1</td><td>jogo_cid</td><td>77</td></tr><tr><td>202503</td><td>faixa</td><td>25-34</td><td>F630-1</td><td>jogo_cid</td><td>44</td></tr></tbody></table></div>
+    <h4>6. Atenção primária: conduta (<code>sisab_conduta</code>)</h4>
+    <p>O que o profissional registrou ao fim do atendimento. Um atendimento pode ter mais de uma conduta. Números reais de jan/2025, jogo patológico:</p>
+    <div class="tbl-wrap"><table class="tbl ex"><thead><tr><th><code>cmp</code></th><th><code>grupo</code></th><th><code>conduta</code></th><th><code>n</code></th></tr></thead><tbody><tr><td>202501</td><td>jogo_cid</td><td>Alta do episódio</td><td>62</td></tr><tr><td>202501</td><td>jogo_cid</td><td>Retorno para consulta agendada</td><td>68</td></tr><tr><td>202501</td><td>jogo_cid</td><td>Encaminhamento p/ serviço especializado</td><td>43</td></tr><tr><td>202501</td><td>jogo_cid</td><td>Encaminhamento p/ CAPS</td><td>3</td></tr></tbody></table></div>
+    <h4>7. Busca por apostas (<code>google_trends_uf</code>)</h4>
+    <p>Índice de 0 a 100 do Google Trends por mês, para o Brasil (<code>BR</code>) e cada estado. <code>nivel</code> e <code>indice_comparavel</code> servem para comparar estados entre si; o site usa só a série do Brasil. Números reais:</p>
+    <div class="tbl-wrap"><table class="tbl ex"><thead><tr><th><code>uf</code></th><th><code>data</code></th><th><code>indice</code></th><th><code>nivel</code></th><th><code>indice_comparavel</code></th></tr></thead><tbody><tr><td>BR</td><td>2022-03-01</td><td>39</td><td></td><td></td></tr><tr><td>BR</td><td>2025-03-01</td><td>47</td><td></td><td></td></tr><tr><td>SP</td><td>2025-03-01</td><td>48</td><td>38</td><td>49,1</td></tr></tbody></table></div>
+  </div>
+
+  <div class="prose">
+    <h3>Como cruzamos as tabelas</h3>
+    <ul class="limites">
+      <li><b>Pessoas por mês no CAPS (tabela 1).</b> Em cada linha, o diagnóstico F63 é o <code>CIDPRI</code>, se ele for do grupo F63, ou então o <code>CIDASSOC</code>. Contamos os códigos <code>id</code> distintos com F630 em cada <code>cmp</code>. Em mar/2025 foram 80 pessoas. No exemplo, a pessoa a1b2c3d4… conta em março, abril e julho de 2025. O controle é a mesma conta com F631, F632 e F633.</li>
+      <li><b>Nova no CAPS (tabelas 1 e 2, pelo <code>id</code>).</b> Na tabela 1, achamos o primeiro mês com F630 de cada pessoa. Na tabela 2, procuramos o mesmo <code>id</code> nos 12 meses anteriores. A pessoa a1b2c3d4… teve o primeiro F630 em mar/2025 e nenhum atendimento de mar/2024 a fev/2025: é nova no CAPS. A pessoa b7c8d9e0… teve o primeiro F630 em mai/2025, mas já era atendida por depressão (F322) desde ago/2024: já estava no CAPS.</li>
+      <li><b>Diagnóstico novo depois (tabela 4 cruzada com ela mesma, pelo <code>id</code>).</b> Para cada pessoa e grupo, o primeiro <code>mes</code> do grupo é o ponto de partida. A pessoa do exemplo entra no grupo 1 (jogo) no mês 86. Olhamos os 12 meses depois (87 a 98) e os 12 antes (74 a 85). O grupo 6 (ansiedade) aparece no mês 90 e não aparecia antes: é ansiedade nova. A porcentagem é o número de pessoas com ansiedade nova dividido pelo número de pessoas que entraram por jogo. Para quem entrou por ansiedade, depressão, álcool ou drogas, fazemos a mesma conta separada por <code>sexo</code> e <code>faixa</code>, e tiramos a média com os pesos da composição dos pacientes de jogo (padronização direta).</li>
+      <li><b>Perfil do CAPS (tabelas 1 e 3).</b> As porcentagens por sexo e idade do jogo patológico vêm da tabela 1 (pessoas por mês, somadas no ano). As da saúde mental em geral vêm do grupo <code>mental</code> da tabela 3.</li>
+      <li><b>Jogo patológico a cada 10 mil atendimentos (tabela 5).</b> No mesmo mês, dividimos os atendimentos de <code>jogo_cid</code> pela soma de depressão (F32 e F33), ansiedade (F41), estresse (F43), álcool (F10) e esquizofrenia (F20), e multiplicamos por 10 mil. Em mar/2025: 162 ÷ (29.611 + 12.597 + 85.085 + 721 + 2.579 + 28.996 = 159.589) × 10.000 = 10,2.</li>
+      <li><b>Quantas vezes maior que em 2022 (tabelas 1 e 5).</b> Cada mês dividido pela média mensal de 2022 da mesma série. Na atenção primária, a média de 2022 foi de 19 atendimentos por mês; em mar/2025 foram 162, ou 8,5 vezes.</li>
+      <li><b>Perfil da atenção primária (tabela 5).</b> A pirâmide usa o recorte <code>sexofaixa</code> de 2025: cada valor é dividido pelo total do mesmo diagnóstico no ano.</li>
+      <li><b>Conduta (tabelas 5 e 6).</b> Cada conduta é dividida pelos atendimentos do mesmo diagnóstico e mês, na tabela 5. Isso permite comparar jogo patológico, ansiedade e depressão mesmo com volumes muito diferentes.</li>
+      <li><b>Busca por apostas (tabela 7).</b> Entra só lado a lado, pelo mês (<code>data</code> = <code>cmp</code>). Não há nenhum modelo estatístico ligando buscas e atendimentos.</li>
+      <li><b>O que é publicado.</b> Só totais. Toda contagem abaixo de 5 é suprimida antes de ir para a página.</li>
+    </ul>
+    <p class="small">A descrição das tabelas também está no <a href="https://github.com/thiagorr162/bets/tree/saude-mental#as-tabelas-que-o-site-usa" target="_blank" rel="noopener">README do repositório</a>.</p>
+  </div>
+
+  <div class="prose">
+    <h3>Privacidade</h3>
+    <p>Dado de saúde é dado pessoal sensível pela LGPD. A página só mostra totais, e toda contagem com menos de 5 pessoas é suprimida. Os dados por pessoa usados nos cálculos ficam fora do site e do repositório, com o código do paciente pseudonimizado de novo, a idade em faixas e a localização só por estado. <span data-congresso>Votos e emendas de parlamentares são registros públicos.</span></p>
+  </div>
+
+  <div class="prose">
+    <h3>Código e reprodução</h3>
+    <p>O código está no GitHub: <a href="https://github.com/thiagorr162/bets" target="_blank" rel="noopener">github.com/thiagorr162/bets</a>, branch <code>saude-mental</code>. Os dados não ficam no repositório. Para baixá-los e refazer o site:</p>
+    <pre style="overflow-x:auto;background:var(--surface);border:1px solid var(--rule);border-radius:8px;padding:.8rem;font-family:var(--f-mono);font-size:.85rem"><code>uv sync
+uv run python -m src.pipeline --pesado     # DATASUS, Google Trends, DataSenado
+<span data-congresso>uv run python -m src.politica.emendas_mp1394
+uv run python -m src.politica.congresso
+</span>uv run python site/montar_dados.py         # gera site/index.html</code></pre>
+    <p class="small">Resultados preliminares, sem revisão por pares.</p>
+  </div>
+
+  <div class="prose">
+    <h3>Uso de inteligência artificial</h3>
+    <p>A análise e o site foram feitos com a ajuda de uma inteligência artificial (Claude, da Anthropic). Ela foi usada para escrever o código que baixa e processa os dados, <span data-congresso>para ler e classificar as 99 emendas à MP 1.394, </span>para montar os gráficos e para redigir os textos. Ferramentas como essa podem errar. Por isso, o código<span data-congresso>, a classificação das emendas</span> e as fontes estão abertos para quem quiser conferir.</p>
+  </div>
+
+  <div class="prose">
+    <h3>Referências</h3>
+    <ul class="limites">
+      <li><b>Atenção primária:</b> <a href="https://sisab.saude.gov.br/paginas/acessoRestrito/relatorio/federal/saude/RelSauProducao.xhtml" target="_blank" rel="noopener">SISAB, relatório de produção</a>.</li>
+      <li><b>CAPS:</b> <a href="https://datasus.saude.gov.br/transferencia-de-arquivos/" target="_blank" rel="noopener">DATASUS, transferência de arquivos</a> (SIA-PS; arquivos em ftp.datasus.gov.br).</li>
+      <li><b>Busca por apostas:</b> <a href="https://trends.google.com/trends/" target="_blank" rel="noopener">Google Trends</a>.</li>
+      <li><b>Apostadores por sexo:</b> <a href="https://www12.senado.leg.br/noticias/arquivos/2024/09/30/relatorio_apostasesportivas-golpesdigitais-endividamento-1.pdf" target="_blank" rel="noopener">DataSenado, Panorama Político 2024: apostas esportivas, golpes digitais e endividamento</a>.</li>
+      <li data-congresso><b>Câmara dos Deputados:</b> <a href="https://dadosabertos.camara.leg.br/" target="_blank" rel="noopener">dados abertos</a>.</li>
+      <li data-congresso><b>Senado Federal:</b> <a href="https://legis.senado.leg.br/dadosabertos/" target="_blank" rel="noopener">dados abertos</a>.</li>
+      <li><b>MP 1.394/2026:</b> <a href="https://www12.senado.leg.br/publicacoes/estudos-legislativos/tipos-de-estudos/sumarios-de-proposicoes/mpv1394" target="_blank" rel="noopener">resumo do Senado</a>.</li>
+      <li data-congresso><b>Votação de 2023:</b> <a href="https://www12.senado.leg.br/noticias/materias/2023/12/12/plenario-aprova-regulamentacao-das-bets-texto-volta-a-camara" target="_blank" rel="noopener">Agência Senado</a>; <a href="https://www.cnnbrasil.com.br/politica/governo-lula-foi-contra-proibir-do-jogo-do-tigrinho-em-2023/" target="_blank" rel="noopener">CNN Brasil</a>.</li>
+      <li><b>CPI das Bets:</b> <a href="https://www12.senado.leg.br/radio/1/noticia/2024/11/12/cpi-das-bets-e-instalada-e-vai-investigar-influenciadores-donos-das-apostas-e-crime-de-lavagem-de-dinheiro" target="_blank" rel="noopener">instalação</a> e <a href="https://www12.senado.leg.br/noticias/materias/2025/06/12/cpi-das-bets-rejeita-relatorio-final" target="_blank" rel="noopener">encerramento</a> (Agência Senado).</li>
+      <li><b>Marcos regulatórios:</b> as notícias de cada marco estão linkadas abaixo do primeiro gráfico da página.</li>
+    </ul>
+  </div>
+</section>
+</div>
+
+<footer>Dados: DATASUS (SIA-PS), SISAB, Google Trends, DataSenado<span data-congresso>, Câmara dos Deputados e Senado Federal</span>. <span id="rodape"></span></footer>
+</div>
+
+<script>const D = {"corte":"202606","choques":{"2018-12-12":"Lei 13.756 (legaliza quota fixa)","2023-12-29":"Lei 14.790 (regulação)","2024-10-01":"Bloqueio de sites não autorizados","2025-01-01":"Mercado regulado","2026-09-25":"MP 1.394 (proibição)"},"noticias":{"2018-12-12":["Agência Brasil","https://agenciabrasil.ebc.com.br/politica/noticia/2026-10/origem-das-bets-passa-por-lobby-estrangeiro-e-jabutis-no-congresso"],"2023-12-29":["Agência Senado","https://www12.senado.leg.br/noticias/materias/2024/01/05/regras-para-apostas-veja-o-que-muda-com-a-nova-lei"],"2024-10-01":["Agência Brasil","https://agenciabrasil.ebc.com.br/economia/noticia/2024-10/bets-nao-autorizadas-serao-suspensas-nesta-terca"],"2025-01-01":["CNN Brasil","https://www.cnnbrasil.com.br/economia/money/macroeconomia/mercado-regulado-de-bets-comeca-nesta-quarta-1o-veja-o-que-muda/"],"2026-09-25":["Agência Brasil","https://agenciabrasil.ebc.com.br/economia/noticia/2026-09/mp-proibe-bets-no-brasil-e-determina-devolucao-de-saldo-ao-apostador"]},"pandemia":["2020-03-01","2021-12-31"],"cpi":{"inicio":"2024-11-12","fim":"2025-06-12","url":"https://www12.senado.leg.br/radio/1/noticia/2024/11/12/cpi-das-bets-e-instalada-e-vai-investigar-influenciadores-donos-das-apostas-e-crime-de-lavagem-de-dinheiro"},"serie":{"caps":[{"cmp":"201801","f630":8,"placebo":56},{"cmp":"201802","f630":5,"placebo":63},{"cmp":"201803","f630":9,"placebo":72},{"cmp":"201804","f630":8,"placebo":76},{"cmp":"201805","f630":10,"placebo":74},{"cmp":"201806","f630":12,"placebo":61},{"cmp":"201807","f630":10,"placebo":63},{"cmp":"201808","f630":10,"placebo":63},{"cmp":"201809","f630":9,"placebo":71},{"cmp":"201810","f630":13,"placebo":66},{"cmp":"201811","f630":10,"placebo":81},{"cmp":"201812","f630":6,"placebo":61},{"cmp":"201901","f630":6,"placebo":58},{"cmp":"201902","f630":12,"placebo":71},{"cmp":"201903","f630":8,"placebo":60},{"cmp":"201904","f630":18,"placebo":63},{"cmp":"201905","f630":12,"placebo":58},{"cmp":"201906","f630":14,"placebo":57},{"cmp":"201907","f630":17,"placebo":76},{"cmp":"201908","f630":18,"placebo":71},{"cmp":"201909","f630":18,"placebo":69},{"cmp":"201910","f630":17,"placebo":78},{"cmp":"201911","f630":19,"placebo":71},{"cmp":"201912","f630":7,"placebo":65},{"cmp":"202001","f630":9,"placebo":66},{"cmp":"202002","f630":8,"placebo":71},{"cmp":"202003","f630":8,"placebo":72},{"cmp":"202004","f630":null,"placebo":52},{"cmp":"202005","f630":8,"placebo":58},{"cmp":"202006","f630":13,"placebo":49},{"cmp":"202007","f630":13,"placebo":58},{"cmp":"202008","f630":9,"placebo":58},{"cmp":"202009","f630":13,"placebo":63},{"cmp":"202010","f630":20,"placebo":54},{"cmp":"202011","f630":18,"placebo":63},{"cmp":"202012","f630":10,"placebo":52},{"cmp":"202101","f630":13,"placebo":53},{"cmp":"202102","f630":13,"placebo":60},{"cmp":"202103","f630":17,"placebo":61},{"cmp":"202104","f630":23,"placebo":54},{"cmp":"202105","f630":19,"placebo":51},{"cmp":"202106","f630":18,"placebo":73},{"cmp":"202107","f630":20,"placebo":65},{"cmp":"202108","f630":18,"placebo":70},{"cmp":"202109","f630":18,"placebo":63},{"cmp":"202110","f630":13,"placebo":62},{"cmp":"202111","f630":15,"placebo":61},{"cmp":"202112","f630":15,"placebo":68},{"cmp":"202201","f630":15,"placebo":66},{"cmp":"202202","f630":15,"placebo":66},{"cmp":"202203","f630":22,"placebo":77},{"cmp":"202204","f630":18,"placebo":72},{"cmp":"202205","f630":16,"placebo":66},{"cmp":"202206","f630":19,"placebo":66},{"cmp":"202207","f630":21,"placebo":71},{"cmp":"202208","f630":28,"placebo":84},{"cmp":"202209","f630":19,"placebo":63},{"cmp":"202210","f630":21,"placebo":71},{"cmp":"202211","f630":26,"placebo":73},{"cmp":"202212","f630":19,"placebo":57},{"cmp":"202301","f630":23,"placebo":67},{"cmp":"202302","f630":26,"placebo":57},{"cmp":"202303","f630":32,"placebo":74},{"cmp":"202304","f630":28,"placebo":63},{"cmp":"202305","f630":35,"placebo":68},{"cmp":"202306","f630":24,"placebo":72},{"cmp":"202307","f630":29,"placebo":78},{"cmp":"202308","f630":37,"placebo":70},{"cmp":"202309","f630":32,"placebo":66},{"cmp":"202310","f630":36,"placebo":78},{"cmp":"202311","f630":33,"placebo":69},{"cmp":"202312","f630":24,"placebo":68},{"cmp":"202401","f630":19,"placebo":62},{"cmp":"202402","f630":35,"placebo":79},{"cmp":"202403","f630":28,"placebo":68},{"cmp":"202404","f630":41,"placebo":52},{"cmp":"202405","f630":25,"placebo":60},{"cmp":"202406","f630":43,"placebo":80},{"cmp":"202407","f630":53,"placebo":77},{"cmp":"202408","f630":61,"placebo":74},{"cmp":"202409","f630":76,"placebo":80},{"cmp":"202410","f630":77,"placebo":71},{"cmp":"202411","f630":67,"placebo":54},{"cmp":"202412","f630":68,"placebo":59},{"cmp":"202501","f630":69,"placebo":51},{"cmp":"202502","f630":72,"placebo":46},{"cmp":"202503","f630":80,"placebo":63},{"cmp":"202504","f630":119,"placebo":65},{"cmp":"202505","f630":111,"placebo":67},{"cmp":"202506","f630":117,"placebo":75},{"cmp":"202507","f630":148,"placebo":61},{"cmp":"202508","f630":148,"placebo":74},{"cmp":"202509","f630":194,"placebo":74},{"cmp":"202510","f630":193,"placebo":72},{"cmp":"202511","f630":201,"placebo":62},{"cmp":"202512","f630":182,"placebo":53},{"cmp":"202601","f630":176,"placebo":63},{"cmp":"202602","f630":203,"placebo":63},{"cmp":"202603","f630":275,"placebo":70},{"cmp":"202604","f630":254,"placebo":65},{"cmp":"202605","f630":269,"placebo":74},{"cmp":"202606","f630":280,"placebo":74}],"trends":[{"cmp":"201801","trends":3},{"cmp":"201802","trends":3},{"cmp":"201803","trends":3},{"cmp":"201804","trends":4},{"cmp":"201805","trends":4},{"cmp":"201806","trends":4},{"cmp":"201807","trends":4},{"cmp":"201808","trends":4},{"cmp":"201809","trends":4},{"cmp":"201810","trends":4},{"cmp":"201811","trends":4},{"cmp":"201812","trends":4},{"cmp":"201901","trends":4},{"cmp":"201902","trends":4},{"cmp":"201903","trends":5},{"cmp":"201904","trends":5},{"cmp":"201905","trends":6},{"cmp":"201906","trends":6},{"cmp":"201907","trends":6},{"cmp":"201908","trends":7},{"cmp":"201909","trends":7},{"cmp":"201910","trends":7},{"cmp":"201911","trends":8},{"cmp":"201912","trends":8},{"cmp":"202001","trends":7},{"cmp":"202002","trends":8},{"cmp":"202003","trends":6},{"cmp":"202004","trends":3},{"cmp":"202005","trends":4},{"cmp":"202006","trends":6},{"cmp":"202007","trends":8},{"cmp":"202008","trends":11},{"cmp":"202009","trends":11},{"cmp":"202010","trends":11},{"cmp":"202011","trends":12},{"cmp":"202012","trends":13},{"cmp":"202101","trends":14},{"cmp":"202102","trends":14},{"cmp":"202103","trends":14},{"cmp":"202104","trends":17},{"cmp":"202105","trends":19},{"cmp":"202106","trends":21},{"cmp":"202107","trends":23},{"cmp":"202108","trends":22},{"cmp":"202109","trends":30},{"cmp":"202110","trends":33},{"cmp":"202111","trends":34},{"cmp":"202112","trends":33},{"cmp":"202201","trends":29},{"cmp":"202202","trends":39},{"cmp":"202203","trends":39},{"cmp":"202204","trends":55},{"cmp":"202205","trends":60},{"cmp":"202206","trends":63},{"cmp":"202207","trends":69},{"cmp":"202208","trends":74},{"cmp":"202209","trends":76},{"cmp":"202210","trends":81},{"cmp":"202211","trends":96},{"cmp":"202212","trends":89},{"cmp":"202301","trends":81},{"cmp":"202302","trends":95},{"cmp":"202303","trends":84},{"cmp":"202304","trends":99},{"cmp":"202305","trends":100},{"cmp":"202306","trends":90},{"cmp":"202307","trends":93},{"cmp":"202308","trends":99},{"cmp":"202309","trends":98},{"cmp":"202310","trends":100},{"cmp":"202311","trends":94},{"cmp":"202312","trends":93},{"cmp":"202401","trends":78},{"cmp":"202402","trends":68},{"cmp":"202403","trends":68},{"cmp":"202404","trends":75},{"cmp":"202405","trends":76},{"cmp":"202406","trends":76},{"cmp":"202407","trends":81},{"cmp":"202408","trends":74},{"cmp":"202409","trends":70},{"cmp":"202410","trends":61},{"cmp":"202411","trends":56},{"cmp":"202412","trends":56},{"cmp":"202501","trends":48},{"cmp":"202502","trends":47},{"cmp":"202503","trends":47},{"cmp":"202504","trends":53},{"cmp":"202505","trends":52},{"cmp":"202506","trends":52},{"cmp":"202507","trends":53},{"cmp":"202508","trends":51},{"cmp":"202509","trends":51},{"cmp":"202510","trends":55},{"cmp":"202511","trends":51},{"cmp":"202512","trends":54},{"cmp":"202601","trends":50},{"cmp":"202602","trends":55},{"cmp":"202603","trends":54},{"cmp":"202604","trends":56},{"cmp":"202605","trends":56},{"cmp":"202606","trends":56},{"cmp":"202607","trends":46},{"cmp":"202608","trends":39},{"cmp":"202609","trends":40},{"cmp":"202610","trends":13}]},"anual":[{"ano":2018,"f630":46,"placebo":296,"meses":12},{"ano":2019,"f630":67,"placebo":283,"meses":12},{"ano":2020,"f630":63,"placebo":269,"meses":12},{"ano":2021,"f630":81,"placebo":314,"meses":12},{"ano":2022,"f630":124,"placebo":338,"meses":12},{"ano":2023,"f630":158,"placebo":311,"meses":12},{"ano":2024,"f630":299,"placebo":328,"meses":12},{"ano":2025,"f630":856,"placebo":338,"meses":12},{"ano":2026,"f630":849,"placebo":216,"meses":6}],"novos":[{"ano":2019,"novos":35,"ja":19},{"ano":2020,"novos":20,"ja":20},{"ano":2021,"novos":38,"ja":24},{"ano":2022,"novos":63,"ja":36},{"ano":2023,"novos":80,"ja":41},{"ano":2024,"novos":178,"ja":74},{"ano":2025,"novos":526,"ja":229},{"ano":2026,"novos":495,"ja":140}],"perfil":[{"sexo":"F","faixa":"0-17","f630_2022":11,"f630_2025":17,"mental_2022":361528,"mental_2025":483119,"pct_f630_2025":1.040391676866585,"pct_mental_2025":9.011973272183907,"cresc_f630":1.5454545454545454,"cresc_mental":1.336325263879976},{"sexo":"F","faixa":"18-24","f630_2022":9,"f630_2025":110,"mental_2022":216383,"mental_2025":268314,"pct_f630_2025":6.731946144430845,"pct_mental_2025":5.005057959949314,"cresc_f630":12.222222222222221,"cresc_mental":1.2399957482796709},{"sexo":"F","faixa":"25-34","f630_2022":14,"f630_2025":322,"mental_2022":372100,"mental_2025":479284,"pct_f630_2025":19.7062423500612,"pct_mental_2025":8.940436202644465,"cresc_f630":23.0,"cresc_mental":1.288051599032518},{"sexo":"F","faixa":"35-44","f630_2022":9,"f630_2025":179,"mental_2022":457908,"mental_2025":592479,"pct_f630_2025":10.954712362301102,"pct_mental_2025":11.051945612427266,"cresc_f630":19.88888888888889,"cresc_mental":1.2938821772059017},{"sexo":"F","faixa":"45-59","f630_2022":20,"f630_2025":106,"mental_2022":512208,"mental_2025":669077,"pct_f630_2025":6.487148102815178,"pct_mental_2025":12.480784322357415,"cresc_f630":5.3,"cresc_mental":1.3062603473588854},{"sexo":"F","faixa":"60+","f630_2022":14,"f630_2025":37,"mental_2022":160779,"mental_2025":207661,"pct_f630_2025":2.2643818849449207,"pct_mental_2025":3.873653037191628,"cresc_f630":2.642857142857143,"cresc_mental":1.291592807518395},{"sexo":"M","faixa":"0-17","f630_2022":24,"f630_2025":50,"mental_2022":461167,"mental_2025":701364,"pct_f630_2025":3.0599755201958385,"pct_mental_2025":13.083057429064047,"cresc_f630":2.0833333333333335,"cresc_mental":1.5208460275778624},{"sexo":"M","faixa":"18-24","f630_2022":26,"f630_2025":139,"mental_2022":272071,"mental_2025":316597,"pct_f630_2025":8.50673194614443,"pct_mental_2025":5.905716194257747,"cresc_f630":5.346153846153846,"cresc_mental":1.1636558104318357},{"sexo":"M","faixa":"25-34","f630_2022":38,"f630_2025":309,"mental_2022":390840,"mental_2025":484551,"pct_f630_2025":18.910648714810282,"pct_mental_2025":9.038685419141007,"cresc_f630":8.131578947368421,"cresc_mental":1.2397681915873504},{"sexo":"M","faixa":"35-44","f630_2022":28,"f630_2025":221,"mental_2022":396400,"mental_2025":496533,"pct_f630_2025":13.525091799265606,"pct_mental_2025":9.262194458833727,"cresc_f630":7.892857142857143,"cresc_mental":1.2526059535822403},{"sexo":"M","faixa":"45-59","f630_2022":29,"f630_2025":111,"mental_2022":401383,"mental_2025":512031,"pct_f630_2025":6.7931456548347615,"pct_mental_2025":9.551290026949049,"cresc_f630":3.8275862068965516,"cresc_mental":1.2756668817563275},{"sexo":"M","faixa":"60+","f630_2022":17,"f630_2025":33,"mental_2022":113386,"mental_2025":149847,"pct_f630_2025":2.0195838433292534,"pct_mental_2025":2.795206065000428,"cresc_f630":1.9411764705882353,"cresc_mental":1.3215652726086113}],"mulheres":{"f630_2025":47.184822521419825,"mental_2025":50.363850406754},"caps_perfil":{"mulheres":[{"ano":2018,"pct":47.3,"ref":47.1},{"ano":2019,"pct":43.4,"ref":48.1},{"ano":2020,"pct":51.9,"ref":49.0},{"ano":2021,"pct":36.6,"ref":50.1},{"ano":2022,"pct":32.2,"ref":50.6},{"ano":2023,"pct":38.7,"ref":50.3},{"ano":2024,"pct":45.5,"ref":50.2},{"ano":2025,"pct":47.2,"ref":50.4},{"ano":2026,"pct":43.5,"ref":50.5}],"faixas":{"jogo":{"25-34":40.1,"45-59":12.2,"35-44":25.7,"18-24":14.6,"60+":3.3,"0-17":4.1},"ref":{"18-24":10.9,"35-44":20.4,"25-34":18.0,"45-59":22.1,"60+":6.7,"0-17":22.0}}},"aps":{"mensal":[{"cmp":"201801","jogo":34,"placebo":51,"ref":44852,"por10mil":7.58},{"cmp":"201802","jogo":11,"placebo":57,"ref":43835,"por10mil":2.51},{"cmp":"201803","jogo":5,"placebo":82,"ref":52361,"por10mil":0.95},{"cmp":"201804","jogo":6,"placebo":84,"ref":49049,"por10mil":1.22},{"cmp":"201805","jogo":15,"placebo":80,"ref":51652,"por10mil":2.9},{"cmp":"201806","jogo":5,"placebo":83,"ref":52808,"por10mil":0.95},{"cmp":"201807","jogo":5,"placebo":72,"ref":56208,"por10mil":0.89},{"cmp":"201808","jogo":10,"placebo":106,"ref":64443,"por10mil":1.55},{"cmp":"201809","jogo":null,"placebo":88,"ref":71983,"por10mil":null},{"cmp":"201810","jogo":18,"placebo":94,"ref":93434,"por10mil":1.93},{"cmp":"201811","jogo":14,"placebo":80,"ref":63332,"por10mil":2.21},{"cmp":"201812","jogo":5,"placebo":61,"ref":44566,"por10mil":1.12},{"cmp":"201901","jogo":8,"placebo":81,"ref":55614,"por10mil":1.44},{"cmp":"201902","jogo":10,"placebo":112,"ref":59488,"por10mil":1.68},{"cmp":"201903","jogo":12,"placebo":76,"ref":49977,"por10mil":2.4},{"cmp":"201904","jogo":9,"placebo":76,"ref":57867,"por10mil":1.56},{"cmp":"201905","jogo":15,"placebo":88,"ref":68529,"por10mil":2.19},{"cmp":"201906","jogo":11,"placebo":106,"ref":58965,"por10mil":1.87},{"cmp":"201907","jogo":6,"placebo":107,"ref":76914,"por10mil":0.78},{"cmp":"201908","jogo":10,"placebo":119,"ref":84565,"por10mil":1.18},{"cmp":"201909","jogo":13,"placebo":93,"ref":74820,"por10mil":1.74},{"cmp":"201910","jogo":13,"placebo":151,"ref":83306,"por10mil":1.56},{"cmp":"201911","jogo":19,"placebo":94,"ref":74204,"por10mil":2.56},{"cmp":"201912","jogo":10,"placebo":72,"ref":59785,"por10mil":1.67},{"cmp":"202001","jogo":11,"placebo":98,"ref":64891,"por10mil":1.7},{"cmp":"202002","jogo":10,"placebo":78,"ref":66108,"por10mil":1.51},{"cmp":"202003","jogo":6,"placebo":71,"ref":72564,"por10mil":0.83},{"cmp":"202004","jogo":null,"placebo":29,"ref":61914,"por10mil":null},{"cmp":"202005","jogo":7,"placebo":54,"ref":66286,"por10mil":1.06},{"cmp":"202006","jogo":6,"placebo":61,"ref":73552,"por10mil":0.82},{"cmp":"202007","jogo":12,"placebo":94,"ref":82679,"por10mil":1.45},{"cmp":"202008","jogo":9,"placebo":98,"ref":83309,"por10mil":1.08},{"cmp":"202009","jogo":10,"placebo":108,"ref":92360,"por10mil":1.08},{"cmp":"202010","jogo":12,"placebo":118,"ref":87497,"por10mil":1.37},{"cmp":"202011","jogo":14,"placebo":113,"ref":84629,"por10mil":1.65},{"cmp":"202012","jogo":12,"placebo":75,"ref":74039,"por10mil":1.62},{"cmp":"202101","jogo":17,"placebo":66,"ref":76724,"por10mil":2.22},{"cmp":"202102","jogo":15,"placebo":88,"ref":82414,"por10mil":1.82},{"cmp":"202103","jogo":16,"placebo":84,"ref":95876,"por10mil":1.67},{"cmp":"202104","jogo":15,"placebo":104,"ref":87919,"por10mil":1.71},{"cmp":"202105","jogo":17,"placebo":115,"ref":90941,"por10mil":1.87},{"cmp":"202106","jogo":15,"placebo":126,"ref":93512,"por10mil":1.6},{"cmp":"202107","jogo":18,"placebo":139,"ref":98472,"por10mil":1.83},{"cmp":"202108","jogo":22,"placebo":134,"ref":112392,"por10mil":1.96},{"cmp":"202109","jogo":13,"placebo":148,"ref":108505,"por10mil":1.2},{"cmp":"202110","jogo":7,"placebo":110,"ref":101484,"por10mil":0.69},{"cmp":"202111","jogo":14,"placebo":123,"ref":105505,"por10mil":1.33},{"cmp":"202112","jogo":16,"placebo":118,"ref":96651,"por10mil":1.66},{"cmp":"202201","jogo":15,"placebo":93,"ref":83853,"por10mil":1.79},{"cmp":"202202","jogo":21,"placebo":119,"ref":96028,"por10mil":2.19},{"cmp":"202203","jogo":12,"placebo":135,"ref":117576,"por10mil":1.02},{"cmp":"202204","jogo":17,"placebo":124,"ref":101348,"por10mil":1.68},{"cmp":"202205","jogo":20,"placebo":159,"ref":118013,"por10mil":1.69},{"cmp":"202206","jogo":10,"placebo":137,"ref":106742,"por10mil":0.94},{"cmp":"202207","jogo":12,"placebo":138,"ref":110880,"por10mil":1.08},{"cmp":"202208","jogo":24,"placebo":184,"ref":133243,"por10mil":1.8},{"cmp":"202209","jogo":30,"placebo":172,"ref":125287,"por10mil":2.39},{"cmp":"202210","jogo":28,"placebo":135,"ref":120128,"por10mil":2.33},{"cmp":"202211","jogo":19,"placebo":135,"ref":119218,"por10mil":1.59},{"cmp":"202212","jogo":20,"placebo":101,"ref":103018,"por10mil":1.94},{"cmp":"202301","jogo":32,"placebo":135,"ref":129618,"por10mil":2.47},{"cmp":"202302","jogo":28,"placebo":133,"ref":118782,"por10mil":2.36},{"cmp":"202303","jogo":27,"placebo":194,"ref":152263,"por10mil":1.77},{"cmp":"202304","jogo":33,"placebo":164,"ref":125260,"por10mil":2.63},{"cmp":"202305","jogo":60,"placebo":224,"ref":147456,"por10mil":4.07},{"cmp":"202306","jogo":52,"placebo":174,"ref":136364,"por10mil":3.81},{"cmp":"202307","jogo":76,"placebo":164,"ref":141672,"por10mil":5.36},{"cmp":"202308","jogo":101,"placebo":228,"ref":169579,"por10mil":5.96},{"cmp":"202309","jogo":97,"placebo":183,"ref":146176,"por10mil":6.64},{"cmp":"202310","jogo":72,"placebo":209,"ref":157312,"por10mil":4.58},{"cmp":"202311","jogo":59,"placebo":186,"ref":149381,"por10mil":3.95},{"cmp":"202312","jogo":59,"placebo":155,"ref":129647,"por10mil":4.55},{"cmp":"202401","jogo":76,"placebo":215,"ref":153991,"por10mil":4.94},{"cmp":"202402","jogo":77,"placebo":197,"ref":142234,"por10mil":5.41},{"cmp":"202403","jogo":79,"placebo":211,"ref":147207,"por10mil":5.37},{"cmp":"202404","jogo":100,"placebo":225,"ref":170305,"por10mil":5.87},{"cmp":"202405","jogo":64,"placebo":238,"ref":153952,"por10mil":4.16},{"cmp":"202406","jogo":97,"placebo":234,"ref":156843,"por10mil":6.18},{"cmp":"202407","jogo":132,"placebo":245,"ref":166563,"por10mil":7.92},{"cmp":"202408","jogo":153,"placebo":221,"ref":173052,"por10mil":8.84},{"cmp":"202409","jogo":170,"placebo":265,"ref":168079,"por10mil":10.11},{"cmp":"202410","jogo":186,"placebo":273,"ref":176129,"por10mil":10.56},{"cmp":"202411","jogo":163,"placebo":233,"ref":153852,"por10mil":10.59},{"cmp":"202412","jogo":136,"placebo":165,"ref":128333,"por10mil":10.6},{"cmp":"202501","jogo":176,"placebo":239,"ref":164259,"por10mil":10.71},{"cmp":"202502","jogo":164,"placebo":239,"ref":169028,"por10mil":9.7},{"cmp":"202503","jogo":162,"placebo":245,"ref":159589,"por10mil":10.15},{"cmp":"202504","jogo":230,"placebo":256,"ref":177983,"por10mil":12.92},{"cmp":"202505","jogo":245,"placebo":276,"ref":183402,"por10mil":13.36},{"cmp":"202506","jogo":238,"placebo":238,"ref":174427,"por10mil":13.64},{"cmp":"202507","jogo":384,"placebo":295,"ref":202841,"por10mil":18.93},{"cmp":"202508","jogo":372,"placebo":314,"ref":203831,"por10mil":18.25},{"cmp":"202509","jogo":375,"placebo":335,"ref":221193,"por10mil":16.95},{"cmp":"202510","jogo":423,"placebo":290,"ref":222551,"por10mil":19.01},{"cmp":"202511","jogo":362,"placebo":263,"ref":195356,"por10mil":18.53},{"cmp":"202512","jogo":292,"placebo":222,"ref":177296,"por10mil":16.47},{"cmp":"202601","jogo":374,"placebo":258,"ref":199188,"por10mil":18.78},{"cmp":"202602","jogo":449,"placebo":263,"ref":191948,"por10mil":23.39},{"cmp":"202603","jogo":636,"placebo":358,"ref":242016,"por10mil":26.28},{"cmp":"202604","jogo":503,"placebo":337,"ref":220453,"por10mil":22.82},{"cmp":"202605","jogo":543,"placebo":326,"ref":230419,"por10mil":23.57},{"cmp":"202606","jogo":557,"placebo":341,"ref":229510,"por10mil":24.27},{"cmp":"202607","jogo":748,"placebo":388,"ref":256490,"por10mil":29.16},{"cmp":"202608","jogo":862,"placebo":368,"ref":253366,"por10mil":34.02},{"cmp":"202609","jogo":824,"placebo":407,"ref":243810,"por10mil":33.8}],"piramide":[{"sexo":"F","faixa":"0-17","j":1.4,"r":4.1},{"sexo":"F","faixa":"18-24","j":4.9,"r":4.9},{"sexo":"F","faixa":"25-34","j":18.7,"r":9.4},{"sexo":"F","faixa":"35-44","j":12.5,"r":12.8},{"sexo":"F","faixa":"45-59","j":7.0,"r":21.2},{"sexo":"F","faixa":"60+","j":2.0,"r":17.9},{"sexo":"M","faixa":"0-17","j":5.3,"r":2.4},{"sexo":"M","faixa":"18-24","j":11.4,"r":2.5},{"sexo":"M","faixa":"25-34","j":18.7,"r":4.7},{"sexo":"M","faixa":"35-44","j":12.7,"r":5.4},{"sexo":"M","faixa":"45-59","j":4.0,"r":8.1},{"sexo":"M","faixa":"60+","j":1.4,"r":6.7}],"anual":[{"ano":2018,"jogo_mes":10.8,"por10mil":1.9,"ref_mes":57376.9,"meses":12},{"ano":2019,"jogo_mes":11.3,"por10mil":1.7,"ref_mes":67002.8,"meses":12},{"ano":2020,"jogo_mes":9.2,"por10mil":1.2,"ref_mes":75819.0,"meses":12},{"ano":2021,"jogo_mes":15.4,"por10mil":1.6,"ref_mes":95866.2,"meses":12},{"ano":2022,"jogo_mes":19.0,"por10mil":1.7,"ref_mes":111277.8,"meses":12},{"ano":2023,"jogo_mes":58.0,"por10mil":4.1,"ref_mes":141959.2,"meses":12},{"ano":2024,"jogo_mes":119.4,"por10mil":7.6,"ref_mes":157545.0,"meses":12},{"ano":2025,"jogo_mes":285.2,"por10mil":15.2,"ref_mes":187646.3,"meses":12},{"ano":2026,"jogo_mes":610.7,"por10mil":26.6,"ref_mes":229688.9,"meses":9}],"faixas":{"jogo":{"0-17":5.5,"18-24":15.0,"25-34":39.0,"60+":2.8,"35-44":26.6,"45-59":11.2},"ref":{"18-24":7.2,"0-17":6.4,"60+":24.9,"25-34":14.0,"35-44":18.2,"45-59":29.4}},"mulheres":[{"ano":2018,"pct":41.9,"ref":69.0},{"ano":2019,"pct":31.1,"ref":70.6},{"ano":2020,"pct":32.4,"ref":70.3},{"ano":2021,"pct":22.2,"ref":70.6},{"ano":2022,"pct":21.9,"ref":70.2},{"ano":2023,"pct":39.2,"ref":70.0},{"ano":2024,"pct":46.1,"ref":70.2},{"ano":2025,"pct":46.5,"ref":70.2},{"ano":2026,"pct":47.9,"ref":70.7}],"fim":"202609"},"conduta":{"grupos":{"jogo_cid":{"n":8919,"alta":37.6,"retorno":35.2,"continuado":31.4,"especializado":24.2,"caps":1.9},"ansiedade_cid":{"n":2387047,"alta":48.6,"retorno":27.9,"continuado":28.7,"especializado":9.9,"caps":0.2},"depressao_cid":{"n":753674,"alta":48.6,"retorno":27.4,"continuado":29.5,"especializado":11.6,"caps":0.6},"alcool_cid":{"n":66420,"alta":54.3,"retorno":24.4,"continuado":25.4,"especializado":11.3,"caps":1.8}},"fim":"202609"},"trajetorias":{"1":{"n":915,"n6":7.9,"n5":6.9,"n3":4.9,"n2":1.9,"fica":31.8},"2":{"n":401401,"n6":2.4,"n5":3.7,"n3":14.4,"n2":0.0,"fica":34.4},"3":{"n":663591,"n6":1.9,"n5":2.8,"n3":0.0,"n2":7.1,"fica":31.1},"5":{"n":1027401,"n6":7.9,"n5":0.0,"n3":2.3,"n2":1.6,"fica":38.4},"6":{"n":890065,"n6":0.0,"n5":9.0,"n3":1.8,"n2":1.3,"fica":32.6}},"congresso":null};</script>
 <script>
 (() => {
 const NS = "http://www.w3.org/2000/svg";
@@ -184,21 +474,12 @@ const idxDate = d => idx(d.slice(0, 4) + d.slice(5, 7));
 const norm = t => t.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
 
 /* ---------- carimbo e destaques ---------- */
+// chave do Congresso (site/montar_dados.py: MOSTRAR_CONGRESSO). O conteúdo fica no modelo, só não é exibido.
+document.querySelectorAll(D.congresso ? "[data-sem-congresso]" : "[data-congresso]").forEach(e => e.remove());
+
 const anual = Object.fromEntries(D.anual.map(d => [d.ano, d]));
 const nov = Object.fromEntries(D.novos.map(d => [d.ano, d]));
 const pctNovo = a => nov[a] && nov[a].novos != null && nov[a].ja != null ? nov[a].novos / (nov[a].novos + nov[a].ja) * 100 : null;
-document.getElementById("carimbo-dados").textContent = `CAPS até ${mesLabel(D.corte)}`;
-document.getElementById("pct-mulheres").textContent = fmt(D.mulheres.f630_2025) + "%";
-document.getElementById("pct-mulheres-caps").textContent = fmt(D.mulheres.mental_2025) + "%";
-const tiles = [
-  [fmt(anual[2025].f630), "pessoas atendidas por jogo patológico nos CAPS em 2025"],
-  [`${fmt(anual[2025].f630 / anual[2022].f630, 1)}<small>×</small>`, `em relação a 2022 (${fmt(anual[2022].f630)} pessoas)`],
-  [fmt(anual[2026].f630), "só no 1º semestre de 2026, quase o total de 2025"],
-  [`${fmt(pctNovo(2026))}<small>%</small>`, "das que receberam o diagnóstico em 2026 não tinham passado pelo CAPS no ano anterior"],
-];
-const tw = document.getElementById("tiles");
-for (const [v, d] of tiles) tw.appendChild(h("div", { class: "tile" }, `<div class="v">${v}</div><div class="d">${d}</div>`));
-
 /* ---------- tooltip ---------- */
 function tipFor(fig) {
   const t = h("div", { class: "tip", hidden: "" }); fig.appendChild(t);
@@ -209,135 +490,297 @@ function tipFor(fig) {
   };
 }
 
-/* ---------- séries temporais (dois gráficos, mesmo eixo x) ---------- */
+/* ---------- séries temporais: painel comum às duas abas ---------- */
 const X0 = 0, X1 = idx("202610");
 const marcos = Object.entries(D.choques);
-const olM = document.getElementById("marcos");
-marcos.forEach(([d, rot], i) => { const n = D.noticias[d];
-  olM.appendChild(h("li", {}, `<b>${i + 1}</b>${rot}, ${mesLabel(d.slice(0, 4) + d.slice(5, 7))}` +
-    (n ? ` · <a href="${n[1]}" target="_blank" rel="noopener">notícia (${n[0]})</a>` : ""))); });
+function listaMarcos(ol) {
+  marcos.forEach(([d, rot], i) => { const n = D.noticias[d];
+    ol.appendChild(h("li", {}, `<b>${i + 1}</b>${rot}, ${mesLabel(d.slice(0, 4) + d.slice(5, 7))}` +
+      (n ? ` · <a href="${n[1]}" target="_blank" rel="noopener">notícia (${n[0]})</a>` : ""))); });
+}
 
-function serieChart(el, series, { altura, yMax, passoY }) {
+function serieChart(el, series, { altura, yMax, passoY, suf = "" }) {
   const W = 1000, H = altura, m = { l: 40, r: 12, t: 18, b: 22 };
   const svg = s("svg", { viewBox: `0 0 ${W} ${H}`, role: "img" }, el);
   const x = i => m.l + (i - X0) / (X1 - X0) * (W - m.l - m.r);
   const y = v => H - m.b - v / yMax * (H - m.t - m.b);
-  // faixa da pandemia
   const [p0, p1] = D.pandemia.map(idxDate);
   s("rect", { x: x(p0), y: m.t, width: x(p1) - x(p0), height: H - m.t - m.b, fill: "var(--band-pand)" }, svg);
-  // grade e eixo y
+  const tp = s("text", { x: x(p0) + 4, y: m.t + 12, style: "font-size:10px;fill:var(--ink-2)" }, svg); tp.textContent = "Pandemia";
+  const [c0, c1] = [idxDate(D.cpi.inicio), idxDate(D.cpi.fim)];
+  s("rect", { x: x(c0), y: m.t, width: x(c1) - x(c0), height: H - m.t - m.b, fill: "var(--band-cpi)" }, svg);
+  const tc = s("text", { x: x(c0) + 4, y: m.t + 12, style: "font-size:10px;fill:var(--ink-2)" }, svg); tc.textContent = "CPI";
   const g = s("g", { class: "grid" }, svg);
   for (let v = 0; v <= yMax; v += passoY) {
     s("line", { x1: m.l, x2: W - m.r, y1: y(v), y2: y(v) }, g);
-    const t = s("text", { x: m.l - 6, y: y(v) + 4, "text-anchor": "end", class: "tnum" }, svg); t.textContent = fmt(v);
+    const t = s("text", { x: m.l - 6, y: y(v) + 4, "text-anchor": "end", class: "tnum" }, svg); t.textContent = fmt(v) + suf;
   }
   s("line", { x1: m.l, x2: W - m.r, y1: y(0), y2: y(0), stroke: "var(--axis)" }, svg);
   for (let a = 2018; a <= 2026; a++) { const t = s("text", { x: x((a - 2018) * 12), y: H - 6, "text-anchor": "start" }, svg); t.textContent = a; s("line", { x1: x((a - 2018) * 12), x2: x((a - 2018) * 12), y1: y(0), y2: y(0) + 4, stroke: "var(--axis)" }, svg); }
-  // marcos
   marcos.forEach(([d], i) => { const xi = x(idxDate(d)); s("line", { x1: xi, x2: xi, y1: m.t, y2: y(0), stroke: "var(--mark)", "stroke-dasharray": "3 3", "stroke-width": 1 }, svg);
     const n = D.noticias[d]; const alvo = n ? s("a", { href: n[1], target: "_blank", rel: "noopener" }, svg) : svg;
     if (n) { const tt = s("title", {}, alvo); tt.textContent = `${marcos[i][1]}: abrir notícia (${n[0]})`; }
     const c = s("text", { x: xi, y: m.t - 5, "text-anchor": "middle", fill: "var(--mark)", style: "fill:var(--mark);font-weight:700;font-family:var(--f-mono);cursor:pointer;text-decoration:underline" }, alvo); c.textContent = i + 1; });
-  // linhas (com quebras onde há supressão)
   for (const se of series) {
     let d = "", aberto = false;
     for (const p of se.pts) { if (p.v == null) { aberto = false; continue; } d += (aberto ? "L" : "M") + x(p.i).toFixed(1) + "," + y(p.v).toFixed(1); aberto = true; }
     s("path", { d, fill: "none", stroke: se.cor, "stroke-width": 2, "stroke-linejoin": "round", "stroke-linecap": "round" }, svg);
     const ult = [...se.pts].reverse().find(p => p.v != null);
     if (se.rotulo && ult) { s("circle", { cx: x(ult.i), cy: y(ult.v), r: 4, fill: se.cor, stroke: "var(--surface)", "stroke-width": 2 }, svg);
-      const t = s("text", { x: x(ult.i) - 8, y: y(ult.v) - 9, "text-anchor": "end", class: "strong tnum" }, svg); t.textContent = fmt(ult.v); }
+      const t = s("text", { x: x(ult.i) - 8, y: y(ult.v) - 9, "text-anchor": "end", class: "strong tnum" }, svg); t.textContent = fmt(ult.v) + suf; }
   }
   return { svg, x, y, W, H, m };
 }
-
-const caps = D.serie.caps.map(d => ({ i: idx(d.cmp), c: d.cmp, f: d.f630, p: d.placebo }));
-const tr = D.serie.trends.map(d => ({ i: idx(d.cmp), c: d.cmp, v: d.trends }));
-const figS = document.getElementById("fig-serie");
-const tipS = tipFor(figS);
-const cA = serieChart(document.getElementById("ch-caps"), [
-  { pts: caps.map(d => ({ i: d.i, v: d.p })), cor: "var(--ref)" },
-  { pts: caps.map(d => ({ i: d.i, v: d.f })), cor: "var(--s1)", rotulo: true },
-], { altura: 300, yMax: 300, passoY: 100 });
-const cB = serieChart(document.getElementById("ch-trends"), [{ pts: tr.map(d => ({ i: d.i, v: d.v })), cor: "var(--s2)", rotulo: true }], { altura: 170, yMax: 100, passoY: 50 });
-// crosshair compartilhado
-const porMes = {};
-for (const d of caps) porMes[d.i] = { ...(porMes[d.i] || {}), c: d.c, f: d.f, p: d.p };
-for (const d of tr) porMes[d.i] = { ...(porMes[d.i] || {}), c: d.c, t: d.v };
-const linhas = [cA, cB].map(ch => s("line", { y1: ch.m.t, y2: ch.H - ch.m.b, stroke: "var(--ink-2)", "stroke-width": 1, visibility: "hidden" }, ch.svg));
-[cA, cB].forEach(ch => {
-  const hit = s("rect", { x: ch.m.l, y: 0, width: ch.W - ch.m.l - ch.m.r, height: ch.H, fill: "transparent" }, ch.svg);
-  hit.addEventListener("pointermove", ev => {
-    const r = ch.svg.getBoundingClientRect(); const px = (ev.clientX - r.left) / r.width * ch.W;
-    const i = Math.round(X0 + (px - ch.m.l) / (ch.W - ch.m.l - ch.m.r) * (X1 - X0));
-    const d = porMes[i]; if (!d) return;
-    linhas.forEach((l, k) => { const xx = [cA, cB][k].x(i); l.setAttribute("x1", xx); l.setAttribute("x2", xx); l.setAttribute("visibility", "visible"); });
-    const marco = marcos.findIndex(([dd]) => idxDate(dd) === i);
-    const fr = figS.getBoundingClientRect();
-    tipS.show(`<div><b>${mesLabel(d.c)}</b></div>
-      <div><span class="k">F63.0:</span> <b>${d.f == null ? (d.c > D.corte ? "sem dado" : "menos de 5") : fmt(d.f)}</b></div>
-      <div><span class="k">F63.1–3:</span> <b>${d.p == null ? (d.c > D.corte ? "sem dado" : "menos de 5") : fmt(d.p)}</b></div>
-      <div><span class="k">Busca:</span> <b>${d.t == null ? "—" : fmt(d.t)}</b></div>
-      ${marco >= 0 ? `<div style="color:var(--mark)">${marcos[marco][1]}</div>` : ""}`, ev.clientX - fr.left, ev.clientY - fr.top);
+const teto = (v, p) => Math.ceil(v / p) * p;
+const passo = v => v > 600 ? 250 : v > 200 ? 100 : v > 60 ? 25 : v > 30 ? 10 : 5;
+// vários gráficos empilhados com o mesmo eixo x e um crosshair compartilhado; tip(i) devolve o HTML do mês i
+function painel(fig, graficos, tip) {
+  const tt = tipFor(fig);
+  const chs = graficos.map(g => { const max = Math.max(...g.series.flatMap(se => se.pts.map(p => p.v ?? 0)));
+    const pp = g.passoY || passo(max); return serieChart(g.el, g.series, { altura: g.altura, yMax: g.yMax || teto(max, pp), passoY: pp, suf: g.suf }); });
+  const ls = chs.map(ch => s("line", { y1: ch.m.t, y2: ch.H - ch.m.b, stroke: "var(--ink-2)", "stroke-width": 1, visibility: "hidden" }, ch.svg));
+  chs.forEach(ch => {
+    const hit = s("rect", { x: ch.m.l, y: 0, width: ch.W - ch.m.l - ch.m.r, height: ch.H, fill: "transparent" }, ch.svg);
+    hit.addEventListener("pointermove", ev => {
+      const r = ch.svg.getBoundingClientRect(); const px = (ev.clientX - r.left) / r.width * ch.W;
+      const i = Math.round(X0 + (px - ch.m.l) / (ch.W - ch.m.l - ch.m.r) * (X1 - X0));
+      const html = tip(i); if (!html) return;
+      ls.forEach((l, k) => { const xx = chs[k].x(i); l.setAttribute("x1", xx); l.setAttribute("x2", xx); l.setAttribute("visibility", "visible"); });
+      const marco = marcos.findIndex(([dd]) => idxDate(dd) === i);
+      const fr = fig.getBoundingClientRect();
+      tt.show(html + (marco >= 0 ? `<div style="color:var(--mark)">${marcos[marco][1]}</div>` : ""), ev.clientX - fr.left, ev.clientY - fr.top);
+    });
+    hit.addEventListener("pointerleave", () => { ls.forEach(l => l.setAttribute("visibility", "hidden")); tt.hide(); });
   });
-  hit.addEventListener("pointerleave", () => { linhas.forEach(l => l.setAttribute("visibility", "hidden")); tipS.hide(); });
-});
+  return chs;
+}
+const busca = Object.fromEntries(D.serie.trends.map(d => [idx(d.cmp), d.trends]));
+const trendsSerie = { pts: D.serie.trends.map(d => ({ i: idx(d.cmp), v: d.trends })), cor: "var(--s2)", rotulo: true };
+const valor = (v, fim, c) => v == null ? (c > fim ? "sem dado" : "menos de 5") : fmt(v);
+function tiles(el, lista) { for (const [v, d] of lista) el.appendChild(h("div", { class: "tile" }, `<div class="v">${v}</div><div class="d">${d}</div>`)); }
 
-/* ---------- perfil: pirâmide ---------- */
-(function piramide() {
-  const el = document.getElementById("ch-piramide");
+/* ---------- perfil: gráficos comuns às duas abas ---------- */
+// barras = jogo patológico; traço = saúde mental em geral
+// pirâmide: mulheres à esquerda, homens à direita; barra = jogo patológico, traço = saúde mental em geral
+function piramideChart(el, linhas, cor) {
   const faixas = ["60+", "45-59", "35-44", "25-34", "18-24", "0-17"];
-  const P = Object.fromEntries(D.perfil.map(d => [d.sexo + d.faixa, d]));
+  const P = Object.fromEntries(linhas.map(d => [d.sexo + d.faixa, d]));
   const W = 520, rowH = 34, m = { t: 26, b: 22 }, H = m.t + m.b + faixas.length * rowH, cx = W / 2, lab = 44;
-  const max = 22, sc = (cx - lab - 10) / max;
-  const svg = s("svg", { viewBox: `0 0 ${W} ${H}`, role: "img" }, el);
+  const max = Math.ceil(Math.max(...linhas.flatMap(d => [d.j ?? 0, d.r ?? 0])) / 5) * 5, sc = (cx - lab - 34) / max;
+  if (!max) { el.textContent = "Sem dados."; return; }
+  const svg = s("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Composição por sexo e idade" }, el);
   const fig = el.closest(".fig"), tip = tipFor(fig);
   [["Mulheres", cx - lab - 4, "end"], ["Homens", cx + lab + 4, "start"]].forEach(([t, x, a]) => { const e = s("text", { x, y: 14, "text-anchor": a, class: "lbl", style: "font-weight:700" }, svg); e.textContent = t; });
   faixas.forEach((fx, r) => {
     const yc = m.t + r * rowH + rowH / 2;
-    const t = s("text", { x: cx, y: yc + 4, "text-anchor": "middle", class: "lbl" }, svg); t.textContent = fx === "60+" ? "60+" : fx.replace("-", "–");
+    const t = s("text", { x: cx, y: yc + 4, "text-anchor": "middle", class: "lbl" }, svg); t.textContent = fx.replace("-", "–");
     for (const [sexo, dir] of [["F", -1], ["M", 1]]) {
       const d = P[sexo + fx]; const x0 = cx + dir * lab;
-      if (d.pct_f630_2025 != null) { const w = d.pct_f630_2025 * sc; const x = dir < 0 ? x0 - w : x0;
-        s("rect", { x, y: yc - 10, width: w, height: 20, rx: 3, fill: "var(--s1)" }, svg);
-        // rótulo depois do que for mais longo (barra ou traço da saúde mental), para não colidir
-        const fora = Math.max(w, d.pct_mental_2025 * sc) + 6;
-        const v = s("text", { x: x0 + dir * fora, y: yc + 4, "text-anchor": dir < 0 ? "end" : "start", class: "lbl tnum" }, svg); v.textContent = fmt(d.pct_f630_2025, 1) + "%"; }
-      const xm = x0 + dir * d.pct_mental_2025 * sc;
-      s("line", { x1: xm, x2: xm, y1: yc - 14, y2: yc + 14, stroke: "var(--ink-2)", "stroke-width": 2, "stroke-linecap": "round" }, svg);
-      const hit = s("rect", { x: dir < 0 ? cx - lab - max * sc : cx + lab, y: yc - rowH / 2, width: max * sc, height: rowH, fill: "transparent" }, svg);
+      if (d.j != null) { const w = d.j * sc; s("rect", { x: dir < 0 ? x0 - w : x0, y: yc - 10, width: w, height: 20, rx: 3, fill: cor }, svg);
+        const fora = Math.max(w, (d.r ?? 0) * sc) + 6;
+        const v = s("text", { x: x0 + dir * fora, y: yc + 4, "text-anchor": dir < 0 ? "end" : "start", class: "lbl tnum" }, svg); v.textContent = fmt(d.j, 1) + "%"; }
+      if (d.r != null) { const xm = x0 + dir * d.r * sc; s("line", { x1: xm, x2: xm, y1: yc - 14, y2: yc + 14, stroke: "var(--ink-2)", "stroke-width": 2, "stroke-linecap": "round" }, svg); }
+      const hit = s("rect", { x: dir < 0 ? 0 : cx + lab, y: yc - rowH / 2, width: cx - lab, height: rowH, fill: "transparent" }, svg);
       hit.addEventListener("pointermove", ev => { const fr = fig.getBoundingClientRect();
-        tip.show(`<div><b>${sexo === "F" ? "Mulheres" : "Homens"}, ${fx.replace("-", "–")} anos</b></div><div><span class="k">Jogo patológico:</span> <b>${d.pct_f630_2025 == null ? "suprimido" : fmt(d.pct_f630_2025, 1) + "%"}</b></div><div><span class="k">Saúde mental:</span> <b>${fmt(d.pct_mental_2025, 1)}%</b></div>`, ev.clientX - fr.left, ev.clientY - fr.top); });
+        tip.show(`<div><b>${sexo === "F" ? "Mulheres" : "Homens"}, ${fx.replace("-", "–")} anos</b></div><div><span class="k">Jogo patológico:</span> <b>${d.j == null ? "menos de 5" : fmt(d.j, 1) + "%"}</b></div><div><span class="k">Saúde mental em geral:</span> <b>${d.r == null ? "—" : fmt(d.r, 1) + "%"}</b></div>`, ev.clientX - fr.left, ev.clientY - fr.top); });
       hit.addEventListener("pointerleave", () => tip.hide());
     }
   });
   s("line", { x1: cx - lab, x2: cx - lab, y1: m.t, y2: H - m.b, stroke: "var(--axis)" }, svg);
   s("line", { x1: cx + lab, x2: cx + lab, y1: m.t, y2: H - m.b, stroke: "var(--axis)" }, svg);
-  for (const v of [0, 10, 20]) for (const dir of [-1, 1]) { const xx = cx + dir * (lab + v * sc); const t = s("text", { x: xx, y: H - 6, "text-anchor": "middle", class: "tnum" }, svg); t.textContent = v + "%"; }
+  const passoP = max > 20 ? 10 : 5;
+  for (let v = 0; v <= max; v += passoP) for (const dir of [-1, 1]) { const xx = cx + dir * (lab + v * sc); const t = s("text", { x: xx, y: H - 6, "text-anchor": "middle", class: "tnum" }, svg); t.textContent = v + "%"; }
+}
+function idadeChart(el, J, R, cor) {
+  const faixas = ["0-17", "18-24", "25-34", "35-44", "45-59", "60+"];
+  const W = 520, rowH = 32, m = { l: 56, r: 50, t: 6, b: 24 }, H = m.t + m.b + faixas.length * rowH;
+  const x = v => m.l + v / 45 * (W - m.l - m.r);
+  const svg = s("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Distribuição por faixa de idade" }, el);
+  const f = el.closest(".fig"), tp = tipFor(f);
+  for (const v of [0, 15, 30, 45]) { s("line", { x1: x(v), x2: x(v), y1: m.t, y2: H - m.b, stroke: v ? "var(--rule)" : "var(--axis)" }, svg);
+    const t = s("text", { x: x(v), y: H - 6, "text-anchor": "middle", class: "tnum" }, svg); t.textContent = v + "%"; }
+  faixas.forEach((fx, r) => {
+    const yc = m.t + r * rowH + rowH / 2, j = J[fx], q = R[fx];
+    const t = s("text", { x: m.l - 8, y: yc + 4, "text-anchor": "end", class: "lbl" }, svg); t.textContent = fx.replace("-", "–");
+    if (j != null) { const w = x(j) - x(0); s("path", { d: `M${x(0)},${yc - 9}h${Math.max(w - 4, 0)}q4,0 4,4v10q0,4 -4,4h${-Math.max(w - 4, 0)}Z`, fill: cor }, svg); }
+    if (q != null) s("line", { x1: x(q), x2: x(q), y1: yc - 13, y2: yc + 13, stroke: "var(--ink-2)", "stroke-width": 2, "stroke-linecap": "round" }, svg);
+    const v = s("text", { x: Math.max(x(j ?? 0), x(q ?? 0)) + 6, y: yc + 4, class: "lbl tnum" }, svg); v.textContent = j == null ? "—" : fmt(j, 1) + "%";
+    const hit = s("rect", { x: 0, y: yc - rowH / 2, width: W, height: rowH, fill: "transparent" }, svg);
+    hit.addEventListener("pointermove", ev => { const fr = f.getBoundingClientRect();
+      tp.show(`<div><b>${fx.replace("-", "–")} anos</b></div><div><span class="k">Jogo patológico:</span> <b>${j == null ? "menos de 5" : fmt(j, 1) + "%"}</b></div><div><span class="k">Saúde mental em geral:</span> <b>${q == null ? "—" : fmt(q, 1) + "%"}</b></div>`, ev.clientX - fr.left, ev.clientY - fr.top); });
+    hit.addEventListener("pointerleave", () => tp.hide());
+  });
+}
+
+/* ---------- aba saúde mental ---------- */
+(function saude() {
+  const anual = Object.fromEntries(D.anual.map(d => [d.ano, d]));
+  const A = D.aps, an = Object.fromEntries(A.anual.map(d => [d.ano, d])), CP = D.caps_perfil;
+  document.getElementById("carimbo-dados").textContent = mesLabel(D.corte);
+  document.getElementById("carimbo-aps").textContent = mesLabel(A.fim);
+  document.querySelectorAll(".aps-fim").forEach(e => e.textContent = mesLabel(A.fim));
+  document.querySelectorAll(".caps-fim").forEach(e => e.textContent = mesLabel(D.corte));
+  const capsPir = D.perfil.map(d => ({ sexo: d.sexo, faixa: d.faixa, j: d.pct_f630_2025, r: d.pct_mental_2025 }));
+  const soma = (L, fx, k) => L.filter(d => d.faixa === fx).reduce((t, d) => t + (d[k] ?? 0), 0);
+  for (const [id, v] of [["aps-r22", fmt(an[2022].por10mil, 1)], ["aps-r25", fmt(an[2025].por10mil)], ["aps-r26", fmt(an[2026].por10mil)],
+                         ["aps-menores", fmt(soma(A.piramide, "0-17", "j"), 1) + "%"], ["caps-menores", fmt(soma(capsPir, "0-17", "j"), 1) + "%"],
+                         ["aps-h1824", fmt(A.piramide.find(d => d.sexo === "M" && d.faixa === "18-24").j, 1) + "%"],
+                         ["aps-h1824-ref", fmt(A.piramide.find(d => d.sexo === "M" && d.faixa === "18-24").r, 1) + "%"]])
+    document.getElementById(id).textContent = v;
+  tiles(document.getElementById("tiles-aps"), [
+    [fmt(an[2026].jogo_mes), `atendimentos por jogo patológico por mês em 2026 (jan–${MESES[+A.fim.slice(4) - 1]})`],
+    [`${fmt(an[2026].jogo_mes / an[2022].jogo_mes)}<small>×</small>`, `a média mensal de 2022 (${fmt(an[2022].jogo_mes)} por mês)`],
+    [`${fmt(an[2026].por10mil / an[2022].por10mil)}<small>×</small>`, "o peso do jogo patológico entre os atendimentos de saúde mental, de 2022 para 2026"],
+  ]);
+  tiles(document.getElementById("tiles-caps"), [
+    [fmt(anual[2026].f630), `pessoas atendidas por jogo patológico só no 1º semestre de 2026, quase o total de 2025 (${fmt(anual[2025].f630)})`],
+    [`${fmt(anual[2025].f630 / anual[2022].f630, 1)}<small>×</small>`, `o número de pessoas de 2022 (${fmt(anual[2022].f630)}) para 2025`],
+    [`${fmt(pctNovo(2026))}<small>%</small>`, "das que receberam o diagnóstico em 2026 não tinham passado pelo CAPS no ano anterior"],
+  ]);
+  listaMarcos(document.getElementById("marcos"));
+  const C = Object.fromEntries(D.serie.caps.map(d => [idx(d.cmp), d]));
+  const P = Object.fromEntries(A.mensal.map(d => [idx(d.cmp), d]));
+  const cmpDe = i => { const a = 2018 + Math.floor(i / 12), m = i % 12 + 1; return `${a}${String(m).padStart(2, "0")}`; };
+  painel(document.getElementById("fig-serie"), [
+    { el: document.getElementById("ch-aps"), altura: 260, series: [
+      { pts: A.mensal.map(d => ({ i: idx(d.cmp), v: d.placebo })), cor: "var(--ref)" },
+      { pts: A.mensal.map(d => ({ i: idx(d.cmp), v: d.jogo })), cor: "var(--s1)", rotulo: true }] },
+    { el: document.getElementById("ch-caps"), altura: 230, series: [
+      { pts: D.serie.caps.map(d => ({ i: idx(d.cmp), v: d.placebo })), cor: "var(--ref)" },
+      { pts: D.serie.caps.map(d => ({ i: idx(d.cmp), v: d.f630 })), cor: "var(--caps)", rotulo: true }] },
+    { el: document.getElementById("ch-trends"), altura: 150, yMax: 100, passoY: 50, series: [trendsSerie] },
+  ], i => { if (i < 0 || i > X1) return null; const c = cmpDe(i), p = P[i], d = C[i], b = busca[i];
+    return `<div><b>${mesLabel(c)}</b></div>
+      <div class="k" style="margin-top:.2rem">Atenção primária (atendimentos)</div>
+      <div><span class="k">F63.0:</span> <b>${valor(p?.jogo, A.fim, c)}</b> · <span class="k">F63.1–3:</span> <b>${valor(p?.placebo, A.fim, c)}</b></div>
+      <div class="k" style="margin-top:.2rem">CAPS (pessoas)</div>
+      <div><span class="k">F63.0:</span> <b>${valor(d?.f630, D.corte, c)}</b> · <span class="k">F63.1–3:</span> <b>${valor(d?.placebo, D.corte, c)}</b></div>
+      <div style="margin-top:.2rem"><span class="k">Busca:</span> <b>${b == null ? "—" : fmt(b)}</b></div>`; });
+  // índice mensal: cada mês dividido pela média mensal de 2022 (×100)
+  const m22 = (lista, k) => { const v = lista.filter(d => d.cmp.startsWith("2022") && d[k] != null).map(d => d[k]); return v.reduce((a, b) => a + b, 0) / v.length; };
+  const bJ = m22(A.mensal, "jogo"), bR = m22(A.mensal, "ref"), bC = m22(D.serie.caps, "f630");
+  const ind = (v, b) => v == null ? null : v / b;  // vezes a média mensal de 2022
+  const chs = painel(document.getElementById("fig-aps-taxa"), [
+    { el: document.getElementById("ch-aps-taxa"), altura: 240, series: [{ pts: A.mensal.map(d => ({ i: idx(d.cmp), v: d.por10mil })), cor: "var(--s1)", rotulo: true }] },
+    { el: document.getElementById("ch-indice"), altura: 300, passoY: 10, suf: "×", series: [
+      { pts: A.mensal.map(d => ({ i: idx(d.cmp), v: ind(d.ref, bR) })), cor: "var(--ref)", rotulo: true },
+      { pts: D.serie.caps.map(d => ({ i: idx(d.cmp), v: ind(d.f630, bC) })), cor: "var(--caps)", rotulo: true },
+      { pts: A.mensal.map(d => ({ i: idx(d.cmp), v: ind(d.jogo, bJ) })), cor: "var(--s1)", rotulo: true }] },
+  ], i => { const d = P[i], c = C[i]; if (!d) return null;
+    return `<div><b>${mesLabel(d.cmp)}</b></div><div><span class="k">Jogo patológico a cada 10 mil:</span> <b>${d.por10mil == null ? "—" : fmt(d.por10mil, 1)}</b></div>
+      <div class="k" style="margin-top:.2rem">Vezes a média de 2022</div>
+      <div><span class="k">Jogo, atenção primária:</span> <b>${d.jogo == null ? "—" : fmt(ind(d.jogo, bJ), 1) + "×"}</b></div>
+      <div><span class="k">Jogo, CAPS:</span> <b>${c && c.f630 != null ? fmt(ind(c.f630, bC), 1) + "×" : "sem dado"}</b></div>
+      <div><span class="k">Outros diagnósticos:</span> <b>${fmt(ind(d.ref, bR), 1)}×</b></div>`; });
+  const ci = chs[1]; s("line", { x1: ci.m.l, x2: ci.W - ci.m.r, y1: ci.y(1), y2: ci.y(1), stroke: "var(--ink-2)", "stroke-dasharray": "4 4" }, ci.svg);
+  listaMarcos(document.getElementById("marcos-aps-taxa"));
+  piramideChart(document.getElementById("ch-caps-idade"), capsPir, "var(--caps)");
+
+  piramideChart(document.getElementById("ch-aps-idade"), A.piramide, "var(--s1)");
 })();
 
-/* ---------- perfil: crescimento ---------- */
-(function cresc() {
-  const el = document.getElementById("ch-cresc");
-  const linhas = D.perfil.filter(d => d.cresc_mental != null);
-  const W = 520, rowH = 26, m = { l: 112, r: 46, t: 8, b: 26 }, H = m.t + m.b + linhas.length * rowH;
-  const lo = Math.log(1), hi = Math.log(30);
-  const x = v => m.l + (Math.log(v) - lo) / (hi - lo) * (W - m.l - m.r);
-  const svg = s("svg", { viewBox: `0 0 ${W} ${H}`, role: "img" }, el);
-  const fig = el.closest(".fig"), tip = tipFor(fig);
-  for (const v of [1, 2, 5, 10, 20]) { s("line", { x1: x(v), x2: x(v), y1: m.t, y2: H - m.b, stroke: v === 1 ? "var(--axis)" : "var(--rule)" }, svg);
-    const t = s("text", { x: x(v), y: H - 8, "text-anchor": "middle", class: "tnum" }, svg); t.textContent = v + "×"; }
-  linhas.forEach((d, r) => {
-    const yc = m.t + r * rowH + rowH / 2;
-    const t = s("text", { x: m.l - 8, y: yc + 4, "text-anchor": "end", class: "lbl" }, svg); t.textContent = `${d.sexo === "F" ? "Mulheres" : "Homens"} ${d.faixa.replace("-", "–")}`;
-    if (d.cresc_f630 != null) s("line", { x1: x(d.cresc_mental), x2: x(d.cresc_f630), y1: yc, y2: yc, stroke: "var(--rule)", "stroke-width": 3 }, svg);
-    s("circle", { cx: x(d.cresc_mental), cy: yc, r: 5, fill: "var(--ref)", stroke: "var(--surface)", "stroke-width": 2 }, svg);
-    if (d.cresc_f630 != null) { s("circle", { cx: x(d.cresc_f630), cy: yc, r: 6, fill: "var(--s1)", stroke: "var(--surface)", "stroke-width": 2 }, svg);
-      const v = s("text", { x: x(d.cresc_f630) + 10, y: yc + 4, class: "lbl tnum" }, svg); v.textContent = fmt(d.cresc_f630, 1) + "×"; }
-    const hit = s("rect", { x: 0, y: yc - rowH / 2, width: W, height: rowH, fill: "transparent" }, svg);
-    hit.addEventListener("pointermove", ev => { const fr = fig.getBoundingClientRect();
-      tip.show(`<div><b>${d.sexo === "F" ? "Mulheres" : "Homens"}, ${d.faixa.replace("-", "–")} anos</b></div><div><span class="k">Jogo patológico:</span> <b>${d.cresc_f630 == null ? "base pequena" : fmt(d.cresc_f630, 1) + "×"}</b></div><div><span class="k">Saúde mental:</span> <b>${fmt(d.cresc_mental, 1)}×</b></div>`, ev.clientX - fr.left, ev.clientY - fr.top); });
-    hit.addEventListener("pointerleave", () => tip.hide());
+/* ---------- Congresso ---------- */
+(function congresso() {
+  if (!D.congresso) return;
+  const C = D.congresso;
+  const TIPOS = {1: "derruba ou esvazia a proibição", 2: "proíbe só o cassino online", 3: "mantém o cassino online, com regras",
+    4: "ameniza para empresas e esporte", 5: "regras que pressupõem o mercado funcionando", 6: "endurece a proibição",
+    7: "salvaguardas se alguma aposta for readmitida", 8: "saúde e destino dos recursos", 9: "técnica"};
+  const POS = c => c <= 5 ? "contra" : c <= 7 ? "pro" : "neutro";
+
+  // barras empilhadas por partido
+  function porPartido(el, casa, minimo) {
+    const cont = {};
+    for (const [cs, , partido, , tirar] of C.votos) { if (cs !== casa) continue; const k = partido || "sem partido"; cont[k] = cont[k] || [0, 0]; cont[k][tirar ? 0 : 1]++; }
+    const linhas = Object.entries(cont).filter(([, v]) => v[0] + v[1] >= minimo).sort((a, b) => (b[1][0] + b[1][1]) - (a[1][0] + a[1][1]));
+    const max = Math.max(...linhas.map(([, v]) => v[0] + v[1]));
+    const W = 520, rowH = 24, m = { l: 96, r: 128, t: 4, b: 4 }, H = m.t + m.b + linhas.length * rowH;
+    const x = v => v / max * (W - m.l - m.r);
+    const svg = s("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": `Votos por partido, ${casa}` }, el);
+    const fig = el.closest(".fig"), tip = tipFor(fig);
+    linhas.forEach(([pt, [a, b]], i) => {
+      const y = m.t + i * rowH;
+      const t = s("text", { x: m.l - 8, y: y + rowH / 2 + 4, "text-anchor": "end", class: "lbl" }, svg); t.textContent = pt;
+      if (a) s("rect", { x: m.l, y: y + 4, width: x(a), height: rowH - 8, rx: 3, fill: "var(--pro)" }, svg);
+      if (b) s("rect", { x: m.l + x(a) + (a ? 2 : 0), y: y + 4, width: x(b), height: rowH - 8, rx: 3, fill: "var(--contra)" }, svg);
+      const v = s("text", { x: m.l + x(a + b) + 6, y: y + rowH / 2 + 4, class: "lbl tnum" }, svg); v.textContent = `${a} proibir · ${b} permitir`;
+      const hit = s("rect", { x: 0, y, width: W, height: rowH, fill: "transparent" }, svg);
+      hit.addEventListener("pointermove", ev => { const fr = fig.getBoundingClientRect();
+        tip.show(`<div><b>${pt}</b></div><div><span class="k">Proibir os cassinos online:</span> <b>${a}</b></div><div><span class="k">Permitir os cassinos online:</span> <b>${b}</b></div>`, ev.clientX - fr.left, ev.clientY - fr.top); });
+      hit.addEventListener("pointerleave", () => tip.hide());
+    });
+  }
+  porPartido(document.getElementById("ch-camara"), "Câmara", 3);
+  porPartido(document.getElementById("ch-senado"), "Senado", 1);
+
+  // emendas por autor (barras divergentes)
+  (function () {
+    const el = document.getElementById("ch-emendas");
+    const A = {};
+    for (const [n, nome, partido, uf, cargo, cat] of C.emendas) {
+      const k = `${nome} (${partido}/${uf})`; A[k] = A[k] || { contra: 0, pro: 0, tipos: {} };
+      const p = POS(cat); if (p !== "neutro") A[k][p]++; A[k].tipos[cat] = (A[k].tipos[cat] || 0) + 1;
+    }
+    const linhas = Object.entries(A).filter(([, v]) => v.contra + v.pro > 0).sort((a, b) => (b[1].contra - b[1].pro) - (a[1].contra - a[1].pro));
+    const max = Math.max(...linhas.map(([, v]) => Math.max(v.contra, v.pro)));
+    const W = 1000, rowH = 24, lab = 250, m = { t: 22, b: 6 }, H = m.t + m.b + linhas.length * rowH, cx = lab + (W - lab) / 2;
+    const half = (W - lab) / 2 - 40, x = v => v / max * half;
+    const svg = s("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Emendas por autor" }, el);
+    const fig = el.closest(".fig"), tip = tipFor(fig);
+    [["← afrouxa", cx - 8, "end"], ["reforça →", cx + 8, "start"]].forEach(([t, xx, a]) => { const e = s("text", { x: xx, y: 12, "text-anchor": a, class: "lbl", style: "font-weight:700" }, svg); e.textContent = t; });
+    s("line", { x1: cx, x2: cx, y1: m.t, y2: H - m.b, stroke: "var(--axis)" }, svg);
+    linhas.forEach(([k, v], i) => {
+      const y = m.t + i * rowH;
+      const t = s("text", { x: lab - 8, y: y + rowH / 2 + 4, "text-anchor": "end", class: "lbl" }, svg); t.textContent = k;
+      if (v.contra) { s("rect", { x: cx - x(v.contra) - 1, y: y + 4, width: x(v.contra), height: rowH - 8, rx: 3, fill: "var(--contra)" }, svg);
+        const n = s("text", { x: cx - x(v.contra) - 7, y: y + rowH / 2 + 4, "text-anchor": "end", class: "lbl tnum" }, svg); n.textContent = v.contra; }
+      if (v.pro) { s("rect", { x: cx + 1, y: y + 4, width: x(v.pro), height: rowH - 8, rx: 3, fill: "var(--pro)" }, svg);
+        const n = s("text", { x: cx + x(v.pro) + 7, y: y + rowH / 2 + 4, class: "lbl tnum" }, svg); n.textContent = v.pro; }
+      const hit = s("rect", { x: 0, y, width: W, height: rowH, fill: "transparent" }, svg);
+      hit.addEventListener("pointermove", ev => { const fr = fig.getBoundingClientRect();
+        tip.show(`<div><b>${k}</b></div>` + Object.entries(v.tipos).sort((a, b) => a[0] - b[0]).map(([c, q]) => `<div><span class="k">${TIPOS[c]}:</span> <b>${q}</b></div>`).join(""), ev.clientX - fr.left, ev.clientY - fr.top); });
+      hit.addEventListener("pointerleave", () => tip.hide());
+    });
+  })();
+
+  // tabela de projetos
+  const tb = document.querySelector("#tbl-pls tbody");
+  for (const p of C.projetos) {
+    const partidos = [...new Set(p.autores.map(a => a[1]).filter(Boolean))].join(", ");
+    const nomes = p.autores.length > 3 ? `${p.autores.slice(0, 2).map(a => a[0]).join(", ")} e mais ${p.autores.length - 2} deputados` : p.autores.map(a => `${a[0]}${a[1] ? ` (${a[1]}/${a[2]})` : ""}`).join(", ");
+    const tr = h("tr", {}, `<td><a href="${p.url}" target="_blank" rel="noopener">${p.projeto}</a></td><td class="tnum">${p.data.slice(8, 10)}/${p.data.slice(5, 7)}/${p.data.slice(0, 4)}</td><td>${p.alcance}</td><td>${nomes}${p.autores.length > 3 ? ` <span class="small">(${partidos})</span>` : ""}</td>`);
+    tb.appendChild(tr);
+  }
+
+  // busca por parlamentar
+  const P = {};
+  const chave = n => norm(n).replace(/[^a-z ]/g, "").trim();
+  const ent = (nome, partido, uf, casa) => { const k = chave(nome); P[k] = P[k] || { nome, partido, uf, casa, voto: null, url: null, emendas: [], projetos: [] }; return P[k]; };
+  for (const [casa, nome, partido, uf, tirar, url] of C.votos) { const e = ent(nome, partido, uf, casa); e.voto = tirar; e.url = url; e.casa = casa; }
+  for (const [n, nome, partido, uf, cargo, cat, resumo, url] of C.emendas) { const e = ent(nome, partido, uf, cargo === "Senador(a)" ? "Senado" : "Câmara"); e.emendas.push({ n, cat, resumo, url }); if (!e.partido) e.partido = partido; }
+  for (const p of C.projetos) for (const [nome, partido, uf] of p.autores) { const e = ent(nome, partido, uf, "Câmara"); e.projetos.push(p); }
+  const lista = Object.values(P);
+  const q2 = document.getElementById("q-parl"), sug2 = document.getElementById("sug-parl"), ficha = document.getElementById("ficha-parl");
+  function mostrar(e) {
+    sug2.hidden = true; q2.value = e.nome;
+    const voto = e.voto == null ? `<span class="chip neutro">não votou ou não era parlamentar</span>` : e.voto ? `<span class="chip pro">votou para proibir os cassinos online</span>` : `<span class="chip contra">votou para permitir os cassinos online</span>`;
+    const ems = e.emendas.length ? `<ul>${e.emendas.map(x => `<li><a href="${x.url}" target="_blank" rel="noopener">Emenda ${x.n}</a>: ${x.resumo} <span class="chip ${POS(x.cat)}">${TIPOS[x.cat]}</span></li>`).join("")}</ul>` : `<p class="small" style="margin:0">Não apresentou emendas.</p>`;
+    const pls = e.projetos.length ? `<ul>${e.projetos.map(p => `<li><a href="${p.url}" target="_blank" rel="noopener">${p.projeto}</a> (${p.data.slice(0, 4)}): proíbe ${p.alcance === "total" ? "as apostas" : p.alcance}</li>`).join("")}</ul>` : `<p class="small" style="margin:0">Não assinou projetos de proibição.</p>`;
+    ficha.innerHTML = `<div class="ficha"><div><div class="eyebrow">${e.casa === "Senado" ? "Senado" : "Câmara"}</div><h3>${e.nome} <span class="small">${e.partido || ""}${e.uf ? "/" + e.uf : ""}</span></h3>${e.url ? `<a class="small" href="${e.url}" target="_blank" rel="noopener">página oficial</a>` : ""}</div>
+      <div><b>Em 2023: proibir ou permitir os cassinos online?</b><div style="margin-top:.3rem">${voto}</div></div>
+      <div><b>Emendas à MP 1.394 (2026)</b>${ems}</div>
+      <div><b>Projetos para proibir as bets</b>${pls}</div></div>`;
+  }
+  q2.addEventListener("input", () => {
+    const t = chave(q2.value); sug2.innerHTML = "";
+    if (t.length < 2) { sug2.hidden = true; return; }
+    const res = lista.filter(e => chave(e.nome).includes(t)).sort((a, b) => (chave(a.nome).startsWith(t) ? -1 : 0) - (chave(b.nome).startsWith(t) ? -1 : 0)).slice(0, 8);
+    if (!res.length) { sug2.appendChild(h("li", {}, `<span class="small" style="display:block;padding:.45rem .8rem">Nenhum parlamentar com esse nome votou em 2023, apresentou emenda ou assinou projeto de proibição.</span>`)); sug2.hidden = false; return; }
+    for (const e of res) { const li = h("li"); const b = h("button", { type: "button" }, `<span>${e.nome}</span><span class="small">${e.partido || ""}${e.uf ? "/" + e.uf : ""} · ${e.casa}</span>`); b.addEventListener("click", () => mostrar(e)); li.appendChild(b); sug2.appendChild(li); }
+    sug2.hidden = false;
   });
+  q2.addEventListener("keydown", ev => { if (ev.key === "Enter") { const b = sug2.querySelector("button"); if (b) { ev.preventDefault(); b.click(); } } if (ev.key === "Escape") sug2.hidden = true; });
+  const ex = lista.find(e => chave(e.nome) === "carlos portinho"); if (ex) mostrar(ex);
 })();
 
 /* ---------- novos × já estavam ---------- */
@@ -354,8 +797,8 @@ const linhas = [cA, cB].map(ch => s("line", { y1: ch.m.t, y2: ch.H - ch.m.b, str
     const x0 = m.l + i * bw + bw * .18, w = bw * .64;
     const n = d.novos ?? 0, j = d.ja ?? 0;
     const yN = y(n), yJ = y(n + j);
-    s("rect", { x: x0, y: yN, width: w, height: y(0) - yN, fill: "var(--s1)" }, svg);
-    if (j) s("path", { d: `M${x0},${yN - 2}V${yJ + 4}q0,-4 4,-4h${w - 8}q4,0 4,4V${yN - 2}Z`, fill: "var(--s1-soft)" }, svg);
+    s("rect", { x: x0, y: yN, width: w, height: y(0) - yN, fill: "var(--caps)" }, svg);
+    if (j) s("path", { d: `M${x0},${yN - 2}V${yJ + 4}q0,-4 4,-4h${w - 8}q4,0 4,4V${yN - 2}Z`, fill: "var(--caps-soft)" }, svg);
     const t = s("text", { x: x0 + w / 2, y: H - 6, "text-anchor": "middle", class: "lbl" }, svg); t.textContent = d.ano + (d.ano === 2026 ? "*" : "");
     const p = pctNovo(d.ano);
     if (p != null) { const l = s("text", { x: x0 + w / 2, y: yJ - 7, "text-anchor": "middle", class: "strong tnum" }, svg); l.textContent = fmt(p) + "%"; }
@@ -366,7 +809,66 @@ const linhas = [cA, cB].map(ch => s("line", { y1: ch.m.t, y2: ch.H - ch.m.b, str
   });
 })();
 
-document.getElementById("rodape").textContent = `Dados do CAPS até ${mesLabel(D.corte)}; buscas até out/2026.`;
+/* ---------- conduta na atenção primária ---------- */
+(function conduta() {
+  const G = D.conduta.grupos, ROT = { jogo_cid: "Jogo patológico", ansiedade_cid: "Ansiedade", depressao_cid: "Depressão", alcool_cid: "Álcool" };
+  const COLS = ["alta", "retorno", "continuado", "especializado", "caps"];
+  const ext = Object.fromEntries(COLS.map(c => { const v = Object.values(G).map(r => r[c]); return [c, [Math.min(...v), Math.max(...v)]]; }));
+  const tb = document.querySelector("#tbl-conduta tbody");
+  for (const g of Object.keys(ROT)) {
+    const r = G[g];
+    tb.appendChild(h("tr", g === "jogo_cid" ? { class: "jogo" } : {}, `<td>${ROT[g]}</td><td class="c">${fmt(r.n)}</td>` +
+      COLS.map(c => `<td class="c" style="background:color-mix(in srgb, var(--s1) ${Math.round(4 + (r[c] - ext[c][0]) / (ext[c][1] - ext[c][0] || 1) * 40)}%, transparent)">${fmt(r[c], 1)}</td>`).join("")));
+  }
+  const J = G.jogo_cid;
+  document.getElementById("cd-esp").textContent = fmt(J.especializado) + "%";
+  document.getElementById("cd-alta").textContent = fmt(J.alta) + "%";
+  document.getElementById("cd-caps").textContent = fmt(J.caps, 1) + "%";
+})();
+
+/* ---------- trajetórias ---------- */
+(function trajetorias() {
+  const T = D.trajetorias, J = T["1"];
+  document.getElementById("traj-n").textContent = fmt(J.n);
+  document.getElementById("traj-ans").textContent = fmt(J.n6, 1) + "%";
+  document.getElementById("traj-dep").textContent = fmt(J.n5, 1) + "%";
+  document.getElementById("traj-drog").textContent = fmt(J.n3, 1) + "%";
+  const ROT = { 1: "Jogo patológico", 6: "Ansiedade", 5: "Depressão", 3: "Drogas", 2: "Álcool" };
+  const COLS = [["n6", 6], ["n5", 5], ["n3", 3], ["n2", 2]];
+  const max = Math.max(...Object.values(T).flatMap(r => COLS.map(([c]) => r[c])));
+  const tb = document.querySelector("#tbl-traj tbody");
+  for (const e of [1, 6, 5, 3, 2]) {
+    const r = T[e];
+    const cel = COLS.map(([c, g]) => g === e ? `<td class="diag">—</td>` :
+      `<td class="c" style="background:color-mix(in srgb, var(--caps) ${Math.round(r[c] / max * 45)}%, transparent)">${fmt(r[c], 1)}</td>`).join("");
+    tb.appendChild(h("tr", e === 1 ? { class: "jogo" } : {}, `<td>${ROT[e]}</td><td class="c">${fmt(r.n)}</td>${cel}<td class="c">${fmt(r.fica, 1)}</td>`));
+  }
+})();
+
+
+document.querySelectorAll(".lk-cpi").forEach(a => a.href = D.cpi.url);
+
+/* ---------- abas ---------- */
+(function abas() {
+  // "Como foi feito" abre por link no topo (#metodo); as abas só existem se o Congresso estiver ligado
+  const nomes = ["saude", "votacao", "metodo"].filter(n => document.getElementById("aba-" + n));
+  function abrir(nome, rolar) {
+    if (!nomes.includes(nome)) nome = "saude";
+    for (const n of nomes) {
+      document.getElementById("aba-" + n).hidden = n !== nome;
+      const t = document.getElementById("tab-" + n); if (t) t.setAttribute("aria-selected", n === nome ? "true" : "false");
+    }
+    document.querySelector(".topo-link").hidden = nome === "metodo";
+    if (rolar) window.scrollTo({ top: 0 });
+  }
+  document.querySelectorAll(".abas button").forEach(b => b.addEventListener("click", () => {
+    if (location.hash !== "#" + b.dataset.aba) location.hash = b.dataset.aba; else abrir(b.dataset.aba, true);
+  }));
+  window.addEventListener("hashchange", () => abrir(location.hash.slice(1), true));
+  abrir(location.hash.slice(1), false);
+})();
+
+document.getElementById("rodape").textContent = `Dados do CAPS até ${mesLabel(D.corte)}; da atenção primária até ${mesLabel(D.aps.fim)}; buscas até out/2026.`;
 })();
 </script>
 
