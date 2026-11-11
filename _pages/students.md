@@ -38,6 +38,7 @@ Interested in working with me? First, check out the recruitment poster [here](/a
 
 **2026:**
 
+- Lucas Sala Battisti (Undergraduate)
 - Reinaldo Cardoso Anacleto (Master Degree - co-supervised with Daiane Zuanetti)
 
 **2025:**
